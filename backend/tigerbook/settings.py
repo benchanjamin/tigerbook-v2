@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # third party apps
-    'django-cas-ng',
+    'rest_framework',
+    'uniauth',
     # my internal apps
     'base',
 ]
@@ -135,5 +136,47 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Authentication settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
 # CAS settings
-CAS_SERVER_URL = env('CAS_SERVER_URL')
+AUTHENTICATION_BACKENDS = [
+    'uniauth.backends.CasIdOrLinkedEmailBackend',
+    'uniauth.backends.CASBackend',
+]
+
+LOGIN_URL = "/accounts/login/"
+PASSWORD_RESET_TIMEOUT_DAYS = 3
+
+# Custom settings
+UNIAUTH_ALLOW_SHARED_EMAILS = False  # Enforce single email address for one profile
+UNIAUTH_ALLOW_STANDALONE_ACCOUNTS = False
+
+# TODO: setup service account later for tigerbook@princeton.edu
+UNIAUTH_FROM_EMAIL = env('EMAIL_HOST_USER')
+UNIAUTH_LOGIN_DISPLAY_STANDARD = False
+UNIAUTH_LOGIN_DISPLAY_CAS = True
+
+# TODO: set to UI URL address later (tigerbook.tigerapps.org)
+UNIAUTH_LOGIN_REDIRECT_URL = env('UNIAUTH_LOGIN_REDIRECT_URL')
+UNIAUTH_LOGOUT_REDIRECT_URL = env('UNIAUTH_LOGOUT_REDIRECT_URL')
+
+UNIAUTH_LOGOUT_CAS_COMPLETELY = env('UNIAUTH_LOGOUT_CAS_COMPLETELY')
+UNIAUTH_MAX_LINKED_EMAILS = 20
+UNIAUTH_PERFORM_RECURSIVE_MERGING = False
+
+UNIAUTH_USE_JWT_AUTH = True
+
+# email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+
+# TODO: add settings for simple jwt

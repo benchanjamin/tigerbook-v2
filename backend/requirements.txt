@@ -2,4 +2,7 @@ django
 djangorestframework
 django-environ
 psycopg2
-django-cas-ng
+djangorestframework_simplejwt
+requests
+lxml
+six
