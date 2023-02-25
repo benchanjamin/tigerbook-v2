@@ -1,0 +1,5 @@
+django
+djangorestframework
+django-environ
+psycopg2
+django-cas-ng
