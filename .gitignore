@@ -1,2 +1,4 @@
 webscrapper/node_modules
 webscrapper/undergrad-images
+backend/.env
+/backend/.idea/
