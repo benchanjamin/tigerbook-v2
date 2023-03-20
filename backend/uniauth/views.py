@@ -1,3 +1,7 @@
+from base.utils import (
+    add_to_undergraduate_tigerbook_directory,
+    update_undergraduate_tigerbook_directory,
+)
 from uniauth.cas import CASClient
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME,
@@ -57,6 +61,9 @@ from uniauth.utils import (
     get_setting,
     is_tmp_user,
     is_unlinked_account,
+)
+from base.models import (
+    UndergraduateTigerBookDirectory,
 )
 
 try:
@@ -266,6 +273,22 @@ def cas_login(request, institution):
 
         # Authentication successful: setup session + proceed
         if user:
+            # TODO: differentiate between fac, undergraduate, graduate student, stf, and #sv
+            # TODO: if wanting to add alumni, add extra checks for authentication here
+            pu_status = _get_pu_status(user)
+            if pu_status not in ['fac', 'undergraduate', 'graduate', 'stf', '#sv']:
+                raise PermissionDenied(
+                    "Not valid PU status of either 'fac', 'undergraduate', 'graduate', 'stf', or '#sv'.")
+            if pu_status == 'undergraduate':
+                if not UndergraduateTigerBookDirectory.objects.filter(user=user).exists():
+                    add_to_undergraduate_tigerbook_directory(user)
+                else:
+                    update_undergraduate_tigerbook_directory(user)
+            # if pu_status == 'graduate':
+            #     if not UndergraduateTigerBookDirectory.objects.filter(user=user).exists():
+            #         add_to_graduate_tigerbook_directory(user)
+            #     else:
+            #         update_graduate_tigerbook_directory(user)
             if not request.session.exists(request.session.session_key):
                 request.session.create()
             auth_login(request, user)
@@ -759,9 +782,8 @@ def verify_token(request, pk_base64, token):
 
             # Change the email + username to the verified email
             user.email = email.address
-
-            # original
-            # user.username = choose_username(user.email)
+            user.username = choose_username(user.email)
+            user.save()
 
             # If the user was created via CAS, add the institution
             # account described by the temporary username
@@ -770,10 +792,6 @@ def verify_token(request, pk_base64, token):
                 _add_institution_account(
                     user.uniauth_profile, username_split[1], username_split[2]
                 )
-                user.username = username_split[2]
-            else:
-                user.username = choose_username(user.email)
-            user.save()
 
         # If UNIAUTH_ALLOW_SHARED_EMAILS is False, and there were
         # pending LinkedEmails for this address on other accounts,
@@ -888,3 +906,14 @@ def get_jwt_tokens_from_session(request):
                 {"refresh": refresh, "access": access},
                 status=status.HTTP_200_OK,
             )
+
+
+def _get_pu_status(user):
+    from active_directory.req_lib import ReqLib
+    if user.username.startswith("cas"):
+        username_split = get_account_username_split(user.username)
+        net_id = username_split[2]
+        req_lib = ReqLib()
+        return req_lib.get_pu_status_from_net_id(net_id)
+    else:
+        raise PermissionDenied("Verification of CAS ticket failed.")

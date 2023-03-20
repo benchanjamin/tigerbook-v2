@@ -47,5 +47,4 @@ urlpatterns = [
         views.PasswordResetVerifyDone.as_view(),
         name="password-reset-verify-done",
     ),
-    url(r"^jwt-tokens/", views.get_jwt_tokens_from_session, name="jwt-tokens"),
 ]

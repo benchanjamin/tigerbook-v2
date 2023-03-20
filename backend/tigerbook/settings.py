@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 import environ
 from pathlib import Path
+from datetime import timedelta
 
 env = environ.Env(
     # set casting, default value
@@ -31,7 +32,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# TODO: SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -47,9 +48,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party apps
     'rest_framework',
-    'uniauth',
+    'storages',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt.token_blacklist',
+    'corsheaders',
     # my internal apps
     'base',
+    'utils',
+    'active_directory',
+    'uniauth',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'tigerbook.urls'
@@ -136,16 +144,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Authentication settings
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
-}
-
 # CAS settings
 AUTHENTICATION_BACKENDS = [
-    'uniauth.backends.CasIdOrLinkedEmailBackend',
+    # 'uniauth.backends.CasIdOrLinkedEmailBackend',
     'uniauth.backends.CASBackend',
 ]
 
@@ -154,7 +155,7 @@ PASSWORD_RESET_TIMEOUT_DAYS = 3
 
 # Custom settings
 UNIAUTH_ALLOW_SHARED_EMAILS = False  # Enforce single email address for one profile
-UNIAUTH_ALLOW_STANDALONE_ACCOUNTS = False
+UNIAUTH_ALLOW_STANDALONE_ACCOUNTS = True
 
 # TODO: setup service account later for tigerbook@princeton.edu
 UNIAUTH_FROM_EMAIL = env('EMAIL_HOST_USER')
@@ -175,8 +176,63 @@ UNIAUTH_USE_JWT_AUTH = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+# TODO: change to sendgrid later
 EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
-# TODO: add settings for simple jwt
+# TODO: add keys for OIT Active Directory
+OIT_CONSUMER_KEY = env('OIT_CONSUMER_KEY')
+OIT_CONSUMER_SECRET = env('OIT_CONSUMER_SECRET')
+OIT_BASE_URL = env('OIT_BASE_URL')
+OIT_REFRESH_TOKEN_URL = env('OIT_REFRESH_TOKEN_URL')
+
+# TODO: add configuration for AWS S3
+USE_S3 = env('USE_S3') == 'TRUE'
+
+if USE_S3:
+    # aws settings
+    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+    AWS_DEFAULT_ACL = None
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    # aws public settings
+    PUBLIC_MEDIA_DEFAULT_ACL = 'public-read'
+    PUBLIC_MEDIA_LOCATION = 'static/public'
+    # aws private res college settings
+    PRIVATE_RS_COLLEGE_FB_MEDIA_DEFAULT_ACL = 'private'
+    PRIVATE_RS_COLLEGE_FB_MEDIA_LOCATION = 'static/private/rs-college-fb'
+    # aws private tigerbook settings
+    PRIVATE_TIGERBOOK_MEDIA_DEFAULT_ACL = 'private'
+    PRIVATE_UNDERGRADUATE_TIGERBOOK_MEDIA_LOCATION = 'static/private/tigerbook/undergraduate'
+    PRIVATE_GRADUATE_TIGERBOOK_MEDIA_LOCATION = 'static/private/tigerbook/graduate'
+    PRIVATE_UNDERGRADUATE_ALUMNI_TIGERBOOK_MEDIA_LOCATION = 'static/private/tigerbook/undergraduate-alumni'
+    PRIVATE_GRADUATE_ALUMNI_TIGERBOOK_MEDIA_LOCATION = 'static/private/tigerbook/graduate-alumni'
+    PRIVATE_EXTRACURRICULARS_TIGERBOOK_MEDIA_LOCATION = 'static/private/tigerbook/extracurriculars'
+
+# TODO: rest framework auth
+auth_classes = [
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "rest_framework.authentication.SessionAuthentication",
+]
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated"
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": auth_classes,
+    # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    # "PAGE_SIZE": 10
+}
+
+# TODO: simple jwt auth
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "UPDATE_LAST_LOGIN": True,
+}
+
+CORS_ALLOW_ALL_ORIGINS = True

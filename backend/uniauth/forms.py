@@ -277,7 +277,7 @@ class SignupForm(UserCreationForm):
         # TODO: added validation for princeton.edu emails, add for alumni.princeton.edu later
         if not email.endswith("@princeton.edu"):
             err_msg = (
-                "Please use your '@princeton.edu' email address."
+                "Please use your '@alumni.princeton.edu' email address."
             )
             raise forms.ValidationError(err_msg, code="not_princeton_email")
         if get_user_model().objects.filter(email=email).exists():

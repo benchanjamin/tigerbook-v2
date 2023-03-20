@@ -6,3 +6,8 @@ djangorestframework_simplejwt
 requests
 lxml
 six
+django-storages
+boto3
+django-cors-headers
+Pillow
+drf-writable-nested
