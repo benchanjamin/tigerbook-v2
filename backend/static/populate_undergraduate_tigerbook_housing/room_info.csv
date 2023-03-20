@@ -1,0 +1,2869 @@
+room_id,building,room_no,occupancy,sq_footage,res_college,taken
+3106,ADDY,A610,1,128,New College West,false
+3192,JOSE ENRIQUE FELICIANO,D606,1,152,New College West,false
+3216,KWANZA MARION JONES,C113,1,142,New College West,false
+3167,ALIYA KANJI,B514,1,152,New College West,false
+573,1901,114,1,191,Upperclass,false
+618,1901,333,1,144,Upperclass,false
+614,1901,324,2,246,Upperclass,false
+609,1901,313,2,364,Upperclass,false
+596,1901,221,2,331,Upperclass,false
+576,1901,117,2,370,Upperclass,false
+571,1901,112,2,402,Upperclass,false
+574,1901,115,2,380,Upperclass,false
+606,1901,301,4,556,Upperclass,false
+637,1903,123,4,503,Upperclass,false
+585,1901,131,4,482,Upperclass,false
+588,1901,141,4,799,Upperclass,false
+580,1901,122,4,503,Upperclass,false
+3107,ADDY,A613,1,131,New College West,false
+3108,ADDY,A615,2,308,New College West,false
+2330,1903,412,DA,221,Upperclass,false
+3104,ADDY,A606,2,305,New College West,false
+3105,ADDY,A609,2,306,New College West,false
+3100,ADDY,A508,4,494,New College West,false
+3101,ADDY,A515,4,707,New College West,false
+3162,ALIYA KANJI,B508,1,164,New College West,false
+3191,JOSE ENRIQUE FELICIANO,D605A,1,270,New College West,false
+3219,KWANZA MARION JONES,C119,1,155,New College West,false
+3232,KWANZA MARION JONES,C219A,1,155,New College West,false
+3213,KWANZA MARION JONES,C103,1,152,New College West,false
+3183,JOSE ENRIQUE FELICIANO,D505B,1,172,New College West,false
+3195,JOSE ENRIQUE FELICIANO,D614,1,164,New College West,false
+162,BOGLE,C202,4,580,Butler College,false
+1589,FISHER,A321,1,120,Whitman College,false
+223,FORBES,251,2,293,Forbes College,false
+308,FORBES,A377,2,279,Forbes College,false
+235,FORBES,268,2,295,Forbes College,false
+1599,HARGADON,G304B,1,220,Whitman College,false
+3185,JOSE ENRIQUE FELICIANO,D510,4,459,New College West,false
+3186,JOSE ENRIQUE FELICIANO,D512,4,482,New College West,false
+3176,JOSE ENRIQUE FELICIANO,D313,2,295,New College West,false
+3228,KWANZA MARION JONES,C214,4,731,New College West,false
+3248,KWANZA MARION JONES,C501,4,455,New College West,false
+1131,PATTON,312,2,284,Upperclass,false
+1222,PYNE,443,2,319,Upperclass,false
+1307,SCULLY,168,2,278,Upperclass,false
+1341,SCULLY,270,2,278,Upperclass,false
+1998,SCULLY,349,2,280,Upperclass,false
+1379,SCULLY,366,2,278,Upperclass,false
+1449,SPELMAN,67,4,930,Upperclass,false
+2039,WITHERSPOON,522,2,284,Rockefeller College,false
+555,WITHERSPOON,403,4,650,Rockefeller College,false
+558,WITHERSPOON,501,4,532,Rockefeller College,false
+1010,LAUGHLIN,617,3,485,Upperclass,false
+675,1903,324,3,389,Upperclass,false
+672,1903,314,3,394,Upperclass,false
+1134,PATTON,T01,3,395,Upperclass,false
+669,1903,311,3,396,Upperclass,false
+1136,PATTON,T03,3,419,Upperclass,false
+269,FORBES,A223,3,289,Forbes College,false
+781,CUYLER,322,3,416,Upperclass,false
+287,FORBES,A256,1,169,Forbes College,false
+289,FORBES,A258,1,180,Forbes College,false
+1942,CUYLER,432,1,164,Upperclass,false
+792,CUYLER,435,1,120,Upperclass,false
+382,EDWARDS,505,1,157,Mathey College,false
+391,EDWARDS,514,1,158,Mathey College,false
+372,EDWARDS,112,1,121,Mathey College,false
+809,CUYLER,633,1,226,Upperclass,false
+311,FORBES,A426,1,180,Forbes College,false
+892,FOULKE,204,1,179,Upperclass,false
+925,FOULKE,334,1,198,Upperclass,false
+1546,BAKER,E309,1,146,Whitman College,false
+1528,BAKER,E113,1,220,Whitman College,false
+1534,BAKER,E206,1,215,Whitman College,false
+3153,ALIYA KANJI,B410B,1,153,New College West,false
+704,1903,531,1,207,Upperclass,false
+1500,1981,F107,1,131,Whitman College,false
+1391,SCULLY,405,1,134,Upperclass,false
+1393,SCULLY,408,1,134,Upperclass,false
+1285,SCULLY,118,1,147,Upperclass,false
+98,BLOOMBERG,334,1,166,Butler College,false
+64,BLOOMBERG,226,1,145,Butler College,false
+1815,BLOOMBERG,413,1,225,Butler College,false
+116,BLOOMBERG,374,1,132,Butler College,false
+2558,FEINBERG,202,4,610,Upperclass,false
+135,BLOOMBERG,436,1,153,Butler College,false
+2704,BLOOMBERG,434,1,178,Butler College,false
+143,BLOOMBERG,456,1,153,Butler College,false
+1646,WENDELL,B210,1,147,Whitman College,false
+1660,WENDELL,B407,1,206,Whitman College,false
+528,WITHERSPOON,6,1,169,Rockefeller College,false
+1974,SCULLY,126,1,148,Upperclass,false
+1333,SCULLY,260,1,151,Upperclass,false
+1679,WENDELL,C206,1,143,Whitman College,false
+1402,SCULLY,430,1,134,Upperclass,false
+1939,SCULLY,221,1,190,Upperclass,false
+549,WITHERSPOON,306,1,113,Rockefeller College,false
+564,WITHERSPOON,510,1,116,Rockefeller College,false
+1617,LAURITZEN,D110,1,148,Whitman College,false
+1627,LAURITZEN,D303,1,117,Whitman College,false
+446,LITTLE,311,1,131,Mathey College,false
+519,HOLDER,116,1,176,Rockefeller College,false
+1070,LOCKHART,221,1,188,Upperclass,false
+1418,SPELMAN,17,4,930,Upperclass,false
+1414,SPELMAN,13,4,930,Upperclass,false
+362,CAMPBELL,52A,1,117,Mathey College,false
+481,CAMPBELL,3C,1,171,Rockefeller College,false
+955,HENRY,205,1,198,Upperclass,false
+1242,PYNE,633,1,215,Upperclass,false
+2184,PATTON,T5,1,195,Upperclass,true
+1776,FEINBERG,301,4,617,Upperclass,false
+2557,FEINBERG,201,4,610,Upperclass,false
+2556,FEINBERG,1,4,621,Upperclass,false
+1779,FEINBERG,402,6,881,Upperclass,false
+1777,FEINBERG,302,4,606,Upperclass,false
+2559,FEINBERG,102,4,614,Upperclass,false
+1643,WENDELL,B204,1,139,Whitman College,true
+1916,BUYERS,23,4,554,Rockefeller College,true
+81,BLOOMBERG,306,1,139,Butler College,true
+2397,JOLINE,121,4,426,Mathey College,true
+2690,SCULLY,434,1,134,Upperclass,true
+2315,LOCKHART,333,1,165,Upperclass,true
+2231,HOLDER,43A,2,186,Rockefeller College,true
+2531,1981,F205,1,115,Whitman College,true
+1672,WENDELL,B421,1,195,Whitman College,true
+1228,PYNE,612,1,176,Upperclass,true
+2592,FORBES,A272,2,185,Forbes College,true
+1329,SCULLY,254,1,166,Upperclass,true
+2138,BLAIR,118,4,549,Mathey College,true
+1866,FORBES,A371,2,291,Forbes College,true
+1949,DOD,306,1,120,Upperclass,true
+2404,2 DICKINSON,36,1,136,No Res College Associated,true
+2547,1981,F415,1,146,Whitman College,true
+1305,SCULLY,164,2,278,Upperclass,true
+2792,1967,B111,4,522,Butler College,true
+1831,BLOOMBERG,339,1,135,Butler College,true
+2518,FISHER,A203,1,145,Whitman College,true
+2768,BUYERS,T2,5,563,Rockefeller College,true
+411,JOLINE,331,1,155,Mathey College,true
+2897,FORBES,312,2,266,Forbes College,true
+2770,BUYERS,22,2,593,Rockefeller College,true
+2865,FORBES,232,2,220,Forbes College,true
+1868,BAKER,E315,,,Whitman College,true
+2918,WENDELL,B220,4,458,Whitman College,true
+2020,WITHERSPOON,511,1,226,Rockefeller College,true
+2614,FORBES,A175,2,195,Forbes College,true
+2830,FORBES,172,2,292,Forbes College,true
+1555,BAKER,E427,1,130,Whitman College,true
+579,1901,121,1,122,Upperclass,false
+630,1901,441,2,372,Upperclass,false
+641,1903,132,2,318,Upperclass,false
+664,1903,237,2,449,Upperclass,false
+3218,KWANZA MARION JONES,C117,1,152,New College West,false
+682,1903,422,2,495,Upperclass,false
+3253,KWANZA MARION JONES,C513,1,152,New College West,false
+3260,BAKER,E219,4,452,Whitman College,false
+3243,KWANZA MARION JONES,C413A,1,160,New College West,false
+1566,BAKER,S302,4,510,Whitman College,false
+328,BLAIR,91,4,504,Mathey College,false
+331,BLAIR,95,4,540,Mathey College,false
+812,DOD,102,1,120,Upperclass,false
+802,CUYLER,612,2,266,Upperclass,false
+842,DOD,303,2,260,Upperclass,false
+227,FORBES,255,2,346,Forbes College,false
+1578,FISHER,A225,4,687,Whitman College,false
+3263,FORBES,323,1,127,Forbes College,false
+257,FORBES,A137,2,185,Forbes College,false
+1864,FORBES,A327,2,288,Forbes College,false
+301,FORBES,A332,2,184,Forbes College,false
+274,FORBES,A234,2,180,Forbes College,false
+1931,HENRY,217,2,392,Upperclass,false
+488,HOLDER,27,4,620,Rockefeller College,false
+2220,HOLDER,52,4,437,Rockefeller College,false
+497,HOLDER,62,4,444,Rockefeller College,false
+499,HOLDER,66,4,523,Rockefeller College,false
+3264,LAURITZEN,D409,2,229,Whitman College,false
+1025,LITTLE,101,4,512,Upperclass,false
+1217,PYNE,438,2,239,Upperclass,false
+1151,PYNE,124,2,438,Upperclass,false
+1338,SCULLY,266,2,278,Upperclass,false
+1306,SCULLY,166,2,278,Upperclass,false
+790,CUYLER,422,3,396,Upperclass,false
+410,JOLINE,323,3,421,Mathey College,false
+408,JOLINE,313,3,409,Mathey College,false
+891,FOULKE,203,3,463,Upperclass,false
+1113,PATTON,73,3,443,Upperclass,false
+469,BUYERS,B23,1,125,Rockefeller College,false
+2879,FORBES,407,1,159,Forbes College,false
+2609,FORBES,A240,1,171,Forbes College,false
+1586,FISHER,A316,1,129,Whitman College,false
+832,DOD,210,1,125,Upperclass,false
+808,CUYLER,632,1,148,Upperclass,false
+642,1903,133,1,233,Upperclass,false
+667,1903,243,1,214,Upperclass,false
+670,1903,312,1,172,Upperclass,false
+648,1903,143,1,185,Upperclass,false
+3151,ALIYA KANJI,B408,1,164,New College West,false
+1564,BAKER,S204,1,202,Whitman College,false
+688,1903,503,1,158,Upperclass,false
+50,1976,D316,1,140,Butler College,false
+49,1976,D314,1,139,Butler College,false
+1195,PYNE,343,1,228,Upperclass,false
+1385,SCULLY,373,1,166,Upperclass,false
+1270,PYNE,735,1,251,Upperclass,false
+1680,WENDELL,C207,1,146,Whitman College,false
+1604,HARGADON,G402,1,128,Whitman College,false
+1915,WITHERSPOON,514,1,115,Rockefeller College,false
+1135,PATTON,T02,1,154,Upperclass,false
+1778,FEINBERG,401,6,881,Upperclass,false
+2560,FEINBERG,101,4,609,Upperclass,false
+363,CAMPBELL,52B,1,118,Mathey College,false
+85,BLOOMBERG,310,1,152,Butler College,true
+2586,FORBES,A312,2,186,Forbes College,true
+373,EDWARDS,113,1,156,Mathey College,true
+2943,WENDELL,C422,1,172,Whitman College,true
+2895,FORBES,315,2,263,Forbes College,true
+896,FOULKE,214,1,183,Upperclass,true
+2859,FORBES,259,2,293,Forbes College,true
+2769,BUYERS,26,4,448,Rockefeller College,true
+401,JOLINE,223,3,390,Mathey College,true
+2767,BUYERS,15,4,443,Rockefeller College,true
+2616,FORBES,A170,1,173,Forbes College,true
+1289,SCULLY,125,1,166,Upperclass,true
+2516,FISHER,A108,1,147,Whitman College,true
+2126,BLAIR,42,2,232,Mathey College,true
+218,FORBES,224,1,142,Forbes College,true
+1912,WITHERSPOON,415,1,142,Rockefeller College,true
+2762,BUYERS,14,4,444,Rockefeller College,true
+156,BLOOMBERG,479,1,166,Butler College,true
+2298,1901,611,1,230,Upperclass,true
+2146,BLAIR,309,2,187,Mathey College,true
+1327,SCULLY,250,1,166,Upperclass,true
+2159,LITTLE,11,3,466,Mathey College,true
+1291,SCULLY,128,1,147,Upperclass,true
+2132,BLAIR,54,4,490,Mathey College,true
+2737,BLOOMBERG,213,1,163,Butler College,true
+2605,FORBES,A113,1,112,Forbes College,true
+1523,BAKER,E002,2,201,Whitman College,true
+2761,BUYERS,13,4,551,Rockefeller College,true
+2224,HOLDER,78A,1,179,Rockefeller College,true
+2738,BLOOMBERG,211,1,148,Butler College,true
+1364,SCULLY,338,1,148,Upperclass,true
+544,WITHERSPOON,216,1,109,Rockefeller College,true
+2714,BLOOMBERG,351,1,186,Butler College,true
+3166,ALIYA KANJI,B513,1,150,New College West,false
+3164,ALIYA KANJI,B510B,1,153,New College West,false
+3165,ALIYA KANJI,B512,1,152,New College West,false
+3102,ADDY,A604,2,307,New College West,false
+684,1903,432,2,332,Upperclass,false
+687,1903,502,2,292,Upperclass,false
+1507,1981,F201,4,1115,Whitman College,false
+1515,1981,F301,4,1020,Whitman College,false
+3117,ADDY,A711,1,152,New College West,false
+3181,JOSE ENRIQUE FELICIANO,D504,1,158,New College West,false
+1890,BLOOMBERG,330,2,181,Butler College,false
+734,BROWN,311,4,502,Upperclass,false
+2196,CAMPBELL,42,4,411,Rockefeller College,false
+777,CUYLER,236,1,127,Upperclass,false
+2211,CAMPBELL,64,2,267,Mathey College,false
+222,FORBES,239,2,218,Forbes College,false
+224,FORBES,252,2,298,Forbes College,false
+299,FORBES,A328,2,185,Forbes College,false
+252,FORBES,A132,2,185,Forbes College,false
+938,HENRY,121,2,313,Upperclass,false
+397,HAMILTON,324,5,957,Mathey College,false
+495,HOLDER,57,1,160,Rockefeller College,false
+507,HOLDER,81,4,483,Rockefeller College,false
+1032,LITTLE,123,4,617,Upperclass,false
+1087,LOCKHART,321,3,396,Upperclass,false
+1082,LOCKHART,304,1,181,Upperclass,false
+1058,LOCKHART,103,2,380,Upperclass,false
+1227,PYNE,611,2,349,Upperclass,false
+1999,SCULLY,147,2,280,Upperclass,false
+1452,SPELMAN,73,4,930,Upperclass,false
+1427,SPELMAN,34,4,930,Upperclass,false
+1659,WENDELL,B320,4,460,Whitman College,false
+866,DOD,202S,3,460,Upperclass,false
+587,1901,133,3,415,Upperclass,false
+990,HENRY,324,3,461,Upperclass,false
+1469,WRIGHT,11,3,448,Upperclass,false
+742,BROWN,322,1,124,Upperclass,false
+2875,FORBES,411,1,309,Forbes College,false
+2876,FORBES,410,1,271,Forbes College,false
+295,FORBES,A266,1,160,Forbes College,false
+836,DOD,214,1,125,Upperclass,false
+259,FORBES,A142,1,168,Forbes College,false
+386,EDWARDS,509,1,160,Mathey College,false
+643,1903,134,1,172,Upperclass,false
+2320,1903,333,1,138,Upperclass,false
+1814,BLOOMBERG,465,1,146,Butler College,false
+342,BLAIR,B51,1,138,Mathey College,false
+693,1903,514,1,163,Upperclass,false
+1571,BAKER,S404,1,109,Whitman College,false
+38,1967,B309,1,148,Butler College,false
+1388,SCULLY,402,1,134,Upperclass,false
+1229,PYNE,613,1,204,Upperclass,false
+1286,SCULLY,121,1,190,Upperclass,false
+1257,PYNE,717,1,167,Upperclass,false
+68,BLOOMBERG,271,1,133,Butler College,false
+125,BLOOMBERG,405,1,148,Butler College,false
+129,BLOOMBERG,409,1,151,Butler College,false
+146,BLOOMBERG,459,1,146,Butler College,false
+145,BLOOMBERG,458,1,134,Butler College,false
+1348,SCULLY,304,1,148,Upperclass,false
+1970,SCULLY,234,1,148,Upperclass,false
+1335,SCULLY,262,1,161,Upperclass,false
+1406,SCULLY,438,1,134,Upperclass,false
+966,HENRY,221,1,133,Upperclass,false
+974,HENRY,229,1,166,Upperclass,false
+1634,LAURITZEN,D312,1,152,Whitman College,false
+1016,LAUGHLIN,626,1,190,Upperclass,false
+1613,LAURITZEN,D106,1,144,Whitman College,false
+415,JOLINE,412,1,212,Mathey College,false
+1147,PYNE,116,1,191,Upperclass,false
+1084,LOCKHART,312,1,178,Upperclass,false
+2789,1967,B113,4,522,Butler College,true
+1940,SCULLY,223,1,166,Upperclass,true
+2176,PATTON,T1,3,395,Upperclass,true
+2823,FORBES,212,1,170,Forbes College,true
+2624,FORBES,A216,2,181,Forbes College,true
+2625,FORBES,A160,1,162,Forbes College,true
+67,BLOOMBERG,269,1,156,Butler College,true
+51,BLOOMBERG,111,1,160,Butler College,true
+2867,FORBES,230,1,107,Forbes College,true
+2904,FORBES,313,2,261,Forbes College,true
+2087,EDWARDS,208,1,155,Mathey College,true
+2155,LITTLE,107,1,238,Mathey College,true
+2698,BLOOMBERG,263,1,141,Butler College,true
+2502,LAURITZEN,D205,4,496,Whitman College,true
+1315,SCULLY,206,1,147,Upperclass,true
+2043,EDWARDS,216,1,128,Mathey College,true
+1092,LOCKHART,331,1,170,Upperclass,true
+485,HOLDER,22,1,110,Rockefeller College,true
+2045,EDWARDS,214,1,176,Mathey College,true
+1482,WRIGHT,404,1,216,Upperclass,true
+2736,BLOOMBERG,214,1,155,Butler College,true
+2824,FORBES,214,2,187,Forbes College,true
+2225,HOLDER,77,1,192,Rockefeller College,true
+2168,LITTLE,27,1,209,Mathey College,true
+1945,SCULLY,315,,,Upperclass,true
+1978,SCULLY,208,1,148,Upperclass,true
+2294,FOULKE,212,1,204,Upperclass,true
+2899,FORBES,310,1,120,Forbes College,true
+2607,FORBES,A111,2,181,Forbes College,true
+690,1903,511,1,175,Upperclass,true
+2917,WENDELL,B215,4,484,Whitman College,true
+1920,WITHERSPOON,305,2,220,Rockefeller College,true
+394,HAMILTON,121,1,145,Mathey College,true
+2297,1901,621,2,381,Upperclass,true
+2543,1981,F410,1,185,Whitman College,true
+2156,LITTLE,112,1,146,Mathey College,true
+2573,FORBES,A414,2,179,Forbes College,true
+29,1967,B204,4,574,Butler College,false
+3128,ALIYA KANJI,B205,1,151,New College West,false
+3231,KWANZA MARION JONES,C218B,1,159,New College West,false
+3244,KWANZA MARION JONES,C413B,1,160,New College West,false
+338,BLAIR,302,4,598,Mathey College,false
+2153,BLAIR,303,4,595,Mathey College,false
+712,BROWN,114,1,125,Upperclass,false
+720,BROWN,128,4,509,Upperclass,false
+754,BROWN,418,4,523,Upperclass,false
+784,CUYLER,403,1,235,Upperclass,false
+820,DOD,113,2,260,Upperclass,false
+1926,DOD,300N,1,150,Upperclass,false
+927,FOULKE,341,4,603,Upperclass,false
+3184,JOSE ENRIQUE FELICIANO,D506,4,449,New College West,false
+501,HOLDER,68,1,179,Rockefeller College,false
+398,JOLINE,212,2,386,Mathey College,false
+399,JOLINE,213,2,366,Mathey College,false
+3236,KWANZA MARION JONES,C225,2,223,New College West,false
+3249,KWANZA MARION JONES,C502,4,489,New College West,false
+3245,KWANZA MARION JONES,C414,4,729,New College West,false
+2506,LAURITZEN,D404,1,132,Whitman College,false
+1040,LITTLE,146,4,653,Upperclass,false
+1099,LOCKHART,423,2,350,Upperclass,false
+1055,LITTLE,A56,4,610,Upperclass,false
+1170,PYNE,225,1,163,Upperclass,false
+1174,PYNE,234,2,263,Upperclass,false
+2004,WITHERSPOON,122,2,243,Rockefeller College,false
+531,WITHERSPOON,117,4,610,Rockefeller College,false
+741,BROWN,321,3,498,Upperclass,false
+908,FOULKE,311,3,414,Upperclass,false
+903,FOULKE,304,3,431,Upperclass,false
+983,HENRY,302,3,436,Upperclass,false
+767,CUYLER,122,3,441,Upperclass,false
+779,CUYLER,312,3,415,Upperclass,false
+932,HENRY,111,3,388,Upperclass,false
+737,BROWN,314,1,129,Upperclass,false
+841,DOD,302,1,120,Upperclass,false
+829,DOD,205,1,125,Upperclass,false
+1812,1903,126,1,165,Upperclass,false
+1943,1903,332,1,185,Upperclass,false
+650,1903,212,1,205,Upperclass,false
+654,1903,216,1,206,Upperclass,false
+928,FOULKE,329A,1,123,Upperclass,false
+3274,BAKER,E415,1,128,Whitman College,false
+3278,BAKER,E214,1,118,Whitman College,false
+1563,BAKER,S203,1,193,Whitman College,false
+340,BLAIR,B41,1,122,Mathey College,false
+1502,1981,F114,1,101,Whitman College,false
+1212,PYNE,432,1,133,Upperclass,false
+1395,SCULLY,413,1,134,Upperclass,false
+1256,PYNE,716,1,149,Upperclass,false
+2745,BLOOMBERG,224,1,135,Butler College,false
+123,BLOOMBERG,403,1,149,Butler College,false
+112,BLOOMBERG,367,1,135,Butler College,false
+142,BLOOMBERG,454,1,129,Butler College,false
+93,BLOOMBERG,324,1,136,Butler College,false
+1651,WENDELL,B311,1,115,Whitman College,false
+1657,WENDELL,B317,1,115,Whitman College,false
+1661,WENDELL,B408,1,167,Whitman College,false
+1686,WENDELL,C214,1,149,Whitman College,false
+2819,WILF,E105,1,142,Butler College,false
+1682,WENDELL,C209,1,146,Whitman College,false
+1403,SCULLY,432,1,134,Upperclass,false
+1603,HARGADON,G401,1,181,Whitman College,false
+538,WITHERSPOON,208,1,108,Rockefeller College,false
+560,WITHERSPOON,504,1,197,Rockefeller College,false
+1630,LAURITZEN,D306,1,169,Whitman College,false
+3295,PATTON,T09,1,155,Upperclass,false
+1441,SPELMAN,54,4,930,Upperclass,false
+2585,FORBES,A314,2,183,Forbes College,true
+2085,EDWARDS,210,1,166,Mathey College,true
+2389,JOLINE,322,1,155,Mathey College,true
+2068,EDWARDS,414,1,147,Mathey College,true
+2800,YOSELOFF,A106,4,538,Butler College,true
+2317,LOCKHART,331,4,471,Upperclass,true
+1647,WENDELL,B212,1,152,Whitman College,true
+2589,FORBES,A277,2,282,Forbes College,true
+2584,FORBES,A316,1,179,Forbes College,true
+2854,FORBES,271,2,292,Forbes College,true
+426,LITTLE,51,4,529,Mathey College,true
+2809,1976,D208,4,522,Butler College,true
+2848,FORBES,105,2,193,Forbes College,true
+2080,EDWARDS,312,1,163,Mathey College,true
+95,BLOOMBERG,326,1,150,Butler College,true
+2047,EDWARDS,211,1,164,Mathey College,true
+171,WILF,E203,1,128,Butler College,true
+774,CUYLER,233,1,160,Upperclass,true
+773,CUYLER,232,1,152,Upperclass,true
+2811,1976,D115,4,522,Butler College,true
+241,FORBES,308,1,130,Forbes College,true
+1518,1981,F305,1,115,Whitman College,true
+1295,SCULLY,136,1,147,Upperclass,true
+2385,JOLINE,423,4,426,Mathey College,true
+2033,WITHERSPOON,212,1,110,Rockefeller College,true
+2071,EDWARDS,411,1,168,Mathey College,true
+1911,WITHERSPOON,405,2,231,Rockefeller College,true
+2244,HOLDER,105,4,461,Rockefeller College,true
+2079,EDWARDS,313,1,154,Mathey College,true
+1813,FISHER,A224,1,174,Whitman College,true
+2136,BLAIR,72,2,215,Mathey College,true
+77,BLOOMBERG,302,1,145,Butler College,true
+2626,FORBES,A161,1,169,Forbes College,true
+2580,FORBES,A324,2,179,Forbes College,true
+2059,EDWARDS,403,1,170,Mathey College,true
+2216,CAMPBELL,11,2,253,Rockefeller College,true
+2131,BLAIR,62,4,533,Mathey College,true
+2763,BUYERS,12,4,465,Rockefeller College,true
+2520,FISHER,A210,1,146,Whitman College,true
+2387,JOLINE,413,4,424,Mathey College,true
+2265,CUYLER,411,2,223,Upperclass,true
+484,HOLDER,12,1,200,Rockefeller College,true
+2877,FORBES,409,2,368,Forbes College,true
+2191,CAMPBELL,2A,2,257,Rockefeller College,true
+3190,JOSE ENRIQUE FELICIANO,D605,1,173,New College West,false
+3202,KWANZA MARION JONES,C016B,1,159,New College West,false
+48,1976,D312,4,571,Butler College,false
+3135,ALIYA KANJI,B223B,1,159,New College West,false
+3224,KWANZA MARION JONES,C122,1,151,New College West,false
+3129,ALIYA KANJI,B210,1,153,New College West,false
+1559,BAKER,S102,4,554,Whitman College,false
+2134,BLAIR,74,4,510,Mathey College,false
+2208,CAMPBELL,44,2,377,Rockefeller College,false
+733,BROWN,228,4,519,Upperclass,false
+811,DOD,101,1,125,Upperclass,false
+1583,FISHER,A310,1,133,Whitman College,false
+213,FORBES,217,2,244,Forbes College,false
+221,FORBES,237,2,234,Forbes College,false
+2597,FORBES,A149,1,158,Forbes College,false
+270,FORBES,A227,2,291,Forbes College,false
+3178,JOSE ENRIQUE FELICIANO,D316,2,303,New College West,false
+3175,JOSE ENRIQUE FELICIANO,D007,4,442,New College West,false
+3210,KWANZA MARION JONES,C023,1,152,New College West,false
+437,LITTLE,83,2,419,Mathey College,false
+1031,LITTLE,122,4,637,Upperclass,false
+1064,LOCKHART,121,2,384,Upperclass,false
+1166,PYNE,221,2,373,Upperclass,false
+1971,SCULLY,153,2,280,Upperclass,false
+1277,SCULLY,102,4,755,Upperclass,false
+1412,SPELMAN,11,4,930,Upperclass,false
+1434,SPELMAN,45,4,930,Upperclass,false
+1667,WENDELL,B415,2,201,Whitman College,false
+178,WILF,E305,4,580,Butler College,false
+1143,PATTON,T12,6,1278,Upperclass,false
+959,HENRY,212,3,401,Upperclass,false
+1592,HARGADON,G101D,3,475,Whitman College,false
+1117,PATTON,80,3,456,Upperclass,false
+768,CUYLER,211,3,425,Upperclass,false
+1108,PATTON,62,3,449,Upperclass,false
+1265,PYNE,728,3,446,Upperclass,false
+365,EDWARDS,102,1,101,Mathey College,false
+600,1901,225,1,145,Upperclass,false
+1960,1903,233,1,140,Upperclass,false
+902,FOULKE,303,1,185,Upperclass,false
+655,1903,221,1,176,Upperclass,false
+660,1903,227,1,185,Upperclass,false
+318,FORBES,A438,1,181,Forbes College,false
+1544,BAKER,E307,1,114,Whitman College,false
+148,BLOOMBERG,463,1,147,Butler College,false
+150,BLOOMBERG,469,1,142,Butler College,false
+1517,1981,F303,1,177,Whitman College,false
+1276,SCULLY,101,1,288,Upperclass,false
+1268,PYNE,733,1,145,Upperclass,false
+1267,PYNE,732,1,144,Upperclass,false
+132,BLOOMBERG,425,1,137,Butler College,false
+100,BLOOMBERG,340,1,148,Butler College,false
+1683,WENDELL,C210,1,150,Whitman College,false
+167,WILF,E107,1,138,Butler College,false
+994,HENRY,222A,1,139,Upperclass,false
+1900,HOLDER,75,1,135,Rockefeller College,false
+1033,LITTLE,124,1,219,Upperclass,false
+522,HOLDER,124,1,200,Rockefeller College,false
+1155,PYNE,133,1,174,Upperclass,false
+1435,SPELMAN,46,4,930,Upperclass,false
+1429,SPELMAN,36,4,930,Upperclass,false
+2503,LAURITZEN,D207,4,529,Whitman College,true
+1369,SCULLY,352,1,166,Upperclass,true
+730,BROWN,225,1,130,Upperclass,true
+2076,EDWARDS,316,1,131,Mathey College,true
+2846,FORBES,114,2,187,Forbes College,true
+2757,BLOOMBERG,160,4,568,Butler College,true
+2569,FORBES,A422,2,180,Forbes College,true
+2731,BLOOMBERG,203,1,133,Butler College,true
+547,WITHERSPOON,222,2,280,Rockefeller College,true
+2291,PYNE,136,1,192,Upperclass,true
+2062,EDWARDS,319,2,288,Mathey College,true
+2855,FORBES,270,2,294,Forbes College,true
+2219,HOLDER,54,2,193,Rockefeller College,true
+339,BLAIR,305,4,605,Mathey College,true
+1309,SCULLY,171,1,166,Upperclass,true
+883,FOULKE,122,1,151,Upperclass,true
+1952,1903,521,1,179,Upperclass,true
+2532,1981,F207,1,108,Whitman College,true
+2621,FORBES,A222,2,184,Forbes College,true
+2286,PYNE,331,1,229,Upperclass,true
+2777,HAMILTON,321,2,272,Mathey College,true
+516,HOLDER,97,1,118,Rockefeller College,true
+477,CAMPBELL,26,4,486,Rockefeller College,true
+2751,BLOOMBERG,246,1,146,Butler College,true
+2771,BUYERS,18,1,108,Rockefeller College,true
+536,WITHERSPOON,205,2,212,Rockefeller College,true
+2234,HOLDER,77A,2,250,Rockefeller College,true
+2290,PYNE,231A,1,132,Upperclass,true
+508,HOLDER,85,1,158,Rockefeller College,true
+2082,EDWARDS,310,1,166,Mathey College,true
+2915,FORBES,373,2,246,Forbes College,true
+1670,WENDELL,B419,1,152,Whitman College,true
+1297,SCULLY,140,4,755,Upperclass,true
+2836,FORBES,166,2,293,Forbes College,true
+268,FORBES,A178,3,363,Forbes College,true
+2089,EDWARDS,206,1,176,Mathey College,true
+2241,HOLDER,113,2,205,Rockefeller College,true
+2594,FORBES,A177,4,525,Forbes College,true
+2613,FORBES,A211,2,291,Forbes College,true
+668,1903,244,2,342,Upperclass,false
+3205,KWANZA MARION JONES,C018,1,152,New College West,false
+3246,KWANZA MARION JONES,C415,1,132,New College West,false
+3148,ALIYA KANJI,B402,4,727,New College West,false
+3132,ALIYA KANJI,B220,1,147,New College West,false
+2201,CAMPBELL,31,4,422,Rockefeller College,false
+2197,CAMPBELL,41,4,411,Rockefeller College,false
+719,BROWN,127,4,536,Upperclass,false
+813,DOD,103,2,260,Upperclass,false
+798,CUYLER,521,2,347,Upperclass,false
+2202,CAMPBELL,56,2,246,Mathey College,false
+875,DOD,402S,3,460,Upperclass,false
+225,FORBES,253,2,287,Forbes College,false
+2228,HOLDER,55,1,186,Rockefeller College,false
+520,HOLDER,122,2,435,Rockefeller College,false
+503,HOLDER,74,2,326,Rockefeller College,false
+2221,HOLDER,51,4,445,Rockefeller College,false
+3254,KWANZA MARION JONES,C601,4,455,New College West,false
+3255,KWANZA MARION JONES,C602,4,490,New College West,false
+2170,LITTLE,23,4,531,Mathey College,false
+1618,LAURITZEN,D112,4,460,Whitman College,false
+434,LITTLE,74,4,573,Mathey College,false
+1115,PATTON,75,2,313,Upperclass,false
+1182,PYNE,314,3,407,Upperclass,false
+1161,PYNE,144,1,192,Upperclass,false
+1223,PYNE,511,4,809,Upperclass,false
+1197,PYNE,345,4,577,Upperclass,false
+1424,SPELMAN,25,4,930,Upperclass,false
+1894,WITHERSPOON,517,4,665,Rockefeller College,false
+1658,WENDELL,B318,4,517,Whitman College,false
+1034,LITTLE,131,3,464,Upperclass,false
+2795,YOSELOFF,A204,4,522,Butler College,false
+788,CUYLER,414,3,437,Upperclass,false
+933,HENRY,112,3,395,Upperclass,false
+743,BROWN,325,1,132,Upperclass,false
+2883,FORBES,403,1,193,Forbes College,false
+281,FORBES,A247,1,170,Forbes College,false
+278,FORBES,A244,1,168,Forbes College,false
+1587,FISHER,A317,1,113,Whitman College,false
+821,DOD,114,1,125,Upperclass,false
+827,DOD,202,1,120,Upperclass,false
+831,DOD,207,1,120,Upperclass,false
+662,1903,231,1,182,Upperclass,false
+1532,BAKER,E123,1,140,Whitman College,false
+165,BOGLE,C205,1,153,Butler College,false
+42,1976,D114,1,202,Butler College,false
+1494,1981,F027,1,164,Whitman College,false
+31,1967,B209,1,148,Butler College,false
+1211,PYNE,431,1,175,Upperclass,false
+1216,PYNE,437,1,128,Upperclass,false
+1224,PYNE,601,1,188,Upperclass,false
+2707,BLOOMBERG,411,1,154,Butler College,false
+117,BLOOMBERG,376,1,135,Butler College,false
+1250,PYNE,705,1,168,Upperclass,false
+1684,WENDELL,C211,1,147,Whitman College,false
+1464,WILF,E401,1,137,Upperclass,false
+1293,SCULLY,131,1,196,Upperclass,false
+1996,SCULLY,435,1,134,Upperclass,false
+1988,SCULLY,224,1,147,Upperclass,false
+951,HENRY,201,1,182,Upperclass,false
+2257,HOLDER,36,1,190,Rockefeller College,false
+1626,LAURITZEN,D302,1,146,Whitman College,false
+1014,LAUGHLIN,624,1,191,Upperclass,false
+504,HOLDER,76,1,169,Rockefeller College,false
+514,HOLDER,95,1,112,Rockefeller College,false
+1093,LOCKHART,401,1,219,Upperclass,false
+2181,PATTON,309,1,152,Upperclass,false
+2308,LOCKHART,122,1,248,Upperclass,true
+2622,FORBES,A218,2,186,Forbes College,true
+2227,HOLDER,133A,2,182,Rockefeller College,true
+2571,FORBES,A417,1,283,Forbes College,true
+2113,BROWN,324,1,140,Upperclass,true
+2896,FORBES,314,2,231,Forbes College,true
+1874,BAKER,E314,,,Whitman College,true
+1086,LOCKHART,315,1,177,Upperclass,true
+906,FOULKE,307,1,164,Upperclass,true
+702,1903,527,1,188,Upperclass,true
+2871,FORBES,225,2,196,Forbes College,true
+2612,FORBES,A212,2,186,Forbes College,true
+512,HOLDER,93,2,197,Rockefeller College,true
+2599,FORBES,A140,1,171,Forbes College,true
+2143,BLAIR,104,2,260,Mathey College,true
+265,FORBES,A155,1,178,Forbes College,true
+2165,LITTLE,37,4,527,Mathey College,true
+1371,SCULLY,354,1,166,Upperclass,true
+2053,EDWARDS,303,1,102,Mathey College,true
+2545,1981,F412,1,155,Whitman College,true
+1676,WENDELL,B428,1,130,Whitman College,true
+2882,FORBES,404,1,153,Forbes College,true
+2787,1967,B206,1,151,Butler College,true
+2083,EDWARDS,309,1,166,Mathey College,true
+1985,SCULLY,142,1,140,Upperclass,true
+2057,EDWARDS,406,1,156,Mathey College,true
+2245,HOLDER,104,4,545,Rockefeller College,true
+2892,FORBES,320,1,122,Forbes College,true
+1818,BLOOMBERG,243,1,138,Butler College,true
+473,CAMPBELL,14,2,328,Rockefeller College,true
+2392,JOLINE,221,4,435,Mathey College,true
+2235,HOLDER,141,4,419,Rockefeller College,true
+1954,PYNE,425,1,169,Upperclass,true
+2764,BUYERS,31,2,197,Rockefeller College,true
+2322,1903,331,1,248,Upperclass,true
+1560,BAKER,S104,1,200,Whitman College,true
+1671,WENDELL,B420,1,134,Whitman College,true
+2733,BLOOMBERG,220,1,131,Butler College,true
+2237,HOLDER,133,2,202,Rockefeller College,true
+1876,WENDELL,C306,1,146,Whitman College,true
+3220,KWANZA MARION JONES,C120A,1,148,New College West,false
+3188,JOSE ENRIQUE FELICIANO,D603,1,157,New College West,false
+3146,ALIYA KANJI,B329,4,561,New College West,false
+3139,ALIYA KANJI,B304,2,233,New College West,false
+3140,ALIYA KANJI,B305,1,151,New College West,false
+3159,ALIYA KANJI,B502,4,723,New College West,false
+3111,ADDY,A704,2,307,New College West,false
+57,BLOOMBERG,175,2,244,Butler College,false
+782,CUYLER,401,1,223,Upperclass,false
+216,FORBES,220,2,248,Forbes College,false
+943,HENRY,131,1,139,Upperclass,false
+3193,JOSE ENRIQUE FELICIANO,D607,2,297,New College West,false
+517,HOLDER,107,2,748,Rockefeller College,false
+2240,HOLDER,121,2,439,Rockefeller College,false
+1052,LITTLE,A46,2,444,Upperclass,false
+1103,PATTON,30,3,428,Upperclass,false
+1120,PATTON,83,1,192,Upperclass,false
+1078,LOCKHART,242,2,420,Upperclass,false
+1054,LITTLE,A54,4,501,Upperclass,false
+1249,PYNE,704,2,399,Upperclass,false
+1314,SCULLY,202,4,755,Upperclass,false
+1426,SPELMAN,32,4,930,Upperclass,false
+1430,SPELMAN,37,4,930,Upperclass,false
+1460,SPELMAN,83,4,930,Upperclass,false
+1453,SPELMAN,74,4,930,Upperclass,false
+170,WILF,E202,4,580,Butler College,false
+804,CUYLER,621,3,431,Upperclass,false
+993,HENRY,333,3,402,Upperclass,false
+917,FOULKE,322,3,437,Upperclass,false
+1474,WRIGHT,301,4,632,Upperclass,false
+979,HENRY,234,3,436,Upperclass,false
+709,BROWN,111,3,497,Upperclass,false
+280,FORBES,A246,1,168,Forbes College,false
+853,DOD,414,1,125,Upperclass,false
+371,EDWARDS,111,1,156,Mathey College,false
+2342,1903,114,1,162,Upperclass,false
+680,1903,414,1,203,Upperclass,false
+921,FOULKE,329,1,119,Upperclass,false
+315,FORBES,A432,1,181,Forbes College,false
+3281,BAKER,E418,1,138,Whitman College,false
+347,BLAIR,B71,1,150,Mathey College,false
+353,BLAIR,B91,1,132,Mathey College,false
+695,1903,516,1,187,Upperclass,false
+1508,1981,F212,1,119,Whitman College,false
+3288,99ALEXANDER,203,1,192,Forbes College,false
+1173,PYNE,233,1,134,Upperclass,false
+1192,PYNE,334,1,177,Upperclass,false
+2696,BLOOMBERG,267,1,135,Butler College,false
+114,BLOOMBERG,371,1,136,Butler College,false
+1869,BLOOMBERG,429,1,134,Butler College,false
+97,BLOOMBERG,329,1,133,Butler College,false
+2034,WITHERSPOON,105,1,190,Rockefeller College,false
+166,WILF,E103,1,211,Butler College,false
+1394,SCULLY,411,1,134,Upperclass,false
+1995,SCULLY,437,1,134,Upperclass,false
+936,HENRY,115,1,238,Upperclass,false
+1901,WITHERSPOON,512,1,116,Rockefeller College,false
+2036,WITHERSPOON,521,1,128,Rockefeller College,false
+2508,LAURITZEN,D406,1,131,Whitman College,false
+1638,LAURITZEN,D420,1,132,Whitman College,false
+456,LITTLE,391,1,140,Mathey College,false
+448,LITTLE,318,1,159,Mathey College,false
+453,LITTLE,385,1,207,Mathey College,false
+1012,LAUGHLIN,622,1,181,Upperclass,false
+1074,LOCKHART,225,1,194,Upperclass,false
+208,FORBES,209,2,183,Forbes College,false
+1442,SPELMAN,55,4,930,Upperclass,false
+1419,SPELMAN,18,4,930,Upperclass,false
+486,HOLDER,24,1,110,Rockefeller College,true
+2204,CAMPBELL,54,3,284,Mathey College,true
+478,CAMPBELL,28,4,455,Rockefeller College,true
+2861,FORBES,257,2,281,Forbes College,true
+533,WITHERSPOON,201,4,510,Rockefeller College,true
+471,BUYERS,T02,4,563,Rockefeller College,true
+2127,BLAIR,41,2,213,Mathey College,true
+2693,WRIGHT,405,1,256,Upperclass,true
+2538,1981,F316,1,118,Whitman College,true
+2151,BLAIR,101,4,497,Mathey College,true
+1610,LAURITZEN,D018,2,194,Whitman College,true
+2619,FORBES,A224,2,181,Forbes College,true
+2116,BROWN,310,1,217,Upperclass,true
+2256,HOLDER,65,4,449,Rockefeller College,true
+2934,WENDELL,C410,1,148,Whitman College,true
+361,CAMPBELL,6A,1,146,Mathey College,true
+2526,FISHER,A208,1,143,Whitman College,true
+2232,HOLDER,75A,1,169,Rockefeller College,true
+2031,WITHERSPOON,315,2,219,Rockefeller College,true
+2546,1981,F414,1,162,Whitman College,true
+2799,YOSELOFF,A104,4,522,Butler College,true
+1260,PYNE,721,1,177,Upperclass,true
+2674,SCULLY,445,1,134,Upperclass,true
+1944,SCULLY,313,1,166,Upperclass,true
+824,DOD,117,1,120,Upperclass,true
+1623,LAURITZEN,D209,1,118,Whitman College,true
+2840,FORBES,162,2,293,Forbes College,true
+2056,EDWARDS,219,2,269,Mathey College,true
+2579,FORBES,A326,2,180,Forbes College,true
+2849,FORBES,104,2,193,Forbes College,true
+2139,BLAIR,116,4,495,Mathey College,true
+2135,BLAIR,73,4,496,Mathey College,true
+428,LITTLE,55,1,212,Mathey College,true
+2812,1976,D209,4,522,Butler College,true
+1883,BLOOMBERG,347,2,208,Butler College,true
+2188,PATTON,T3,3,419,Upperclass,true
+2898,FORBES,311,2,256,Forbes College,true
+1951,1903,322,1,175,Upperclass,true
+3099,ADDY,A418,1,127,New College West,false
+1499,1981,F105,4,475,Whitman College,false
+1488,1981,F018,4,466,Whitman College,false
+3147,ALIYA KANJI,B401,4,439,New College West,false
+3168,ALIYA KANJI,B516,4,600,New College West,false
+3124,ALIYA KANJI,B006,1,145,New College West,false
+3199,KWANZA MARION JONES,C006,1,148,New College West,false
+1562,BAKER,S202,4,558,Whitman College,false
+325,BLAIR,82,4,523,Mathey College,false
+710,BROWN,112,4,505,Upperclass,false
+2200,CAMPBELL,32,4,422,Rockefeller College,false
+772,CUYLER,231,1,126,Upperclass,false
+803,CUYLER,613,2,253,Upperclass,false
+1588,FISHER,A318,1,132,Whitman College,false
+226,FORBES,254,2,306,Forbes College,false
+890,FOULKE,202,2,370,Upperclass,false
+912,FOULKE,315,2,351,Upperclass,false
+3180,JOSE ENRIQUE FELICIANO,D414,4,455,New College West,false
+3257,KWANZA MARION JONES,C610,4,573,New College West,false
+3208,KWANZA MARION JONES,C021,1,152,New College West,false
+1007,LAUGHLIN,614,2,380,Upperclass,false
+1106,PATTON,60,4,574,Upperclass,false
+1253,PYNE,713,1,171,Upperclass,false
+859,DOD,102N,3,460,Upperclass,false
+304,FORBES,A337,3,291,Forbes College,false
+1591,HARGADON,G101A,3,430,Whitman College,false
+756,BROWN,420,3,500,Upperclass,false
+778,CUYLER,311,3,424,Upperclass,false
+882,FOULKE,121,3,414,Upperclass,false
+765,CUYLER,112,3,447,Upperclass,false
+759,BROWN,425,1,129,Upperclass,false
+277,FORBES,A242,1,167,Forbes College,false
+1953,DOD,307,1,120,Upperclass,false
+254,FORBES,A134,1,108,Forbes College,false
+253,FORBES,A133,1,115,Forbes College,false
+260,FORBES,A144,1,168,Forbes College,false
+378,EDWARDS,501,1,161,Mathey College,false
+638,1903,124,1,174,Upperclass,false
+1958,1903,235,1,149,Upperclass,false
+911,FOULKE,314,1,170,Upperclass,false
+649,1903,211,1,176,Upperclass,false
+3273,BAKER,E406,1,126,Whitman College,false
+3160,ALIYA KANJI,B503A,1,152,New College West,false
+3174,ALIYA KANJI,B612,1,137,New College West,false
+1551,BAKER,E419,1,128,Whitman College,false
+1561,BAKER,S106,1,138,Whitman College,false
+1201,PYNE,413,1,178,Upperclass,false
+1203,PYNE,421,1,180,Upperclass,false
+1232,PYNE,616,1,196,Upperclass,false
+1190,PYNE,332,1,231,Upperclass,false
+2695,BLOOMBERG,270,1,134,Butler College,false
+1652,WENDELL,B312,1,152,Whitman College,false
+1665,WENDELL,B412,1,131,Whitman College,false
+1342,SCULLY,271,1,166,Upperclass,false
+1356,SCULLY,328,1,147,Upperclass,false
+1362,SCULLY,335,1,160,Upperclass,false
+1964,SCULLY,446,1,134,Upperclass,false
+561,WITHERSPOON,505,1,233,Rockefeller College,false
+982,HENRY,301,1,216,Upperclass,false
+1049,LITTLE,A36,1,201,Upperclass,false
+1907,JOLINE,232,1,133,Mathey College,false
+1094,LOCKHART,402,1,249,Upperclass,false
+1102,LOCKHART,433,1,122,Upperclass,false
+1146,PYNE,115,1,207,Upperclass,false
+359,CAMPBELL,4B,1,168,Rockefeller College,false
+2801,YOSELOFF,A102,4,522,Butler College,true
+1928,DOD,215,1,125,Upperclass,true
+429,LITTLE,57,2,443,Mathey College,true
+2067,EDWARDS,415,1,211,Mathey College,true
+2775,HAMILTON,115,4,503,Mathey College,true
+1913,BLAIR,64,2,213,Mathey College,true
+2913,FORBES,371,2,246,Forbes College,true
+2850,FORBES,103,2,203,Forbes College,true
+2115,BROWN,315,1,141,Upperclass,true
+1525,BAKER,E008,2,141,Whitman College,true
+1480,WRIGHT,402,1,193,Upperclass,true
+2411,2 DICKINSON,26,1,128,No Res College Associated,true
+1607,HARGADON,G406,1,140,Whitman College,true
+2600,FORBES,A122,3,356,Forbes College,true
+2090,EDWARDS,205,1,156,Mathey College,true
+552,WITHERSPOON,316,1,113,Rockefeller College,true
+2172,LITTLE,19,4,539,Mathey College,true
+1387,SCULLY,401,1,134,Upperclass,true
+2050,EDWARDS,306,1,182,Mathey College,true
+32,1967,B211,4,522,Butler College,true
+2701,BLOOMBERG,257,1,156,Butler College,true
+1352,SCULLY,310,1,147,Upperclass,true
+87,BLOOMBERG,314,1,156,Butler College,true
+366,EDWARDS,103,1,129,Mathey College,true
+310,FORBES,A424,2,179,Forbes College,true
+2002,WITHERSPOON,115,2,190,Rockefeller College,true
+2542,1981,F409,1,145,Whitman College,true
+2086,EDWARDS,209,1,167,Mathey College,true
+2396,JOLINE,122,4,400,Mathey College,true
+3172,ALIYA KANJI,B603B,1,149,New College West,false
+619,1901,334,1,142,Upperclass,false
+3109,ADDY,A617,4,441,New College West,false
+3203,KWANZA MARION JONES,C017A,1,155,New College West,false
+3229,KWANZA MARION JONES,C217,1,155,New College West,false
+694,1903,515,2,369,Upperclass,false
+47,1976,D306,4,564,Butler College,false
+3114,ADDY,A707,1,136,New College West,false
+3261,BAKER,E405,1,121,Whitman College,false
+53,BLOOMBERG,121,4,758,Butler College,false
+56,BLOOMBERG,140,4,680,Butler College,false
+63,BLOOMBERG,193,4,710,Butler College,false
+1584,FISHER,A312,1,129,Whitman College,false
+392,EDWARDS,515,2,299,Mathey College,false
+232,FORBES,264,2,296,Forbes College,false
+309,FORBES,A378,2,184,Forbes College,false
+395,HAMILTON,124,4,628,Mathey College,false
+500,HOLDER,67,2,761,Rockefeller College,false
+496,HOLDER,61,4,508,Rockefeller College,false
+523,HOLDER,126,4,618,Rockefeller College,false
+3209,KWANZA MARION JONES,C022,1,151,New College West,false
+459,LITTLE,401,4,550,Mathey College,false
+1642,MURLEY,T403,2,584,Whitman College,false
+1284,SCULLY,117,2,337,Upperclass,false
+1310,SCULLY,172,2,278,Upperclass,false
+1423,SPELMAN,24,4,930,Upperclass,false
+1416,SPELMAN,15,4,930,Upperclass,false
+1450,SPELMAN,68,4,930,Upperclass,false
+1457,SPELMAN,78,4,930,Upperclass,false
+1455,SPELMAN,76,4,930,Upperclass,false
+559,WITHERSPOON,503,4,657,Rockefeller College,false
+1678,WENDELL,C204,4,450,Whitman College,false
+1104,PATTON,40,6,835,Upperclass,false
+673,1903,321,3,393,Upperclass,false
+298,FORBES,A323,3,392,Forbes College,false
+1072,LOCKHART,223,3,440,Upperclass,false
+627,1901,413,3,459,Upperclass,false
+950,HENRY,151,3,406,Upperclass,false
+465,BUYERS,34,1,131,Rockefeller College,false
+468,BUYERS,B22,1,128,Rockefeller College,false
+467,BUYERS,B21,1,124,Rockefeller College,false
+283,FORBES,A250,1,168,Forbes College,false
+285,FORBES,A254,1,167,Forbes College,false
+279,FORBES,A245,1,166,Forbes College,false
+376,EDWARDS,116,1,122,Mathey College,false
+599,1901,224,1,148,Upperclass,false
+683,1903,431,1,171,Upperclass,false
+910,FOULKE,313,1,173,Upperclass,false
+920,FOULKE,328,1,133,Upperclass,false
+3277,BAKER,E410,1,124,Whitman College,false
+3279,BAKER,E210,1,145,Whitman College,false
+3150,ALIYA KANJI,B403B,1,149,New College West,false
+147,BLOOMBERG,461,1,147,Butler College,false
+703,1903,528,1,194,Upperclass,false
+1493,1981,F026,1,130,Whitman College,false
+2807,1976,D216,1,140,Butler College,false
+319,BLAIR,45,1,101,Mathey College,false
+708,1903,523A,1,235,Upperclass,false
+1219,PYNE,440,1,103,Upperclass,false
+1282,SCULLY,110,1,147,Upperclass,false
+126,BLOOMBERG,406,1,146,Butler College,false
+92,BLOOMBERG,323,1,133,Butler College,false
+91,BLOOMBERG,322,1,133,Butler College,false
+96,BLOOMBERG,327,1,132,Butler College,false
+168,WILF,E108,1,135,Butler College,false
+1956,SCULLY,227,1,166,Upperclass,false
+1992,SCULLY,324,1,147,Upperclass,false
+1401,SCULLY,428,1,134,Upperclass,false
+186,YOSELOFF,A205,1,138,Butler College,false
+973,HENRY,228,1,106,Upperclass,false
+1157,PYNE,135,1,145,Upperclass,false
+1432,SPELMAN,41,4,930,Upperclass,false
+1303,SCULLY,160,1,147,Upperclass,true
+1521,1981,F327,1,148,Whitman College,true
+2729,BLOOMBERG,205,1,144,Butler College,true
+2003,WITHERSPOON,112,1,104,Rockefeller College,true
+2005,WITHERSPOON,309,2,214,Rockefeller College,true
+1867,FORBES,A226,2,180,Forbes College,true
+2837,FORBES,165,3,449,Forbes College,true
+2602,FORBES,A117,1,363,Forbes College,true
+1637,LAURITZEN,D418,1,139,Whitman College,true
+2630,FORBES,A159,1,174,Forbes College,true
+90,BLOOMBERG,320,1,133,Butler College,true
+2167,LITTLE,28,2,198,Mathey College,true
+2798,YOSELOFF,A103,4,522,Butler College,true
+1909,WITHERSPOON,408,1,114,Rockefeller College,true
+2417,2 DICKINSON,22,1,153,No Res College Associated,true
+2725,BLOOMBERG,113,1,145,Butler College,true
+567,1901,103,1,155,Upperclass,true
+1816,BLOOMBERG,248,1,152,Butler College,true
+1597,HARGADON,G301,1,173,Whitman College,true
+2078,EDWARDS,314,1,174,Mathey College,true
+2615,FORBES,A172,2,186,Forbes College,true
+1519,1981,F307,1,108,Whitman College,true
+1331,SCULLY,256,1,166,Upperclass,true
+2905,FORBES,361,2,245,Forbes College,true
+2529,FISHER,A116,1,111,Whitman College,true
+961,HENRY,214,1,162,Upperclass,true
+539,WITHERSPOON,209,2,208,Rockefeller College,true
+2186,PATTON,T8,1,195,Upperclass,true
+239,FORBES,306,1,136,Forbes College,true
+1644,WENDELL,B205,1,113,Whitman College,true
+2391,JOLINE,222,4,401,Mathey College,true
+830,DOD,206,1,120,Upperclass,true
+2936,WENDELL,C412,1,149,Whitman College,true
+1870,1981,F216,1,118,Whitman College,true
+621,1901,401,1,154,Upperclass,false
+566,1901,102,2,335,Upperclass,false
+608,1901,312,2,355,Upperclass,false
+581,1901,123,4,502,Upperclass,false
+3217,KWANZA MARION JONES,C116,1,151,New College West,false
+3198,KWANZA MARION JONES,C005,1,148,New College West,false
+3206,KWANZA MARION JONES,C019,1,151,New College West,false
+28,1967,B202,4,542,Butler College,false
+3227,KWANZA MARION JONES,C213B,1,160,New College West,false
+3096,ADDY,A308,4,485,New College West,false
+149,BLOOMBERG,467,1,134,Butler College,false
+728,BROWN,221,4,505,Upperclass,false
+1929,DOD,400N,1,150,Upperclass,false
+2903,FORBES,327,1,145,Forbes College,false
+275,FORBES,A236,2,180,Forbes College,false
+944,HENRY,132,1,176,Upperclass,false
+940,HENRY,123,4,523,Upperclass,false
+949,HENRY,141,4,642,Upperclass,false
+511,HOLDER,92,4,440,Rockefeller College,false
+2248,HOLDER,101,4,527,Rockefeller College,false
+527,HOLDER,143,4,462,Rockefeller College,false
+3225,KWANZA MARION JONES,C125,4,456,New College West,false
+3240,KWANZA MARION JONES,C314,4,727,New College West,false
+1001,LAUGHLIN,531,5,768,Upperclass,false
+1635,LAURITZEN,D314,4,965,Whitman College,false
+1037,LITTLE,142,4,644,Upperclass,false
+1063,LOCKHART,114,1,173,Upperclass,false
+1234,PYNE,621,2,353,Upperclass,false
+1148,PYNE,121,2,444,Upperclass,false
+1244,PYNE,641,4,588,Upperclass,false
+1316,SCULLY,207,4,510,Upperclass,false
+1365,SCULLY,340,4,755,Upperclass,false
+1384,SCULLY,372,2,278,Upperclass,false
+1417,SPELMAN,16,4,930,Upperclass,false
+1467,WILF,E405,4,580,Upperclass,false
+878,FOULKE,111,3,401,Upperclass,false
+679,1903,413,3,557,Upperclass,false
+919,FOULKE,326,3,386,Upperclass,false
+568,1901,104,3,404,Upperclass,false
+1124,PATTON,87,3,472,Upperclass,false
+417,JOLINE,432,3,331,Mathey College,false
+885,FOULKE,124,3,454,Upperclass,false
+718,BROWN,123,1,123,Upperclass,false
+290,FORBES,A259,1,172,Forbes College,false
+191,FORBES,106,1,143,Forbes College,false
+843,DOD,310,1,125,Upperclass,false
+815,DOD,105,1,125,Upperclass,false
+819,DOD,112,1,120,Upperclass,false
+846,DOD,315,1,125,Upperclass,false
+603,1901,233,1,174,Upperclass,false
+657,1903,224,1,175,Upperclass,false
+677,1903,402,1,217,Upperclass,false
+313,FORBES,A428,1,181,Forbes College,false
+3276,BAKER,E411,1,133,Whitman College,false
+698,1903,523,1,105,Upperclass,false
+1485,1981,F015,1,144,Whitman College,false
+1172,PYNE,232,1,132,Upperclass,false
+1389,SCULLY,403,1,134,Upperclass,false
+1238,PYNE,626,1,125,Upperclass,false
+122,BLOOMBERG,402,1,153,Butler College,false
+1243,PYNE,634,1,215,Upperclass,false
+2685,SCULLY,152,1,166,Upperclass,false
+1337,SCULLY,265,1,166,Upperclass,false
+1975,SCULLY,440,1,134,Upperclass,false
+960,HENRY,213,1,179,Upperclass,false
+968,HENRY,223,1,133,Upperclass,false
+980,HENRY,235,1,164,Upperclass,false
+985,HENRY,312,1,196,Upperclass,false
+2513,LAURITZEN,D408,1,139,Whitman College,false
+2507,LAURITZEN,D405,1,149,Whitman College,false
+1625,LAURITZEN,D301,1,131,Whitman College,false
+458,LITTLE,395,1,230,Mathey College,false
+443,LITTLE,305,1,123,Mathey College,false
+1895,LITTLE,323,1,127,Mathey College,false
+2177,PATTON,T13,1,229,Upperclass,false
+1349,SCULLY,306,1,147,Upperclass,true
+1950,DOD,406,1,120,Upperclass,true
+2864,FORBES,233,2,202,Forbes College,true
+1889,BLOOMBERG,240,2,200,Butler College,true
+1884,1976,D215,4,522,Butler College,true
+2907,FORBES,362,2,245,Forbes College,true
+532,WITHERSPOON,121,1,115,Rockefeller College,true
+2932,WENDELL,C406,1,127,Whitman College,true
+2142,BLAIR,111,4,495,Mathey College,true
+2912,FORBES,369,2,247,Forbes College,true
+1917,WITHERSPOON,114,1,107,Rockefeller College,true
+2909,FORBES,365,2,245,Forbes College,true
+1553,BAKER,E423,1,141,Whitman College,true
+2386,JOLINE,421,4,429,Mathey College,true
+2805,1976,D108,4,522,Butler College,true
+2652,SCULLY,312,1,148,Upperclass,true
+2682,SCULLY,204,1,148,Upperclass,true
+2713,BLOOMBERG,356,3,533,Butler College,true
+2645,SCULLY,323,1,166,Upperclass,true
+2072,EDWARDS,410,1,169,Mathey College,true
+2416,2 DICKINSON,21,1,105,No Res College Associated,true
+1579,FISHER,A301,2,245,Whitman College,true
+1300,SCULLY,150,1,166,Upperclass,true
+169,WILF,E201,1,137,Butler College,true
+2739,BLOOMBERG,210,1,153,Butler College,true
+2536,1981,F314,4,526,Whitman College,true
+66,BLOOMBERG,229,1,131,Butler College,true
+2570,FORBES,A418,2,181,Forbes College,true
+2628,FORBES,A166,1,161,Forbes College,true
+2774,HAMILTON,112,4,449,Mathey College,true
+2144,BLAIR,103,4,511,Mathey College,true
+1595,HARGADON,G205,1,156,Whitman College,true
+2048,EDWARDS,308,1,153,Mathey College,true
+2190,CAMPBELL,1A,3,444,Rockefeller College,true
+466,BUYERS,B13,1,154,Rockefeller College,true
+1656,WENDELL,B316,1,148,Whitman College,true
+1934,SCULLY,321,1,182,Upperclass,true
+1914,WITHERSPOON,401,4,545,Rockefeller College,true
+1302,SCULLY,158,1,166,Upperclass,true
+1506,1981,F123,4,702,Whitman College,false
+3113,ADDY,A706,2,305,New College West,false
+3118,ADDY,A713,1,132,New College West,false
+1558,BAKER,S003,2,261,Whitman College,false
+345,BLAIR,B61,2,248,Mathey College,false
+738,BROWN,318,4,507,Upperclass,false
+463,BUYERS,32,4,728,Rockefeller College,false
+749,BROWN,411,4,512,Upperclass,false
+805,CUYLER,622,2,265,Upperclass,false
+214,FORBES,218,2,275,Forbes College,false
+240,FORBES,307,1,120,Forbes College,false
+2884,FORBES,402,1,182,Forbes College,false
+305,FORBES,A338,2,184,Forbes College,false
+3242,KWANZA MARION JONES,C316,4,444,New College West,false
+3247,KWANZA MARION JONES,C416,4,444,New College West,false
+996,LAUGHLIN,512,2,377,Upperclass,false
+1132,PATTON,313,2,234,Upperclass,false
+1640,MURLEY,T304,2,231,Whitman College,false
+1319,SCULLY,217,2,337,Upperclass,false
+1977,SCULLY,347,2,280,Upperclass,false
+1420,SPELMAN,21,4,930,Upperclass,false
+1446,SPELMAN,64,4,930,Upperclass,false
+1649,WENDELL,B218,4,514,Whitman College,false
+534,WITHERSPOON,203,4,619,Rockefeller College,false
+1109,PATTON,63,3,430,Upperclass,false
+2868,FORBES,228,3,389,Forbes College,false
+1966,BROWN,125,1,128,Upperclass,false
+716,BROWN,121,1,112,Upperclass,false
+724,BROWN,213,1,126,Upperclass,false
+1835,FORBES,A158,1,180,Forbes College,false
+794,CUYLER,437,1,191,Upperclass,false
+854,DOD,415,1,125,Upperclass,false
+384,EDWARDS,507,1,164,Mathey College,false
+605,1901,235,1,176,Upperclass,false
+640,1903,131,1,184,Upperclass,false
+1967,1903,232,1,128,Upperclass,false
+666,1903,242,1,157,Upperclass,false
+589,1901,201,1,173,Upperclass,false
+924,FOULKE,333,1,188,Upperclass,false
+880,FOULKE,113,1,173,Upperclass,false
+1533,BAKER,E125,1,140,Whitman College,false
+3282,BAKER,E417,1,128,Whitman College,false
+54,BLOOMBERG,124,1,170,Butler College,false
+3284,BAKER,E107,1,114,Whitman College,false
+1573,BAKER,S406,1,109,Whitman College,false
+1168,PYNE,223,1,176,Upperclass,false
+1214,PYNE,434,1,152,Upperclass,false
+1213,PYNE,433,1,183,Upperclass,false
+1205,PYNE,423,1,164,Upperclass,false
+1968,PYNE,624,1,178,Upperclass,false
+1179,PYNE,311,1,209,Upperclass,false
+1183,PYNE,315,1,166,Upperclass,false
+65,BLOOMBERG,227,1,132,Butler College,false
+70,BLOOMBERG,274,1,132,Butler College,false
+102,BLOOMBERG,342,1,145,Butler College,false
+530,WITHERSPOON,14,1,121,Rockefeller College,false
+1334,SCULLY,261,1,160,Upperclass,false
+1669,WENDELL,B418,1,140,Whitman College,false
+551,WITHERSPOON,312,1,116,Rockefeller College,false
+1910,WITHERSPOON,410,1,114,Rockefeller College,false
+978,HENRY,233,1,194,Upperclass,false
+454,LITTLE,387,1,137,Mathey College,false
+1073,LOCKHART,224,1,206,Upperclass,false
+1317,SCULLY,213,1,166,Upperclass,true
+2183,PATTON,T4,1,184,Upperclass,true
+2593,FORBES,A271,3,293,Forbes College,true
+2306,LOCKHART,412,1,168,Upperclass,true
+2759,BLOOMBERG,122,1,279,Butler College,true
+367,EDWARDS,105,1,151,Mathey College,true
+1645,WENDELL,B209,4,480,Whitman College,true
+2212,CAMPBELL,6B,2,193,Mathey College,true
+2939,WENDELL,C415,1,132,Whitman College,true
+554,WITHERSPOON,321,1,115,Rockefeller College,true
+1636,LAURITZEN,D416,1,133,Whitman College,true
+2716,BLOOMBERG,345,1,139,Butler College,true
+2785,1967,B311,4,522,Butler College,true
+1328,SCULLY,252,1,166,Upperclass,true
+1947,SCULLY,132,1,147,Upperclass,true
+1290,SCULLY,127,1,166,Upperclass,true
+1011,LAUGHLIN,618,1,175,Upperclass,true
+2643,SCULLY,113,1,166,Upperclass,true
+1358,SCULLY,331,1,196,Upperclass,true
+2828,FORBES,202,2,193,Forbes College,true
+2727,BLOOMBERG,207,1,143,Butler College,true
+174,WILF,E208,1,135,Butler College,true
+2728,BLOOMBERG,206,1,140,Butler College,true
+431,LITTLE,63,4,644,Mathey College,true
+1556,BAKER,E429,1,119,Whitman College,true
+1351,SCULLY,308,1,148,Upperclass,true
+1149,PYNE,122,1,168,Upperclass,true
+198,FORBES,116,2,193,Forbes College,true
+2549,1981,F420,4,634,Whitman College,true
+2148,BLAIR,307,2,194,Mathey College,true
+2336,1903,522,1,214,Upperclass,true
+2900,FORBES,309,1,120,Forbes College,true
+2806,1976,D315,4,522,Butler College,true
+758,BROWN,422,1,126,Upperclass,true
+1367,SCULLY,348,1,166,Upperclass,true
+915,FOULKE,318,1,211,Upperclass,true
+2393,JOLINE,215,4,425,Mathey College,true
+2070,EDWARDS,412,1,158,Mathey College,true
+3163,ALIYA KANJI,B510A,1,162,New College West,false
+646,1903,141,2,378,Upperclass,false
+3098,ADDY,A416,1,162,New College West,false
+3127,ALIYA KANJI,B204,2,232,New College West,false
+3125,ALIYA KANJI,B201,4,468,New College West,false
+2724,BLOOMBERG,272,2,173,Butler College,false
+333,BLAIR,97,4,592,Mathey College,false
+321,BLAIR,53,4,503,Mathey College,false
+323,BLAIR,65,4,499,Mathey College,false
+745,BROWN,327,4,501,Upperclass,false
+852,DOD,413,4,705,Upperclass,false
+862,DOD,200S,1,150,Upperclass,false
+1879,FISHER,A305,1,139,Whitman College,false
+215,FORBES,219,2,246,Forbes College,false
+1577,FISHER,A201,4,755,Whitman College,false
+242,FORBES,317,1,125,Forbes College,false
+276,FORBES,A238,2,185,Forbes College,false
+294,FORBES,A265,2,343,Forbes College,false
+913,FOULKE,316,2,382,Upperclass,false
+1598,HARGADON,G304A,1,157,Whitman College,false
+970,HENRY,225,2,370,Upperclass,false
+2509,LAURITZEN,D407,2,201,Whitman College,false
+2514,LAURITZEN,D413,2,203,Whitman College,false
+1619,LAURITZEN,D114,4,593,Whitman College,false
+1021,LITTLE,91,4,509,Upperclass,false
+1030,LITTLE,121,4,600,Upperclass,false
+1067,LOCKHART,212,1,199,Upperclass,false
+1066,LOCKHART,211,1,179,Upperclass,false
+1075,LOCKHART,231,4,686,Upperclass,false
+1163,PYNE,212,1,148,Upperclass,false
+1252,PYNE,712,1,164,Upperclass,false
+1381,SCULLY,368,2,278,Upperclass,false
+1654,WENDELL,B314,4,484,Whitman College,false
+863,DOD,201N,3,460,Upperclass,false
+1191,PYNE,333,3,423,Upperclass,false
+909,FOULKE,312,3,453,Upperclass,false
+152,BLOOMBERG,473,3,482,Butler College,false
+1476,WRIGHT,303,1,196,Upperclass,false
+1478,WRIGHT,306,2,423,Upperclass,false
+786,CUYLER,412,3,399,Upperclass,false
+971,HENRY,226,3,490,Upperclass,false
+752,BROWN,414,1,134,Upperclass,false
+286,FORBES,A255,1,179,Forbes College,false
+1932,DOD,312,1,120,Upperclass,false
+2110,DOD,203,1,260,Upperclass,false
+624,1901,404,1,190,Upperclass,false
+602,1901,232,1,139,Upperclass,false
+674,1903,323,1,175,Upperclass,false
+1982,FOULKE,323,1,168,Upperclass,false
+1535,BAKER,E207,1,114,Whitman College,false
+1568,BAKER,S305,1,211,Whitman College,false
+3285,99ALEXANDER,202,1,204,Forbes College,false
+1218,PYNE,439,1,117,Upperclass,false
+1220,PYNE,441,1,115,Upperclass,false
+1993,SCULLY,406,1,134,Upperclass,false
+1392,SCULLY,407,1,134,Upperclass,false
+1278,SCULLY,104,1,148,Upperclass,false
+1184,PYNE,316,1,169,Upperclass,false
+131,BLOOMBERG,423,1,134,Butler College,false
+1251,PYNE,711,1,168,Upperclass,false
+1375,SCULLY,360,1,151,Upperclass,false
+1989,SCULLY,226,1,148,Upperclass,false
+948,HENRY,137,1,137,Upperclass,false
+954,HENRY,204,1,213,Upperclass,false
+989,HENRY,323,1,113,Upperclass,false
+1481,WRIGHT,403,1,174,Upperclass,false
+1475,WRIGHT,302,1,185,Upperclass,false
+2512,LAURITZEN,D414,1,132,Whitman College,false
+1620,LAURITZEN,D201,1,125,Whitman College,false
+1126,PATTON,89,1,192,Upperclass,false
+1965,PATTON,T10,1,136,Upperclass,false
+1140,PATTON,T07,1,186,Upperclass,false
+2683,SCULLY,165,1,211,Upperclass,true
+368,EDWARDS,106,1,154,Mathey College,true
+1905,EDWARDS,317,1,100,Mathey College,true
+1550,BAKER,E323,1,135,Whitman College,true
+1383,SCULLY,371,1,166,Upperclass,true
+2410,2 DICKINSON,30,1,121,No Res College Associated,true
+2140,BLAIR,113,2,221,Mathey College,true
+2575,FORBES,A411,3,287,Forbes College,true
+2914,FORBES,372,2,247,Forbes College,true
+2215,CAMPBELL,12,2,253,Rockefeller College,true
+2741,BLOOMBERG,208,1,140,Butler College,true
+1548,BAKER,E319,4,458,Whitman College,true
+492,HOLDER,43,2,191,Rockefeller College,true
+2280,PYNE,642,2,268,Upperclass,true
+1378,SCULLY,364,2,278,Upperclass,true
+271,FORBES,A228,2,185,Forbes College,true
+2519,FISHER,A205,1,145,Whitman College,true
+2856,FORBES,269,2,294,Forbes College,true
+33,1967,B212,4,522,Butler College,true
+1935,SCULLY,323,3,414,Upperclass,true
+2587,FORBES,A311,2,293,Forbes College,true
+2541,1981,F407,1,136,Whitman College,true
+189,YOSELOFF,A213,4,580,Butler College,true
+396,HAMILTON,221,1,145,Mathey College,true
+2567,FORBES,A437,2,287,Forbes College,true
+2054,EDWARDS,302,1,131,Mathey College,true
+2576,FORBES,A372,2,184,Forbes College,true
+937,HENRY,116,1,210,Upperclass,true
+2403,2 DICKINSON,24,1,111,No Res College Associated,true
+34,1967,B213,4,522,Butler College,true
+731,BROWN,226,1,127,Upperclass,true
+2924,WENDELL,C307,1,146,Whitman College,true
+2166,LITTLE,61,1,223,Mathey College,true
+2797,YOSELOFF,A210,4,520,Butler College,true
+2617,FORBES,A168,1,173,Forbes College,true
+2766,BUYERS,21,4,526,Rockefeller College,true
+2125,BLAIR,43,4,490,Mathey College,true
+2845,FORBES,115,2,201,Forbes College,true
+569,1901,105,1,142,Upperclass,true
+900,FOULKE,301,1,174,Upperclass,true
+2074,EDWARDS,408,1,175,Mathey College,true
+3171,ALIYA KANJI,B603A,1,152,New College West,false
+583,1901,125,4,498,Upperclass,false
+3239,KWANZA MARION JONES,C313B,1,160,New College West,false
+3170,ALIYA KANJI,B602,4,725,New College West,false
+3136,ALIYA KANJI,B229,4,556,New College West,false
+1557,BAKER,S002,4,650,Whitman College,false
+326,BLAIR,83,4,504,Mathey College,false
+723,BROWN,212,4,518,Upperclass,false
+464,BUYERS,33,4,583,Rockefeller College,false
+835,DOD,213,2,260,Upperclass,false
+193,FORBES,108,2,183,Forbes College,false
+1590,FISHER,A323,4,1065,Whitman College,false
+918,FOULKE,325,2,350,Upperclass,false
+3212,KWANZA MARION JONES,C102,4,481,New College West,false
+1056,LOCKHART,101,1,234,Upperclass,false
+1059,LOCKHART,104,1,166,Upperclass,false
+1061,LOCKHART,112,1,112,Upperclass,false
+1097,LOCKHART,421,2,302,Upperclass,false
+1101,LOCKHART,432,2,248,Upperclass,false
+1076,LOCKHART,232,4,722,Upperclass,false
+1983,SCULLY,222,2,305,Upperclass,false
+1187,PYNE,323,3,414,Upperclass,false
+735,BROWN,312,3,500,Upperclass,false
+115,BLOOMBERG,373,3,531,Butler College,false
+998,LAUGHLIN,521,3,440,Upperclass,false
+1116,PATTON,76,3,457,Upperclass,false
+1473,WRIGHT,32,3,459,Upperclass,false
+470,BUYERS,B31,1,210,Rockefeller College,false
+2880,FORBES,406,1,228,Forbes College,false
+833,DOD,211,1,125,Upperclass,false
+256,FORBES,A136,1,105,Forbes College,false
+383,EDWARDS,506,1,164,Mathey College,false
+388,EDWARDS,511,1,163,Mathey College,false
+622,1901,402,1,186,Upperclass,false
+601,1901,226,1,139,Upperclass,false
+658,1903,225,1,177,Upperclass,false
+635,1903,113,1,180,Upperclass,false
+678,1903,411,1,166,Upperclass,false
+681,1903,421,1,230,Upperclass,false
+661,1903,228,1,196,Upperclass,false
+1959,1903,234,1,156,Upperclass,false
+3268,BAKER,E105,1,116,Whitman College,false
+3272,BAKER,E407,1,149,Whitman College,false
+3149,ALIYA KANJI,B403A,1,152,New College West,false
+43,1976,D204,1,219,Butler College,false
+2334,1903,534,1,119,Upperclass,false
+1208,PYNE,427,1,167,Upperclass,false
+1206,PYNE,424,1,166,Upperclass,false
+1288,SCULLY,123,1,166,Upperclass,false
+1259,PYNE,719,1,165,Upperclass,false
+107,BLOOMBERG,349,1,169,Butler College,false
+136,BLOOMBERG,441,1,138,Butler College,false
+2703,BLOOMBERG,439,1,134,Butler College,false
+144,BLOOMBERG,457,1,149,Butler College,false
+1648,WENDELL,B216,1,149,Whitman College,false
+1663,WENDELL,B410,1,133,Whitman College,false
+537,WITHERSPOON,206,1,109,Rockefeller College,false
+1344,SCULLY,273,1,166,Upperclass,false
+1339,SCULLY,267,1,166,Upperclass,false
+1875,WENDELL,B416,1,134,Whitman College,false
+1681,WENDELL,C208,1,149,Whitman College,false
+931,HENRY,103,1,202,Upperclass,false
+1899,HAMILTON,322,1,129,Mathey College,false
+976,HENRY,231,1,144,Upperclass,false
+1632,LAURITZEN,D308,1,146,Whitman College,false
+444,LITTLE,307,1,116,Mathey College,false
+1088,LOCKHART,322,1,181,Upperclass,false
+1150,PYNE,123,1,157,Upperclass,false
+1138,PATTON,T05,1,195,Upperclass,false
+905,FOULKE,306,1,168,Upperclass,true
+2408,2 DICKINSON,32,1,112,No Res College Associated,true
+2051,EDWARDS,305,1,153,Mathey College,true
+2671,SCULLY,216,1,148,Upperclass,true
+161,BOGLE,C105,1,153,Butler College,true
+78,BLOOMBERG,303,1,132,Butler College,true
+2152,BLAIR,94,1,175,Mathey College,true
+2555,SPELMAN,33,2,501,Upperclass,true
+1520,1981,F326,1,115,Whitman College,true
+714,BROWN,118,1,123,Upperclass,true
+69,BLOOMBERG,273,1,148,Butler College,true
+2773,HAMILTON,111,2,201,Mathey College,true
+1888,1976,D110,4,522,Butler College,true
+1918,LITTLE,12,3,422,Mathey College,true
+823,DOD,116,1,120,Upperclass,true
+2841,FORBES,161,2,282,Forbes College,true
+2052,EDWARDS,304,1,132,Mathey College,true
+2711,BLOOMBERG,365,1,142,Butler College,true
+2114,BROWN,415,1,142,Upperclass,true
+2860,FORBES,258,2,293,Forbes College,true
+2814,1976,D308,4,522,Butler College,true
+2154,BLAIR,A2,1,160,Mathey College,true
+793,CUYLER,436,1,126,Upperclass,true
+163,BOGLE,C203,1,139,Butler College,true
+2141,BLAIR,112,2,235,Mathey College,true
+423,LITTLE,35,2,231,Mathey College,true
+2283,PYNE,723,1,192,Upperclass,true
+1318,SCULLY,215,1,166,Upperclass,true
+545,WITHERSPOON,217,4,618,Rockefeller College,true
+2656,SCULLY,245,1,138,Upperclass,true
+2150,BLAIR,304,4,600,Mathey College,true
+1511,1981,F226,1,114,Whitman College,true
+2941,WENDELL,C418,1,136,Whitman College,true
+2835,FORBES,167,2,293,Forbes College,true
+663,1903,236,4,521,Upperclass,false
+3200,KWANZA MARION JONES,C007,1,142,New College West,false
+3233,KWANZA MARION JONES,C219B,1,155,New College West,false
+40,1976,D106,4,538,Butler College,false
+3179,JOSE ENRIQUE FELICIANO,D404A,1,269,New College West,false
+329,BLAIR,92,2,213,Mathey College,false
+59,BLOOMBERG,181,4,702,Butler College,false
+715,BROWN,119,4,837,Upperclass,false
+806,CUYLER,623,2,257,Upperclass,false
+848,DOD,403,4,705,Upperclass,false
+851,DOD,411,4,735,Upperclass,false
+1574,FISHER,A101,4,722,Whitman College,false
+1833,FORBES,328,1,142,Forbes College,false
+314,FORBES,A431,2,270,Forbes College,false
+876,FOULKE,101,2,434,Upperclass,false
+904,FOULKE,305,2,385,Upperclass,false
+1976,LAUGHLIN,621,2,381,Upperclass,false
+999,LAUGHLIN,522,2,357,Upperclass,false
+1036,LITTLE,141,2,288,Upperclass,false
+1017,LAUGHLIN,627,2,437,Upperclass,false
+2162,LITTLE,43,4,530,Mathey College,false
+1019,LAUGHLIN,632,4,621,Upperclass,false
+436,LITTLE,81,4,506,Mathey College,false
+1100,LOCKHART,431,2,283,Upperclass,false
+1130,PATTON,311,2,347,Upperclass,false
+1181,PYNE,313,2,349,Upperclass,false
+1299,SCULLY,149,2,280,Upperclass,false
+1308,SCULLY,170,2,278,Upperclass,false
+1422,SPELMAN,23,4,930,Upperclass,false
+1462,SPELMAN,85,4,930,Upperclass,false
+1437,SPELMAN,48,4,930,Upperclass,false
+1069,LOCKHART,214,3,434,Upperclass,false
+995,LAUGHLIN,511,3,436,Upperclass,false
+1885,YOSELOFF,A115,4,522,Butler College,false
+857,DOD,101N,3,460,Upperclass,false
+238,FORBES,305,3,394,Forbes College,false
+284,FORBES,A252,1,167,Forbes College,false
+291,FORBES,A260,1,162,Forbes College,false
+2266,CUYLER,433,1,152,Upperclass,false
+825,DOD,200,1,125,Upperclass,false
+1933,DOD,317,1,120,Upperclass,false
+2108,DOD,405,1,125,Upperclass,false
+855,DOD,416,1,120,Upperclass,false
+385,EDWARDS,508,1,163,Mathey College,false
+610,1901,314,1,185,Upperclass,false
+639,1903,125,1,179,Upperclass,false
+296,FORBES,A268,1,175,Forbes College,false
+1924,FOULKE,324,1,174,Upperclass,false
+901,FOULKE,302,1,188,Upperclass,false
+897,FOULKE,215,1,166,Upperclass,false
+3270,BAKER,E409,1,128,Whitman College,false
+1536,BAKER,E215,1,109,Whitman College,false
+1496,1981,F102,1,159,Whitman College,false
+46,1976,D304,1,219,Butler College,false
+1490,1981,F023,1,147,Whitman College,false
+1273,PYNE,743,1,137,Upperclass,false
+1266,PYNE,731,1,177,Upperclass,false
+101,BLOOMBERG,341,1,139,Butler College,false
+1666,WENDELL,B414,1,137,Whitman College,false
+177,WILF,E303,1,128,Butler College,false
+1323,SCULLY,238,1,148,Upperclass,false
+1677,WENDELL,C202,1,160,Whitman College,false
+1359,SCULLY,332,1,147,Upperclass,false
+1374,SCULLY,358,1,166,Upperclass,false
+1606,HARGADON,G405,1,165,Whitman College,false
+969,HENRY,224,1,167,Upperclass,false
+967,HENRY,222,1,93,Upperclass,false
+1919,HOLDER,25,1,125,Rockefeller College,false
+1601,HARGADON,G309,1,188,Whitman College,false
+1003,LAUGHLIN,533,1,150,Upperclass,false
+439,LITTLE,87,1,198,Mathey College,false
+1440,SPELMAN,53,4,930,Upperclass,false
+2077,EDWARDS,315,1,155,Mathey College,true
+2857,FORBES,265,3,451,Forbes College,true
+267,FORBES,A174,1,107,Forbes College,true
+2606,FORBES,A112,2,185,Forbes College,true
+2173,LITTLE,18,2,243,Mathey College,true
+1886,YOSELOFF,A215,4,522,Butler College,true
+192,FORBES,107,2,183,Forbes College,true
+1522,1981,F328,1,117,Whitman College,true
+2834,FORBES,168,2,294,Forbes College,true
+2242,HOLDER,112,4,441,Rockefeller College,true
+2540,1981,F319,1,151,Whitman College,true
+2012,WITHERSPOON,411,2,223,Rockefeller College,true
+2550,SPELMAN,62,2,501,Upperclass,true
+2008,WITHERSPOON,304,2,189,Rockefeller College,true
+2839,FORBES,163,2,289,Forbes College,true
+2046,EDWARDS,212,1,162,Mathey College,true
+2548,1981,F417,1,146,Whitman College,true
+2096,EDWARDS,202,1,129,Mathey College,true
+2205,CAMPBELL,53,3,285,Mathey College,true
+89,BLOOMBERG,318,1,135,Butler College,true
+2551,SPELMAN,44,2,501,Upperclass,true
+2527,FISHER,A206,1,145,Whitman College,true
+1811,WILF,E406,1,139,Upperclass,true
+2891,FORBES,322,1,131,Forbes College,true
+2838,FORBES,164,3,459,Forbes College,true
+557,WITHERSPOON,417,4,659,Rockefeller College,true
+2648,SCULLY,317,1,188,Upperclass,true
+2747,BLOOMBERG,222,1,131,Butler College,true
+2312,LOCKHART,233,1,173,Upperclass,true
+2658,SCULLY,235,1,198,Upperclass,true
+1085,LOCKHART,314,1,172,Upperclass,true
+2406,2 DICKINSON,34,1,108,No Res College Associated,true
+3258,99ALEXANDER,205,2,681,Forbes College,false
+1503,1981,F116,4,465,Whitman College,false
+3121,ALIYA KANJI,B003,1,150,New College West,false
+3130,ALIYA KANJI,B212,1,140,New College West,false
+3137,ALIYA KANJI,B301,4,468,New College West,false
+2130,BLAIR,63,2,251,Mathey College,false
+75,BLOOMBERG,281,4,710,Butler College,false
+61,BLOOMBERG,191,4,669,Butler College,false
+334,BLAIR,98,4,573,Mathey College,false
+337,BLAIR,301,4,575,Mathey College,false
+2198,CAMPBELL,34,4,423,Rockefeller College,false
+776,CUYLER,235,1,151,Upperclass,false
+766,CUYLER,121,4,529,Upperclass,false
+1575,FISHER,A105,1,148,Whitman College,false
+377,EDWARDS,117,2,270,Mathey College,false
+258,FORBES,A138,2,186,Forbes College,false
+2247,HOLDER,102,4,444,Rockefeller College,false
+1020,LAUGHLIN,633,2,409,Upperclass,false
+422,LITTLE,33,4,514,Mathey College,false
+1639,MURLEY,T302,2,240,Whitman College,false
+1145,PYNE,114,2,435,Upperclass,false
+1353,SCULLY,322,2,297,Upperclass,false
+1350,SCULLY,307,4,510,Upperclass,false
+1386,SCULLY,374,2,278,Upperclass,false
+1428,SPELMAN,35,4,930,Upperclass,false
+1454,SPELMAN,75,4,930,Upperclass,false
+1456,SPELMAN,77,4,930,Upperclass,false
+2018,WITHERSPOON,104,4,593,Rockefeller College,false
+870,DOD,302S,3,460,Upperclass,false
+1107,PATTON,61,3,437,Upperclass,false
+406,JOLINE,311,3,424,Mathey College,false
+894,FOULKE,211,3,397,Upperclass,false
+659,1903,226,3,433,Upperclass,false
+1118,PATTON,81,3,435,Upperclass,false
+881,FOULKE,114,3,441,Upperclass,false
+736,BROWN,313,1,125,Upperclass,false
+1984,BROWN,126,1,108,Upperclass,false
+725,BROWN,214,1,127,Upperclass,false
+751,BROWN,413,1,128,Upperclass,false
+748,BROWN,410,1,230,Upperclass,false
+293,FORBES,A263,1,166,Forbes College,false
+810,CUYLER,634,1,130,Upperclass,false
+625,1901,405,1,196,Upperclass,false
+597,1901,222,1,87,Upperclass,false
+893,FOULKE,205,1,167,Upperclass,false
+644,1903,135,1,131,Upperclass,false
+3271,BAKER,E408,1,126,Whitman College,false
+3275,BAKER,E413,1,128,Whitman College,false
+1529,BAKER,E118,1,146,Whitman College,false
+3154,ALIYA KANJI,B411A,1,157,New College West,false
+154,BLOOMBERG,476,1,113,Butler College,false
+352,BLAIR,B83,1,149,Mathey College,false
+1495,1981,F101,1,149,Whitman College,false
+1169,PYNE,224,1,168,Upperclass,false
+1200,PYNE,412,1,176,Upperclass,false
+1239,PYNE,630,1,121,Upperclass,false
+1262,PYNE,724,1,131,Upperclass,false
+179,WILF,E306,1,139,Butler College,false
+1298,SCULLY,148,1,166,Upperclass,false
+1377,SCULLY,362,1,161,Upperclass,false
+947,HENRY,136,1,142,Upperclass,false
+3293,LAUGHLIN,611,1,230,Upperclass,false
+442,LITTLE,303,1,193,Mathey College,false
+2246,HOLDER,103,1,240,Rockefeller College,false
+526,HOLDER,142,1,166,Rockefeller College,false
+1091,LOCKHART,325,1,146,Upperclass,false
+1111,PATTON,70,1,190,Upperclass,false
+1144,PYNE,113,1,168,Upperclass,false
+1154,PYNE,132,1,177,Upperclass,false
+1137,PATTON,T04,1,184,Upperclass,false
+1436,SPELMAN,47,4,930,Upperclass,false
+1160,PYNE,143,1,129,Upperclass,true
+2091,EDWARDS,204,1,131,Mathey College,true
+2784,1967,B312,4,522,Butler College,true
+2238,HOLDER,132,4,437,Rockefeller College,true
+1301,SCULLY,156,1,166,Upperclass,true
+1896,WITHERSPOON,422,2,290,Rockefeller College,true
+1326,SCULLY,248,1,166,Upperclass,true
+2187,PATTON,T7,1,186,Upperclass,true
+1826,HARGADON,G404,1,189,Whitman College,true
+2858,FORBES,260,2,293,Forbes College,true
+701,1903,526,1,177,Upperclass,true
+2222,HOLDER,45,2,186,Rockefeller College,true
+2610,FORBES,A237,3,293,Forbes College,true
+2908,FORBES,364,2,245,Forbes College,true
+2504,LAURITZEN,D212,4,463,Whitman College,true
+2147,BLAIR,308,2,209,Mathey College,true
+2042,EDWARDS,217,1,99,Mathey College,true
+211,FORBES,213,2,193,Forbes College,true
+647,1903,142,1,165,Upperclass,true
+1090,LOCKHART,324,1,177,Upperclass,true
+1881,BAKER,E311,,,Whitman College,true
+2869,FORBES,227,1,131,Forbes College,true
+2402,2 DICKINSON,10,1,181,No Res College Associated,true
+2311,LOCKHART,234,2,340,Upperclass,true
+2675,SCULLY,442,1,134,Upperclass,true
+2207,CAMPBELL,5A,2,225,Mathey College,true
+133,BLOOMBERG,427,1,137,Butler College,true
+2831,FORBES,171,2,296,Forbes College,true
+2384,JOLINE,431,1,334,Mathey College,true
+2866,FORBES,231,1,129,Forbes College,true
+2213,CAMPBELL,2B,6,895,Rockefeller College,true
+2192,CAMPBELL,21,2,309,Rockefeller College,true
+1986,SCULLY,316,1,148,Upperclass,true
+578,1901,119,2,337,Upperclass,false
+651,1903,213,2,252,Upperclass,false
+3241,KWANZA MARION JONES,C315,1,119,New College West,false
+1514,1981,F229,4,706,Whitman College,false
+3215,KWANZA MARION JONES,C112,1,148,New College West,false
+3126,ALIYA KANJI,B203,1,156,New College West,false
+346,BLAIR,B62,2,225,Mathey College,false
+322,BLAIR,61,2,277,Mathey College,false
+160,BOGLE,C104,4,516,Butler College,false
+717,BROWN,122,4,518,Upperclass,false
+750,BROWN,412,4,516,Upperclass,false
+757,BROWN,421,4,507,Upperclass,false
+861,DOD,200N,1,150,Upperclass,false
+2097,DOD,300S,1,150,Upperclass,false
+209,FORBES,210,2,192,Forbes College,false
+199,FORBES,151,2,284,Forbes College,false
+205,FORBES,206,2,183,Forbes College,false
+244,FORBES,321,2,248,Forbes College,false
+916,FOULKE,321,2,411,Upperclass,false
+899,FOULKE,222,4,545,Upperclass,false
+3177,JOSE ENRIQUE FELICIANO,D314,2,261,New College West,false
+1000,LAUGHLIN,523,2,361,Upperclass,false
+1045,LITTLE,A20,2,328,Upperclass,false
+1614,LAURITZEN,D107,4,529,Whitman College,false
+1041,LITTLE,399,4,776,Upperclass,false
+1162,PYNE,211,2,375,Upperclass,false
+1324,SCULLY,240,4,755,Upperclass,false
+1458,SPELMAN,81,4,930,Upperclass,false
+739,BROWN,319,3,490,Upperclass,false
+726,BROWN,219,3,495,Upperclass,false
+865,DOD,202N,3,460,Upperclass,false
+868,DOD,301S,3,460,Upperclass,false
+1139,PATTON,T06,3,442,Upperclass,false
+939,HENRY,122,3,392,Upperclass,false
+713,BROWN,117,1,119,Upperclass,false
+3267,CUYLER,431,1,153,Upperclass,false
+255,FORBES,A135,1,115,Forbes College,false
+379,EDWARDS,502,1,170,Mathey College,false
+389,EDWARDS,512,1,174,Mathey College,false
+369,EDWARDS,107,1,157,Mathey College,false
+297,FORBES,A270,1,173,Forbes College,false
+307,FORBES,A376,1,180,Forbes College,false
+653,1903,215,1,185,Upperclass,false
+877,FOULKE,102,1,204,Upperclass,false
+1541,BAKER,E224,1,113,Whitman College,false
+155,BLOOMBERG,478,1,113,Butler College,false
+1877,BAKER,S206,1,137,Whitman College,false
+348,BLAIR,B72,1,145,Mathey College,false
+351,BLAIR,B82,1,146,Mathey College,false
+1893,BLAIR,A02,1,160,Mathey College,false
+696,1903,517,1,202,Upperclass,false
+1484,1981,F007,1,107,Whitman College,false
+1167,PYNE,222,1,165,Upperclass,false
+1171,PYNE,230,1,82,Upperclass,false
+1198,PYNE,346,1,101,Upperclass,false
+2636,SCULLY,409,1,134,Upperclass,false
+1226,PYNE,603,1,234,Upperclass,false
+1272,PYNE,742,1,156,Upperclass,false
+1178,PYNE,243,1,136,Upperclass,false
+1175,PYNE,235,1,157,Upperclass,false
+104,BLOOMBERG,344,1,145,Butler College,false
+1254,PYNE,714,1,170,Upperclass,false
+137,BLOOMBERG,443,1,138,Butler College,false
+141,BLOOMBERG,451,1,175,Butler College,false
+1688,WENDELL,C216,1,138,Whitman College,false
+1320,SCULLY,228,1,147,Upperclass,false
+1673,WENDELL,B422,1,131,Whitman College,false
+1685,WENDELL,C213,1,146,Whitman College,false
+1997,SCULLY,439,1,134,Upperclass,false
+952,HENRY,202,1,187,Upperclass,false
+1602,HARGADON,G311,1,188,Whitman College,false
+957,HENRY,207,1,193,Upperclass,false
+956,HENRY,206,1,193,Upperclass,false
+487,HOLDER,26,1,235,Rockefeller College,false
+1628,LAURITZEN,D304,1,176,Whitman College,false
+1908,JOLINE,233,1,131,Mathey College,false
+1927,PATTON,310,1,170,Upperclass,false
+2092,EDWARDS,203,1,102,Mathey College,true
+2063,EDWARDS,318,1,127,Mathey College,true
+2851,FORBES,102,2,193,Forbes College,true
+474,CAMPBELL,15,4,452,Rockefeller College,true
+37,1967,B305,1,152,Butler College,true
+2149,BLAIR,306,2,223,Mathey College,true
+2016,WITHERSPOON,404,2,191,Rockefeller College,true
+2223,HOLDER,44,4,447,Rockefeller College,true
+2189,PATTON,T2,1,154,Upperclass,true
+2817,WILF,E408,1,140,Upperclass,true
+1621,LAURITZEN,D203,1,118,Whitman College,true
+2583,FORBES,A317,1,290,Forbes College,true
+419,LITTLE,13,4,561,Mathey College,true
+2844,FORBES,158,2,289,Forbes College,true
+543,WITHERSPOON,215,2,212,Rockefeller College,true
+2195,CAMPBELL,23,2,262,Rockefeller College,true
+2782,HENRY,322,1,227,Upperclass,true
+370,EDWARDS,110,1,148,Mathey College,true
+2521,FISHER,A212,1,143,Whitman College,true
+2852,FORBES,101,2,193,Forbes College,true
+2722,BLOOMBERG,313,1,161,Butler College,true
+1549,BAKER,E321,1,145,Whitman College,true
+2829,FORBES,201,2,193,Forbes College,true
+2740,BLOOMBERG,209,1,145,Butler College,true
+535,WITHERSPOON,204,2,180,Rockefeller College,true
+1611,LAURITZEN,D020,2,187,Whitman College,true
+2554,SPELMAN,72,2,501,Upperclass,true
+2611,FORBES,A214,2,180,Forbes College,true
+248,FORBES,A121,3,372,Forbes College,true
+2121,BROWN,115,1,138,Upperclass,true
+572,1901,113,1,194,Upperclass,false
+612,1901,322,2,296,Upperclass,false
+582,1901,124,2,336,Upperclass,false
+1489,1981,F019,2,232,Whitman College,false
+1516,1981,F302,2,288,Whitman College,false
+3120,ALIYA KANJI,B002,1,153,New College West,false
+3144,ALIYA KANJI,B319,1,133,New College West,false
+3182,JOSE ENRIQUE FELICIANO,D505A,1,170,New College West,false
+1538,BAKER,E218,4,470,Whitman College,false
+3204,KWANZA MARION JONES,C017B,1,154,New College West,false
+711,BROWN,113,1,125,Upperclass,false
+722,BROWN,211,4,501,Upperclass,false
+2210,CAMPBELL,65,2,257,Mathey College,false
+2209,CAMPBELL,66,2,256,Mathey College,false
+358,CAMPBELL,63,2,270,Mathey College,false
+800,CUYLER,601,4,684,Upperclass,false
+871,DOD,400S,1,150,Upperclass,false
+234,FORBES,267,2,296,Forbes College,false
+312,FORBES,A427,2,284,Forbes College,false
+942,HENRY,125,1,238,Upperclass,false
+2249,HOLDER,91,2,434,Rockefeller College,false
+493,HOLDER,46,4,549,Rockefeller College,false
+2395,JOLINE,123,4,496,Mathey College,false
+1005,LAUGHLIN,612,2,349,Upperclass,false
+1051,LITTLE,A40,4,562,Upperclass,false
+1612,LAURITZEN,D105,4,496,Whitman College,false
+1035,LITTLE,134,4,537,Upperclass,false
+1129,PATTON,308,2,327,Upperclass,false
+1215,PYNE,435,2,247,Upperclass,false
+1463,SPELMAN,86,4,930,Upperclass,false
+1448,SPELMAN,66,4,930,Upperclass,false
+172,WILF,E205,4,580,Butler College,false
+1128,PATTON,307,6,873,Upperclass,false
+860,DOD,102S,3,460,Upperclass,false
+867,DOD,301N,3,460,Upperclass,false
+187,YOSELOFF,A207,1,139,Butler College,false
+1946,WRIGHT,406,1,179,Upperclass,false
+623,1901,403,3,414,Upperclass,false
+1230,PYNE,614,3,402,Upperclass,false
+1258,PYNE,718,3,389,Upperclass,false
+2103,DOD,314,1,125,Upperclass,false
+844,DOD,311,1,125,Upperclass,false
+262,FORBES,A147,1,172,Forbes College,false
+611,1901,321,1,128,Upperclass,false
+633,1903,111,1,170,Upperclass,false
+584,1901,126,1,167,Upperclass,false
+889,FOULKE,201,1,146,Upperclass,false
+3155,ALIYA KANJI,B411B,1,169,New College West,false
+349,BLAIR,B73,1,149,Mathey College,false
+1505,1981,F121,1,147,Whitman College,false
+1487,1981,F017,1,150,Whitman College,false
+1196,PYNE,344,1,216,Upperclass,false
+1994,SCULLY,410,1,134,Upperclass,false
+1235,PYNE,622,1,166,Upperclass,false
+1281,SCULLY,108,1,148,Upperclass,false
+118,BLOOMBERG,378,1,136,Butler College,false
+1255,PYNE,715,1,165,Upperclass,false
+99,BLOOMBERG,336,1,146,Butler College,false
+1689,WENDELL,C217,1,143,Whitman College,false
+175,WILF,E301,1,137,Butler College,false
+180,WILF,E308,1,140,Butler College,false
+1948,SCULLY,134,1,148,Upperclass,false
+1304,SCULLY,162,1,140,Upperclass,false
+1325,SCULLY,242,1,140,Upperclass,false
+2672,SCULLY,214,1,147,Upperclass,false
+981,HENRY,236,1,181,Upperclass,false
+412,JOLINE,332,1,200,Mathey College,false
+418,JOLINE,433,1,195,Mathey College,false
+3294,HOLDER,125,1,186,Rockefeller College,false
+1980,LOCKHART,313,1,174,Upperclass,false
+1080,LOCKHART,302,1,216,Upperclass,false
+217,FORBES,221,2,248,Forbes College,false
+1439,SPELMAN,52,4,930,Upperclass,false
+480,CAMPBELL,3B,1,141,Rockefeller College,false
+2145,BLAIR,310,2,217,Mathey College,true
+159,BOGLE,C103,1,139,Butler College,true
+2930,WENDELL,C322,1,210,Whitman College,true
+2916,WENDELL,B214,4,480,Whitman College,true
+1690,WENDELL,C302,1,145,Whitman College,true
+1873,1967,B208,1,139,Butler College,true
+2055,EDWARDS,301,1,155,Mathey College,true
+2926,WENDELL,C310,1,149,Whitman College,true
+2843,FORBES,159,2,281,Forbes College,true
+907,FOULKE,308,1,166,Upperclass,true
+1332,SCULLY,258,1,166,Upperclass,true
+1823,EDWARDS,108,1,153,Mathey College,true
+1878,BLOOMBERG,239,1,120,Butler College,true
+2604,FORBES,A114,1,105,Forbes College,true
+1990,SCULLY,314,1,147,Upperclass,true
+1542,BAKER,E305,1,114,Whitman College,true
+2120,BROWN,120,3,497,Upperclass,true
+1008,LAUGHLIN,615,1,187,Upperclass,true
+1936,SCULLY,144,1,154,Upperclass,true
+2893,FORBES,319,1,125,Forbes College,true
+1887,BLOOMBERG,335,2,179,Butler College,true
+975,HENRY,230,1,143,Upperclass,true
+2933,WENDELL,C409,1,129,Whitman College,true
+2398,JOLINE,113,4,492,Mathey College,true
+2922,WENDELL,C304,4,450,Whitman College,true
+1360,SCULLY,333,1,196,Upperclass,true
+2708,BLOOMBERG,372,2,173,Butler College,true
+884,FOULKE,123,1,171,Upperclass,true
+374,EDWARDS,114,1,129,Mathey College,true
+2049,EDWARDS,307,1,143,Mathey College,true
+1675,WENDELL,B426,1,150,Whitman College,true
+616,1901,331,4,686,Upperclass,false
+45,1976,D212,4,571,Butler College,false
+3145,ALIYA KANJI,B320,1,147,New College West,false
+3223,KWANZA MARION JONES,C121B,1,154,New College West,false
+1569,BAKER,S402,4,485,Whitman College,false
+762,BROWN,428,4,508,Upperclass,false
+775,CUYLER,234,4,639,Upperclass,false
+1582,FISHER,A308,1,131,Whitman College,false
+194,FORBES,109,2,183,Forbes College,false
+230,FORBES,262,2,293,Forbes College,false
+914,FOULKE,317,2,376,Upperclass,false
+922,FOULKE,331,4,638,Upperclass,false
+498,HOLDER,63,4,530,Rockefeller College,false
+2505,LAURITZEN,D403,1,149,Whitman College,false
+1026,LITTLE,103,4,512,Upperclass,false
+435,LITTLE,77,4,683,Mathey College,false
+1119,PATTON,82,4,669,Upperclass,false
+2654,SCULLY,249,2,280,Upperclass,false
+1443,SPELMAN,56,4,930,Upperclass,false
+1431,SPELMAN,38,4,930,Upperclass,false
+1655,WENDELL,B315,4,484,Whitman College,false
+1650,WENDELL,B309,4,512,Whitman College,false
+746,BROWN,328,3,495,Upperclass,false
+727,BROWN,220,3,497,Upperclass,false
+864,DOD,201S,3,460,Upperclass,false
+691,1903,512,3,424,Upperclass,false
+1112,PATTON,72,3,455,Upperclass,false
+987,HENRY,314,3,431,Upperclass,false
+898,FOULKE,221,3,430,Upperclass,false
+565,1901,101,3,444,Upperclass,false
+984,HENRY,311,3,407,Upperclass,false
+744,BROWN,326,1,124,Upperclass,false
+753,BROWN,417,1,120,Upperclass,false
+1840,FORBES,A157,1,172,Forbes College,false
+791,CUYLER,434,1,124,Upperclass,false
+795,CUYLER,438,1,180,Upperclass,false
+834,DOD,212,1,120,Upperclass,false
+817,DOD,107,1,120,Upperclass,false
+1925,DOD,316,1,120,Upperclass,false
+381,EDWARDS,504,1,180,Mathey College,false
+390,EDWARDS,513,1,173,Mathey College,false
+364,EDWARDS,101,1,131,Mathey College,false
+375,EDWARDS,115,1,99,Mathey College,false
+814,DOD,104,1,125,Upperclass,false
+631,1901,222A,1,92,Upperclass,false
+586,1901,132,1,219,Upperclass,false
+593,1901,213,1,144,Upperclass,false
+316,FORBES,A434,1,180,Forbes College,false
+1565,BAKER,S205,1,195,Whitman College,false
+2272,PYNE,436,1,131,Upperclass,false
+1236,PYNE,623,1,205,Upperclass,false
+1237,PYNE,625,1,194,Upperclass,false
+1279,SCULLY,106,1,147,Upperclass,false
+1271,PYNE,741,1,183,Upperclass,false
+2746,BLOOMBERG,223,1,131,Butler College,false
+108,BLOOMBERG,350,1,146,Butler College,false
+111,BLOOMBERG,361,1,141,Butler College,false
+138,BLOOMBERG,445,1,139,Butler College,false
+73,BLOOMBERG,278,1,136,Butler College,false
+1322,SCULLY,236,1,147,Upperclass,false
+1361,SCULLY,334,1,148,Upperclass,false
+1396,SCULLY,415,1,134,Upperclass,false
+929,HENRY,101,1,165,Upperclass,false
+930,HENRY,102,1,197,Upperclass,false
+1593,HARGADON,G203A,1,157,Whitman College,false
+1600,HARGADON,G306,1,156,Whitman College,false
+550,WITHERSPOON,310,1,112,Rockefeller College,false
+562,WITHERSPOON,506,1,117,Rockefeller College,false
+972,HENRY,227,1,110,Upperclass,false
+1906,WITHERSPOON,516,1,122,Rockefeller College,false
+1006,LAUGHLIN,613,1,155,Upperclass,false
+1615,LAURITZEN,D108,1,148,Whitman College,false
+1633,LAURITZEN,D311,1,117,Whitman College,false
+2250,HOLDER,87,1,190,Rockefeller College,false
+1071,LOCKHART,222,1,189,Upperclass,false
+2060,EDWARDS,402,1,170,Mathey College,true
+39,1967,B313,4,580,Butler College,true
+83,BLOOMBERG,308,1,140,Butler College,true
+1372,SCULLY,355,1,181,Upperclass,true
+2164,LITTLE,41,4,505,Mathey College,true
+2169,LITTLE,25,2,412,Mathey College,true
+2928,WENDELL,C314,1,148,Whitman College,true
+1370,SCULLY,353,2,280,Upperclass,true
+243,FORBES,318,1,124,Forbes College,true
+2772,BUYERS,11,1,152,Rockefeller College,true
+546,WITHERSPOON,221,1,109,Rockefeller College,true
+1399,SCULLY,420,1,134,Upperclass,true
+2203,CAMPBELL,55,2,255,Mathey College,true
+2399,JOLINE,112,2,365,Mathey College,true
+355,CAMPBELL,52,1,126,Mathey College,true
+2236,HOLDER,134,4,411,Rockefeller College,true
+2239,HOLDER,131,4,437,Rockefeller College,true
+2163,LITTLE,42,4,551,Mathey College,true
+1624,LAURITZEN,D214,4,595,Whitman College,true
+2069,EDWARDS,413,1,179,Mathey College,true
+2260,HOLDER,32,4,436,Rockefeller College,true
+2842,FORBES,160,2,294,Forbes College,true
+2409,2 DICKINSON,31,1,103,No Res College Associated,true
+2137,BLAIR,71,4,527,Mathey College,true
+2730,BLOOMBERG,204,1,140,Butler College,true
+2517,FISHER,A121,1,117,Whitman College,true
+1827,BAKER,E317,,,Whitman College,true
+1836,FORBES,301,1,147,Forbes College,true
+2400,JOLINE,111,4,422,Mathey College,true
+2179,PATTON,T9,1,155,Upperclass,true
+2157,LITTLE,128,1,230,Mathey College,true
+2251,HOLDER,84,2,180,Rockefeller College,true
+1955,1903,223,1,169,Upperclass,true
+2261,HOLDER,31,4,461,Rockefeller College,true
+620,1901,335,1,158,Upperclass,false
+628,1901,421,2,351,Upperclass,false
+3197,KWANZA MARION JONES,C004,1,148,New College West,false
+3158,ALIYA KANJI,B501,4,438,New College West,false
+1543,BAKER,E306,4,465,Whitman College,false
+354,BLAIR,B92,4,644,Mathey College,false
+60,BLOOMBERG,182,4,585,Butler College,false
+2760,BUYERS,B12,4,458,Rockefeller College,false
+755,BROWN,419,4,520,Upperclass,false
+797,CUYLER,511,2,351,Upperclass,false
+195,FORBES,110,2,192,Forbes College,false
+233,FORBES,266,2,295,Forbes College,false
+962,HENRY,215,2,366,Upperclass,false
+945,HENRY,133,4,524,Upperclass,false
+3235,KWANZA MARION JONES,C223,4,456,New College West,false
+3211,KWANZA MARION JONES,C101,4,488,New College West,false
+1013,LAUGHLIN,623,2,430,Upperclass,false
+1015,LAUGHLIN,625,2,395,Upperclass,false
+1042,LITTLE,A10,2,309,Upperclass,false
+1631,LAURITZEN,D307,4,500,Whitman College,false
+1029,LITTLE,115,4,708,Upperclass,false
+440,LITTLE,301,4,562,Mathey College,false
+1114,PATTON,74,1,192,Upperclass,false
+1122,PATTON,85,1,136,Upperclass,false
+1287,SCULLY,122,2,305,Upperclass,false
+1312,SCULLY,174,2,278,Upperclass,false
+1444,SPELMAN,61,4,930,Upperclass,false
+1447,SPELMAN,65,4,930,Upperclass,false
+176,WILF,E302,4,580,Butler College,false
+1133,PATTON,408,6,868,Upperclass,false
+1472,WRIGHT,31,3,425,Upperclass,false
+1018,LAUGHLIN,631,3,444,Upperclass,false
+988,HENRY,321,3,457,Upperclass,false
+747,BROWN,329,1,237,Upperclass,false
+763,BROWN,429,1,220,Upperclass,false
+1854,FORBES,A249,1,161,Forbes College,false
+838,DOD,217,1,120,Upperclass,false
+816,DOD,106,1,120,Upperclass,false
+261,FORBES,A146,1,166,Forbes College,false
+2596,FORBES,A150,1,166,Forbes College,false
+303,FORBES,A336,1,180,Forbes College,false
+317,FORBES,A436,1,180,Forbes College,false
+1527,BAKER,E109,1,144,Whitman College,false
+692,1903,513,1,176,Upperclass,false
+1491,1981,F024,1,115,Whitman College,false
+1510,1981,F225,1,147,Whitman College,false
+3286,99ALEXANDER,107,1,185,Forbes College,false
+706,1903,533,1,112,Upperclass,false
+1981,SCULLY,114,1,147,Upperclass,false
+1261,PYNE,722,1,164,Upperclass,false
+103,BLOOMBERG,343,1,139,Butler College,false
+105,BLOOMBERG,346,1,148,Butler College,false
+113,BLOOMBERG,369,1,154,Butler College,false
+1245,PYNE,643,1,149,Upperclass,false
+2038,WITHERSPOON,102,1,119,Rockefeller College,false
+1407,SCULLY,441,1,134,Upperclass,false
+1608,HARGADON,G407A,1,150,Whitman College,false
+958,HENRY,211,1,175,Upperclass,false
+964,HENRY,218,1,165,Upperclass,false
+542,WITHERSPOON,214,1,104,Rockefeller College,false
+2009,WITHERSPOON,314,1,109,Rockefeller College,false
+182,YOSELOFF,A107,1,139,Butler College,false
+2862,FORBES,241,2,464,Forbes College,true
+1616,LAURITZEN,D109,1,117,Whitman College,false
+1023,LITTLE,95,1,203,Upperclass,false
+405,JOLINE,235,1,238,Mathey College,false
+414,JOLINE,334,1,144,Mathey College,false
+1098,LOCKHART,422,1,90,Upperclass,false
+2269,PYNE,112,1,160,Upperclass,false
+1438,SPELMAN,51,4,930,Upperclass,false
+204,FORBES,156,4,594,Forbes College,true
+2816,1976,D310,4,522,Butler College,true
+2553,SPELMAN,31,2,501,Upperclass,true
+2756,BLOOMBERG,241,1,138,Butler College,true
+2523,FISHER,A223,1,134,Whitman College,true
+2061,EDWARDS,401,1,146,Mathey College,true
+407,JOLINE,312,1,156,Mathey College,true
+173,WILF,E206,1,139,Butler College,true
+2160,LITTLE,46,2,389,Mathey College,true
+1987,SCULLY,318,1,147,Upperclass,true
+2058,EDWARDS,405,1,179,Mathey College,true
+1691,WENDELL,C321,2,291,Whitman College,true
+1368,SCULLY,350,1,166,Upperclass,true
+2581,FORBES,A322,2,184,Forbes College,true
+1292,SCULLY,130,1,148,Upperclass,true
+2341,1903,122,1,205,Upperclass,true
+1311,SCULLY,173,1,166,Upperclass,true
+1330,SCULLY,255,1,181,Upperclass,true
+35,1967,B214,4,580,Butler College,true
+2927,WENDELL,C312,1,148,Whitman College,true
+425,LITTLE,48,1,130,Mathey College,true
+1547,BAKER,E310,1,113,Whitman College,true
+1408,SCULLY,443,1,134,Upperclass,true
+2603,FORBES,A116,1,124,Forbes College,true
+2332,1903,536,1,201,Upperclass,true
+76,BLOOMBERG,301,1,148,Butler College,true
+1156,PYNE,134,2,436,Upperclass,true
+2910,FORBES,367,2,248,Forbes College,true
+540,WITHERSPOON,210,1,107,Rockefeller College,true
+2886,FORBES,330,2,198,Forbes College,true
+1828,1981,F218,1,118,Whitman College,true
+2735,BLOOMBERG,216,1,139,Butler College,true
+424,LITTLE,47,1,210,Mathey College,true
+1497,1981,F103,4,484,Whitman College,false
+3169,ALIYA KANJI,B601,4,438,New College West,false
+3123,ALIYA KANJI,B005,1,149,New College West,false
+3116,ADDY,A710,1,128,New College West,false
+3252,KWANZA MARION JONES,C512,1,161,New College West,false
+3189,JOSE ENRIQUE FELICIANO,D604,1,159,New College West,false
+3133,ALIYA KANJI,B221,1,147,New College West,false
+341,BLAIR,B42,2,214,Mathey College,false
+55,BLOOMBERG,132,4,632,Butler College,false
+320,BLAIR,51,4,517,Mathey College,false
+324,BLAIR,81,4,501,Mathey College,false
+120,BLOOMBERG,381,4,710,Butler College,false
+158,BOGLE,C102,4,522,Butler College,false
+732,BROWN,227,4,505,Upperclass,false
+874,DOD,402N,3,460,Upperclass,false
+991,HENRY,331,4,525,Upperclass,false
+941,HENRY,124,4,518,Upperclass,false
+3187,JOSE ENRIQUE FELICIANO,D515,4,457,New College West,false
+2254,HOLDER,72,4,418,Rockefeller College,false
+2255,HOLDER,71,4,435,Rockefeller College,false
+1047,LITTLE,A28,2,420,Upperclass,false
+2171,LITTLE,21,4,529,Mathey College,false
+1050,LITTLE,A38,4,548,Upperclass,false
+451,LITTLE,329,4,742,Mathey College,false
+1038,LITTLE,143,4,595,Upperclass,false
+1062,LOCKHART,113,3,377,Upperclass,false
+1641,MURLEY,T402,4,965,Whitman College,false
+1164,PYNE,213,2,350,Upperclass,false
+1963,SCULLY,253,2,280,Upperclass,false
+1347,SCULLY,302,4,755,Upperclass,false
+1425,SPELMAN,26,4,930,Upperclass,false
+1415,SPELMAN,14,4,930,Upperclass,false
+1461,SPELMAN,84,4,930,Upperclass,false
+1451,SPELMAN,71,4,930,Upperclass,false
+1465,WILF,E402,4,580,Upperclass,false
+676,1903,401,3,593,Upperclass,false
+249,FORBES,A125,3,372,Forbes College,false
+626,1901,411,3,839,Upperclass,false
+183,YOSELOFF,A113,4,653,Butler College,false
+770,CUYLER,221,3,428,Upperclass,false
+858,DOD,101S,3,460,Upperclass,false
+2878,FORBES,408,1,318,Forbes College,false
+264,FORBES,A154,1,170,Forbes College,false
+1857,FORBES,A145,1,144,Forbes College,false
+306,FORBES,A374,1,180,Forbes College,false
+3269,BAKER,E404,1,126,Whitman College,false
+705,1903,532,1,216,Upperclass,false
+1570,BAKER,S403,1,128,Whitman College,false
+1513,1981,F228,1,117,Whitman College,false
+1202,PYNE,414,1,200,Upperclass,false
+128,BLOOMBERG,408,1,145,Butler College,false
+1246,PYNE,701,1,162,Upperclass,false
+74,BLOOMBERG,279,1,139,Butler College,false
+1871,WENDELL,B310,1,148,Whitman College,false
+1662,WENDELL,B409,1,152,Whitman College,false
+1687,WENDELL,C215,1,147,Whitman College,false
+1294,SCULLY,133,1,196,Upperclass,false
+1346,SCULLY,301,1,288,Upperclass,false
+1373,SCULLY,356,1,166,Upperclass,false
+1405,SCULLY,436,1,134,Upperclass,false
+1409,SCULLY,444,1,134,Upperclass,false
+1313,SCULLY,201,1,288,Upperclass,false
+1321,SCULLY,230,1,148,Upperclass,false
+3291,HENRY,104,1,595,Upperclass,false
+965,HENRY,220,1,179,Upperclass,false
+393,HAMILTON,113,1,176,Mathey College,false
+1002,LAUGHLIN,532,1,127,Upperclass,false
+2511,LAURITZEN,D412,1,132,Whitman College,false
+360,CAMPBELL,5B,1,140,Mathey College,false
+482,CAMPBELL,4A,1,192,Rockefeller College,false
+2790,1967,B114,4,522,Butler College,true
+1531,BAKER,E121,4,450,Whitman College,true
+2591,FORBES,A274,2,186,Forbes College,true
+2776,HAMILTON,211,4,454,Mathey College,true
+1596,HARGADON,G207,1,155,Whitman College,true
+513,HOLDER,94,2,201,Rockefeller College,true
+2316,LOCKHART,332,1,133,Upperclass,true
+2552,SPELMAN,42,2,501,Upperclass,true
+2259,HOLDER,33,4,453,Rockefeller College,true
+2310,LOCKHART,235,1,206,Upperclass,true
+2282,PYNE,726,1,182,Upperclass,true
+2853,FORBES,272,2,291,Forbes College,true
+2929,WENDELL,C316,1,136,Whitman College,true
+2863,FORBES,236,3,389,Forbes College,true
+2112,BROWN,217,1,118,Upperclass,true
+2124,BLAIR,44,2,213,Mathey College,true
+2582,FORBES,A318,2,184,Forbes College,true
+2590,FORBES,A276,2,180,Forbes College,true
+2833,FORBES,169,2,293,Forbes College,true
+2263,HOLDER,64,4,480,Rockefeller College,true
+1825,WILF,E106,1,139,Butler College,true
+2906,FORBES,326,1,170,Forbes College,true
+2161,LITTLE,45,1,222,Mathey College,true
+1509,1981,F214,4,526,Whitman College,true
+2744,BLOOMBERG,225,1,132,Butler College,true
+247,FORBES,224N,1,134,Forbes College,true
+2627,FORBES,A163,1,167,Forbes College,true
+250,FORBES,A126,1,172,Forbes College,true
+1576,FISHER,A114,1,111,Whitman College,true
+2075,EDWARDS,407,1,156,Mathey College,true
+1923,WITHERSPOON,409,2,219,Rockefeller College,true
+2193,CAMPBELL,27,2,333,Rockefeller College,true
+1820,EDWARDS,104,1,156,Mathey College,true
+689,1903,504,2,309,Upperclass,false
+41,1976,D112,4,571,Butler College,false
+44,1976,D210,4,580,Butler College,false
+3230,KWANZA MARION JONES,C218A,1,149,New College West,false
+335,BLAIR,102,4,541,Mathey College,false
+164,BOGLE,C204,4,522,Butler College,false
+476,CAMPBELL,24,2,262,Rockefeller College,false
+462,BUYERS,24,4,553,Rockefeller College,false
+799,CUYLER,522,2,360,Upperclass,false
+785,CUYLER,404,2,394,Upperclass,false
+1585,FISHER,A314,1,135,Whitman College,false
+202,FORBES,154,2,311,Forbes College,false
+2885,FORBES,401,1,137,Forbes College,false
+246,FORBES,331,2,286,Forbes College,false
+251,FORBES,A131,2,208,Forbes College,false
+400,JOLINE,214,2,332,Mathey College,false
+403,JOLINE,231,2,290,Mathey College,false
+490,HOLDER,41,4,470,Rockefeller College,false
+491,HOLDER,42,4,448,Rockefeller College,false
+525,HOLDER,136,4,594,Rockefeller College,false
+502,HOLDER,73,4,467,Rockefeller College,false
+1044,LITTLE,A16,2,404,Upperclass,false
+1028,LITTLE,111,4,744,Upperclass,false
+1081,LOCKHART,303,1,200,Upperclass,false
+1065,LOCKHART,201,2,338,Upperclass,false
+1177,PYNE,242,2,237,Upperclass,false
+1186,PYNE,322,2,348,Upperclass,false
+1158,PYNE,141,2,373,Upperclass,false
+1221,PYNE,442,2,428,Upperclass,false
+1280,SCULLY,107,4,510,Upperclass,false
+1421,SPELMAN,22,4,930,Upperclass,false
+52,BLOOMBERG,112,3,495,Butler College,false
+946,HENRY,134,3,473,Upperclass,false
+577,1901,118,3,427,Upperclass,false
+707,1903,535,3,486,Upperclass,false
+3266,99ALEXANDER,101,3,417,Forbes College,false
+1127,PATTON,90,3,431,Upperclass,false
+977,HENRY,232,3,454,Upperclass,false
+721,BROWN,210,1,228,Upperclass,false
+288,FORBES,A257,1,172,Forbes College,false
+849,DOD,404,1,125,Upperclass,false
+1822,EDWARDS,109,1,152,Mathey College,false
+604,1901,234,1,156,Upperclass,false
+671,1903,313,1,176,Upperclass,false
+2000,FOULKE,327,1,112,Upperclass,false
+3280,BAKER,E208,1,220,Whitman College,false
+3161,ALIYA KANJI,B503B,1,149,New College West,false
+1498,1981,F104,1,170,Whitman College,false
+190,99ALEXANDER,106,1,185,Forbes College,false
+3287,99ALEXANDER,103,1,203,Forbes College,false
+3289,SCULLY,414,1,134,Upperclass,false
+1233,PYNE,617,1,199,Upperclass,false
+1275,PYNE,631A,1,88,Upperclass,false
+121,BLOOMBERG,401,1,162,Butler College,false
+130,BLOOMBERG,410,1,134,Butler College,false
+1240,PYNE,631,1,84,Upperclass,false
+94,BLOOMBERG,325,1,132,Butler College,false
+529,WITHERSPOON,12,1,109,Rockefeller College,false
+2040,WITHERSPOON,106,1,172,Rockefeller College,false
+1972,SCULLY,326,1,148,Upperclass,false
+1410,SCULLY,447,1,134,Upperclass,false
+1404,SCULLY,433,1,134,Upperclass,false
+1969,SCULLY,232,1,147,Upperclass,false
+953,HENRY,203,1,209,Upperclass,false
+3292,HOLDER,69,1,278,Rockefeller College,false
+1594,HARGADON,G203B,1,220,Whitman College,false
+986,HENRY,313,1,194,Upperclass,false
+2510,LAURITZEN,D410,1,139,Whitman College,false
+441,LITTLE,302,1,162,Mathey College,false
+449,LITTLE,321,1,111,Mathey College,false
+1904,JOLINE,434,1,151,Mathey College,false
+416,JOLINE,422,1,205,Mathey College,false
+1110,PATTON,64,1,191,Upperclass,false
+837,DOD,216,1,120,Upperclass,true
+2032,WITHERSPOON,311,2,215,Rockefeller College,true
+88,BLOOMBERG,316,1,140,Butler College,true
+2388,JOLINE,411,4,445,Mathey College,true
+2413,2 DICKINSON,23,2,268,No Res College Associated,true
+2544,1981,F411,1,146,Whitman College,true
+2415,2 DICKINSON,20,1,118,No Res College Associated,true
+2214,CAMPBELL,16,4,445,Rockefeller College,true
+2194,CAMPBELL,25,4,498,Rockefeller College,true
+1837,FORBES,302,1,115,Forbes College,true
+2394,JOLINE,211,4,442,Mathey College,true
+2044,EDWARDS,215,1,157,Mathey College,true
+110,BLOOMBERG,359,1,143,Butler College,true
+2030,WITHERSPOON,322,1,294,Rockefeller College,true
+2873,FORBES,222,1,307,Forbes College,true
+2006,WITHERSPOON,308,1,112,Rockefeller College,true
+2942,WENDELL,C419,2,213,Whitman College,true
+2810,1976,D206,4,522,Butler College,true
+2412,2 DICKINSON,25,1,169,No Res College Associated,true
+2528,FISHER,A103,1,145,Whitman College,true
+1961,WRIGHT,305,1,149,Upperclass,true
+1979,SCULLY,247,2,280,Upperclass,true
+2758,BLOOMBERG,131,3,392,Butler College,true
+1880,BAKER,E313,,,Whitman College,true
+2021,WITHERSPOON,508,1,115,Rockefeller College,true
+2791,1967,B112,4,522,Butler College,true
+2623,FORBES,A217,1,291,Forbes College,true
+2779,HAMILTON,212,2,203,Mathey College,true
+119,BLOOMBERG,379,1,142,Butler College,true
+1554,BAKER,E425,1,137,Whitman College,true
+2572,FORBES,A416,2,180,Forbes College,true
+1296,SCULLY,138,1,148,Upperclass,true
+2847,FORBES,113,2,193,Forbes College,true
+2935,WENDELL,C411,1,144,Whitman College,true
+1821,BLOOMBERG,250,2,247,Butler College,true
+575,1901,116,1,183,Upperclass,false
+590,1901,202,2,375,Upperclass,false
+1504,1981,F117,4,466,Whitman College,false
+686,1903,501,4,538,Upperclass,false
+1501,1981,F113,4,465,Whitman College,false
+3207,KWANZA MARION JONES,C020,1,152,New College West,false
+3222,KWANZA MARION JONES,C121A,1,154,New College West,false
+3141,ALIYA KANJI,B312,1,143,New College West,false
+3259,BAKER,E211,4,486,Whitman College,false
+3097,ADDY,A408,4,484,New College West,false
+3256,KWANZA MARION JONES,C603,1,160,New College West,false
+58,BLOOMBERG,177,4,708,Butler College,false
+2199,CAMPBELL,33,4,424,Rockefeller College,false
+210,FORBES,211,2,183,Forbes College,false
+200,FORBES,152,2,291,Forbes College,false
+203,FORBES,155,2,349,Forbes College,false
+237,FORBES,304,1,130,Forbes College,false
+935,HENRY,114,4,519,Upperclass,false
+1902,HOLDER,56,1,122,Rockefeller College,false
+3251,KWANZA MARION JONES,C510,4,873,New College West,false
+997,LAUGHLIN,513,2,364,Upperclass,false
+1022,LITTLE,93,4,508,Upperclass,false
+1188,PYNE,324,1,174,Upperclass,false
+1336,SCULLY,264,2,278,Upperclass,false
+1343,SCULLY,272,2,278,Upperclass,false
+2037,WITHERSPOON,101,2,244,Rockefeller College,false
+807,CUYLER,631,3,456,Upperclass,false
+886,FOULKE,131,3,400,Upperclass,false
+185,YOSELOFF,A203,4,580,Butler College,false
+769,CUYLER,212,3,409,Upperclass,false
+783,CUYLER,402,3,399,Upperclass,false
+760,BROWN,426,1,122,Upperclass,false
+282,FORBES,A248,1,170,Forbes College,false
+292,FORBES,A261,1,167,Forbes College,false
+796,CUYLER,439,1,142,Upperclass,false
+1937,DOD,304,1,125,Upperclass,false
+822,DOD,115,1,125,Upperclass,false
+850,DOD,407,1,120,Upperclass,false
+2041,EDWARDS,218,1,127,Mathey College,false
+645,1903,136,1,166,Upperclass,false
+652,1903,214,1,234,Upperclass,false
+879,FOULKE,112,1,148,Upperclass,false
+1830,BAKER,E205,1,111,Whitman College,false
+3156,ALIYA KANJI,B413,1,151,New College West,false
+153,BLOOMBERG,474,1,205,Butler College,false
+151,BLOOMBERG,471,1,132,Butler College,false
+3283,BAKER,E416,1,133,Whitman College,false
+344,BLAIR,B53,1,147,Mathey College,false
+336,BLAIR,114,1,184,Mathey College,false
+2813,1976,D214,1,139,Butler College,false
+1199,PYNE,411,1,179,Upperclass,false
+1274,PYNE,441A,1,124,Upperclass,false
+124,BLOOMBERG,404,1,145,Butler College,false
+127,BLOOMBERG,407,1,149,Butler College,false
+106,BLOOMBERG,348,1,154,Butler College,false
+1241,PYNE,632,1,194,Upperclass,false
+139,BLOOMBERG,447,1,173,Butler College,false
+3290,WENDELL,B308,1,175,Whitman College,false
+1930,SCULLY,233,1,196,Upperclass,false
+2657,SCULLY,244,1,154,Upperclass,false
+1668,WENDELL,B417,1,153,Whitman College,false
+2637,SCULLY,412,1,134,Upperclass,false
+1357,SCULLY,330,1,148,Upperclass,false
+2680,SCULLY,210,1,147,Upperclass,false
+1048,LITTLE,A34,1,228,Upperclass,false
+1903,LITTLE,325,1,118,Mathey College,false
+1089,LOCKHART,323,1,179,Upperclass,false
+1142,PATTON,T11,1,139,Upperclass,false
+1079,LOCKHART,301,1,172,Upperclass,false
+1413,SPELMAN,12,4,930,Upperclass,false
+460,BUYERS,16,2,265,Rockefeller College,true
+2827,FORBES,203,2,203,Forbes College,true
+2815,1976,D309,4,522,Butler College,true
+2414,2 DICKINSON,11,1,150,No Res College Associated,true
+461,BUYERS,17,4,545,Rockefeller College,true
+2065,EDWARDS,417,2,270,Mathey College,true
+2684,SCULLY,154,1,166,Upperclass,true
+1921,HOLDER,111,4,437,Rockefeller College,true
+188,YOSELOFF,A208,4,580,Butler College,true
+357,CAMPBELL,62,2,272,Mathey College,true
+2894,FORBES,316,2,287,Forbes College,true
+2726,BLOOMBERG,150,4,692,Butler College,true
+2940,WENDELL,C416,1,148,Whitman College,true
+2699,BLOOMBERG,261,1,141,Butler College,true
+1581,FISHER,A303,1,233,Whitman College,true
+1411,SCULLY,448,1,134,Upperclass,true
+427,LITTLE,53,4,528,Mathey College,true
+2081,EDWARDS,311,1,163,Mathey College,true
+2066,EDWARDS,416,1,170,Mathey College,true
+2073,EDWARDS,409,1,169,Mathey College,true
+1829,BLOOMBERG,244,1,143,Butler College,true
+2229,HOLDER,82A,2,180,Rockefeller College,true
+2826,FORBES,204,2,193,Forbes College,true
+2574,FORBES,A412,2,183,Forbes College,true
+82,BLOOMBERG,307,1,142,Butler College,true
+228,FORBES,256,2,287,Forbes College,true
+86,BLOOMBERG,311,1,147,Butler College,true
+2755,BLOOMBERG,242,2,170,Butler College,true
+420,LITTLE,15,2,292,Mathey College,true
+494,HOLDER,47,1,121,Rockefeller College,true
+2010,WITHERSPOON,301,4,529,Rockefeller College,true
+699,1903,524,1,177,Upperclass,true
+509,HOLDER,86,2,245,Rockefeller College,true
+2253,HOLDER,82,2,248,Rockefeller College,true
+2405,2 DICKINSON,35,1,145,No Res College Associated,true
+212,FORBES,215,2,201,Forbes College,true
+617,1901,332,1,119,Upperclass,false
+591,1901,203,2,345,Upperclass,false
+3237,KWANZA MARION JONES,C227,1,158,New College West,false
+3119,ADDY,A715,2,308,New College West,false
+3122,ALIYA KANJI,B004,1,143,New College West,false
+3234,KWANZA MARION JONES,C220,1,152,New College West,false
+3250,KWANZA MARION JONES,C503,1,160,New College West,false
+3134,ALIYA KANJI,B223A,1,159,New College West,false
+1891,BLOOMBERG,333,2,193,Butler College,false
+330,BLAIR,93,2,271,Mathey College,false
+847,DOD,401,4,735,Upperclass,false
+764,CUYLER,111,4,530,Upperclass,false
+263,FORBES,A148,1,167,Forbes College,false
+273,FORBES,A232,2,185,Forbes College,false
+963,HENRY,216,2,363,Upperclass,false
+2390,JOLINE,224,2,329,Mathey College,false
+438,LITTLE,85,2,418,Mathey College,false
+1043,LITTLE,A14,4,522,Upperclass,false
+1068,LOCKHART,213,3,450,Upperclass,false
+1123,PATTON,86,1,155,Upperclass,false
+1060,LOCKHART,111,1,238,Upperclass,false
+1057,LOCKHART,102,1,111,Upperclass,false
+1077,LOCKHART,241,2,562,Upperclass,false
+1125,PATTON,88,2,242,Upperclass,false
+1153,PYNE,131,2,464,Upperclass,false
+1194,PYNE,342,2,317,Upperclass,false
+1225,PYNE,602,4,563,Upperclass,false
+1340,SCULLY,268,2,278,Upperclass,false
+1380,SCULLY,367,4,783,Upperclass,false
+1433,SPELMAN,43,4,930,Upperclass,false
+548,WITHERSPOON,303,4,650,Rockefeller College,false
+873,DOD,401S,3,460,Upperclass,false
+1083,LOCKHART,311,3,400,Upperclass,false
+1477,WRIGHT,304,2,319,Upperclass,false
+1471,WRIGHT,21,2,238,Upperclass,false
+2796,YOSELOFF,A206,4,565,Butler College,false
+771,CUYLER,222,3,415,Upperclass,false
+840,DOD,301,1,125,Upperclass,false
+839,DOD,300,1,125,Upperclass,false
+1845,FORBES,A152,1,167,Forbes College,false
+613,1901,323,1,190,Upperclass,false
+634,1903,112,1,204,Upperclass,false
+887,FOULKE,132,1,152,Upperclass,false
+656,1903,222,1,178,Upperclass,false
+1537,BAKER,E217,1,114,Whitman College,false
+1567,BAKER,S303,1,179,Whitman College,false
+343,BLAIR,B52,1,156,Mathey College,false
+350,BLAIR,B81,1,143,Mathey College,false
+1486,1981,F016,1,118,Whitman College,false
+1176,PYNE,241,1,230,Upperclass,false
+1180,PYNE,312,1,210,Upperclass,false
+1189,PYNE,325,1,169,Upperclass,false
+1247,PYNE,702,1,161,Upperclass,false
+1248,PYNE,703,1,155,Upperclass,false
+2723,BLOOMBERG,276,1,134,Butler College,false
+1653,WENDELL,B313,1,115,Whitman College,false
+1354,SCULLY,325,1,166,Upperclass,false
+1674,WENDELL,B424,1,150,Whitman College,false
+1400,SCULLY,422,1,134,Upperclass,false
+1398,SCULLY,417,1,134,Upperclass,false
+992,HENRY,332,1,120,Upperclass,false
+1898,HAMILTON,325,1,127,Mathey College,false
+1004,LAUGHLIN,534,1,138,Upperclass,false
+1622,LAURITZEN,D206,1,144,Whitman College,false
+1046,LITTLE,A24,1,189,Upperclass,false
+450,LITTLE,327,1,118,Mathey College,false
+518,HOLDER,115,1,128,Rockefeller College,false
+1141,PATTON,T08,1,195,Upperclass,false
+479,CAMPBELL,3A,1,162,Rockefeller College,false
+2712,BLOOMBERG,363,1,141,Butler College,true
+327,BLAIR,84,2,213,Mathey College,true
+430,LITTLE,62,1,238,Mathey College,true
+2285,PYNE,341,1,196,Upperclass,true
+1892,WITHERSPOON,421,1,122,Rockefeller College,true
+2118,BROWN,424,1,146,Upperclass,true
+1872,WILF,E102,1,132,Butler College,true
+472,CAMPBELL,13,2,333,Rockefeller College,true
+2825,FORBES,205,2,193,Forbes College,true
+2925,WENDELL,C308,1,148,Whitman College,true
+541,WITHERSPOON,211,2,209,Rockefeller College,true
+2783,1967,B314,4,522,Butler College,true
+2028,WITHERSPOON,412,1,118,Rockefeller College,true
+2931,WENDELL,C404,1,134,Whitman College,true
+2117,BROWN,229,1,222,Upperclass,true
+2700,BLOOMBERG,259,1,143,Butler College,true
+2522,FISHER,A221,1,116,Whitman College,true
+2258,HOLDER,34,2,195,Rockefeller College,true
+2111,BROWN,224,1,138,Upperclass,true
+2911,FORBES,368,2,247,Forbes College,true
+2537,1981,F315,4,465,Whitman College,true
+79,BLOOMBERG,304,1,139,Butler College,true
+489,HOLDER,37,4,458,Rockefeller College,true
+895,FOULKE,213,1,168,Upperclass,true
+1524,BAKER,E006,2,142,Whitman College,true
+2629,FORBES,A165,2,299,Forbes College,true
+2539,1981,F318,1,118,Whitman College,true
+1207,PYNE,426,1,174,Upperclass,true
+219,FORBES,234,2,238,Forbes College,true
+2889,FORBES,325,3,371,Forbes College,true
+71,BLOOMBERG,275,1,155,Butler College,true
+2870,FORBES,226,1,123,Forbes College,true
+524,HOLDER,135,2,182,Rockefeller College,true
+1897,WITHERSPOON,414,1,110,Rockefeller College,true
+2128,BLAIR,40,1,299,Mathey College,true
+553,WITHERSPOON,317,4,654,Rockefeller College,true
+2534,1981,F217,4,465,Whitman College,true
+2734,BLOOMBERG,218,1,135,Butler College,true
+455,LITTLE,389,1,140,Mathey College,true
+594,1901,214,1,153,Upperclass,false
+615,1901,325,1,160,Upperclass,false
+595,1901,215,2,349,Upperclass,false
+3221,KWANZA MARION JONES,C120B,1,159,New College West,false
+3226,KWANZA MARION JONES,C213A,1,160,New College West,false
+3143,ALIYA KANJI,B318,1,132,New College West,false
+3201,KWANZA MARION JONES,C016A,1,148,New College West,false
+3110,ADDY,A618,4,707,New College West,false
+475,CAMPBELL,22,2,317,Rockefeller College,false
+761,BROWN,427,4,530,Upperclass,false
+845,DOD,313,2,260,Upperclass,false
+206,FORBES,207,2,192,Forbes College,false
+1855,FORBES,216,2,193,Forbes College,false
+300,FORBES,A331,2,279,Forbes College,false
+483,HOLDER,11,2,305,Rockefeller College,false
+521,HOLDER,123,2,402,Rockefeller College,false
+402,JOLINE,225,2,394,Mathey College,false
+1027,LITTLE,105,4,508,Upperclass,false
+452,LITTLE,381,4,710,Mathey College,false
+1039,LITTLE,145,4,521,Upperclass,false
+1209,PYNE,428,2,250,Upperclass,false
+1269,PYNE,734,2,252,Upperclass,false
+1382,SCULLY,370,2,278,Upperclass,false
+1459,SPELMAN,82,4,930,Upperclass,false
+1664,WENDELL,B411,2,208,Whitman College,false
+1105,PATTON,41,6,859,Upperclass,false
+872,DOD,401N,3,460,Upperclass,false
+869,DOD,302N,3,460,Upperclass,false
+592,1901,212,3,378,Upperclass,false
+181,YOSELOFF,A105,1,138,Butler College,false
+1479,WRIGHT,401,2,433,Upperclass,false
+184,YOSELOFF,A202,4,580,Butler College,false
+1483,WRIGHT,407,3,429,Upperclass,false
+780,CUYLER,321,3,429,Upperclass,false
+1468,WRIGHT,10,3,448,Upperclass,false
+266,FORBES,A156,1,171,Forbes College,false
+818,DOD,111,1,125,Upperclass,false
+828,DOD,204,1,125,Upperclass,false
+380,EDWARDS,503,1,165,Mathey College,false
+387,EDWARDS,510,1,162,Mathey College,false
+632,1901,223A,1,129,Upperclass,false
+2331,1903,334,1,124,Upperclass,false
+665,1903,241,1,216,Upperclass,false
+926,FOULKE,335,1,190,Upperclass,false
+1545,BAKER,E308,1,144,Whitman College,false
+3152,ALIYA KANJI,B410A,1,156,New College West,false
+1552,BAKER,E421,1,133,Whitman College,false
+1526,BAKER,E108,1,144,Whitman College,false
+1193,PYNE,335,1,113,Upperclass,false
+1204,PYNE,422,1,171,Upperclass,false
+1264,PYNE,727,1,155,Upperclass,false
+1263,PYNE,725,1,133,Upperclass,false
+109,BLOOMBERG,357,1,156,Butler College,false
+140,BLOOMBERG,449,1,147,Butler College,false
+72,BLOOMBERG,277,1,154,Butler College,false
+1466,WILF,E403,1,128,Upperclass,false
+1973,SCULLY,124,1,147,Upperclass,false
+1355,SCULLY,327,1,166,Upperclass,false
+1957,SCULLY,225,1,166,Upperclass,false
+1609,HARGADON,G407B,1,110,Whitman College,false
+563,WITHERSPOON,509,1,224,Rockefeller College,false
+457,LITTLE,393,1,141,Mathey College,false
+447,LITTLE,313,1,110,Mathey College,false
+404,JOLINE,234,1,167,Mathey College,false
+1096,LOCKHART,413,1,198,Upperclass,false
+2182,PATTON,71,1,165,Upperclass,false
+2938,WENDELL,C414,1,148,Whitman College,true
+2133,BLAIR,52,2,210,Mathey College,true
+1530,BAKER,E120,1,146,Whitman College,true
+2568,FORBES,A423,1,102,Forbes College,true
+1832,BLOOMBERG,338,1,137,Butler College,true
+2804,1976,D109,4,522,Butler College,true
+2418,2 DICKINSON,12,2,263,No Res College Associated,true
+1819,WILF,E104,1,142,Butler College,true
+1363,SCULLY,336,1,147,Upperclass,true
+1539,BAKER,E221,1,145,Whitman College,true
+1376,SCULLY,361,1,160,Upperclass,true
+1834,FORBES,329,1,138,Forbes College,true
+2206,CAMPBELL,51,4,399,Mathey College,true
+1283,SCULLY,116,1,148,Upperclass,true
+1991,SCULLY,418,1,124,Upperclass,true
+2872,FORBES,223,2,193,Forbes College,true
+3265,PYNE,323,3,414,Upperclass,true
+2937,WENDELL,C413,1,149,Whitman College,true
+2793,1967,B108,4,538,Butler College,true
+2588,FORBES,A278,2,185,Forbes College,true
+62,BLOOMBERG,192,1,165,Butler College,true
+787,CUYLER,413,1,235,Upperclass,true
+356,CAMPBELL,61,2,274,Mathey College,true
+1817,BLOOMBERG,245,1,138,Butler College,true
+197,FORBES,112,1,170,Forbes College,true
+1231,PYNE,615,1,156,Upperclass,true
+1938,DOD,305,1,125,Upperclass,true
+2697,BLOOMBERG,265,1,142,Butler College,true
+84,BLOOMBERG,309,1,144,Butler College,true
+2233,HOLDER,113A,2,186,Rockefeller College,true
+80,BLOOMBERG,305,1,143,Butler College,true
+2881,FORBES,405,1,179,Forbes College,true
+30,1967,B205,1,152,Butler College,true
+2407,2 DICKINSON,33,2,244,No Res College Associated,true
+2230,HOLDER,87A,2,559,Rockefeller College,true
+1397,SCULLY,416,1,134,Upperclass,true
+2088,EDWARDS,207,1,154,Mathey College,true
+1580,FISHER,A302,1,126,Whitman College,true
+2252,HOLDER,83,4,433,Rockefeller College,true
+515,HOLDER,96,2,246,Rockefeller College,true
+2732,BLOOMBERG,202,1,145,Butler College,true
+3112,ADDY,A705,1,168,New College West,false
+3173,ALIYA KANJI,B610,1,148,New College West,false
+570,1901,111,1,122,Upperclass,false
+629,1901,431,2,330,Upperclass,false
+607,1901,311,2,363,Upperclass,false
+3214,KWANZA MARION JONES,C111,1,146,New College West,false
+36,1967,B304,4,574,Butler College,false
+3157,ALIYA KANJI,B415,4,580,New College West,false
+3142,ALIYA KANJI,B313,1,151,New College West,false
+1795,WALKER,214,1,164,Upperclass,true
+3131,ALIYA KANJI,B213,1,149,New College West,false
+332,BLAIR,96,4,603,Mathey College,false
+157,BLOOMBERG,481,4,638,Butler College,false
+740,BROWN,320,4,503,Upperclass,false
+789,CUYLER,421,5,775,Upperclass,false
+207,FORBES,208,2,183,Forbes College,false
+220,FORBES,235,2,291,Forbes College,false
+196,FORBES,111,2,183,Forbes College,false
+201,FORBES,153,2,280,Forbes College,false
+231,FORBES,263,2,293,Forbes College,false
+229,FORBES,261,2,293,Forbes College,false
+245,FORBES,324,2,294,Forbes College,false
+888,FOULKE,133,4,525,Upperclass,false
+2217,HOLDER,21,2,305,Rockefeller College,false
+3194,JOSE ENRIQUE FELICIANO,D611,4,459,New College West,false
+3196,KWANZA MARION JONES,C001,4,485,New College West,false
+409,JOLINE,321,4,508,Mathey College,false
+432,LITTLE,71,5,889,Mathey College,false
+433,LITTLE,73,4,573,Mathey College,false
+1629,LAURITZEN,D305,4,495,Whitman College,false
+1024,LITTLE,97,4,519,Upperclass,false
+421,LITTLE,31,4,527,Mathey College,false
+1121,PATTON,84,1,139,Upperclass,false
+1053,LITTLE,A48,4,529,Upperclass,false
+1159,PYNE,142,2,295,Upperclass,false
+1345,SCULLY,274,2,278,Upperclass,false
+1445,SPELMAN,63,4,930,Upperclass,false
+801,CUYLER,611,3,439,Upperclass,false
+1009,LAUGHLIN,616,3,409,Upperclass,false
+1470,WRIGHT,20,3,435,Upperclass,false
+236,FORBES,303,3,311,Forbes College,false
+729,BROWN,222,1,125,Upperclass,false
+826,DOD,201,1,125,Upperclass,false
+2093,EDWARDS,201,1,154,Mathey College,false
+598,1901,223,1,157,Upperclass,false
+636,1903,121,1,173,Upperclass,false
+302,FORBES,A334,1,180,Forbes College,false
+1540,BAKER,E223,1,140,Whitman College,false
+1492,1981,F025,1,147,Whitman College,false
+1572,BAKER,S405,1,131,Whitman College,false
+1512,1981,F227,1,147,Whitman College,false
+1390,SCULLY,404,1,134,Upperclass,false
+1185,PYNE,321,1,213,Upperclass,false
+134,BLOOMBERG,430,1,187,Butler College,false
+1824,WENDELL,C212,1,149,Whitman College,false
+1366,SCULLY,345,1,181,Upperclass,false
+1605,HARGADON,G403,1,185,Whitman College,false
+556,WITHERSPOON,416,1,120,Rockefeller College,false
+445,LITTLE,309,1,119,Mathey College,false
+505,HOLDER,78,1,250,Rockefeller College,false
+506,HOLDER,79,1,176,Rockefeller College,false
+413,JOLINE,333,1,188,Mathey College,false
+1095,LOCKHART,411,1,182,Upperclass,false
+2530,1981,F203,2,235,Whitman College,true
+2832,FORBES,170,2,293,Forbes College,true
+2601,FORBES,A118,2,179,Forbes College,true
+1941,SCULLY,231,1,196,Upperclass,true
+510,HOLDER,88,1,215,Rockefeller College,true
+2264,HOLDER,114,2,186,Rockefeller College,true
+697,1903,522,1,230,Upperclass,true
+2185,PATTON,T6,3,442,Upperclass,true
+2709,BLOOMBERG,370,1,136,Butler College,true
+2710,BLOOMBERG,368,1,128,Butler College,true
+3103,ADDY,A605,1,168,New College West,false
+3238,KWANZA MARION JONES,C313A,1,160,New College West,false
+700,1903,525,2,314,Upperclass,false
+1882,1967,B302,4,542,Butler College,false
+3115,ADDY,A709,2,306,New College West,false
+3138,ALIYA KANJI,B303,1,156,New College West,false
+272,FORBES,A231,2,282,Forbes College,false
+934,HENRY,113,4,519,Upperclass,false
+1165,PYNE,214,1,146,Upperclass,false
+856,DOD,417,1,120,Upperclass,false
+923,FOULKE,332,1,184,Upperclass,false
+685,1903,433,1,179,Upperclass,false
+1210,PYNE,429,1,113,Upperclass,false
+2670,SCULLY,218,1,147,Upperclass,false
+1922,WITHERSPOON,515,1,227,Rockefeller College,false
+1152,PYNE,125,1,186,Upperclass,false
+2351,WALKER,234,1,183,Upperclass,false
+2350,WALKER,311,2,181,Upperclass,true
+2370,WALKER,316,1,181,Upperclass,true
+2355,WALKER,131,2,274,Upperclass,true
+2380,WALKER,225,1,176,Upperclass,false
+2362,WALKER,113,2,171,Upperclass,true
+1809,WALKER,333,2,201,Upperclass,false
+1794,WALKER,213,1,157,Upperclass,true
+2361,WALKER,114,2,189,Upperclass,true
+2363,WALKER,112,2,219,Upperclass,true
+2346,WALKER,221,2,364,Upperclass,false
+2356,WALKER,126,1,99,Upperclass,false
+2360,WALKER,116,1,99,Upperclass,true
+1797,WALKER,231,4,701,Upperclass,true
+2379,WALKER,232,1,160,Upperclass,true
+1805,WALKER,324,1,158,Upperclass,true
+2381,WALKER,222,1,202,Upperclass,false
+2352,WALKER,220,1,148,Upperclass,true
+2357,WALKER,125,1,100,Upperclass,false
+2364,WALKER,111,2,178,Upperclass,true
+1792,WALKER,123,1,161,Upperclass,true
+1791,WALKER,121,1,177,Upperclass,false
+2349,WALKER,313,1,181,Upperclass,true
+2372,WALKER,314,1,179,Upperclass,true
+2367,WALKER,321,1,194,Upperclass,false
+1796,WALKER,223,1,152,Upperclass,true
+2359,WALKER,122,1,219,Upperclass,false
+2354,WALKER,211,2,417,Upperclass,true
+2353,WALKER,215,1,177,Upperclass,true
+2365,WALKER,323,1,199,Upperclass,false
+2358,WALKER,124,1,151,Upperclass,true
+2347,WALKER,224,1,188,Upperclass,false
+1793,WALKER,132,1,151,Upperclass,true
+2374,WALKER,329,1,181,Upperclass,false
+1801,WALKER,304,1,183,Upperclass,false
+1863,WALKER,328,1,199,Upperclass,false
+1807,WALKER,331,4,755,Upperclass,true
+2368,WALKER,318,1,176,Upperclass,true
+1865,WALKER,322,4,495,Upperclass,false
+1808,WALKER,332,2,275,Upperclass,false
+1802,WALKER,305,2,186,Upperclass,false
+2371,WALKER,315,1,179,Upperclass,true
+1803,WALKER,312,4,476,Upperclass,true
+1806,WALKER,327,1,175,Upperclass,true
+1798,WALKER,301,2,246,Upperclass,false
+1804,WALKER,319,1,176,Upperclass,true
+2377,WALKER,325,1,177,Upperclass,true
+1799,WALKER,302,2,186,Upperclass,false
+2348,WALKER,233,1,208,Upperclass,false
+2378,WALKER,324,1,176,Upperclass,true
+2369,WALKER,317,2,202,Upperclass,true
+1800,WALKER,303,2,185,Upperclass,false
+2376,WALKER,326,1,177,Upperclass,true
+3296,EDWARDS,404,1,170,Mathey College,false
+3050,GROUSBECK,C503B,1,146,Yeh College,false
+3016,GROUSBECK,C211,1,154,Yeh College,false
+3079,MANNION,D103,4,454,Yeh College,false
+3060,H,A305,1,148,Yeh College,false
+3037,GROUSBECK,C305B,1,159,Yeh College,false
+2952,BOSQUE,B030,1,154,Yeh College,false
+3063,H,A311A,1,145,Yeh College,false
+3030,GROUSBECK,C233,1,152,Yeh College,false
+2997,BOSQUE,B510,1,146,Yeh College,false
+2961,BOSQUE,B223,4,473,Yeh College,false
+2962,BOSQUE,B228A,1,158,Yeh College,false
+3052,GROUSBECK,C505,1,151,Yeh College,false
+3013,GROUSBECK,C205A,1,157,Yeh College,false
+2967,BOSQUE,B234,4,533,Yeh College,false
+3095,MANNION,D515,4,461,Yeh College,false
+2955,BOSQUE,B117,1,136,Yeh College,false
+3092,MANNION,D507,1,150,Yeh College,false
+2957,BOSQUE,B120,1,130,Yeh College,false
+3056,GROUSBECK,C515,1,167,Yeh College,false
+2946,BOSQUE,B021,1,136,Yeh College,false
+3083,MANNION,D216,1,152,Yeh College,false
+3071,H,A601,4,454,Yeh College,false
+2970,BOSQUE,B306,2,295,Yeh College,false
+2945,BOSQUE,B020,1,151,Yeh College,false
+3031,GROUSBECK,C237,2,294,Yeh College,false
+3057,GROUSBECK,C516,4,458,Yeh College,false
+2983,BOSQUE,B403,1,128,Yeh College,false
+3085,MANNION,D311,2,258,Yeh College,false
+3081,MANNION,D118,1,152,Yeh College,false
+2969,BOSQUE,B303,1,129,Yeh College,false
+3026,GROUSBECK,C228,1,153,Yeh College,false
+3089,MANNION,D501,1,155,Yeh College,false
+2974,BOSQUE,B317,2,242,Yeh College,false
+2981,BOSQUE,B335,4,533,Yeh College,false
+3012,GROUSBECK,C204,1,149,Yeh College,false
+3076,H,A608,1,151,Yeh College,false
+3072,H,A603,2,302,Yeh College,false
+3040,GROUSBECK,C402A,1,142,Yeh College,false
+3025,GROUSBECK,C227,1,153,Yeh College,false
+3049,GROUSBECK,C503A,1,142,Yeh College,false
+2987,BOSQUE,B418A,1,158,Yeh College,false
+3024,GROUSBECK,C225,4,735,Yeh College,false
+2944,BOSQUE,B014,4,558,Yeh College,false
+2998,BOSQUE,B512,1,151,Yeh College,false
+3045,GROUSBECK,C405B,1,159,Yeh College,false
+2971,BOSQUE,B309,2,241,Yeh College,false
+3061,H,A306,1,152,Yeh College,false
+3064,H,A311B,1,146,Yeh College,false
+3008,GROUSBECK,C117,4,554,Yeh College,false
+3020,GROUSBECK,C217,4,441,Yeh College,false
+3021,GROUSBECK,C218A,1,141,Yeh College,false
+2994,BOSQUE,B504,4,473,Yeh College,false
+2995,BOSQUE,B509A,1,158,Yeh College,false
+3018,GROUSBECK,C214,4,471,Yeh College,false
+2991,BOSQUE,B422,1,131,Yeh College,false
+2990,BOSQUE,B421,1,151,Yeh College,false
+2959,BOSQUE,B122,2,280,Yeh College,false
+3003,GROUSBECK,C102B,1,146,Yeh College,false
+2999,BOSQUE,B513,1,131,Yeh College,false
+3094,MANNION,D513,4,484,Yeh College,false
+3035,GROUSBECK,C304,1,149,Yeh College,false
+3077,H,A614,1,149,Yeh College,false
+3058,GROUSBECK,C517,2,301,Yeh College,false
+3044,GROUSBECK,C405A,1,157,Yeh College,false
+2989,BOSQUE,B419,1,146,Yeh College,false
+3073,H,A604,1,152,Yeh College,false
+3036,GROUSBECK,C305A,1,157,Yeh College,false
+3090,MANNION,D505,4,453,Yeh College,false
+3046,GROUSBECK,C417,1,132,Yeh College,false
+2958,BOSQUE,B121,1,130,Yeh College,false
+2979,BOSQUE,B332,1,151,Yeh College,false
+3068,H,A419,1,153,Yeh College,false
+3007,GROUSBECK,C105A,1,157,Yeh College,false
+3017,GROUSBECK,C212,1,137,Yeh College,false
+3042,GROUSBECK,C403,1,151,Yeh College,false
+3002,GROUSBECK,C102A,1,142,Yeh College,false
+3009,GROUSBECK,C202A,1,142,Yeh College,false
+3088,MANNION,D410,4,723,Yeh College,false
+2960,BOSQUE,B217,2,340,Yeh College,false
+2977,BOSQUE,B329B,1,158,Yeh College,false
+2951,BOSQUE,B029,1,149,Yeh College,false
+3000,BOSQUE,B515,4,533,Yeh College,false
+2947,BOSQUE,B022,1,136,Yeh College,false
+3004,GROUSBECK,C103,1,150,Yeh College,false
+3010,GROUSBECK,C202B,1,146,Yeh College,false
+2956,BOSQUE,B119,1,140,Yeh College,false
+3080,MANNION,D115,2,338,Yeh College,false
+3014,GROUSBECK,C205B,1,159,Yeh College,false
+2950,BOSQUE,B028,1,153,Yeh College,false
+3011,GROUSBECK,C203,1,150,Yeh College,false
+2965,BOSQUE,B231,1,151,Yeh College,false
+3047,GROUSBECK,C418,4,733,Yeh College,false
+2993,BOSQUE,B503,2,274,Yeh College,false
+2978,BOSQUE,B330,1,146,Yeh College,false
+2954,BOSQUE,B116,1,136,Yeh College,false
+2968,BOSQUE,B235,4,454,Yeh College,false
+3051,GROUSBECK,C504,1,149,Yeh College,false
+3028,GROUSBECK,C231,1,150,Yeh College,false
+3067,H,A417,1,158,Yeh College,false
+3086,MANNION,D312,2,337,Yeh College,false
+3023,GROUSBECK,C224,4,482,Yeh College,false
+2948,BOSQUE,B024,1,140,Yeh College,false
+3074,H,A605,1,150,Yeh College,false
+3039,GROUSBECK,C318,4,733,Yeh College,false
+3087,MANNION,D314,1,161,Yeh College,false
+3082,MANNION,D203,4,783,Yeh College,false
+3066,H,A416,2,245,Yeh College,false
+3029,GROUSBECK,C232,1,152,Yeh College,false
+2986,BOSQUE,B406,1,157,Yeh College,false
+3075,H,A606,1,151,Yeh College,false
+2973,BOSQUE,B314A,1,158,Yeh College,false
+2982,BOSQUE,B336,4,454,Yeh College,false
+3022,GROUSBECK,C218B,1,140,Yeh College,false
+2975,BOSQUE,B324,4,473,Yeh College,false
+3093,MANNION,D509,4,724,Yeh College,false
+3055,GROUSBECK,C510,4,441,Yeh College,false
+3005,GROUSBECK,C104,1,149,Yeh College,false
+3041,GROUSBECK,C402B,1,146,Yeh College,false
+3019,GROUSBECK,C216,4,561,Yeh College,false
+2963,BOSQUE,B228B,1,158,Yeh College,false
+2949,BOSQUE,B025,1,148,Yeh College,false
+2953,BOSQUE,B115,1,154,Yeh College,false
+2996,BOSQUE,B509B,1,158,Yeh College,false
+3032,GROUSBECK,C302A,1,142,Yeh College,false
+3048,GROUSBECK,C501,4,484,Yeh College,false
+3034,GROUSBECK,C303,1,151,Yeh College,false
+2966,BOSQUE,B232,1,131,Yeh College,false
+3059,H,A303,2,302,Yeh College,false
+2984,BOSQUE,B405A,1,177,Yeh College,false
+3054,GROUSBECK,C506B,1,158,Yeh College,false
+2972,BOSQUE,B310,2,244,Yeh College,false
+3065,H,A410A,1,240,Yeh College,false
+3062,H,A308,1,151,Yeh College,false
+3001,BOSQUE,B516,4,454,Yeh College,false
+3053,GROUSBECK,C506A,1,159,Yeh College,false
+3091,MANNION,D506,4,453,Yeh College,false
+2992,BOSQUE,B424,4,533,Yeh College,false
+3006,GROUSBECK,C105,1,254,Yeh College,false
+3069,H,A517,1,157,Yeh College,false
+2980,BOSQUE,B333,1,131,Yeh College,false
+3015,GROUSBECK,C210,4,441,Yeh College,false
+3084,MANNION,D303,4,786,Yeh College,false
+2985,BOSQUE,B405B,1,164,Yeh College,false
+3043,GROUSBECK,C404,1,149,Yeh College,false
+3078,H,A615,1,147,Yeh College,false
+3038,GROUSBECK,C314,2,250,Yeh College,false
+3033,GROUSBECK,C302B,1,146,Yeh College,false
+3070,H,A519,1,153,Yeh College,false
+2988,BOSQUE,B418B,1,158,Yeh College,false
+2964,BOSQUE,B229,1,146,Yeh College,false
+3027,GROUSBECK,C229,1,152,Yeh College,false
+2976,BOSQUE,B329A,1,158,Yeh College,false

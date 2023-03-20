@@ -50,7 +50,6 @@ class MyProfileSetupFirstPage(UpdateModelMixin,
         return self.update(request, *args, **kwargs)
 
 
-
 class MyProfileSetupSecondPage(UpdateModelMixin,
                                GenericAPIView):
     queryset = UndergraduateTigerBookDirectory.objects.all()
@@ -75,7 +74,6 @@ class MyProfileSetupSecondPage(UpdateModelMixin,
 
     def post(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
-
 
 
 class MyFullProfile(UpdateModelMixin,

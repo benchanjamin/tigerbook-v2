@@ -77,7 +77,9 @@ class UndergraduateTigerBookDirectory(models.Model):
     residential_college = models.ForeignKey('UndergraduateTigerBookResidentialColleges',
                                             related_name='undergraduates',
                                             on_delete=models.RESTRICT, null=True)
-    housing = models.TextField(null=True, blank=False)
+    housing = models.ForeignKey('UndergraduateTigerBookHousing',
+                                related_name='undergraduates',
+                                on_delete=models.RESTRICT, null=True)
     aliases = ArrayField(base_field=models.TextField(blank=False, null=True), default=list, blank=True)
     pronouns = models.ForeignKey('TigerBookPronouns',
                                  related_name='undergraduates',
@@ -430,7 +432,8 @@ class UndergraduateTigerBookCertificates(models.Model):
 
 
 class UndergraduateTigerBookHousing(models.Model):
-    housing = models.TextField(unique=True, null=False, blank=False)
+    building = models.TextField(null=False, blank=False)
+    room_no = models.TextField(null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
 
 
@@ -470,7 +473,6 @@ class TigerBookExtracurriculars(models.Model):
 class TigerBookExtracurricularPositions(models.Model):
     position = models.TextField(unique=True, null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
-
 
 # class GraduateTigerBookDepartment(models.Model):
 #     department = models.TextField(unique=True, null=False, blank=False)

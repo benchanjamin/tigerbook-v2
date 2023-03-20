@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
 from tigerbook.settings import BASE_DIR
-from django.core.files import File
 from base.models import (
     TigerBookCities
 )

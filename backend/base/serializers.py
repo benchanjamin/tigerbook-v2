@@ -12,7 +12,8 @@ from base.models import (
     TigerBookCities,
     UndergraduateTigerBookDirectoryPermissions, UndergraduateTigerBookClassYears,
     UndergraduateTigerBookResidentialColleges, TigerBookInterests, TigerBookExtracurriculars,
-    TigerBookExtracurricularSubgroups, TigerBookExtracurricularPositions, TigerBookResearchTypes
+    TigerBookExtracurricularSubgroups, TigerBookExtracurricularPositions, TigerBookResearchTypes,
+    UndergraduateTigerBookHousing
 )
 from uniauth.utils import get_account_username_split
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
@@ -75,7 +76,8 @@ class TigerBookCitiesSerializer(serializers.RelatedField):
                                                    admin_name=admin_name,
                                                    country=country)
             else:
-                raise serializers.ValidationError('Entered # of commas is not 2 or 3 for a city location')
+                raise serializers.ValidationError('Entered # of commas is not 2 or 3, each followed by a space,'
+                                                  ' for a city location')
         except TigerBookCities.DoesNotExist:
             raise serializers.ValidationError(
                 'TigerBookCities object does not exist.'
@@ -293,6 +295,36 @@ class UndergraduateTigerBookDirectorySetupSecondPageSerializer(serializers.Model
 # TODO: This is personal account information for profile page
 
 
+class UndergraduateTigerBookHousingSerializer(serializers.RelatedField):
+    def get_queryset(self):
+        return UndergraduateTigerBookHousing.objects.all()
+
+    # TODO: referenced
+    #  https://stackoverflow.com/questions/35257698/what-is-serializers-to-internal-value-method-used-for-in-django
+    def to_internal_value(self, data):
+        # data is the room str, e.g. "FORBES, 307"
+        # enforce that the data type is a string
+        if not isinstance(data, str):
+            raise serializers.ValidationError(
+                'Housing must be a string.'
+            )
+        data = data.split(", ")
+        try:
+            if len(data) == 2:
+                building, room_no = data
+                return UndergraduateTigerBookHousing.objects.get(building__iexact=building, room_no=room_no)
+            else:
+                raise serializers.ValidationError(
+                    'Entered # of commas is not 1 followed by a space for a housing location')
+        except TigerBookCities.DoesNotExist:
+            raise serializers.ValidationError(
+                'UndergraduateTigerBookHousing object does not exist.'
+            )
+
+    def to_representation(self, value):
+        return f"{value.building.capitalize()}, {value.room_no}"
+
+
 class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSerializer):
     user = UsernameSerializer(read_only=True)
     active_directory_entry = ActiveDirectorySetupSerializer(read_only=True)
@@ -322,10 +354,8 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
                                                        queryset=UndergraduateTigerBookResidentialColleges.objects.all(),
                                                        allow_null=False,
                                                        required=False)
-    housing = serializers.CharField(allow_blank=False, allow_null=True, required=False)
-    housing_roommates = serializers.ListField(allow_empty=True, allow_null=False,
-                                              child=serializers.CharField(allow_blank=False),
-                                              required=False)
+    housing = UndergraduateTigerBookHousingSerializer(allow_null=True, required=False)
+
     interests = serializers.SlugRelatedField(many=True, slug_field='interest',
                                              queryset=TigerBookInterests.objects.all(),
                                              allow_null=False,
@@ -348,7 +378,6 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
             'class_year',
             'residential_college',
             'housing',
-            'housing_roommates',
             'aliases',
             'pronouns',
             'certificates',
