@@ -283,7 +283,7 @@ def cas_login(request, institution):
             if user.username.startswith("cas"):
                 username_split = get_account_username_split(user.username)
                 net_id = username_split[2]
-                if not hasattr(user, 'profile'):
+                if not hasattr(user, 'cas_profile'):
                     CASProfile.objects.create(user=user, net_id=net_id, pu_status=pu_status)
             if pu_status == 'undergraduate':
                 if not UndergraduateTigerBookDirectory.objects.filter(user=user).exists():

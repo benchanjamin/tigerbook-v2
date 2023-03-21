@@ -17,7 +17,7 @@ User = settings.AUTH_USER_MODEL  # default is 'auth.user'
 
 
 class CASProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cas_profile')
     pu_status = models.TextField(null=True, blank=False)
     net_id = models.TextField(null=True, blank=False)
 
@@ -158,6 +158,8 @@ class UndergraduateTigerBookDirectoryPermissions(models.Model):
     is_visible_to_staff = models.BooleanField(null=False, default=False)
     # TODO: add finer control over which usernames get to see which fields, tigerbook listed users
     # TODO: can add any username
+    username_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
+                                                  blank=True)
     profile_pic_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
                                                   blank=True)
     track_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
@@ -428,7 +430,7 @@ class UndergraduateTigerBookResidentialColleges(models.Model):
 
 
 class TigerBookPronouns(models.Model):
-    pronoun = models.TextField(unique=True, null=False, blank=False)
+    pronouns = models.TextField(unique=True, null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
 
 

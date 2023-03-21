@@ -112,8 +112,8 @@ class TigerBookDirectoryList(ListModelMixin,
         qs = super().get_queryset()
         request = self.request
         # net_id = request.user.profile.net_id
-        pu_status = request.user.profile.pu_status
-        lookup = None
+        pu_status = request.user.cas_profile.pu_status
+        qs_self = qs.filter(user__username__exact=self.request.user.username)
         match pu_status:
             case 'fac':
                 lookup = Q(permissions__is_visible_to_faculty=False)
@@ -125,7 +125,7 @@ class TigerBookDirectoryList(ListModelMixin,
                 lookup = Q(permissions__is_visible_to_staff=False)
             case '#sv':
                 lookup = Q(permissions__is_visible_to_service_accounts=False)
-        return qs.exclude(lookup)
+        return qs_self.union(qs.exclude(lookup))
 
     def get_object(self):
         queryset = self.get_queryset()
@@ -134,3 +134,4 @@ class TigerBookDirectoryList(ListModelMixin,
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+

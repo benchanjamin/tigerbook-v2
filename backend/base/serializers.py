@@ -10,9 +10,9 @@ from base.models import (
     UndergraduateTigerBookCertificates,
     TigerBookPronouns,
     TigerBookCities,
-    UndergraduateTigerBookDirectoryPermissions, UndergraduateTigerBookClassYears,
+    UndergraduateTigerBookDirectoryPermissions,
     UndergraduateTigerBookResidentialColleges, TigerBookInterests, TigerBookExtracurriculars,
-    TigerBookExtracurricularSubgroups, TigerBookExtracurricularPositions, TigerBookResearchTypes,
+    TigerBookExtracurricularPositions, TigerBookResearchTypes,
     UndergraduateTigerBookHousing
 )
 from uniauth.utils import get_account_username_split
@@ -169,13 +169,13 @@ class PermissionsSerializer(WritableNestedModelSerializer):
     housing_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                          child=serializers.CharField(allow_blank=False,
                                                                                      allow_null=False)
-                                                        , required=False)
+                                                         , required=False)
     aliases_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                          child=serializers.CharField(allow_blank=False,
                                                                                      allow_null=False), required=False)
     pronouns_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                           child=serializers.CharField(allow_blank=False,
-                                                                                      allow_null=False),required=False)
+                                                                                      allow_null=False), required=False)
     certificates_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                               child=serializers.CharField(allow_blank=False,
                                                                                           allow_null=False),
@@ -232,7 +232,7 @@ class PhotoUploadSetupSerializer(serializers.Serializer):
 
 # TODO: This is personal account information for setup, or initial page
 class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelSerializer):
-    username = UsernameSerializer(source='user', read_only=True)
+    username = serializers.SerializerMethodField(read_only=True)
     active_directory_entry = ActiveDirectorySetupSerializer(read_only=True)
     residential_college_facebook_entry = ResidentialCollegeSetupSerializer(read_only=True)
     # 'concentration' and 'track' are required fields, hence allow_empty=False and allow_null=False
@@ -273,6 +273,11 @@ class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelS
             'class_year',
             'residential_college'
         ]
+
+    def get_username(self, obj):
+        if hasattr(obj.user, 'cas_profile'):
+            return obj.user.cas_profile.net_id
+        return obj.username
 
     def update(self, instance, validated_data):
         instance.has_setup_profile.has_setup_stage_one = True
@@ -337,7 +342,7 @@ class UndergraduateTigerBookHousingSerializer(serializers.RelatedField):
 
 
 class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSerializer):
-    user = UsernameSerializer(read_only=True)
+    username = serializers.SerializerMethodField(read_only=True)
     active_directory_entry = ActiveDirectorySetupSerializer(read_only=True)
     residential_college_facebook_entry = ResidentialCollegeSetupSerializer(read_only=True)
     # 'concentration' and 'track' are required fields, hence allow_empty=False and allow_null=False
@@ -380,7 +385,7 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
     class Meta:
         model = UndergraduateTigerBookDirectory
         fields = [
-            'user',
+            'username',
             'active_directory_entry',
             'residential_college_facebook_entry',
             'permissions',
@@ -402,10 +407,9 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
         ]
 
     def get_username(self, obj):
-        if obj.user.username.startswith("cas"):
-            net_id = get_account_username_split(obj.user.username)[2]
-            return net_id
-        return obj.user.username
+        if hasattr(obj.user, 'cas_profile'):
+            return obj.user.cas_profile.net_id
+        return obj.username
 
     def update(self, instance, validated_data):
         try:
@@ -459,23 +463,20 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
 
 
 class TigerBookDirectoryListSerializer(serializers.ModelSerializer):
-    user = UsernameSerializer(read_only=True)
-    active_directory_entry = ActiveDirectorySetupSerializer(read_only=True)
-    residential_college_facebook_entry = ResidentialCollegeSetupSerializer(read_only=True)
-    track = serializers.CharField(read_only=True)
-    concentration = serializers.CharField(read_only=True)
-    class_year = serializers.CharField(read_only=True)
-    residential_college = serializers.CharField(read_only=True)
-    pronouns = serializers.CharField(read_only=True)
+    username = serializers.SerializerMethodField(read_only=True)
+    track = serializers.SerializerMethodField(read_only=True)
+    concentration = serializers.SerializerMethodField(read_only=True)
+    class_year = serializers.SerializerMethodField(read_only=True)
+    # TODO: make rest list serializable
+    residential_college = serializers.SerializerMethodField(read_only=True)
+    pronouns = serializers.SerializerMethodField(read_only=True)
     profile_pic_url = serializers.SerializerMethodField(read_only=True)
-
 
     class Meta:
         model = UndergraduateTigerBookDirectory
         fields = [
-            'user',
+            'username',
             'active_directory_entry',
-            'residential_college_facebook_entry',
             'track',
             'concentration',
             'class_year',
@@ -484,8 +485,61 @@ class TigerBookDirectoryListSerializer(serializers.ModelSerializer):
             'profile_pic_url'
         ]
 
+    def get_username(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.username_prohibited_usernames:
+            return None
+        if hasattr(obj.user, 'cas_profile'):
+            return obj.user.cas_profile.net_id
+        return obj.username
+
+    def get_track(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.track_prohibited_usernames:
+            return None
+        if hasattr(obj.track, 'track'):
+            return obj.track.track
+        return None
+
+    def get_concentration(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.concentration_prohibited_usernames:
+            return None
+        if hasattr(obj.concentration, 'concentration'):
+            return obj.concentration.concentration
+        return None
+
+    def get_class_year(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.class_year_prohibited_usernames:
+            return None
+        if hasattr(obj.class_year, 'class_year'):
+            return obj.class_year.class_year
+        return None
+
+    def get_residential_college(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.residential_college_prohibited_usernames:
+            return None
+        if hasattr(obj.residential_college, 'residential_college'):
+            return obj.residential_college.residential_college
+        return None
+
+    def get_pronouns(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.pronouns_prohibited_usernames:
+            return None
+        if hasattr(obj.pronouns, 'pronouns'):
+            return obj.pronouns.pronouns
+        return None
+
     def get_profile_pic_url(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.profile_pic_prohibited_usernames:
+            return None
         if obj.profile_pic:
             return obj.profile_pic.url
-        else:
+        elif hasattr(obj.residential_college_facebook_entry, 'url'):
             return obj.residential_college_facebook_entry.url
+        else:
+            return None

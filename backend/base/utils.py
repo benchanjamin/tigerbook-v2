@@ -14,7 +14,7 @@ from django.core.exceptions import PermissionDenied
 
 
 def add_to_undergraduate_tigerbook_directory(user):
-    net_id = user.profile.net_id
+    net_id = user.cas_profile.net_id
     req_lib = ReqLib()
     req = req_lib.get_info_for_tigerbook(net_id)
     if not OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(**req).exists():
