@@ -74,6 +74,8 @@ try:
 except ImportError:
     from urllib.parse import urlencode, urlunparse
 
+from django.conf import settings
+
 
 def _get_global_context(request):
     """
@@ -277,7 +279,11 @@ def cas_login(request, institution):
             # TODO: differentiate between fac, undergraduate, graduate student, stf, and #sv
             # TODO: if wanting to add alumni, add extra checks for authentication here
             pu_status = _get_pu_status(user)
-            if pu_status not in ['fac', 'undergraduate', 'graduate', 'stf', '#sv']:
+            if pu_status not in [settings.PU_STATUS_FACULTY,
+                                 settings.PU_STATUS_UNDERGRADUATE,
+                                 settings.PU_STATUS_GRADUATE,
+                                 settings.PU_STATUS_STAFF,
+                                 settings.PU_STATUS_SERVICE_ACCOUNT]:
                 raise PermissionDenied(
                     "Not valid PU status of either 'fac', 'undergraduate', 'graduate', 'stf', or '#sv'.")
             if user.username.startswith("cas"):
@@ -285,11 +291,12 @@ def cas_login(request, institution):
                 net_id = username_split[2]
                 if not hasattr(user, 'cas_profile'):
                     CASProfile.objects.create(user=user, net_id=net_id, pu_status=pu_status)
-            if pu_status == 'undergraduate':
+            if pu_status == settings.PU_STATUS_UNDERGRADUATE:
                 if not UndergraduateTigerBookDirectory.objects.filter(user=user).exists():
                     add_to_undergraduate_tigerbook_directory(user)
                 else:
                     update_undergraduate_tigerbook_directory(user)
+            # TODO: add graduates if enough time
             # if pu_status == 'graduate':
             #     if not UndergraduateTigerBookDirectory.objects.filter(user=user).exists():
             #         add_to_graduate_tigerbook_directory(user)

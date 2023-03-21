@@ -236,3 +236,12 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+# TODO: pu statuses
+
+PU_STATUS_FACULTY = 'fac'
+PU_STATUS_UNDERGRADUATE = 'undergraduate'
+PU_STATUS_GRADUATE = 'graduate'
+PU_STATUS_STAFF = 'stf'
+PU_STATUS_SERVICE_ACCOUNT = '#sv'

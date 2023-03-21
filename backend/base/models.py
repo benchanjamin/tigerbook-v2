@@ -159,7 +159,7 @@ class UndergraduateTigerBookDirectoryPermissions(models.Model):
     # TODO: add finer control over which usernames get to see which fields, tigerbook listed users
     # TODO: can add any username
     username_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
-                                                  blank=True)
+                                               blank=True)
     profile_pic_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
                                                   blank=True)
     track_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
@@ -180,7 +180,7 @@ class UndergraduateTigerBookDirectoryPermissions(models.Model):
     certificates_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
                                                    blank=True)
     hometown_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
-                                                blank=True)
+                                               blank=True)
     current_city_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True),
                                                    default=list, blank=True)
     interests_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,

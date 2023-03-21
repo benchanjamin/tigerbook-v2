@@ -8,7 +8,6 @@ from base.models import (OITActiveDirectoryUndergraduateGraduateInfo,
                          UndergraduateTigerBookResidentialColleges,
                          SetupTigerBookDirectoryStages
                          )
-from uniauth.utils import get_account_username_split
 from active_directory.req_lib import ReqLib
 from django.core.exceptions import PermissionDenied
 
@@ -48,10 +47,8 @@ def add_to_undergraduate_tigerbook_directory(user):
                                                    (residential_college=residential_college))
 
 
-# TODO: Update in case their OIT ActiveDirectory info changes
 def update_undergraduate_tigerbook_directory(user):
-    # TODO: add this condition if statement always before using `get_account_username_split`
-    net_id = user.profile.net_id
+    net_id = user.cas_profile.net_id
     req_lib = ReqLib()
     req = req_lib.get_info_for_tigerbook(net_id)
     active_directory_entry = OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(**req).first()
@@ -64,7 +61,6 @@ def update_undergraduate_tigerbook_directory(user):
         active_directory_entry,
         residential_college_facebook_entry=
         residential_college_facebook_entry)
-
 
 # def add_to_graduate_tigerbook_directory(user):
 #     # TODO: add this condition if statement always before using `get_account_username_split`
