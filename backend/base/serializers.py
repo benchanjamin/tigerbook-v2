@@ -136,59 +136,70 @@ class UsernameSerializer(serializers.Serializer):
 
 class PermissionsSerializer(WritableNestedModelSerializer):
     # Default should be true
-    is_visible_to_undergrads = serializers.BooleanField()
+    is_visible_to_undergrads = serializers.BooleanField(required=False)
     # Default should be true
-    is_visible_to_faculty = serializers.BooleanField()
+    is_visible_to_faculty = serializers.BooleanField(required=False)
     # Default should be true
-    is_visible_to_service_accounts = serializers.BooleanField()
+    is_visible_to_service_accounts = serializers.BooleanField(required=False)
     # Default should be false
-    is_visible_to_graduate_students = serializers.BooleanField()
+    is_visible_to_graduate_students = serializers.BooleanField(required=False)
     # Default should be false
-    is_visible_to_alumni = serializers.BooleanField()
+    # is_visible_to_alumni = serializers.BooleanField()
     # Default should be false
-    is_visible_to_staff = serializers.BooleanField()
+    is_visible_to_staff = serializers.BooleanField(required=False)
     profile_pic_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                              child=serializers.CharField(allow_blank=False,
-                                                                                         allow_null=False))
+                                                                                         allow_null=False),
+                                                             required=False)
     track_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                        child=serializers.CharField(allow_blank=False,
-                                                                                   allow_null=False))
+                                                                                   allow_null=False), required=False)
     concentration_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                                child=serializers.CharField(allow_blank=False,
-                                                                                           allow_null=False))
+                                                                                           allow_null=False),
+                                                               required=False)
     class_year_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                             child=serializers.CharField(allow_blank=False,
-                                                                                        allow_null=False))
+                                                                                        allow_null=False),
+                                                            required=False)
     residential_college_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                                      child=serializers.CharField(allow_blank=False,
-                                                                                                 allow_null=False))
+                                                                                                 allow_null=False),
+                                                                     required=False)
     housing_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                          child=serializers.CharField(allow_blank=False,
-                                                                                     allow_null=False))
+                                                                                     allow_null=False)
+                                                        , required=False)
     aliases_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                          child=serializers.CharField(allow_blank=False,
-                                                                                     allow_null=False))
+                                                                                     allow_null=False), required=False)
     pronouns_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                           child=serializers.CharField(allow_blank=False,
-                                                                                      allow_null=False))
+                                                                                      allow_null=False),required=False)
     certificates_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                               child=serializers.CharField(allow_blank=False,
-                                                                                          allow_null=False))
+                                                                                          allow_null=False),
+                                                              required=False)
     hometown_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                           child=serializers.CharField(allow_blank=False,
-                                                                                      allow_null=False))
+                                                                                      allow_null=False),
+                                                          required=False)
     current_city_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                               child=serializers.CharField(allow_blank=False,
-                                                                                          allow_null=False))
+                                                                                          allow_null=False),
+                                                              required=False)
     interests_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                            child=serializers.CharField(allow_blank=False,
-                                                                                       allow_null=False))
+                                                                                       allow_null=False),
+                                                           required=False)
     extracurriculars_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                                   child=serializers.CharField(allow_blank=False,
-                                                                                              allow_null=False))
+                                                                                              allow_null=False),
+                                                                  required=False)
     research_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                           child=serializers.CharField(allow_blank=False,
-                                                                                      allow_null=False))
+                                                                                      allow_null=False),
+                                                          required=False)
 
     class Meta:
         model = UndergraduateTigerBookDirectoryPermissions
@@ -399,7 +410,7 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
     def update(self, instance, validated_data):
         try:
             # TODO: only change profile pic if profile pic is in validated data
-            if instance.profile_pic.url and validated_data['profile_pic']:
+            if instance.profile_pic.url and 'profile_pic' in validated_data:
                 instance.profile_pic.delete(save=False)
         except ValueError:
             pass
@@ -407,6 +418,8 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
         instance.extracurricular_objs.clear()
         instance.extracurricular_position_objs.clear()
         # add extracurriculars
+        if instance.extracurriculars is None:
+            return super().update(instance, validated_data)
         for extracurricular in instance.extracurriculars:
             extracurricular_title = extracurricular['extracurricular']
             retrieved_extracurricular = TigerBookExtracurriculars.objects.get(extracurricular=extracurricular_title)

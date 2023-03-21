@@ -134,8 +134,3 @@ class TigerBookDirectoryList(ListModelMixin,
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
-        # if not (instance.has_setup_profile.has_setup_stage_one and instance.has_setup_profile.has_setup_stage_two):
-        #     return Response({"invalid": "full profile get request is not allowed until setup profile is complete"})
-        # serializer = UndergraduateTigerBookDirectoryProfileFullSerializer(instance)
-        # return Response(serializer.data)
-        # return Response({"invalid": "full profile view not allowed"}, status=400)
