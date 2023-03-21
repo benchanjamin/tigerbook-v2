@@ -3,6 +3,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 import uuid
 from utils.storage_backends import (
     PrivateTigerBookUndergraduateMediaStorage,
@@ -12,6 +14,12 @@ from utils.storage_backends import (
     PrivateResidentialCollegeFacebookMediaStorage, PrivateTigerBookExtracurricularsMediaStorage)
 
 User = settings.AUTH_USER_MODEL  # default is 'auth.user'
+
+
+class CASProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    pu_status = models.TextField(null=True, blank=False)
+    net_id = models.TextField(null=True, blank=False)
 
 
 class OITActiveDirectoryUndergraduateGraduateInfo(models.Model):
@@ -145,7 +153,7 @@ class UndergraduateTigerBookDirectoryPermissions(models.Model):
     # Default should be false
     is_visible_to_graduate_students = models.BooleanField(null=False, default=False)
     # Default should be false
-    is_visible_to_alumni = models.BooleanField(null=False, default=False)
+    # is_visible_to_alumni = models.BooleanField(null=False, default=False)
     # Default should be false
     is_visible_to_staff = models.BooleanField(null=False, default=False)
     # TODO: add finer control over which usernames get to see which fields, tigerbook listed users
@@ -163,15 +171,13 @@ class UndergraduateTigerBookDirectoryPermissions(models.Model):
                                                           blank=True)
     housing_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
                                               blank=True)
-    housing_roommates_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True),
-                                                        default=list, blank=True)
     aliases_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
                                               blank=True)
     pronouns_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
                                                blank=True)
     certificates_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
                                                    blank=True)
-    home_city_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
+    hometown_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
                                                 blank=True)
     current_city_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True),
                                                    default=list, blank=True)

@@ -63,8 +63,9 @@ from uniauth.utils import (
     is_unlinked_account,
 )
 from base.models import (
-    UndergraduateTigerBookDirectory,
+    UndergraduateTigerBookDirectory, CASProfile
 )
+from django.core.exceptions import ObjectDoesNotExist
 
 try:
     from urllib import urlencode
@@ -279,6 +280,11 @@ def cas_login(request, institution):
             if pu_status not in ['fac', 'undergraduate', 'graduate', 'stf', '#sv']:
                 raise PermissionDenied(
                     "Not valid PU status of either 'fac', 'undergraduate', 'graduate', 'stf', or '#sv'.")
+            if user.username.startswith("cas"):
+                username_split = get_account_username_split(user.username)
+                net_id = username_split[2]
+                if not hasattr(user, 'profile'):
+                    CASProfile.objects.create(user=user, net_id=net_id, pu_status=pu_status)
             if pu_status == 'undergraduate':
                 if not UndergraduateTigerBookDirectory.objects.filter(user=user).exists():
                     add_to_undergraduate_tigerbook_directory(user)

@@ -174,9 +174,9 @@ class PermissionsSerializer(WritableNestedModelSerializer):
     certificates_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                               child=serializers.CharField(allow_blank=False,
                                                                                           allow_null=False))
-    home_city_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
-                                                           child=serializers.CharField(allow_blank=False,
-                                                                                       allow_null=False))
+    hometown_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
+                                                          child=serializers.CharField(allow_blank=False,
+                                                                                      allow_null=False))
     current_city_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                               child=serializers.CharField(allow_blank=False,
                                                                                           allow_null=False))
@@ -200,7 +200,7 @@ class PermissionsSerializer(WritableNestedModelSerializer):
 class ActiveDirectorySetupSerializer(serializers.Serializer):
     full_name = serializers.CharField(read_only=True)
     email = serializers.EmailField(read_only=True)
-    department = serializers.CharField(read_only=True)
+    # department = serializers.CharField(read_only=True)
 
 
 class ResidentialCollegeSetupSerializer(serializers.Serializer):
@@ -221,7 +221,7 @@ class PhotoUploadSetupSerializer(serializers.Serializer):
 
 # TODO: This is personal account information for setup, or initial page
 class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelSerializer):
-    user = UsernameSerializer(read_only=True)
+    username = UsernameSerializer(source='user', read_only=True)
     active_directory_entry = ActiveDirectorySetupSerializer(read_only=True)
     residential_college_facebook_entry = ResidentialCollegeSetupSerializer(read_only=True)
     # 'concentration' and 'track' are required fields, hence allow_empty=False and allow_null=False
@@ -231,7 +231,7 @@ class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelS
     track = serializers.SlugRelatedField(slug_field='track', queryset=UndergraduateTigerBookTracks.objects.all(),
                                          allow_null=False)
     aliases = serializers.ListField(allow_empty=True, allow_null=False, child=serializers.CharField(allow_blank=False))
-    home_cities = TigerBookCitiesSerializer(many=True)
+    hometown = TigerBookCitiesSerializer(many=True)
     certificates = serializers.SlugRelatedField(many=True, slug_field='certificate',
                                                 queryset=UndergraduateTigerBookCertificates.objects.all(),
                                                 allow_null=False)
@@ -247,7 +247,7 @@ class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelS
     class Meta:
         model = UndergraduateTigerBookDirectory
         fields = [
-            'user',
+            'username',
             'active_directory_entry',
             'residential_college_facebook_entry',
             'aliases',
@@ -346,6 +346,7 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
                                             queryset=TigerBookPronouns.objects.all(),
                                             allow_null=True, required=False)
     # # new fields are below compared to setup profile
+    # TODO: default profile pic should be of res college facebook
     profile_pic = serializers.FileField(allow_null=True, required=False)
     permissions = PermissionsSerializer(required=False)
     class_year = serializers.SlugRelatedField(slug_field='class_year',
@@ -444,6 +445,34 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
         return miscellaneous
 
 
-class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer):
+class TigerBookDirectoryListSerializer(serializers.ModelSerializer):
+    user = UsernameSerializer(read_only=True)
+    active_directory_entry = ActiveDirectorySetupSerializer(read_only=True)
+    residential_college_facebook_entry = ResidentialCollegeSetupSerializer(read_only=True)
+    track = serializers.CharField(read_only=True)
+    concentration = serializers.CharField(read_only=True)
+    class_year = serializers.CharField(read_only=True)
+    residential_college = serializers.CharField(read_only=True)
+    pronouns = serializers.CharField(read_only=True)
+    profile_pic_url = serializers.SerializerMethodField(read_only=True)
+
+
     class Meta:
         model = UndergraduateTigerBookDirectory
+        fields = [
+            'user',
+            'active_directory_entry',
+            'residential_college_facebook_entry',
+            'track',
+            'concentration',
+            'class_year',
+            'residential_college',
+            'pronouns',
+            'profile_pic_url'
+        ]
+
+    def get_profile_pic_url(self, obj):
+        if obj.profile_pic:
+            return obj.profile_pic.url
+        else:
+            return obj.residential_college_facebook_entry.url
