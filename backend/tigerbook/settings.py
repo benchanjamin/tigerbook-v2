@@ -16,7 +16,7 @@ from pathlib import Path
 from datetime import timedelta
 
 env = environ.Env(
-    # set casting, default value
+    # if debug is not set, default to False
     DEBUG=(bool, False)
 )
 

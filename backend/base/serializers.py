@@ -1,5 +1,7 @@
 import contextlib
 import re
+
+from django.urls import reverse
 from rest_framework import serializers
 
 from base.models import (
@@ -465,6 +467,7 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
     residential_college = serializers.SerializerMethodField(read_only=True)
     pronouns = serializers.SerializerMethodField(read_only=True)
     profile_pic_url = serializers.SerializerMethodField(read_only=True)
+    url = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -475,8 +478,12 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
             'class_year',
             'residential_college',
             'pronouns',
-            'profile_pic_url'
+            'profile_pic_url',
+            'url',
         ]
+
+    def get_url(self, obj):
+        return reverse('undergraduate-retrieve', kwargs={'username': obj.user.username})
 
     def get_username(self, obj):
         request = self.context.get('request')
@@ -528,8 +535,9 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
             return None
         if obj.profile_pic:
             return obj.profile_pic.url
-        elif hasattr(obj.residential_college_facebook_entry, 'url'):
-            return obj.residential_college_facebook_entry.url
+        # TODO: check if this works with people who don't have a profile pic on residential college facebook
+        elif hasattr(obj, 'residential_college_facebook_entry'):
+            return obj.residential_college_facebook_entry.residential_college_picture_url.url
         else:
             return None
 
@@ -547,14 +555,12 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
         model = UndergraduateTigerBookDirectory
         fields = [
             'username',
-            'active_directory_entry',
             'track',
             'concentration',
             'class_year',
             'residential_college',
             'pronouns',
             'profile_pic_url',
-            'housing'
         ]
 
     def get_username(self, obj):
@@ -607,7 +613,8 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             return None
         if obj.profile_pic:
             return obj.profile_pic.url
-        elif hasattr(obj.residential_college_facebook_entry, 'url'):
-            return obj.residential_college_facebook_entry.url
+        # TODO: check if this works with people who don't have a profile pic on residential college facebook
+        elif hasattr(obj, 'residential_college_facebook_entry'):
+            return obj.residential_college_facebook_entry.residential_college_picture_url.url
         else:
             return None

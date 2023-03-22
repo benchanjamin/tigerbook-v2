@@ -3,8 +3,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 import uuid
 from utils.storage_backends import (
     PrivateTigerBookUndergraduateMediaStorage,
@@ -47,8 +45,8 @@ class CurrentUndergraduateResidentialCollegeFacebookDirectory(models.Model):
 
 
 class SetupTigerBookDirectoryStages(models.Model):
-    has_setup_stage_one = models.BooleanField(default=False)
-    has_setup_stage_two = models.BooleanField(default=False)
+    has_setup_page_one = models.BooleanField(default=False)
+    has_setup_page_two = models.BooleanField(default=False)
 
 
 class UndergraduateTigerBookDirectory(models.Model):
@@ -382,7 +380,7 @@ class GenericTigerBookDirectory(models.Model):
 class TigerBookIndividualNotes(models.Model):
     # TODO: Current behavior -> when netIDs are deleted, directory entries are deleted with "CASCADE"
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    # TODO: individual note taking, basic user is tied to User table
+    # TODO: individual note-taking, basic user is tied to User table
     individual_notes_taking_user = models.OneToOneField(User, on_delete=models.RESTRICT, null=False,
                                                         related_name="individual_notes_creator")
     # TODO: must map individual_notes_taking_user to existing, target tigerbook listed user

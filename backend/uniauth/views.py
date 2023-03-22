@@ -74,7 +74,7 @@ try:
 except ImportError:
     from urllib.parse import urlencode, urlunparse
 
-from django.conf import settings
+from django.conf import settings as django_settings
 
 
 def _get_global_context(request):
@@ -279,19 +279,20 @@ def cas_login(request, institution):
             # TODO: differentiate between fac, undergraduate, graduate student, stf, and #sv
             # TODO: if wanting to add alumni, add extra checks for authentication here
             pu_status = _get_pu_status(user)
-            if pu_status not in [settings.PU_STATUS_FACULTY,
-                                 settings.PU_STATUS_UNDERGRADUATE,
-                                 settings.PU_STATUS_GRADUATE,
-                                 settings.PU_STATUS_STAFF,
-                                 settings.PU_STATUS_SERVICE_ACCOUNT]:
+            if pu_status not in [django_settings.PU_STATUS_FACULTY,
+                                 django_settings.PU_STATUS_UNDERGRADUATE,
+                                 django_settings.PU_STATUS_GRADUATE,
+                                 django_settings.PU_STATUS_STAFF,
+                                 django_settings.PU_STATUS_SERVICE_ACCOUNT]:
                 raise PermissionDenied(
-                    "Not valid PU status of either 'fac', 'undergraduate', 'graduate', 'stf', or '#sv'.")
+                    f"Not valid PU status of either {django_settings.PU_STATUS_FACULTY}, {django_settings.PU_STATUS_UNDERGRADUATE},"
+                    f" {django_settings.PU_STATUS_GRADUATE}, {django_settings.PU_STATUS_STAFF}, or {django_settings.PU_STATUS_SERVICE_ACCOUNT}.")
             if user.username.startswith("cas"):
                 username_split = get_account_username_split(user.username)
                 net_id = username_split[2]
                 if not hasattr(user, 'cas_profile'):
                     CASProfile.objects.create(user=user, net_id=net_id, pu_status=pu_status)
-            if pu_status == settings.PU_STATUS_UNDERGRADUATE:
+            if pu_status == django_settings.PU_STATUS_UNDERGRADUATE:
                 if not UndergraduateTigerBookDirectory.objects.filter(user=user).exists():
                     add_to_undergraduate_tigerbook_directory(user)
                 else:
