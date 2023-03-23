@@ -243,14 +243,17 @@ class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelS
                                                  allow_null=False)
     track = serializers.SlugRelatedField(slug_field='track', queryset=UndergraduateTigerBookTracks.objects.all(),
                                          allow_null=False)
-    aliases = serializers.ListField(allow_empty=True, allow_null=False, child=serializers.CharField(allow_blank=False))
-    hometown = TigerBookCitiesSerializer(many=True)
+    aliases = serializers.ListField(allow_empty=True, allow_null=False, child=serializers.CharField(allow_blank=False),
+                                    required=False)
+    hometown = TigerBookCitiesSerializer(required=False, allow_null=True)
     certificates = serializers.SlugRelatedField(many=True, slug_field='certificate',
                                                 queryset=UndergraduateTigerBookCertificates.objects.all(),
-                                                allow_null=False)
+                                                allow_null=False,
+                                                required=False)
     pronouns = serializers.SlugRelatedField(slug_field='pronouns',
                                             queryset=TigerBookPronouns.objects.all(),
-                                            allow_null=True)
+                                            allow_null=True,
+                                            required=False)
     class_year = serializers.SlugRelatedField(slug_field='class_year',
                                               read_only=True)
     residential_college = serializers.SlugRelatedField(slug_field='residential_college',
@@ -282,7 +285,7 @@ class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelS
         return obj.username
 
     def update(self, instance, validated_data):
-        instance.has_setup_profile.has_setup_stage_one = True
+        instance.has_setup_profile.has_setup_page_one = True
         instance.has_setup_profile.save()
         return super().update(instance, validated_data)
 
@@ -302,7 +305,7 @@ class UndergraduateTigerBookDirectorySetupSecondPageSerializer(serializers.Model
         with contextlib.suppress(ValueError):
             if instance.profile_pic.url:
                 instance.profile_pic.delete(save=False)
-        instance.has_setup_profile.has_setup_stage_two = True
+        instance.has_setup_profile.has_setup_page_two = True
         instance.has_setup_profile.save()
         # extra
         return super().update(instance, validated_data)

@@ -69,8 +69,8 @@ class UndergraduateProfileEdit(UpdateModelMixin, GenericAPIView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        lookup = Q(user__username__exact=self.request.user.username) & Q(user__cas_profile__pu_status=
-                                                                         settings.PU_STATUS_UNDERGRADUATE)
+        lookup = Q(user=self.request.user) & Q(user__cas_profile__pu_status=
+                                               settings.PU_STATUS_UNDERGRADUATE)
         return qs.filter(lookup)
 
     def get_object(self):
@@ -81,17 +81,6 @@ class UndergraduateProfileEdit(UpdateModelMixin, GenericAPIView):
 
 class UndergraduateProfileSetupFirstPage(UndergraduateProfileEdit):
     serializer_class = UndergraduateTigerBookDirectorySetupFirstPageSerializer
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        lookup = Q(user__username__exact=self.request.user.username) & Q(user__cas_profile__pu_status=
-                                                                         settings.PU_STATUS_UNDERGRADUATE)
-        return qs.filter(lookup)
-
-    def get_object(self):
-        queryset = self.get_queryset()
-        obj = get_object_or_404(queryset, user=self.request.user)
-        return obj
 
     def get(self, request):
         instance = self.get_object()
@@ -111,6 +100,10 @@ class UndergraduateProfileSetupSecondPage(UndergraduateProfileEdit):
         return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if not instance.has_setup_profile.has_setup_page_one:
+            return Response(
+                {"invalid": "setup profile page two is not allowed until setup profile page one is complete"})
         return self.update(request, *args, **kwargs)
 
 
@@ -119,7 +112,7 @@ class UndergraduateFullProfileEdit(UndergraduateProfileEdit):
 
     def post(self, request, *args, **kwargs):
         instance = self.get_object()
-        if not instance.has_setup_profile:
+        if not (instance.has_setup_profile.has_setup_page_one and instance.has_setup_profile.has_setup_page_two):
             return Response({"invalid": "full profile post request is not allowed until setup profile is complete"})
         return self.update(request, *args, **kwargs)
 
@@ -129,7 +122,7 @@ class UndergraduateFullProfilePreview(UndergraduateProfileEdit):
 
     def get(self, request):
         instance = self.get_object()
-        if not (instance.has_setup_profile.has_setup_stage_one and instance.has_setup_profile.has_setup_stage_two):
+        if not (instance.has_setup_profile.has_setup_page_one and instance.has_setup_profile.has_setup_page_two):
             return Response({"invalid": "full profile get request is not allowed until setup profile is complete"})
         serializer = self.serializer_class(instance)
         return Response(serializer.data)
