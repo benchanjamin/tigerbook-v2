@@ -4,7 +4,8 @@ from uniauth.models import (
     LinkedEmail,
     UserProfile,
 )
-from base.models import UndergraduateTigerBookDirectory, OITActiveDirectoryUndergraduateGraduateInfo
+from base.models import UndergraduateTigerBookDirectory, OITActiveDirectoryUndergraduateGraduateInfo, \
+    GenericTigerBookDirectory
 from django.contrib.auth.models import User
 
 
@@ -12,6 +13,7 @@ class Command(BaseCommand):
 
     # TODO: put logging
     def handle(self, *args, **options):
+        GenericTigerBookDirectory.objects.all().delete()
         OITActiveDirectoryUndergraduateGraduateInfo.objects.all().delete()
         UndergraduateTigerBookDirectory.objects.all().delete()
         InstitutionAccount.objects.all().delete()

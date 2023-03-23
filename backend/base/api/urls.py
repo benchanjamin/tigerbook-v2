@@ -3,7 +3,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from .views import (UndergraduateProfileSetupFirstPage, get_routes, UndergraduateFullProfileEdit,
                     UndergraduateProfileSetupSecondPage, UndergraduateTigerBookDirectoryList,
                     UndergraduateTigerBookDirectoryRetrieve, TigerBookRedirectURLView,
-                    UndergraduateFullProfilePreview)
+                    UndergraduateFullProfilePreview, TigerBookIndividualNotesPostView, TigerBookIndividualNotesListView)
 from uniauth.views import get_jwt_tokens_from_session
 
 urlpatterns = [
@@ -15,12 +15,21 @@ urlpatterns = [
          name="undergraduate-setup-second-page"),
     path('undergraduate/profile/edit/', UndergraduateFullProfileEdit.as_view()),
     path('undergraduate/profile/preview/', UndergraduateFullProfilePreview.as_view()),
-    path('undergraduates/all/', UndergraduateTigerBookDirectoryList.as_view(),
+    # TODO: generalize this to work for all directory entries instead of just undergraduates,
+    #  if there's time
+    path('directory/all/', UndergraduateTigerBookDirectoryList.as_view(),
          name="undergraduates-all"),
-    path('search/', UndergraduateTigerBookDirectoryList.as_view(),
+    # TODO: add search functionality
+    path('directory/search/', UndergraduateTigerBookDirectoryList.as_view(),
          name="search"),
-    path('undergraduates/<str:username>/', UndergraduateTigerBookDirectoryRetrieve.as_view(),
+    # TODO: generalize this to work for all directory entries instead of just undergraduates
+    #   if there's time
+    path('directory/<str:username>/', UndergraduateTigerBookDirectoryRetrieve.as_view(),
          name="undergraduate-retrieve"),
+    path('individual-notes/', TigerBookIndividualNotesListView.as_view(), name='individual-notes-list'),
+    path('individual-note/<str:tigerbook_id>/', TigerBookIndividualNotesPostView.as_view(),
+         name='individual-note-retrieve'),
+    # path('group-note/<str:username>/', name='group-note'),
     path("token/", get_jwt_tokens_from_session, name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]

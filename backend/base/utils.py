@@ -1,3 +1,5 @@
+from django.contrib.contenttypes.models import ContentType
+
 from base.models import (OITActiveDirectoryUndergraduateGraduateInfo,
                          CurrentUndergraduateResidentialCollegeFacebookDirectory,
                          UndergraduateTigerBookDirectory,
@@ -6,7 +8,8 @@ from base.models import (OITActiveDirectoryUndergraduateGraduateInfo,
                          UndergraduateTigerBookConcentrations,
                          UndergraduateTigerBookClassYears,
                          UndergraduateTigerBookResidentialColleges,
-                         SetupTigerBookDirectoryStages
+                         SetupTigerBookDirectoryStages,
+                         GenericTigerBookDirectory
                          )
 from active_directory.req_lib import ReqLib
 from django.core.exceptions import PermissionDenied
@@ -31,20 +34,26 @@ def add_to_undergraduate_tigerbook_directory(user):
     class_year = active_directory_entry.department.split(" ")[-1]
     permissions = UndergraduateTigerBookDirectoryPermissions.objects.create()
     has_setup_profile = SetupTigerBookDirectoryStages.objects.create()
-    UndergraduateTigerBookDirectory.objects.create(user=user,
-                                                   has_setup_profile=has_setup_profile,
-                                                   active_directory_entry=active_directory_entry,
-                                                   residential_college_facebook_entry=
-                                                   residential_college_facebook_entry,
-                                                   permissions=permissions,
-                                                   concentration=UndergraduateTigerBookConcentrations.objects.get(
-                                                       concentration=concentration),
-                                                   track=UndergraduateTigerBookTracks.objects.get(track=track),
-                                                   class_year=UndergraduateTigerBookClassYears.objects.get(
-                                                       class_year=class_year),
-                                                   residential_college=
-                                                   UndergraduateTigerBookResidentialColleges.objects.get
-                                                   (residential_college=residential_college))
+    undergraduate_tigerbook_entry = UndergraduateTigerBookDirectory.objects.create(user=user,
+                                                                                   has_setup_profile=has_setup_profile,
+                                                                                   active_directory_entry=
+                                                                                   active_directory_entry,
+                                                                                   residential_college_facebook_entry=
+                                                                                   residential_college_facebook_entry,
+                                                                                   permissions=permissions,
+                                                                                   concentration=
+                                                                                   UndergraduateTigerBookConcentrations.objects.get(
+                                                                                       concentration=concentration),
+                                                                                   track=UndergraduateTigerBookTracks.objects.get(
+                                                                                       track=track),
+                                                                                   class_year=
+                                                                                   UndergraduateTigerBookClassYears.objects.get(
+                                                                                       class_year=class_year),
+                                                                                   residential_college=
+                                                                                   UndergraduateTigerBookResidentialColleges.objects.get
+                                                                                   (residential_college=
+                                                                                    residential_college))
+    GenericTigerBookDirectory.objects.create(tigerbook_entry=undergraduate_tigerbook_entry)
 
 
 def update_undergraduate_tigerbook_directory(user):

@@ -4,14 +4,15 @@ from django.urls import reverse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
-from rest_framework.mixins import UpdateModelMixin, ListModelMixin, RetrieveModelMixin
+from rest_framework.mixins import UpdateModelMixin, ListModelMixin, RetrieveModelMixin, CreateModelMixin
 
-from base.models import UndergraduateTigerBookDirectory
+from base.models import UndergraduateTigerBookDirectory, TigerBookIndividualNotes, GenericTigerBookDirectory
 from base.serializers import (
     UndergraduateTigerBookDirectorySetupFirstPageSerializer,
     UndergraduateTigerBookDirectoryProfileFullSerializer,
     UndergraduateTigerBookDirectorySetupSecondPageSerializer, UndergraduateTigerBookDirectoryListSerializer,
-    UndergraduateTigerBookDirectoryRetrieveSerializer,
+    UndergraduateTigerBookDirectoryRetrieveSerializer, TigerBookIndividualNotesPostSerializer,
+    TigerBookIndividualNotesListSerializer,
 )
 
 from django.conf import settings
@@ -203,25 +204,77 @@ class UndergraduateTigerBookDirectoryRetrieve(RetrieveModelMixin,
 
     def get_object(self):
         queryset = self.filter_queryset(self.get_queryset())
-
-        # Perform the lookup filtering.
-        lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
-
-        assert lookup_url_kwarg in self.kwargs, (
-                'Expected view %s to be called with a URL keyword argument '
-                'named "%s". Fix your URL conf, or set the `.lookup_field` '
-                'attribute on the view correctly.' %
-                (self.__class__.__name__, lookup_url_kwarg)
-        )
-        filter_kwargs = {"user__username__exact": self.kwargs[lookup_url_kwarg]}
-
-        # filter_kwargs = {self.lookup_field: self.kwargs[lookup_url_kwarg]}
-        obj = get_object_or_404(queryset, **filter_kwargs)
-
-        # May raise a permission denied
-        self.check_object_permissions(self.request, obj)
+        lookup = Q(user__username__exact=
+                   self.kwargs[self.lookup_field]) | Q(user__cas_profile__net_id__exact=
+                                                       self.kwargs[self.lookup_field])
+        obj = get_object_or_404(queryset, lookup)
 
         return obj
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
+
+
+class TigerBookIndividualNotesPostView(CreateModelMixin,
+                                       UpdateModelMixin,
+                                       GenericAPIView):
+    queryset = TigerBookIndividualNotes.objects.all().select_related('individual_notes_taking_user')
+    serializer_class = TigerBookIndividualNotesPostSerializer
+    lookup_field = 'tigerbook_id'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        user = self.request.user
+        lookup = Q(individual_notes_taking_user=user)
+        return qs.filter(lookup)
+
+    def get_object(self):
+        queryset = self.filter_queryset(self.get_queryset())
+        user = self.request.user
+        lookup = Q(individual_notes_taking_user=
+                   user)
+        obj = get_object_or_404(queryset, lookup)
+
+        return obj
+
+    def post(self, request, *args, **kwargs):
+        if self.get_queryset().exists():
+            return self.update(request, *args, **kwargs)
+        return self.create(request, *args, **kwargs)
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        note = serializer.validated_data.get('note')
+        target_directory_entry = GenericTigerBookDirectory.objects.get(tigerbook_directory_entry_object_id
+                                                                       =self.kwargs[self.lookup_field])
+        serializer.save(
+            individual_notes_taking_user=user,
+            note=note,
+            target_directory_entry=target_directory_entry,
+        )
+
+    def perform_update(self, serializer):
+        user = self.request.user
+        note = serializer.validated_data.get('note')
+        target_directory_entry = GenericTigerBookDirectory.objects.get(tigerbook_directory_entry_object_id
+                                                                       =self.kwargs[self.lookup_field])
+        serializer.save(
+            individual_notes_taking_user=user,
+            note=note,
+            target_directory_entry=target_directory_entry,
+        )
+
+
+class TigerBookIndividualNotesListView(ListModelMixin,
+                                       GenericAPIView):
+    queryset = TigerBookIndividualNotes.objects.all().select_related('individual_notes_taking_user')
+    serializer_class = TigerBookIndividualNotesListSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        username = self.request.user.username
+        lookup = Q(individual_notes_taking_user__username__exact=username)
+        return qs.filter(lookup)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

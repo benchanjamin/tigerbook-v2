@@ -14,7 +14,7 @@ from base.models import (
     UndergraduateTigerBookDirectoryPermissions,
     UndergraduateTigerBookResidentialColleges, TigerBookInterests, TigerBookExtracurriculars,
     TigerBookExtracurricularPositions, TigerBookResearchTypes,
-    UndergraduateTigerBookHousing
+    UndergraduateTigerBookHousing, TigerBookIndividualNotes, GenericTigerBookDirectory
 )
 from uniauth.utils import get_account_username_split
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
@@ -483,6 +483,8 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
         ]
 
     def get_url(self, obj):
+        if hasattr(obj.user, 'cas_profile'):
+            return reverse('undergraduate-retrieve', kwargs={'username': obj.user.cas_profile.net_id})
         return reverse('undergraduate-retrieve', kwargs={'username': obj.user.username})
 
     def get_username(self, obj):
@@ -618,3 +620,29 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             return obj.residential_college_facebook_entry.residential_college_picture_url.url
         else:
             return None
+
+
+class TigerBookIndividualNotesSerializer(serializers.ModelSerializer):
+    note = serializers.CharField(max_length=5000)
+
+    class Meta:
+        model = TigerBookIndividualNotes
+        fields = [
+            'note',
+        ]
+
+
+class TigerBookIndividualNotesListSerializer(TigerBookIndividualNotesSerializer):
+    target_directory_entry = UndergraduateTigerBookDirectoryListSerializer(
+        source='target_directory_entry.tigerbook_entry', read_only=True)
+
+    class Meta:
+        model = TigerBookIndividualNotes
+        fields = [
+            'note',
+            'target_directory_entry',
+        ]
+
+
+class TigerBookIndividualNotesPostSerializer(TigerBookIndividualNotesSerializer):
+    pass

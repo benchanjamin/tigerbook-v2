@@ -372,9 +372,14 @@ class UndergraduateTigerBookDirectoryPermissions(models.Model):
 
 
 class GenericTigerBookDirectory(models.Model):
-    tigerbook_directory_type = models.ForeignKey(ContentType, on_delete=models.RESTRICT)
-    tigerbook_directory_entry_object_id = models.PositiveIntegerField()
+    tigerbook_directory_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    tigerbook_directory_entry_object_id = models.CharField(default=uuid.uuid4, max_length=36)
     tigerbook_entry = GenericForeignKey('tigerbook_directory_type', 'tigerbook_directory_entry_object_id')
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["tigerbook_directory_type", "tigerbook_directory_entry_object_id"]),
+        ]
 
 
 class TigerBookIndividualNotes(models.Model):
