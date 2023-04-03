@@ -368,9 +368,9 @@ class UndergraduateToBeApprovedSubmissionsListView(ListModelMixin,
     serializer_class = UndergraduateToBeApprovedSubmissionsListSerializer
 
     def get(self, request, *args, **kwargs):
-        # TODO: add permission check
-        username = request.user.username
-        if username not in settings.TIGERBOOK_ADMIN_NETIDS:
+        # add permission check
+        display_username = get_display_username(request.user.username)
+        if display_username not in settings.TIGERBOOK_ADMIN_NETIDS:
             return Response({"invalid": "must be a tigerbook admin"},
                             status=status.HTTP_403_FORBIDDEN)
         return self.list(request, *args, **kwargs)
@@ -383,9 +383,9 @@ class UndergraduateToBeApprovedSubmissionsDeleteView(DestroyModelMixin,
     lookup_field = 'id'
 
     def post(self, request, *args, **kwargs):
-        # TODO: add permission check
-        username = request.user.username
-        if username not in settings.TIGERBOOK_ADMIN_NETIDS:
+        # add permission check
+        display_username = get_display_username(request.user.username)
+        if display_username not in settings.TIGERBOOK_ADMIN_NETIDS:
             return Response({"invalid": "must be a tigerbook admin"},
                             status=status.HTTP_403_FORBIDDEN)
         return self.destroy(request, *args, **kwargs)
@@ -399,9 +399,9 @@ class UndergraduateToBeApprovedSubmissionsApproveView(RetrieveModelMixin,
     lookup_field = 'id'
 
     def post(self, request, *args, **kwargs):
-        # TODO: add permission check
-        username = request.user.username
-        if username not in settings.TIGERBOOK_ADMIN_NETIDS:
+        # add permission check
+        display_username = get_display_username(request.user.username)
+        if display_username not in settings.TIGERBOOK_ADMIN_NETIDS:
             return Response({"invalid": "must be a tigerbook admin"},
                             status=status.HTTP_403_FORBIDDEN)
         return self.update(request, *args, **kwargs)
