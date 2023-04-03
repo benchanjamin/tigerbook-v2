@@ -155,10 +155,6 @@ class PermissionsSerializer(WritableNestedModelSerializer):
     # is_visible_to_alumni = serializers.BooleanField()
     # Default should be false
     is_visible_to_staff = serializers.BooleanField(required=False)
-    full_name_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
-                                                           child=serializers.CharField(allow_blank=False,
-                                                                                       allow_null=False),
-                                                           required=False)
     username_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                           child=serializers.CharField(allow_blank=False,
                                                                                       allow_null=False),
@@ -222,18 +218,18 @@ class PermissionsSerializer(WritableNestedModelSerializer):
         exclude = ['id']
 
     def validate(self, data):
-        usernames = itertools.chain(data['full_name_prohibited_usernames'],
-                                    data['username_prohibited_usernames'], data['profile_pic_prohibited_usernames'],
-                                    data['track_prohibited_usernames'], data['concentration_prohibited_usernames'],
-                                    data['class_year_prohibited_usernames'],
-                                    data['residential_college_prohibited_usernames'],
-                                    data['housing_prohibited_usernames'], data['aliases_prohibited_usernames'],
-                                    data['pronouns_prohibited_usernames'], data['certificates_prohibited_usernames'],
-                                    data['hometown_prohibited_usernames'],
-                                    data['current_city_prohibited_usernames'],
-                                    data['interests_prohibited_usernames'],
-                                    data['extracurriculars_prohibited_usernames'],
-                                    data['research_prohibited_usernames'])
+        usernames = itertools.chain(
+            data['username_prohibited_usernames'], data['profile_pic_prohibited_usernames'],
+            data['track_prohibited_usernames'], data['concentration_prohibited_usernames'],
+            data['class_year_prohibited_usernames'],
+            data['residential_college_prohibited_usernames'],
+            data['housing_prohibited_usernames'], data['aliases_prohibited_usernames'],
+            data['pronouns_prohibited_usernames'], data['certificates_prohibited_usernames'],
+            data['hometown_prohibited_usernames'],
+            data['current_city_prohibited_usernames'],
+            data['interests_prohibited_usernames'],
+            data['extracurriculars_prohibited_usernames'],
+            data['research_prohibited_usernames'])
         for username in usernames:
             if not isinstance(username, str):
                 raise serializers.ValidationError(
@@ -644,7 +640,15 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
 
 
 class UndergraduateTigerBookDirectorySearchSerializer(serializers.ModelSerializer):
-    pass
+    username = serializers.SerializerMethodField(read_only=True)
+    full_name = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = UndergraduateTigerBookDirectory
+        fields = [
+            'username',
+            'full_name',
+        ]
 
 
 class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSerializer):

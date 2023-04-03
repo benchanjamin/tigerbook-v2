@@ -156,12 +156,10 @@ class UndergraduateTigerBookDirectoryPermissions(models.Model):
     # is_visible_to_alumni = models.BooleanField(null=False, default=False)
     # Default should be false
     is_visible_to_staff = models.BooleanField(null=False, default=False)
-    # TODO: add finer control over which usernames get to see which fields, tigerbook listed users
-    # TODO: can add any username
+    # TODO: add finer control over which usernames and full names get to see which fields, tigerbook listed users
+    # TODO: can add any username, as long as it is in OIT system
     username_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
                                                blank=True)
-    full_name_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
-                                                blank=True)
     profile_pic_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
                                                   blank=True)
     track_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
