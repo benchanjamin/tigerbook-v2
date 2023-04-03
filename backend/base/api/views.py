@@ -319,7 +319,8 @@ class TigerBookNotesListView(ListModelMixin,
     def get_queryset(self):
         qs = super().get_queryset()
         user = self.request.user
-        lookup = Q(notes_taking_user=user)
+        lookup = Q(notes_taking_user=user) | Q(shared_usernames__contains=user.username) | Q(
+            shared_usernames__contains=get_display_username(user.username))
         return qs.filter(lookup)
 
     def get_object(self):
