@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import {Link, animateScroll as scroll} from "react-scroll";
+import {Link as ReactScrollLink, animateScroll as scroll} from "react-scroll";
+import Link from 'next/link'
 
 export default function Home() {
     return (
@@ -11,10 +12,10 @@ export default function Home() {
             <header>
                 <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
                     <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                        <Link href="/" className="flex items-center">
+                        {/*<Link href="/" className="flex items-center" to={}>*/}
                             <Image src="/Tigerbook.png"
                                    alt="Tigerbook Logo" width={149} height={40}/>
-                        </Link>
+                        {/*</Link>*/}
                         <div className="flex items-center lg:order-2">
                             <Link href="#"
                                   className="text-white bg-primary-400 hover:bg-primary-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Log
@@ -46,20 +47,20 @@ export default function Home() {
                                 {/*    >Home</Link>*/}
                                 {/*</li>*/}
                                 <li>
-                                    <Link to="features"
+                                    <ReactScrollLink to="features"
                                           spy={false}
                                           smooth={true}
                                           offset={0}
                                           duration={500}
-                                          className="cursor-pointer block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Features</Link>
+                                          className="cursor-pointer block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Features</ReactScrollLink>
                                 </li>
                                 <li>
-                                    <Link to="team"
+                                    <ReactScrollLink to="team"
                                           spy={false}
                                           smooth={true}
                                           offset={0}
                                           duration={500}
-                                          className="cursor-pointer block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Team</Link>
+                                          className="cursor-pointer block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Team</ReactScrollLink>
                                 </li>
                             </ul>
                         </div>
