@@ -83,8 +83,7 @@ class UndergraduateProfileEdit(UpdateModelMixin, GenericAPIView):
 
     def get_object(self):
         queryset = self.get_queryset()
-        obj = get_object_or_404(queryset, user=self.request.user)
-        return obj
+        return get_object_or_404(queryset, user=self.request.user)
 
 
 class UndergraduateProfileSetupFirstPage(UndergraduateProfileEdit):
@@ -109,10 +108,10 @@ class UndergraduateProfileSetupSecondPage(UndergraduateProfileEdit):
 
     def post(self, request, *args, **kwargs):
         instance = self.get_object()
-        if not instance.has_setup_profile.has_setup_page_one:
-            return Response(
-                {"invalid": "setup profile page two is not allowed until setup profile page one is complete"})
-        return self.update(request, *args, **kwargs)
+        if instance.has_setup_profile.has_setup_page_one:
+            return self.update(request, *args, **kwargs)
+        return Response(
+            {"invalid": "setup profile page two is not allowed until setup profile page one is complete"})
 
 
 class UndergraduateFullProfileEdit(UndergraduateProfileEdit):
@@ -120,10 +119,10 @@ class UndergraduateFullProfileEdit(UndergraduateProfileEdit):
 
     def post(self, request, *args, **kwargs):
         instance = self.get_object()
-        if not (instance.has_setup_profile.has_setup_page_one and instance.has_setup_profile.has_setup_page_two):
-            return Response({"invalid": "full profile post request is not allowed until setup profile is complete"},
-                            status=status.HTTP_404_NOT_FOUND)
-        return self.update(request, *args, **kwargs)
+        if instance.has_setup_profile.has_setup_page_one and instance.has_setup_profile.has_setup_page_two:
+            return self.update(request, *args, **kwargs)
+        return Response({"invalid": "full profile post request is not allowed until setup profile is complete"},
+                        status=status.HTTP_404_NOT_FOUND)
 
 
 class UndergraduateFullProfilePreview(UndergraduateProfileEdit):
@@ -131,11 +130,11 @@ class UndergraduateFullProfilePreview(UndergraduateProfileEdit):
 
     def get(self, request):
         instance = self.get_object()
-        if not (instance.has_setup_profile.has_setup_page_one and instance.has_setup_profile.has_setup_page_two):
-            return Response({"invalid": "full profile get request is not allowed until setup profile is complete"},
-                            status=status.HTTP_404_NOT_FOUND)
-        serializer = self.serializer_class(instance)
-        return Response(serializer.data)
+        if instance.has_setup_profile.has_setup_page_one and instance.has_setup_profile.has_setup_page_two:
+            serializer = self.serializer_class(instance)
+            return Response(serializer.data)
+        return Response({"invalid": "full profile get request is not allowed until setup profile is complete"},
+                        status=status.HTTP_404_NOT_FOUND)
 
 
 class UndergraduateTigerBookDirectoryList(ListModelMixin,
@@ -168,6 +167,19 @@ class UndergraduateTigerBookDirectoryList(ListModelMixin,
     def get_object(self):
         queryset = self.get_queryset()
         return get_object_or_404(queryset, user=self.request.user)
+
+    # TODO: decide whether this is needed to retrieve the display username
+    # def list(self, request, *args, **kwargs):
+    #     queryset = self.filter_queryset(self.get_queryset())
+    #
+    #     page = self.paginate_queryset(queryset)
+    #     if page is not None:
+    #         serializer = self.get_serializer(page, many=True)
+    #         return self.get_paginated_response(serializer.data)
+    #
+    #     serializer = self.get_serializer(queryset, many=True)
+    #     response = [{"display_username": get_display_username(request.user.username)}] + serializer.data
+    #     return Response(response)
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)

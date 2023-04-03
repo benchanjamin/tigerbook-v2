@@ -48,14 +48,6 @@ class TigerBookMiscellaneousSerializer(serializers.Serializer):
         return miscellaneous_description
 
 
-class UndergraduateTigerBookConcentrationsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UndergraduateTigerBookConcentrations
-        fields = [
-            'concentration'
-        ]
-
-
 class TigerBookCitiesSerializer(serializers.RelatedField):
     def get_queryset(self):
         return TigerBookCities.objects.all()
@@ -91,33 +83,6 @@ class TigerBookCitiesSerializer(serializers.RelatedField):
         if hasattr(value, "admin_name") and value.admin_name != "":
             return f"{value.city}, {value.admin_name}, {value.country}"
         return f"{value.city}, {value.country}"
-
-
-# class UsernameTigerBookSerializer(serializers.RelatedField):
-#     def get_queryset(self):
-#         return User.objects.all()
-#
-#     def to_internal_value(self, data):
-#         # data is the username, e.g., "bychan"
-#         # enforce that the data type is a string
-#         if not isinstance(data, str):
-#             raise serializers.ValidationError(
-#                 'Username must be a string.'
-#             )
-#         try:
-#             return User.objects.get(username__iexact=data)
-#         except User.DoesNotExist:
-#             try:
-#                 return CASProfile.objects.get(net_id__iexact=data).user
-#             except CASProfile.DoesNotExist as e:
-#                 raise serializers.ValidationError(
-#                     'User with username {} does not exist.'.format(data)
-#                 ) from e
-#
-#     def to_representation(self, value):
-#         if hasattr(value, 'cas_profile'):
-#             return value.cas_profile.net_id
-#         return value.username
 
 
 class TigerBookNotesTargetDirectoryEntriesSerializer(serializers.RelatedField):
@@ -275,7 +240,7 @@ class PermissionsSerializer(WritableNestedModelSerializer):
                     req_lib.get_info_for_tigerbook(username):
                 return data
             raise serializers.ValidationError(
-                'User with username {} does not exist.'.format(username)
+                f'User with username {username} does not exist.'
             )
 
 
@@ -302,9 +267,6 @@ class PhotoUploadSetupSerializer(serializers.Serializer):
 
 
 # Serializers below are view-specific to urls in api Django app
-
-class UndergraduateTigerBookDirectoryRedirect(serializers.ModelSerializer):
-    pass
 
 
 # TODO: This is personal account information for setup, or initial page
@@ -355,9 +317,7 @@ class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelS
         ]
 
     def get_username(self, obj):
-        if hasattr(obj.user, 'cas_profile'):
-            return obj.user.cas_profile.net_id
-        return obj.username
+        return get_display_username(obj.user.username)
 
     def update(self, instance, validated_data):
         instance.has_setup_profile.has_setup_page_one = True
@@ -366,13 +326,19 @@ class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelS
 
 
 class UndergraduateTigerBookDirectorySetupSecondPageSerializer(serializers.ModelSerializer):
+    username = serializers.SerializerMethodField(read_only=True)
     profile_pic = serializers.FileField(allow_null=True, required=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
         fields = [
+            'username',
             'profile_pic'
         ]
+
+    def get_username(self, obj):
+        return get_display_username(obj.user.username)
+
 
     # TODO: https://stackoverflow.com/questions/29373983/remove-a-file-in-amazon-s3-using-django-storages
     #   to delete old profile pic on
@@ -485,9 +451,8 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
         ]
 
     def get_username(self, obj):
-        if hasattr(obj.user, 'cas_profile'):
-            return obj.user.cas_profile.net_id
-        return obj.username
+        request = self.context.get('request')
+        return get_display_username(request.user.username)
 
     def update(self, instance, validated_data):
         with contextlib.suppress(ValueError):
@@ -742,10 +707,6 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             return obj.residential_college_facebook_entry.residential_college_picture_url.url
         else:
             return None
-
-
-class TigerBookTargetDirectoryEntriesSerializer(serializers.RelatedField):
-    tigerbook_entry = UndergraduateTigerBookDirectoryListSerializer(read_only=True)
 
 
 class TigerBookNotesListSerializer(serializers.ModelSerializer):
