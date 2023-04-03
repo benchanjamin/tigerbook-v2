@@ -24,7 +24,7 @@ urlpatterns = [
          name="undergraduates-all"),
     # TODO: generalize this to work for all directory entries instead of just undergraduates
     #   if there's time
-    path('directory/<str:username>/', UndergraduateTigerBookDirectoryRetrieveView.as_view(),
+    path('directory/user/<str:username>/', UndergraduateTigerBookDirectoryRetrieveView.as_view(),
          name="undergraduate-retrieve"),
     path('notes/', TigerBookNotesListView.as_view(), name='individual-notes-list'),
     path('note/create/<str:username>/', TigerBookNotesCreateView.as_view(),
@@ -34,15 +34,14 @@ urlpatterns = [
     path('note/delete/<str:id>/', TigerBookNotesDeleteView.as_view(),
          name='individual-note-delete'),
     # TODO: add search functionality
-    path('directory/search/', UndergraduateTigerBookDirectorySearchView.as_view(),
-         name="search"),
+    path('directory/search/', UndergraduateTigerBookDirectorySearchView.as_view(), name="search"),
     # TODO: add validation for categories
-    path('category-submission/create', UndergraduateToBeApprovedSubmissionsCreateView.as_view()),
+    path('category-submission/create/', UndergraduateToBeApprovedSubmissionsCreateView.as_view()),
     # TODO: below to be seen by tigerbook admins only
-    path('category-submission/list', UndergraduateToBeApprovedSubmissionsListView.as_view()),
-    path('category-submission/delete/<str:id>', UndergraduateToBeApprovedSubmissionsDeleteView.as_view(),
+    path('category-submission/list/', UndergraduateToBeApprovedSubmissionsListView.as_view()),
+    path('category-submission/delete/<str:id>/', UndergraduateToBeApprovedSubmissionsDeleteView.as_view(),
          name="category-submission-delete"),
-    path('category-submission/approve/<str:id>', UndergraduateToBeApprovedSubmissionsApproveView.as_view(),
+    path('category-submission/approve/<str:id>/', UndergraduateToBeApprovedSubmissionsApproveView.as_view(),
          name="category-submission-approve"),
     path("token/", get_jwt_tokens_from_session, name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),

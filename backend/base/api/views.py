@@ -142,6 +142,18 @@ class UndergraduateTigerBookDirectorySearchView(ListModelMixin,
     queryset = UndergraduateTigerBookDirectory.objects.all().select_related("active_directory_entry")
     serializer_class = UndergraduateTigerBookDirectorySearchSerializer
 
+    def get_queryset(self, **kwargs):
+        qs = super().get_queryset()
+        query = self.request.GET.get('q', None)
+        if query is None:
+            return None
+        lookup = Q(active_directory_entry__puid__icontains=query) | Q(
+            active_directory_entry__net_id__icontains=query) | Q(
+            aliases__icontains=query) | Q(
+            active_directory_entry__email__icontains=query) | Q(
+            active_directory_entry__full_name__icontains=query)
+        return qs.filter(lookup).order_by('active_directory_entry__full_name')
+
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 

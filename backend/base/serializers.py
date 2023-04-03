@@ -650,6 +650,18 @@ class UndergraduateTigerBookDirectorySearchSerializer(serializers.ModelSerialize
             'full_name',
         ]
 
+    def get_username(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.username_prohibited_usernames:
+            return None
+        return get_display_username(obj.user.username)
+
+    def get_full_name(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.username_prohibited_usernames:
+            return None
+        return obj.active_directory_entry.full_name
+
 
 class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField(read_only=True)
@@ -678,7 +690,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
         request = self.context.get('request')
         if request.user.username in obj.permissions.username_prohibited_usernames:
             return None
-        return get_display_username(obj.username)
+        return get_display_username(obj.user.username)
 
     def get_full_name(self, obj):
         request = self.context.get('request')
