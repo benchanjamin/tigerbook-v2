@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -415,6 +417,33 @@ class TigerBookNotes(models.Model):
 
 # TODO: The tables below have fields that need to be approved (those that need approval will be shown in the admin
 #   dashboard)
+class UndergraduateToBeApprovedCategories(models.Model):
+    category = models.TextField(unique=True, null=False, blank=False)
+    date_added = models.DateField(auto_now_add=True)
+
+    def __repr__(self):
+        return self.category
+
+
+class UndergraduateToBeApprovedSubmissions(models.Model):
+    category = models.ForeignKey(UndergraduateToBeApprovedCategories, on_delete=models.CASCADE)
+    submission_username = models.TextField(null=False, blank=False)
+    submission_field_one = models.TextField(null=False, blank=False)
+    submission_field_two = models.TextField(null=True, blank=False)
+    submission_field_three = models.TextField(null=True, blank=False)
+    date_submitted = models.DateField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+    date_approved = models.DateField(null=True, blank=True)
+    extracurricular_image_field = models.FileField(storage=PrivateTigerBookExtracurricularsMediaStorage(),
+                                                   null=True)
+
+    def __repr__(self):
+        return f"{self.submission_field_one}, " \
+               f"{self.submission_field_two}, " \
+               f"{self.submission_field_three} " \
+               f"({self.category}) submitted by {self.submission_username} on {self.date_submitted}"
+
+
 class UndergraduateTigerBookTracks(models.Model):
     track = models.TextField(unique=True, null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
@@ -469,7 +498,7 @@ class UndergraduateTigerBookHousing(models.Model):
     date_added = models.DateField(auto_now_add=True)
 
     def __repr__(self):
-        return self.building + " " + self.room_no
+        return f"{self.building} {self.room_no}"
 
 
 class TigerBookCities(models.Model):
@@ -481,7 +510,7 @@ class TigerBookCities(models.Model):
     date_added = models.DateField(auto_now_add=True)
 
     def __repr__(self):
-        return self.city + ", " + self.admin_name + ", " + self.country
+        return f"{self.city}, {self.admin_name}, {self.country}"
 
 
 class TigerBookResearchTypes(models.Model):
@@ -502,7 +531,6 @@ class TigerBookInterests(models.Model):
 
 class TigerBookExtracurricularSubgroups(models.Model):
     subgroup = models.TextField(unique=True, null=False, blank=False)
-    approved = models.BooleanField(default=False)
     date_added = models.DateField(auto_now_add=True)
 
     def __repr__(self):
@@ -511,13 +539,13 @@ class TigerBookExtracurricularSubgroups(models.Model):
 
 class TigerBookExtracurriculars(models.Model):
     extracurricular = models.TextField(unique=True, null=False, blank=False)
-    subgroup = models.ForeignKey(TigerBookExtracurricularSubgroups, on_delete=models.RESTRICT, null=True, blank=False)
+    subgroup = models.ForeignKey(TigerBookExtracurricularSubgroups, on_delete=models.RESTRICT, null=False, blank=False)
     image_url = models.FileField(storage=PrivateTigerBookExtracurricularsMediaStorage(),
                                  null=True)
     date_added = models.DateField(auto_now_add=True)
 
     def __repr__(self):
-        return self.extracurricular + " (" + self.subgroup + ")"
+        return f"{self.extracurricular} ({self.subgroup})"
 
 
 class TigerBookExtracurricularPositions(models.Model):

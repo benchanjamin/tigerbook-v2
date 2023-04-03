@@ -9,13 +9,16 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import UpdateModelMixin, ListModelMixin, RetrieveModelMixin, CreateModelMixin, \
     DestroyModelMixin
 
-from base.models import UndergraduateTigerBookDirectory, TigerBookNotes, GenericTigerBookDirectory
+from base.models import UndergraduateTigerBookDirectory, TigerBookNotes, GenericTigerBookDirectory, \
+    UndergraduateToBeApprovedSubmissions
 from base.serializers import (
     UndergraduateTigerBookDirectorySetupFirstPageSerializer,
     UndergraduateTigerBookDirectoryProfileFullSerializer,
     UndergraduateTigerBookDirectorySetupSecondPageSerializer, UndergraduateTigerBookDirectoryListSerializer,
     UndergraduateTigerBookDirectoryRetrieveSerializer, TigerBookNotesCreateSerializer,
-    TigerBookNotesListSerializer, TigerBookNotesUpdateSerializer,
+    TigerBookNotesListSerializer, TigerBookNotesUpdateSerializer, UndergraduateToBeApprovedSubmissionsCreateSerializer,
+    UndergraduateToBeApprovedSubmissionsListSerializer, UndergraduateToBeApprovedSubmissionsDeleteSerializer,
+    UndergraduateToBeApprovedSubmissionsApproveSerializer,
 )
 
 from django.conf import settings
@@ -336,3 +339,42 @@ class TigerBookNotesDeleteView(DestroyModelMixin,
 
     def post(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+
+class UndergraduateToBeApprovedSubmissionsCreateView(CreateModelMixin,
+                                                     GenericAPIView):
+    queryset = UndergraduateToBeApprovedSubmissions.objects.all()
+    serializer_class = UndergraduateToBeApprovedSubmissionsCreateSerializer
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+class UndergraduateToBeApprovedSubmissionsListView(ListModelMixin,
+                                                   GenericAPIView):
+    queryset = UndergraduateToBeApprovedSubmissions.objects.all()
+    serializer_class = UndergraduateToBeApprovedSubmissionsListSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+class UndergraduateToBeApprovedSubmissionsDeleteView(DestroyModelMixin,
+                                                     GenericAPIView):
+    queryset = UndergraduateToBeApprovedSubmissions.objects.all()
+    serializer_class = UndergraduateToBeApprovedSubmissionsDeleteSerializer
+    lookup_field = 'id'
+
+    def post(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+
+class UndergraduateToBeApprovedSubmissionsApproveView(RetrieveModelMixin,
+                                                      UpdateModelMixin,
+                                                      GenericAPIView):
+    queryset = UndergraduateToBeApprovedSubmissions.objects.all()
+    serializer_class = UndergraduateToBeApprovedSubmissionsApproveSerializer
+    lookup_field = 'id'
+
+    def post(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)

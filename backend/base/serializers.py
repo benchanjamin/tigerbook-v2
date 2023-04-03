@@ -1,4 +1,5 @@
 import contextlib
+import datetime
 import re
 
 from django.db.models import Q
@@ -17,11 +18,10 @@ from base.models import (
     UndergraduateTigerBookDirectoryPermissions,
     UndergraduateTigerBookResidentialColleges, TigerBookInterests, TigerBookExtracurriculars,
     TigerBookExtracurricularPositions, TigerBookResearchTypes,
-    UndergraduateTigerBookHousing, TigerBookNotes, GenericTigerBookDirectory, CASProfile
+    UndergraduateTigerBookHousing, TigerBookNotes, GenericTigerBookDirectory, CASProfile,
+    UndergraduateToBeApprovedSubmissions, UndergraduateToBeApprovedCategories, TigerBookExtracurricularSubgroups
 )
 from base.utils import get_display_username
-from uniauth.utils import get_account_username_split
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from drf_writable_nested.serializers import WritableNestedModelSerializer
 from django.contrib.auth.models import User
 
@@ -366,9 +366,7 @@ class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelS
 
 
 class UndergraduateTigerBookDirectorySetupSecondPageSerializer(serializers.ModelSerializer):
-    # TODO: https://stackoverflow.com/questions/29373983/remove-a-file-in-amazon-s3-using-django-storages
-    #   to delete old profile pic on
-    profile_pic = serializers.FileField(allow_null=True)
+    profile_pic = serializers.FileField(allow_null=True, required=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -376,8 +374,11 @@ class UndergraduateTigerBookDirectorySetupSecondPageSerializer(serializers.Model
             'profile_pic'
         ]
 
+    # TODO: https://stackoverflow.com/questions/29373983/remove-a-file-in-amazon-s3-using-django-storages
+    #   to delete old profile pic on
     def update(self, instance, validated_data):
         with contextlib.suppress(ValueError):
+            # if profile pic exists before (going through setup page two twice)
             if instance.profile_pic.url:
                 instance.profile_pic.delete(save=False)
         instance.has_setup_profile.has_setup_page_two = True
@@ -490,7 +491,8 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
 
     def update(self, instance, validated_data):
         with contextlib.suppress(ValueError):
-            # TODO: only change profile pic if profile pic is in validated data
+            # TODO: only change profile pic if profile pic is in validated data (i.e,
+            #  if user is not including profile pic in post request, then don't delete the old one)
             if instance.profile_pic.url and 'profile_pic' in validated_data:
                 instance.profile_pic.delete(save=False)
         # delete existing extracurriculars
@@ -742,18 +744,6 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             return None
 
 
-# class TigerBookNotesSerializer(serializers.ModelSerializer):
-#     note_title = serializers.CharField()
-#     note_description = serializers.CharField(allow_blank=True, allow_null=True)
-#
-#     class Meta:
-#         model = TigerBookNotes
-#         fields = [
-#             'note_title',
-#             'note_description'
-#         ]
-
-
 class TigerBookTargetDirectoryEntriesSerializer(serializers.RelatedField):
     tigerbook_entry = UndergraduateTigerBookDirectoryListSerializer(read_only=True)
 
@@ -773,9 +763,9 @@ class TigerBookNotesListSerializer(serializers.ModelSerializer):
             'update_url',
         ]
 
-
     def get_update_url(self, obj):
         return reverse('individual-note-update', kwargs={'id': obj.id})
+
     def get_target_directory_entries(self, obj):
         request = self.context.get('request')
         tigerbook_directories = []
@@ -833,7 +823,183 @@ class TigerBookNotesUpdateSerializer(serializers.ModelSerializer):
                     not CASProfile.objects.filter(net_id__iexact=username).exists() and \
                     not req_lib.get_info_for_tigerbook(username):
                 raise serializers.ValidationError(
-                    'User with username {} does not exist.'.format(username)
+                    f'User with username {username} does not exist.'
                 )
         return usernames
 
+
+class UndergraduateToBeApprovedSubmissionsCreateSerializer(serializers.ModelSerializer):
+    category = serializers.SlugRelatedField(slug_field='category',
+                                            queryset=UndergraduateToBeApprovedCategories.objects.all(),
+                                            allow_null=False)
+    submission_field_one = serializers.CharField(allow_blank=False,
+                                                 allow_null=False,
+                                                 required=True)
+    submission_field_two = serializers.CharField(allow_blank=False,
+                                                 allow_null=True,
+                                                 required=False)
+    submission_field_three = serializers.CharField(allow_blank=False,
+                                                   allow_null=True,
+                                                   required=False)
+    extracurricular_image_field \
+        = serializers.FileField(allow_null=True, required=False)
+
+    class Meta:
+        model = UndergraduateToBeApprovedSubmissions
+        fields = [
+            'category',
+            'submission_field_one',
+            'submission_field_two',
+            'submission_field_three',
+            'extracurricular_image_field'
+        ]
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        instance = super().create(validated_data)
+        instance.submission_username = get_display_username(request.user.username)
+        category = instance.category.category
+        match category:
+            case 'track':
+                instance.submission_field_one = validated_data.pop('submission_field_one').upper().strip()
+            case 'concentration':
+                instance.submission_field_one = validated_data.pop('submission_field_one').strip()
+            case 'residential_college':
+                instance.submission_field_one = validated_data.pop('submission_field_one').capitalize().strip()
+            case 'certificate':
+                instance.submission_field_one = validated_data.pop('submission_field_one').strip()
+            case 'research_type':
+                instance.submission_field_one = validated_data.pop('submission_field_one').strip()
+            case 'interest':
+                instance.submission_field_one = validated_data.pop('submission_field_one').strip()
+            case 'extracurricular_subgroup':
+                instance.submission_field_one = validated_data.pop('submission_field_one').strip()
+            case 'extracurricular_position':
+                instance.submission_field_one = validated_data.pop('submission_field_one').strip()
+            case 'housing':
+                instance.submission_field_one = validated_data.pop('submission_field_one').capitalize().strip()
+                instance.submission_field_two = validated_data.pop('submission_field_two').capitalize().strip()
+            case 'city':
+                instance.submission_field_one = validated_data.pop('submission_field_one').strip()
+                instance.submission_field_two = validated_data.pop('submission_field_two').strip()
+                instance.submission_field_three = validated_data.pop('submission_field_three').strip()
+            case 'extracurricular':
+                instance.submission_field_one = validated_data.pop('submission_field_one').strip()
+                instance.submission_field_two = validated_data.pop('submission_field_two').strip()
+        instance.save()
+        return instance
+
+
+class UndergraduateToBeApprovedSubmissionsListSerializer(serializers.ModelSerializer):
+    submission_username = serializers.CharField(read_only=True)
+    category = serializers.SlugRelatedField(slug_field='category', read_only=True)
+    submission_field_one = serializers.CharField(read_only=True)
+    submission_field_two = serializers.CharField(read_only=True)
+    submission_field_three = serializers.CharField(read_only=True)
+    date_submitted = serializers.DateField(read_only=True)
+    approved = serializers.BooleanField(read_only=True)
+    date_approved = serializers.DateField(read_only=True)
+    approve_url = serializers.SerializerMethodField(read_only=True)
+    delete_url = serializers.SerializerMethodField(read_only=True)
+    extracurricular_image_field \
+        = serializers.FileField(read_only=True)
+
+    class Meta:
+        model = UndergraduateToBeApprovedSubmissions
+        fields = [
+            'submission_username',
+            'category',
+            'submission_field_one',
+            'submission_field_two',
+            'submission_field_three',
+            'date_submitted',
+            'approved',
+            'date_approved',
+            'approve_url',
+            'delete_url',
+            'extracurricular_image_field'
+        ]
+
+    def get_approve_url(self, obj):
+        return reverse('category-submission-approve', kwargs={'id': obj.id})
+
+    def get_delete_url(self, obj):
+        return reverse('category-submission-delete', kwargs={'id': obj.id})
+
+
+class UndergraduateToBeApprovedSubmissionsDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UndergraduateToBeApprovedSubmissions
+        fields = []
+
+
+class UndergraduateToBeApprovedSubmissionsApproveSerializer(serializers.ModelSerializer):
+    submission_username = serializers.CharField(read_only=True)
+    category = serializers.SlugRelatedField(slug_field='category', read_only=True)
+    submission_field_one = serializers.CharField(read_only=True)
+    submission_field_two = serializers.CharField(read_only=True)
+    submission_field_three = serializers.CharField(read_only=True)
+    date_submitted = serializers.DateField(read_only=True)
+    approved = serializers.BooleanField(read_only=True)
+    date_approved = serializers.DateField(read_only=True)
+    extracurricular_image_field = serializers.FileField(read_only=True)
+
+    class Meta:
+        model = UndergraduateToBeApprovedSubmissions
+        fields = [
+            'submission_username',
+            'category',
+            'submission_field_one',
+            'submission_field_two',
+            'submission_field_three',
+            'date_submitted',
+            'approved',
+            'date_approved',
+            'extracurricular_image_field'
+        ]
+
+    def update(self, instance, validated_data):
+        category = instance.category.category
+        match category:
+            case 'track':
+                UndergraduateTigerBookTracks.objects.create(track=instance.submission_field_one)
+            case 'concentration':
+                UndergraduateTigerBookConcentrations.objects.create(concentration=instance.submission_field_one)
+            case 'residential_college':
+                UndergraduateTigerBookResidentialColleges.objects.create(
+                    residential_college=instance.submission_field_one)
+            case 'certificate':
+                UndergraduateTigerBookCertificates.objects.create(certificate=instance.submission_field_one)
+            case 'research_type':
+                TigerBookResearchTypes.objects.create(research_type=instance.submission_field_one)
+            case 'interest':
+                TigerBookInterests.objects.create(interest=instance.submission_field_one)
+            case 'extracurricular_subgroup':
+                TigerBookExtracurricularSubgroups.objects.create(subgroup=instance.submission_field_one)
+            case 'extracurricular_position':
+                TigerBookExtracurricularPositions.objects.create(position=instance.submission_field_one)
+            case 'housing':
+                UndergraduateTigerBookHousing.objects.create(building=instance.submission_field_one,
+                                                             room_no=instance.submission_field_two)
+            case 'city':
+                city = instance.submission_field_one
+                admin_name = instance.submission_field_two
+                country = instance.submission_field_three
+                TigerBookCities.objects.create(city=city,
+                                               admin_name=admin_name,
+                                               country=country)
+            case 'extracurricular':
+                extracurricular = instance.submission_field_one
+                subgroup = instance.submission_field_two
+                subgroup_query = TigerBookExtracurricularSubgroups.objects.filter(subgroup=subgroup) \
+                    .first()
+                image_url = instance.extracurricular_image_field
+                if not subgroup_query:
+                    subgroup_object = TigerBookExtracurricularSubgroups.objects.create(subgroup=subgroup)
+                TigerBookExtracurriculars.objects.create(extracurricular=extracurricular,
+                                                         subgroup=subgroup_object,
+                                                         image_url=image_url)
+
+        instance.date_approved = datetime.date.today()
+        instance.save()
+        return instance

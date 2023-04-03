@@ -4,7 +4,9 @@ from .views import (UndergraduateProfileSetupFirstPage, get_routes, Undergraduat
                     UndergraduateProfileSetupSecondPage, UndergraduateTigerBookDirectoryList,
                     UndergraduateTigerBookDirectoryRetrieve, TigerBookRedirectURLView,
                     UndergraduateFullProfilePreview, TigerBookNotesCreateView, TigerBookNotesListView,
-                    TigerBookNotesUpdateView, TigerBookNotesDeleteView)
+                    TigerBookNotesUpdateView, TigerBookNotesDeleteView, UndergraduateToBeApprovedSubmissionsCreateView,
+                    UndergraduateToBeApprovedSubmissionsListView, UndergraduateToBeApprovedSubmissionsDeleteView,
+                    UndergraduateToBeApprovedSubmissionsApproveView)
 from uniauth.views import get_jwt_tokens_from_session
 
 urlpatterns = [
@@ -35,7 +37,13 @@ urlpatterns = [
     # path('directory/search/', UndergraduateTigerBookDirectoryList.as_view(),
     #      name="search"),
     # TODO: add validation for categories
-
+    path('category-submission/create', UndergraduateToBeApprovedSubmissionsCreateView.as_view()),
+    # TODO: below to be seen by tigerbook admins only
+    path('category-submission/list', UndergraduateToBeApprovedSubmissionsListView.as_view()),
+    path('category-submission/delete/<str:id>', UndergraduateToBeApprovedSubmissionsDeleteView.as_view(),
+         name="category-submission-delete"),
+    path('category-submission/approve/<str:id>', UndergraduateToBeApprovedSubmissionsApproveView.as_view(),
+         name="category-submission-approve"),
     path("token/", get_jwt_tokens_from_session, name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
