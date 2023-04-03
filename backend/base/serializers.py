@@ -1,9 +1,12 @@
 import contextlib
 import re
 
+from django.db.models import Q
 from django.urls import reverse
 from rest_framework import serializers
+import itertools
 
+from active_directory.req_lib import ReqLib
 from base.models import (
     UndergraduateTigerBookDirectory,
     UndergraduateTigerBookTracks,
@@ -14,11 +17,13 @@ from base.models import (
     UndergraduateTigerBookDirectoryPermissions,
     UndergraduateTigerBookResidentialColleges, TigerBookInterests, TigerBookExtracurriculars,
     TigerBookExtracurricularPositions, TigerBookResearchTypes,
-    UndergraduateTigerBookHousing, TigerBookIndividualNotes, GenericTigerBookDirectory
+    UndergraduateTigerBookHousing, TigerBookNotes, GenericTigerBookDirectory, CASProfile
 )
+from base.utils import get_display_username
 from uniauth.utils import get_account_username_split
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from drf_writable_nested.serializers import WritableNestedModelSerializer
+from django.contrib.auth.models import User
 
 
 class UndergraduateTigerBookTracksSerializer(serializers.ModelSerializer):
@@ -68,12 +73,12 @@ class TigerBookCitiesSerializer(serializers.RelatedField):
         try:
             if len(data) == 2:
                 city, country = data
-                return TigerBookCities.objects.get(city=city, country=country)
+                return self.get_queryset().get(city=city, country=country)
             elif len(data) == 3:
                 city, admin_name, country = data
-                return TigerBookCities.objects.get(city=city,
-                                                   admin_name=admin_name,
-                                                   country=country)
+                return self.get_queryset().get(city=city,
+                                               admin_name=admin_name,
+                                               country=country)
             else:
                 raise serializers.ValidationError('Entered # of commas is not 2 or 3, each followed by a space,'
                                                   ' for a city location')
@@ -86,6 +91,55 @@ class TigerBookCitiesSerializer(serializers.RelatedField):
         if hasattr(value, "admin_name") and value.admin_name != "":
             return f"{value.city}, {value.admin_name}, {value.country}"
         return f"{value.city}, {value.country}"
+
+
+# class UsernameTigerBookSerializer(serializers.RelatedField):
+#     def get_queryset(self):
+#         return User.objects.all()
+#
+#     def to_internal_value(self, data):
+#         # data is the username, e.g., "bychan"
+#         # enforce that the data type is a string
+#         if not isinstance(data, str):
+#             raise serializers.ValidationError(
+#                 'Username must be a string.'
+#             )
+#         try:
+#             return User.objects.get(username__iexact=data)
+#         except User.DoesNotExist:
+#             try:
+#                 return CASProfile.objects.get(net_id__iexact=data).user
+#             except CASProfile.DoesNotExist as e:
+#                 raise serializers.ValidationError(
+#                     'User with username {} does not exist.'.format(data)
+#                 ) from e
+#
+#     def to_representation(self, value):
+#         if hasattr(value, 'cas_profile'):
+#             return value.cas_profile.net_id
+#         return value.username
+
+
+class TigerBookNotesTargetDirectoryEntriesSerializer(serializers.RelatedField):
+    def get_queryset(self):
+        return GenericTigerBookDirectory.objects.all()
+
+    def to_internal_value(self, data):
+        # data is the username str, e.g. "bychan"
+        # enforce that the data type is a string
+        if not isinstance(data, str):
+            raise serializers.ValidationError(
+                'Username must be a string.'
+            )
+        try:
+            return GenericTigerBookDirectory.objects.get(username=data)
+        except GenericTigerBookDirectory.DoesNotExist as exception:
+            raise serializers.ValidationError(
+                'GenericTigerBookDirectory object does not exist.'
+            ) from exception
+
+    def to_representation(self, value):
+        return {"username": value.username, "profile_pic_url": value.profile_pic_url}
 
 
 class TigerBookExtracurricularSerializer(serializers.Serializer):
@@ -123,15 +177,6 @@ class TigerBookResearchSerializer(serializers.Serializer):
         return research_title
 
 
-class UsernameSerializer(serializers.Serializer):
-    username = serializers.SerializerMethodField(read_only=True)  # i.e, netId
-
-    def get_username(self, obj):
-        if obj.username.startswith("cas"):
-            return get_account_username_split(obj.username)[2]
-        return obj.username
-
-
 class PermissionsSerializer(WritableNestedModelSerializer):
     # Default should be true
     is_visible_to_undergrads = serializers.BooleanField(required=False)
@@ -145,6 +190,10 @@ class PermissionsSerializer(WritableNestedModelSerializer):
     # is_visible_to_alumni = serializers.BooleanField()
     # Default should be false
     is_visible_to_staff = serializers.BooleanField(required=False)
+    username_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
+                                                          child=serializers.CharField(allow_blank=False,
+                                                                                      allow_null=False),
+                                                          required=False)
     profile_pic_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                              child=serializers.CharField(allow_blank=False,
                                                                                          allow_null=False),
@@ -202,6 +251,32 @@ class PermissionsSerializer(WritableNestedModelSerializer):
     class Meta:
         model = UndergraduateTigerBookDirectoryPermissions
         exclude = ['id']
+
+    def validate(self, data):
+        usernames = itertools.chain(data['username_prohibited_usernames'], data['profile_pic_prohibited_usernames'],
+                                    data['track_prohibited_usernames'], data['concentration_prohibited_usernames'],
+                                    data['class_year_prohibited_usernames'],
+                                    data['residential_college_prohibited_usernames'],
+                                    data['housing_prohibited_usernames'], data['aliases_prohibited_usernames'],
+                                    data['pronouns_prohibited_usernames'], data['certificates_prohibited_usernames'],
+                                    data['hometown_prohibited_usernames'],
+                                    data['current_city_prohibited_usernames'],
+                                    data['interests_prohibited_usernames'],
+                                    data['extracurriculars_prohibited_usernames'],
+                                    data['research_prohibited_usernames'])
+        for username in usernames:
+            if not isinstance(username, str):
+                raise serializers.ValidationError(
+                    'Username must be a string.'
+                )
+            req_lib = ReqLib()
+            if User.objects.filter(username__iexact=username).exists() or \
+                    CASProfile.objects.filter(net_id__iexact=username).exists() or \
+                    req_lib.get_info_for_tigerbook(username):
+                return data
+            raise serializers.ValidationError(
+                'User with username {} does not exist.'.format(username)
+            )
 
 
 # Serializers below are for the initial user setup page
@@ -492,6 +567,9 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
 
     def get_username(self, obj):
         request = self.context.get('request')
+        if hasattr(request.user,
+                   'cas_profile') and request.user.cas_profile.net_id in obj.permissions.username_prohibited_usernames:
+            return None
         if request.user.username in obj.permissions.username_prohibited_usernames:
             return None
         if hasattr(obj.user, 'cas_profile'):
@@ -500,12 +578,24 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
 
     def get_track(self, obj):
         request = self.context.get('request')
+        if hasattr(request.user,
+                   'cas_profile'):
+            if request.user.cas_profile.net_id in obj.permissions.username_prohibited_usernames:
+                return None
+            if request.user.cas_profile.net_id in obj.permissions.track_prohibited_usernames:
+                return None
         if request.user.username in obj.permissions.track_prohibited_usernames:
             return None
         return obj.track.track if hasattr(obj.track, 'track') else None
 
     def get_concentration(self, obj):
         request = self.context.get('request')
+        if hasattr(request.user,
+                   'cas_profile'):
+            if request.user.cas_profile.net_id in obj.permissions.username_prohibited_usernames:
+                return None
+            if request.user.cas_profile.net_id in obj.permissions.concentration_prohibited_usernames:
+                return None
         if request.user.username in obj.permissions.concentration_prohibited_usernames:
             return None
         if hasattr(obj.concentration, 'concentration'):
@@ -514,6 +604,12 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
 
     def get_class_year(self, obj):
         request = self.context.get('request')
+        if hasattr(request.user,
+                   'cas_profile'):
+            if request.user.cas_profile.net_id in obj.permissions.username_prohibited_usernames:
+                return None
+            if request.user.cas_profile.net_id in obj.permissions.class_year_prohibited_usernames:
+                return None
         if request.user.username in obj.permissions.class_year_prohibited_usernames:
             return None
         if hasattr(obj.class_year, 'class_year'):
@@ -522,6 +618,13 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
 
     def get_residential_college(self, obj):
         request = self.context.get('request')
+        if hasattr(request.user,
+                   'cas_profile'):
+            if request.user.cas_profile.net_id in obj.permissions.username_prohibited_usernames:
+                return None
+            if request.user.cas_profile.net_id in obj.permissions. \
+                    residential_college_prohibited_usernames:
+                return None
         if request.user.username in obj.permissions.residential_college_prohibited_usernames:
             return None
         if hasattr(obj.residential_college, 'residential_college'):
@@ -530,12 +633,26 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
 
     def get_pronouns(self, obj):
         request = self.context.get('request')
+        if hasattr(request.user,
+                   'cas_profile'):
+            if request.user.cas_profile.net_id in obj.permissions.username_prohibited_usernames:
+                return None
+            if request.user.cas_profile.net_id in obj.permissions. \
+                    pronouns_prohibited_usernames:
+                return None
         if request.user.username in obj.permissions.pronouns_prohibited_usernames:
             return None
         return obj.pronouns.pronouns if hasattr(obj.pronouns, 'pronouns') else None
 
     def get_profile_pic_url(self, obj):
         request = self.context.get('request')
+        if hasattr(request.user,
+                   'cas_profile'):
+            if request.user.cas_profile.net_id in obj.permissions.username_prohibited_usernames:
+                return None
+            if request.user.cas_profile.net_id in obj.permissions. \
+                    profile_pic_prohibited_usernames:
+                return None
         if request.user.username in obj.permissions.profile_pic_prohibited_usernames:
             return None
         if obj.profile_pic:
@@ -625,27 +742,98 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             return None
 
 
-class TigerBookIndividualNotesSerializer(serializers.ModelSerializer):
-    note = serializers.CharField(max_length=5000)
+# class TigerBookNotesSerializer(serializers.ModelSerializer):
+#     note_title = serializers.CharField()
+#     note_description = serializers.CharField(allow_blank=True, allow_null=True)
+#
+#     class Meta:
+#         model = TigerBookNotes
+#         fields = [
+#             'note_title',
+#             'note_description'
+#         ]
+
+
+class TigerBookTargetDirectoryEntriesSerializer(serializers.RelatedField):
+    tigerbook_entry = UndergraduateTigerBookDirectoryListSerializer(read_only=True)
+
+
+class TigerBookNotesListSerializer(serializers.ModelSerializer):
+    note_title = serializers.CharField(read_only=True)
+    note_description = serializers.CharField(allow_blank=True, allow_null=True, read_only=True)
+    target_directory_entries = serializers.SerializerMethodField(read_only=True)
+    update_url = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
-        model = TigerBookIndividualNotes
+        model = TigerBookNotes
         fields = [
-            'note',
+            'note_title',
+            'note_description',
+            'target_directory_entries',
+            'update_url',
         ]
 
 
-class TigerBookIndividualNotesListSerializer(TigerBookIndividualNotesSerializer):
-    target_directory_entry = UndergraduateTigerBookDirectoryListSerializer(
-        source='target_directory_entry.tigerbook_entry', read_only=True)
+    def get_update_url(self, obj):
+        return reverse('individual-note-update', kwargs={'id': obj.id})
+    def get_target_directory_entries(self, obj):
+        request = self.context.get('request')
+        tigerbook_directories = []
+        for display_username in obj.target_directory_entries:
+            lookup = Q(user__username__iexact=display_username) | Q(user__cas_profile__net_id__iexact=display_username)
+            tigerbook_directories.append(UndergraduateTigerBookDirectory.objects.filter(lookup).first())
+        return UndergraduateTigerBookDirectoryListSerializer(tigerbook_directories, many=True,
+                                                             context={'request': request}).data
+
+
+class TigerBookNotesCreateSerializer(serializers.ModelSerializer):
+    note_title = serializers.CharField()
+    note_description = serializers.CharField(allow_blank=True, allow_null=True)
 
     class Meta:
-        model = TigerBookIndividualNotes
+        model = TigerBookNotes
         fields = [
-            'note',
-            'target_directory_entry',
+            'note_title',
+            'note_description'
         ]
 
 
-class TigerBookIndividualNotesPostSerializer(TigerBookIndividualNotesSerializer):
-    pass
+class TigerBookNotesUpdateSerializer(serializers.ModelSerializer):
+    note_title = serializers.CharField()
+    note_description = serializers.CharField(allow_blank=True, allow_null=True)
+    # target_directory_entries = serializers.SlugRelatedField(slug_field='tigerbook_directory_username', many=True,
+    #                                                         queryset=GenericTigerBookDirectory.objects.all(),
+    #                                                         allow_null=False,
+    #                                                         required=False)
+    target_directory_entries = serializers.ListField(allow_empty=True, allow_null=False,
+                                                     child=serializers.CharField(allow_blank=False,
+                                                                                 allow_null=False), required=False)
+    shared_usernames = serializers.ListField(allow_empty=True, allow_null=False,
+                                             child=serializers.CharField(allow_blank=False,
+                                                                         allow_null=False), required=False)
+
+    class Meta:
+        model = TigerBookNotes
+        fields = [
+            'note_title',
+            'note_description',
+            'target_directory_entries',
+            'shared_usernames'
+        ]
+
+    def validate_shared_usernames(self, usernames):
+        # if usernames isn't a list of strings, raise a validation error
+        if not isinstance(usernames, list):
+            raise serializers.ValidationError('shared_usernames must be a list of strings')
+        for username in usernames:
+            if not isinstance(username, str):
+                raise serializers.ValidationError('shared_usernames must be a list of strings')
+            req_lib = ReqLib()
+            if not User.objects.filter(username__iexact=username).exists() and \
+                    not CASProfile.objects.filter(net_id__iexact=username).exists() and \
+                    not req_lib.get_info_for_tigerbook(username):
+                raise serializers.ValidationError(
+                    'User with username {} does not exist.'.format(username)
+                )
+        return usernames
+

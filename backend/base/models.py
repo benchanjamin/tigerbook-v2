@@ -373,42 +373,48 @@ class UndergraduateTigerBookDirectoryPermissions(models.Model):
 
 class GenericTigerBookDirectory(models.Model):
     tigerbook_directory_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    tigerbook_directory_username = models.TextField(null=False, blank=False)
     tigerbook_directory_entry_object_id = models.CharField(default=uuid.uuid4, max_length=36)
     tigerbook_entry = GenericForeignKey('tigerbook_directory_type', 'tigerbook_directory_entry_object_id')
 
     class Meta:
         indexes = [
-            models.Index(fields=["tigerbook_directory_type", "tigerbook_directory_entry_object_id"]),
+            models.Index(fields=["tigerbook_directory_type", "tigerbook_directory_username"]),
         ]
 
 
-class TigerBookIndividualNotes(models.Model):
+class TigerBookNotes(models.Model):
     # TODO: Current behavior -> when netIDs are deleted, directory entries are deleted with "CASCADE"
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     # TODO: individual note-taking, basic user is tied to User table
-    individual_notes_taking_user = models.OneToOneField(User, on_delete=models.RESTRICT, null=False,
-                                                        related_name="individual_notes_creator")
-    # TODO: must map individual_notes_taking_user to existing, target tigerbook listed user
-    target_directory_entry = models.ForeignKey(GenericTigerBookDirectory, on_delete=models.RESTRICT, null=False,
-                                               related_name='target_directory_entry_notes')
-    note = models.TextField()
+    notes_taking_user = models.ForeignKey(User, on_delete=models.RESTRICT, null=False,
+                                          related_name="notes")
+    # TODO: must map to existing, target tigerbook listed users
+    target_directory_entries = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
+                                          blank=True)
+    # target_directory_entry = models.ForeignKey(GenericTigerBookDirectory, on_delete=models.RESTRICT, null=False,
+    #                                            related_name='target_directory_entry_notes')
+    shared_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
+                                  blank=True)
+    note_title = models.TextField()
+    note_description = models.TextField()
 
 
-class TigerBookGroupNotes(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    # TODO: group notes taking user is tied to User table
-    group_notes_taking_user = models.OneToOneField(User, on_delete=models.RESTRICT, null=False,
-                                                   related_name="group_notes_creator")
-    target_directory_entries = models.ManyToManyField(GenericTigerBookDirectory,
-                                                      related_name='target_directory_entries_notes')
-    # a user can be associated with many group notes entries, and a group notes entry can be
-    # associated with many users
-    shared_with_users = models.ManyToManyField(User, related_name='group_notes')
-    note = models.TextField()
+# class TigerBookGroupNotes(models.Model):
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+#     # TODO: group notes taking user is tied to User table
+#     group_notes_taking_user = models.OneToOneField(User, on_delete=models.RESTRICT, null=False,
+#                                                    related_name="group_notes_creator")
+#     target_directory_entries = models.ManyToManyField(GenericTigerBookDirectory,
+#                                                       related_name='target_directory_entries_notes')
+#     # a user can be associated with many group notes entries, and a group notes entry can be
+#     # associated with many users
+#     shared_with_users = models.ManyToManyField(User, related_name='group_notes')
+#     note = models.TextField()
 
 
-# The tables below have fields that need to be approved (those that need approval will be shown in the admin
-# dashboard)
+# TODO: The tables below have fields that need to be approved (those that need approval will be shown in the admin
+#   dashboard)
 class UndergraduateTigerBookTracks(models.Model):
     track = models.TextField(unique=True, null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
@@ -421,31 +427,49 @@ class UndergraduateTigerBookConcentrations(models.Model):
     concentration = models.TextField(unique=True, null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
 
+    def __repr__(self):
+        return self.concentration
+
 
 class UndergraduateTigerBookClassYears(models.Model):
     class_year = models.IntegerField(unique=True, null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
+
+    def __repr__(self):
+        return self.class_year
 
 
 class UndergraduateTigerBookResidentialColleges(models.Model):
     residential_college = models.TextField(unique=True, null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
 
+    def __repr__(self):
+        return self.residential_college
+
 
 class TigerBookPronouns(models.Model):
     pronouns = models.TextField(unique=True, null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
+
+    def __repr__(self):
+        return self.pronouns
 
 
 class UndergraduateTigerBookCertificates(models.Model):
     certificate = models.TextField(unique=True, null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
 
+    def __repr__(self):
+        return self.certificate
+
 
 class UndergraduateTigerBookHousing(models.Model):
     building = models.TextField(null=False, blank=False)
     room_no = models.TextField(null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
+
+    def __repr__(self):
+        return self.building + " " + self.room_no
 
 
 class TigerBookCities(models.Model):
@@ -456,21 +480,33 @@ class TigerBookCities(models.Model):
     longitude = models.FloatField(default=0)
     date_added = models.DateField(auto_now_add=True)
 
+    def __repr__(self):
+        return self.city + ", " + self.admin_name + ", " + self.country
+
 
 class TigerBookResearchTypes(models.Model):
     research_type = models.TextField(null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
+
+    def __repr__(self):
+        return self.research_type
 
 
 class TigerBookInterests(models.Model):
     interest = models.TextField(unique=True, null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
 
+    def __repr__(self):
+        return self.interest
+
 
 class TigerBookExtracurricularSubgroups(models.Model):
     subgroup = models.TextField(unique=True, null=False, blank=False)
     approved = models.BooleanField(default=False)
     date_added = models.DateField(auto_now_add=True)
+
+    def __repr__(self):
+        return self.subgroup
 
 
 class TigerBookExtracurriculars(models.Model):
@@ -480,10 +516,16 @@ class TigerBookExtracurriculars(models.Model):
                                  null=True)
     date_added = models.DateField(auto_now_add=True)
 
+    def __repr__(self):
+        return self.extracurricular + " (" + self.subgroup + ")"
+
 
 class TigerBookExtracurricularPositions(models.Model):
     position = models.TextField(unique=True, null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
+
+    def __repr__(self):
+        return self.position
 
 # class GraduateTigerBookDepartment(models.Model):
 #     department = models.TextField(unique=True, null=False, blank=False)

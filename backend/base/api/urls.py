@@ -3,7 +3,8 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from .views import (UndergraduateProfileSetupFirstPage, get_routes, UndergraduateFullProfileEdit,
                     UndergraduateProfileSetupSecondPage, UndergraduateTigerBookDirectoryList,
                     UndergraduateTigerBookDirectoryRetrieve, TigerBookRedirectURLView,
-                    UndergraduateFullProfilePreview, TigerBookIndividualNotesPostView, TigerBookIndividualNotesListView)
+                    UndergraduateFullProfilePreview, TigerBookNotesCreateView, TigerBookNotesListView,
+                    TigerBookNotesUpdateView, TigerBookNotesDeleteView)
 from uniauth.views import get_jwt_tokens_from_session
 
 urlpatterns = [
@@ -19,17 +20,22 @@ urlpatterns = [
     #  if there's time
     path('directory/all/', UndergraduateTigerBookDirectoryList.as_view(),
          name="undergraduates-all"),
-    # TODO: add search functionality
-    path('directory/search/', UndergraduateTigerBookDirectoryList.as_view(),
-         name="search"),
     # TODO: generalize this to work for all directory entries instead of just undergraduates
     #   if there's time
     path('directory/<str:username>/', UndergraduateTigerBookDirectoryRetrieve.as_view(),
          name="undergraduate-retrieve"),
-    path('individual-notes/', TigerBookIndividualNotesListView.as_view(), name='individual-notes-list'),
-    path('individual-note/<str:tigerbook_id>/', TigerBookIndividualNotesPostView.as_view(),
-         name='individual-note-retrieve'),
-    # path('group-note/<str:username>/', name='group-note'),
+    path('notes/', TigerBookNotesListView.as_view(), name='individual-notes-list'),
+    path('note/create/<str:username>/', TigerBookNotesCreateView.as_view(),
+         name='individual-note-create'),
+    path('note/update/<str:id>/', TigerBookNotesUpdateView.as_view(),
+         name='individual-note-update'),
+    path('note/delete/<str:id>/', TigerBookNotesDeleteView.as_view(),
+         name='individual-note-delete'),
+    # TODO: add search functionality
+    # path('directory/search/', UndergraduateTigerBookDirectoryList.as_view(),
+    #      name="search"),
+    # TODO: add validation for categories
+
     path("token/", get_jwt_tokens_from_session, name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]

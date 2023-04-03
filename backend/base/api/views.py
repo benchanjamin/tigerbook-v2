@@ -1,21 +1,26 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+from rest_framework import status, serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
-from rest_framework.mixins import UpdateModelMixin, ListModelMixin, RetrieveModelMixin, CreateModelMixin
+from rest_framework.mixins import UpdateModelMixin, ListModelMixin, RetrieveModelMixin, CreateModelMixin, \
+    DestroyModelMixin
 
-from base.models import UndergraduateTigerBookDirectory, TigerBookIndividualNotes, GenericTigerBookDirectory
+from base.models import UndergraduateTigerBookDirectory, TigerBookNotes, GenericTigerBookDirectory
 from base.serializers import (
     UndergraduateTigerBookDirectorySetupFirstPageSerializer,
     UndergraduateTigerBookDirectoryProfileFullSerializer,
     UndergraduateTigerBookDirectorySetupSecondPageSerializer, UndergraduateTigerBookDirectoryListSerializer,
-    UndergraduateTigerBookDirectoryRetrieveSerializer, TigerBookIndividualNotesPostSerializer,
-    TigerBookIndividualNotesListSerializer,
+    UndergraduateTigerBookDirectoryRetrieveSerializer, TigerBookNotesCreateSerializer,
+    TigerBookNotesListSerializer, TigerBookNotesUpdateSerializer,
 )
 
 from django.conf import settings
+
+from base.utils import get_display_username
 
 
 @api_view(['GET'])
@@ -113,7 +118,8 @@ class UndergraduateFullProfileEdit(UndergraduateProfileEdit):
     def post(self, request, *args, **kwargs):
         instance = self.get_object()
         if not (instance.has_setup_profile.has_setup_page_one and instance.has_setup_profile.has_setup_page_two):
-            return Response({"invalid": "full profile post request is not allowed until setup profile is complete"})
+            return Response({"invalid": "full profile post request is not allowed until setup profile is complete"},
+                            status=status.HTTP_404_NOT_FOUND)
         return self.update(request, *args, **kwargs)
 
 
@@ -123,7 +129,8 @@ class UndergraduateFullProfilePreview(UndergraduateProfileEdit):
     def get(self, request):
         instance = self.get_object()
         if not (instance.has_setup_profile.has_setup_page_one and instance.has_setup_profile.has_setup_page_two):
-            return Response({"invalid": "full profile get request is not allowed until setup profile is complete"})
+            return Response({"invalid": "full profile get request is not allowed until setup profile is complete"},
+                            status=status.HTTP_404_NOT_FOUND)
         serializer = self.serializer_class(instance)
         return Response(serializer.data)
 
@@ -208,66 +215,124 @@ class UndergraduateTigerBookDirectoryRetrieve(RetrieveModelMixin,
         return self.retrieve(request, *args, **kwargs)
 
 
-class TigerBookIndividualNotesPostView(CreateModelMixin,
-                                       UpdateModelMixin,
-                                       GenericAPIView):
-    queryset = TigerBookIndividualNotes.objects.all().select_related('individual_notes_taking_user')
-    serializer_class = TigerBookIndividualNotesPostSerializer
-    lookup_field = 'tigerbook_id'
+class TigerBookNotesCreateView(CreateModelMixin,
+                               GenericAPIView):
+    queryset = TigerBookNotes.objects.all().select_related('notes_taking_user')
+    serializer_class = TigerBookNotesCreateSerializer
+    lookup_field = 'username'
 
     def get_queryset(self):
         qs = super().get_queryset()
         user = self.request.user
-        lookup = Q(individual_notes_taking_user=user)
+        lookup = Q(notes_taking_user=user)
         return qs.filter(lookup)
 
     def get_object(self):
-        queryset = self.filter_queryset(self.get_queryset())
-        user = self.request.user
-        lookup = Q(individual_notes_taking_user=
-                   user)
-        obj = get_object_or_404(queryset, lookup)
-
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset)
         return obj
 
     def post(self, request, *args, **kwargs):
-        if self.get_queryset().exists():
-            return self.update(request, *args, **kwargs)
         return self.create(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         user = self.request.user
-        note = serializer.validated_data.get('note')
-        target_directory_entry = GenericTigerBookDirectory.objects.get(tigerbook_directory_entry_object_id
-                                                                       =self.kwargs[self.lookup_field])
+        note_title = serializer.validated_data.get('note_title')
+        note_description = serializer.validated_data.get('note_description')
+        try:
+            target_directory_entry = GenericTigerBookDirectory.objects.get(tigerbook_directory_username__iexact
+                                                                           =self.kwargs[self.lookup_field])
+        except GenericTigerBookDirectory.DoesNotExist:
+            try:
+                target_directory_entry = GenericTigerBookDirectory.objects.get(
+                    tigerbook_directory_username__iexact=f"cas-princeton-{self.kwargs[self.lookup_field]}")
+            except GenericTigerBookDirectory.DoesNotExist as exception:
+                raise serializers.ValidationError(
+                    'GenericTigerBookDirectory object does not exist.'
+                ) from exception
+
         serializer.save(
-            individual_notes_taking_user=user,
-            note=note,
-            target_directory_entry=target_directory_entry,
+            notes_taking_user=user,
+            note_title=note_title,
+            note_description=note_description,
+            target_directory_entries=[get_display_username(target_directory_entry.tigerbook_directory_username)],
         )
 
-    def perform_update(self, serializer):
-        user = self.request.user
-        note = serializer.validated_data.get('note')
-        target_directory_entry = GenericTigerBookDirectory.objects.get(tigerbook_directory_entry_object_id
-                                                                       =self.kwargs[self.lookup_field])
-        serializer.save(
-            individual_notes_taking_user=user,
-            note=note,
-            target_directory_entry=target_directory_entry,
-        )
 
-
-class TigerBookIndividualNotesListView(ListModelMixin,
-                                       GenericAPIView):
-    queryset = TigerBookIndividualNotes.objects.all().select_related('individual_notes_taking_user')
-    serializer_class = TigerBookIndividualNotesListSerializer
+class TigerBookNotesUpdateView(RetrieveModelMixin,
+                               UpdateModelMixin,
+                               GenericAPIView):
+    queryset = TigerBookNotes.objects.all().select_related('notes_taking_user')
+    serializer_class = TigerBookNotesUpdateSerializer
+    lookup_field = 'id'
 
     def get_queryset(self):
         qs = super().get_queryset()
-        username = self.request.user.username
-        lookup = Q(individual_notes_taking_user__username__exact=username)
+        user = self.request.user
+        lookup = Q(notes_taking_user=user)
         return qs.filter(lookup)
 
     def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if self.get_object():
+            return self.update(request, *args, **kwargs)
+        return Response({"invalid": "must update existing note"},
+                        status=status.HTTP_404_NOT_FOUND)
+
+    def perform_update(self, serializer):
+        user = self.request.user
+        note_title = serializer.validated_data.get('note_title')
+        note_description = serializer.validated_data.get('note_description')
+        target_directory_entries = []
+        for username in serializer.validated_data.get('target_directory_entries'):
+            try:
+                target_directory_entry = GenericTigerBookDirectory.objects.get(tigerbook_directory_username__iexact
+                                                                               =username)
+            except GenericTigerBookDirectory.DoesNotExist:
+                try:
+                    target_directory_entry = GenericTigerBookDirectory.objects.get(
+                        tigerbook_directory_username=f"cas-princeton-{username}")
+                except GenericTigerBookDirectory.DoesNotExist as exception:
+                    raise serializers.ValidationError(
+                        'GenericTigerBookDirectory object does not exist.'
+                    ) from exception
+            target_directory_entries.append(username)
+
+        serializer.save(
+            notes_taking_user=user,
+            note_title=note_title,
+            note_description=note_description,
+            target_directory_entries=target_directory_entries,
+        )
+
+
+class TigerBookNotesListView(ListModelMixin,
+                             GenericAPIView):
+    queryset = TigerBookNotes.objects.all().select_related('notes_taking_user')
+    serializer_class = TigerBookNotesListSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        user = self.request.user
+        lookup = Q(notes_taking_user=user)
+        return qs.filter(lookup)
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset)
+        return obj
+
+    def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+
+class TigerBookNotesDeleteView(DestroyModelMixin,
+                               GenericAPIView):
+    queryset = TigerBookNotes.objects.all().select_related('notes_taking_user')
+    serializer_class = TigerBookNotesListSerializer
+    lookup_field = 'id'
+
+    def post(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
