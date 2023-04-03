@@ -160,6 +160,8 @@ class UndergraduateTigerBookDirectoryPermissions(models.Model):
     # TODO: can add any username
     username_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
                                                blank=True)
+    full_name_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
+                                                blank=True)
     profile_pic_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,
                                                   blank=True)
     track_prohibited_usernames = ArrayField(base_field=models.TextField(blank=False, null=True), default=list,

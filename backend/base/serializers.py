@@ -155,6 +155,10 @@ class PermissionsSerializer(WritableNestedModelSerializer):
     # is_visible_to_alumni = serializers.BooleanField()
     # Default should be false
     is_visible_to_staff = serializers.BooleanField(required=False)
+    full_name_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
+                                                           child=serializers.CharField(allow_blank=False,
+                                                                                       allow_null=False),
+                                                           required=False)
     username_prohibited_usernames = serializers.ListField(allow_empty=True, allow_null=False,
                                                           child=serializers.CharField(allow_blank=False,
                                                                                       allow_null=False),
@@ -218,7 +222,8 @@ class PermissionsSerializer(WritableNestedModelSerializer):
         exclude = ['id']
 
     def validate(self, data):
-        usernames = itertools.chain(data['username_prohibited_usernames'], data['profile_pic_prohibited_usernames'],
+        usernames = itertools.chain(data['full_name_prohibited_usernames'],
+                                    data['username_prohibited_usernames'], data['profile_pic_prohibited_usernames'],
                                     data['track_prohibited_usernames'], data['concentration_prohibited_usernames'],
                                     data['class_year_prohibited_usernames'],
                                     data['residential_college_prohibited_usernames'],
@@ -338,7 +343,6 @@ class UndergraduateTigerBookDirectorySetupSecondPageSerializer(serializers.Model
 
     def get_username(self, obj):
         return get_display_username(obj.user.username)
-
 
     # TODO: https://stackoverflow.com/questions/29373983/remove-a-file-in-amazon-s3-using-django-storages
     #   to delete old profile pic on
@@ -505,6 +509,7 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
 
 
 class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField(read_only=True)
     username = serializers.SerializerMethodField(read_only=True)
     track = serializers.SerializerMethodField(read_only=True)
     concentration = serializers.SerializerMethodField(read_only=True)
@@ -518,6 +523,7 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
         model = UndergraduateTigerBookDirectory
         fields = [
             'username',
+            'full_name',
             'track',
             'concentration',
             'class_year',
@@ -531,6 +537,12 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
         if hasattr(obj.user, 'cas_profile'):
             return reverse('undergraduate-retrieve', kwargs={'username': obj.user.cas_profile.net_id})
         return reverse('undergraduate-retrieve', kwargs={'username': obj.user.username})
+
+    def get_full_name(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.username_prohibited_usernames:
+            return None
+        return obj.active_directory_entry.full_name
 
     def get_username(self, obj):
         request = self.context.get('request')
@@ -631,8 +643,13 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
             return None
 
 
+class UndergraduateTigerBookDirectorySearchSerializer(serializers.ModelSerializer):
+    pass
+
+
 class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField(read_only=True)
+    full_name = serializers.SerializerMethodField(read_only=True)
     track = serializers.SerializerMethodField(read_only=True)
     concentration = serializers.SerializerMethodField(read_only=True)
     class_year = serializers.SerializerMethodField(read_only=True)
@@ -644,6 +661,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
         model = UndergraduateTigerBookDirectory
         fields = [
             'username',
+            'full_name',
             'track',
             'concentration',
             'class_year',
@@ -656,9 +674,13 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
         request = self.context.get('request')
         if request.user.username in obj.permissions.username_prohibited_usernames:
             return None
-        if hasattr(obj.user, 'cas_profile'):
-            return obj.user.cas_profile.net_id
-        return obj.username
+        return get_display_username(obj.username)
+
+    def get_full_name(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.username_prohibited_usernames:
+            return None
+        return obj.active_directory_entry.full_name
 
     def get_track(self, obj):
         request = self.context.get('request')

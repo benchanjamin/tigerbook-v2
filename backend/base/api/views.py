@@ -17,7 +17,7 @@ from base.serializers import (
     UndergraduateTigerBookDirectoryRetrieveSerializer, TigerBookNotesCreateSerializer,
     TigerBookNotesListSerializer, TigerBookNotesUpdateSerializer, UndergraduateToBeApprovedSubmissionsCreateSerializer,
     UndergraduateToBeApprovedSubmissionsListSerializer, UndergraduateToBeApprovedSubmissionsDeleteSerializer,
-    UndergraduateToBeApprovedSubmissionsApproveSerializer,
+    UndergraduateToBeApprovedSubmissionsApproveSerializer, UndergraduateTigerBookDirectorySearchSerializer,
 )
 
 from django.conf import settings
@@ -45,8 +45,7 @@ class TigerBookRedirectURLView(GenericAPIView):
 
     def get_object(self):
         queryset = self.get_queryset()
-        obj = get_object_or_404(queryset, user=self.request.user)
-        return obj
+        return get_object_or_404(queryset, user=self.request.user)
 
     def get(self, request, *args, **kwargs):
         user = request.user
@@ -85,7 +84,7 @@ class UndergraduateProfileEdit(UpdateModelMixin, GenericAPIView):
         return get_object_or_404(queryset, user=self.request.user)
 
 
-class UndergraduateProfileSetupFirstPage(UndergraduateProfileEdit):
+class UndergraduateProfileSetupFirstPageView(UndergraduateProfileEdit):
     serializer_class = UndergraduateTigerBookDirectorySetupFirstPageSerializer
 
     def get(self, request):
@@ -97,7 +96,7 @@ class UndergraduateProfileSetupFirstPage(UndergraduateProfileEdit):
         return self.update(request, *args, **kwargs)
 
 
-class UndergraduateProfileSetupSecondPage(UndergraduateProfileEdit):
+class UndergraduateProfileSetupSecondPageView(UndergraduateProfileEdit):
     serializer_class = UndergraduateTigerBookDirectorySetupSecondPageSerializer
 
     def get(self, request):
@@ -113,7 +112,7 @@ class UndergraduateProfileSetupSecondPage(UndergraduateProfileEdit):
             {"invalid": "setup profile page two is not allowed until setup profile page one is complete"})
 
 
-class UndergraduateFullProfileEdit(UndergraduateProfileEdit):
+class UndergraduateFullProfileEditView(UndergraduateProfileEdit):
     serializer_class = UndergraduateTigerBookDirectoryProfileFullSerializer
 
     def post(self, request, *args, **kwargs):
@@ -124,7 +123,7 @@ class UndergraduateFullProfileEdit(UndergraduateProfileEdit):
                         status=status.HTTP_404_NOT_FOUND)
 
 
-class UndergraduateFullProfilePreview(UndergraduateProfileEdit):
+class UndergraduateFullProfilePreviewView(UndergraduateProfileEdit):
     serializer_class = UndergraduateTigerBookDirectoryProfileFullSerializer
 
     def get(self, request):
@@ -136,8 +135,19 @@ class UndergraduateFullProfilePreview(UndergraduateProfileEdit):
                         status=status.HTTP_404_NOT_FOUND)
 
 
-class UndergraduateTigerBookDirectoryList(ListModelMixin,
-                                          GenericAPIView):
+# TODO: make search page the default page instead of list page
+#   Should be able to lookup/convert from any of the University identifiers (PUID, NetID, alias, email).
+class UndergraduateTigerBookDirectorySearchView(ListModelMixin,
+                                                GenericAPIView):
+    queryset = UndergraduateTigerBookDirectory.objects.all().select_related("active_directory_entry")
+    serializer_class = UndergraduateTigerBookDirectorySearchSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+class UndergraduateTigerBookDirectoryListView(ListModelMixin,
+                                              GenericAPIView):
     queryset = UndergraduateTigerBookDirectory.objects.all().select_related("permissions", "concentration",
                                                                             "class_year", "residential_college",
                                                                             "pronouns", "track",
@@ -184,8 +194,8 @@ class UndergraduateTigerBookDirectoryList(ListModelMixin,
         return self.list(request, *args, **kwargs)
 
 
-class UndergraduateTigerBookDirectoryRetrieve(RetrieveModelMixin,
-                                              GenericAPIView):
+class UndergraduateTigerBookDirectoryRetrieveView(RetrieveModelMixin,
+                                                  GenericAPIView):
     queryset = UndergraduateTigerBookDirectory.objects.all().select_related("permissions",
                                                                             "concentration",
                                                                             "class_year", "residential_college",
@@ -221,9 +231,7 @@ class UndergraduateTigerBookDirectoryRetrieve(RetrieveModelMixin,
         lookup = Q(user__username__exact=
                    self.kwargs[self.lookup_field]) | Q(user__cas_profile__net_id__exact=
                                                        self.kwargs[self.lookup_field])
-        obj = get_object_or_404(queryset, lookup)
-
-        return obj
+        return get_object_or_404(queryset, lookup)
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
@@ -336,8 +344,7 @@ class TigerBookNotesListView(ListModelMixin,
 
     def get_object(self):
         queryset = self.get_queryset()
-        obj = get_object_or_404(queryset)
-        return obj
+        return get_object_or_404(queryset)
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
