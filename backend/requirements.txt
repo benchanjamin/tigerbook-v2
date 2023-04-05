@@ -11,3 +11,4 @@ boto3
 django-cors-headers
 Pillow
 drf-writable-nested
+django-filter

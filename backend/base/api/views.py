@@ -21,8 +21,9 @@ from base.serializers import (
 )
 
 from django.conf import settings
-
+from django_filters.rest_framework import DjangoFilterBackend
 from base.utils import get_display_username
+from base.filters import UndergraduateDirectoryListFilter
 
 
 @api_view(['GET'])
@@ -166,6 +167,8 @@ class UndergraduateTigerBookDirectoryListView(ListModelMixin,
                                                                             "residential_college_facebook_entry",
                                                                             "active_directory_entry")
     serializer_class = UndergraduateTigerBookDirectoryListSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = UndergraduateDirectoryListFilter
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -322,11 +325,11 @@ class TigerBookNotesUpdateView(RetrieveModelMixin,
         target_directory_entries = []
         for username in serializer.validated_data.get('target_directory_entries'):
             try:
-                target_directory_entry = GenericTigerBookDirectory.objects.get(tigerbook_directory_username__iexact
+                GenericTigerBookDirectory.objects.get(tigerbook_directory_username__iexact
                                                                                =username)
             except GenericTigerBookDirectory.DoesNotExist:
                 try:
-                    target_directory_entry = GenericTigerBookDirectory.objects.get(
+                    GenericTigerBookDirectory.objects.get(
                         tigerbook_directory_username=f"cas-princeton-{username}")
                 except GenericTigerBookDirectory.DoesNotExist as exception:
                     raise serializers.ValidationError(
