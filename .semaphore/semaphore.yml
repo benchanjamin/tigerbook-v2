@@ -20,6 +20,7 @@ blocks:
       env_vars:
         - name: FOO_1
           value: BAR_1
+    dependencies: []
   - name: 'Block #2'
     task:
       env_vars:
@@ -37,6 +38,10 @@ blocks:
           value: '&m5y&mh@u!d_9k)o3m7h(6g&-rpo+0@#t9nuy_-4pu45f++y@%'
         - name: DEBUG
           value: 'True'
+        - name: EMAIL_HOST_USER
+          value: food4u@princeton.edu
+        - name: EMAIL_HOST_PASSWORD
+          value: daphneaaronbenjamin
       prologue:
         commands:
           - sem-version python 3.10
@@ -50,3 +55,4 @@ blocks:
         - name: Checklist
           commands:
             - python manage.py check --deploy
+    dependencies: []
