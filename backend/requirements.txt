@@ -1,7 +1,7 @@
 django
 djangorestframework
 django-environ
-psycopg2
+psycopg2-binary
 djangorestframework_simplejwt
 requests
 lxml
