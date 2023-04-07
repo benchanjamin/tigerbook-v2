@@ -13,7 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         UndergraduateTigerBookHousing.objects.all().delete()
         tigerbook_cities_csv_path = str(
-            BASE_DIR / "static" / "populate_undergraduate_tigerbook_housing" / "room_info.csv")
+            BASE_DIR / "data" / "populate_undergraduate_tigerbook_housing" / "room_info.csv")
         with open(tigerbook_cities_csv_path, mode='r') as csv_file:
             csv_reader = csv.DictReader(csv_file)
             for row in csv_reader:

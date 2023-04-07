@@ -13,7 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         TigerBookCities.objects.all().delete()
         tigerbook_cities_csv_path = str(
-            BASE_DIR / "static" / "populate_tigerbook_cities" /
+            BASE_DIR / "data" / "populate_tigerbook_cities" /
             "simplemaps_worldcities_basicv1.75" / "worldcities.csv")
         with open(tigerbook_cities_csv_path, mode='r') as csv_file:
             csv_reader = csv.DictReader(csv_file)
