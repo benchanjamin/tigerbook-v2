@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
     nginx:
@@ -7,12 +7,13 @@ services:
             context: .
             dockerfile: ./docker/nginx/Dockerfile
         ports:
-            - 80:80
+            - "80:80"
         volumes:
-            - static_volume:/app/backend/server/django_static
+            - static_volume:/app/backend/static
             - ./docker/nginx/development:/etc/nginx/conf.d
         depends_on:
             - backend
+            - frontend
     backend:
         restart: unless-stopped
         build:
@@ -20,9 +21,21 @@ services:
             dockerfile: ./docker/backend/Dockerfile
         entrypoint: /app/docker/backend/wsgi-entrypoint.sh
         volumes:
-            - static_volume:/app/backend/server/django_static
-        expose:
-            - 8000
+            - static_volume:/app/backend/static
+        ports:
+            - "8000:8000"
+
+    frontend:
+        restart: unless-stopped
+
+        build:
+            context: .
+            dockerfile: ./docker/frontend/Dockerfile
+        volumes:
+            - node_modules:/app/frontend/node_modules
+        ports:
+            - "3000:3000"
 
 volumes:
     static_volume: {}
+    node_modules: {}

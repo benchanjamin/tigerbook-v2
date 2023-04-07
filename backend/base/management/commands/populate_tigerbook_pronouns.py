@@ -12,7 +12,7 @@ class Command(BaseCommand):
         TigerBookPronouns.objects.all().delete()
         pronouns = ['she/her/hers', 'he/him/his', 'they/them/theirs']
         for pronoun in pronouns:
-            TigerBookPronouns.objects.create(pronoun=pronoun)
+            TigerBookPronouns.objects.create(pronouns=pronouns)
             log.info(
                 f"Added track to TigerBookPronouns: {pronoun}"
             )
