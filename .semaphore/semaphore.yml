@@ -17,6 +17,9 @@ blocks:
             - cache restore
             - pip install --cache-dir .pip_cache -r requirements.txt
             - cache store
+      env_vars:
+        - name: FOO_1
+          value: BAR_1
   - name: 'Block #2'
     task:
       env_vars:
@@ -30,6 +33,8 @@ blocks:
           value: chunee.db.elephantsql.com
         - name: DATABASE_PORT
           value: '5432'
+        - name: SECRET_KEY
+          value: '&m5y&mh@u!d_9k)o3m7h(6g&-rpo+0@#t9nuy_-4pu45f++y@%'
       prologue:
         commands:
           - sem-version python 3.10
