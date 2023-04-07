@@ -1,5 +1,5 @@
 from django.urls import path
-from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 from .views import (UndergraduateProfileSetupFirstPageView, get_routes, UndergraduateFullProfileEditView,
                     UndergraduateProfileSetupSecondPageView, UndergraduateTigerBookDirectoryListView,
                     UndergraduateTigerBookDirectoryRetrieveView, TigerBookRedirectURLView,
@@ -23,7 +23,7 @@ urlpatterns = [
     path('list/', UndergraduateTigerBookDirectoryListView.as_view(),
          name="undergraduates-all"),
     # TODO: add search functionality
-    path('search/', UndergraduateTigerBookDirectorySearchView.as_view(), name="search"),
+    path('directory/search/', UndergraduateTigerBookDirectorySearchView.as_view(), name="search"),
     path('notes/', TigerBookNotesListView.as_view(), name='individual-notes-list'),
     # TODO: add validation for categories
     path('category-submission/create/', UndergraduateToBeApprovedSubmissionsCreateView.as_view()),
@@ -35,9 +35,10 @@ urlpatterns = [
          name="category-submission-approve"),
     path("token/", get_jwt_tokens_from_session, name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     # TODO: generalize this to work for all directory entries instead of just undergraduates
     #   if there's time
-    path('<str:username>/', UndergraduateTigerBookDirectoryRetrieveView.as_view(),
+    path('directory/<str:username>/', UndergraduateTigerBookDirectoryRetrieveView.as_view(),
          name="undergraduate-retrieve"),
     path('note/create/<str:username>/', TigerBookNotesCreateView.as_view(),
          name='individual-note-create'),

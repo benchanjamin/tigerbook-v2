@@ -392,7 +392,7 @@ class UndergraduateToBeApprovedSubmissionsListView(ListModelMixin,
     def get(self, request, *args, **kwargs):
         # add permission check
         display_username = get_display_username(request.user.username)
-        if display_username not in settings.TIGERBOOK_ADMIN_NETIDS:
+        if display_username not in settings.TIGERBOOK_ADMIN_NETIDS.split(","):
             return Response({"invalid": "must be a tigerbook admin"},
                             status=status.HTTP_403_FORBIDDEN)
         return self.list(request, *args, **kwargs)
@@ -407,7 +407,7 @@ class UndergraduateToBeApprovedSubmissionsDeleteView(DestroyModelMixin,
     def post(self, request, *args, **kwargs):
         # add permission check
         display_username = get_display_username(request.user.username)
-        if display_username not in settings.TIGERBOOK_ADMIN_NETIDS:
+        if display_username not in settings.TIGERBOOK_ADMIN_NETIDS.split(","):
             return Response({"invalid": "must be a tigerbook admin"},
                             status=status.HTTP_403_FORBIDDEN)
         return self.destroy(request, *args, **kwargs)
@@ -423,7 +423,7 @@ class UndergraduateToBeApprovedSubmissionsApproveView(RetrieveModelMixin,
     def post(self, request, *args, **kwargs):
         # add permission check
         display_username = get_display_username(request.user.username)
-        if display_username not in settings.TIGERBOOK_ADMIN_NETIDS:
+        if display_username not in settings.TIGERBOOK_ADMIN_NETIDS.split(","):
             return Response({"invalid": "must be a tigerbook admin"},
                             status=status.HTTP_403_FORBIDDEN)
         return self.update(request, *args, **kwargs)

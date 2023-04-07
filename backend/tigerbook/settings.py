@@ -15,10 +15,7 @@ import environ
 from pathlib import Path
 from datetime import timedelta
 
-env = environ.Env(
-    # if debug is not set, default to False
-    DEBUG=(bool, False)
-)
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,7 +30,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # TODO: SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -164,7 +161,10 @@ UNIAUTH_LOGIN_DISPLAY_STANDARD = False
 UNIAUTH_LOGIN_DISPLAY_CAS = True
 
 # TODO: set to UI URL address later (tigerbook.tigerapps.org)
-UNIAUTH_LOGIN_REDIRECT_URL = env('UNIAUTH_LOGIN_REDIRECT_URL')
+if DEBUG:
+    UNIAUTH_LOGIN_REDIRECT_URL = env('UNIAUTH_LOGIN_REDIRECT_URL_DEV')
+else:
+    UNIAUTH_LOGIN_REDIRECT_URL = env('UNIAUTH_LOGIN_REDIRECT_URL_PROD')
 UNIAUTH_LOGOUT_REDIRECT_URL = env('UNIAUTH_LOGOUT_REDIRECT_URL')
 
 UNIAUTH_LOGOUT_CAS_COMPLETELY = env('UNIAUTH_LOGOUT_CAS_COMPLETELY')
