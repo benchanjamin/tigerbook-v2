@@ -32,14 +32,6 @@ SECRET_KEY = env('SECRET_KEY')
 # TODO: SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    '0.0.0.0',
-    'localhost',
-    'tiger-book.com',
-    'www.tiger-book.com',
-]
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -247,7 +239,15 @@ SIMPLE_JWT = {
     "UPDATE_LAST_LOGIN": True,
 }
 
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '0.0.0.0',
+    'localhost',
+    'tiger-book.com',
+    'www.tiger-book.com',
+]
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 # TODO: pu statuses
 
