@@ -42,8 +42,8 @@ services:
     image: certbot/certbot:latest
     restart: unless-stopped
     volumes:
-      - ./docker/certbot/conf/:/etc/letsencrypt/:rw
-      - ./docker/certbot/www/:/var/www/certbot:rw
+      - ./docker/nginx/certbot/conf:/etc/letsencrypt:rw
+      - ./docker/nginx/certbot/www:/var/www/certbot:rw
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
