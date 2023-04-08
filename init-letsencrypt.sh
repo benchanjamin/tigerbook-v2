@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(tiger-book.io www.tiger-book.io)
+domains=(tiger-book.com)
 rsa_key_size=4096
 data_path="./data/certbot"
 email="it.admin@tigerapps.org" # Adding a valid address is strongly recommended
@@ -30,7 +30,7 @@ fi
 echo "### Creating dummy certificate for $domains ..."
 path="/etc/letsencrypt/live/$domains"
 mkdir -p "$data_path/conf/live/$domains"
-docker-compose run --rm --entrypoint "chmod 700 /etc/letsencrypt/live/tiger-book.io/privkey.pem && \
+docker-compose run --rm --entrypoint "\
   openssl req -x509 -nodes -newkey rsa:$rsa_key_size -days 1\
     -keyout '$path/privkey.pem' \
     -out '$path/fullchain.pem' \
