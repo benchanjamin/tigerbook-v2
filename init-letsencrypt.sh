@@ -30,7 +30,7 @@ fi
 echo "### Creating dummy certificate for $domains ..."
 path="/etc/letsencrypt/live/$domains"
 mkdir -p "$data_path/conf/live/$domains"
-docker-compose run --rm --entrypoint "\
+docker-compose run --rm --entrypoint "chmod 700 /etc/letsencrypt/live/tiger-book.io/privkey.pem && \
   openssl req -x509 -nodes -newkey rsa:$rsa_key_size -days 1\
     -keyout '$path/privkey.pem' \
     -out '$path/fullchain.pem' \

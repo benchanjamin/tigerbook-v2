@@ -41,9 +41,6 @@ services:
   certbot:
     image: certbot/certbot
     restart: unless-stopped
-    build:
-      context: .
-      dockerfile: ./docker/certbot/Dockerfile
     volumes:
       - ./docker/nginx/certbot/conf:/etc/letsencrypt
       - ./docker/nginx/certbot/www:/var/www/certbot
