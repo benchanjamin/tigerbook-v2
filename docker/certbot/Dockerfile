@@ -1,1 +1,0 @@
-RUN chmod +x /etc/letsencrypt/live/tiger-book.io/privkey.pem

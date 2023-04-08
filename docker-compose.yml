@@ -11,9 +11,9 @@ services:
       - "443:443"
     volumes:
       - static_volume:/app/backend/static
-      - ./docker/nginx/production:/etc/nginx/conf.d
+      - ./docker/nginx/production:/etc/nginx/conf.d:ro
       - ./docker/nginx/certbot/conf:/etc/letsencrypt
-      - ./docker/nginx/certbot/www:/var/www/certbot
+      - ./docker/nginx/certbot/www:/var/www/certbot:ro
     depends_on:
       - backend
       - frontend
@@ -39,11 +39,11 @@ services:
       - "3000:3000"
 
   certbot:
-    image: certbot/certbot
+    image: certbot/certbot:latest
     restart: unless-stopped
     volumes:
-      - ./docker/nginx/certbot/conf:/etc/letsencrypt
-      - ./docker/nginx/certbot/www:/var/www/certbot
+      - ./docker/certbot/conf/:/etc/letsencrypt/:rw
+      - ./docker/certbot/www/:/var/www/certbot:rw
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
