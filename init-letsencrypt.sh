@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(tiger-book.io www.tigerbook.io)
+domains=(tiger-book.io www.tiger-book.io)
 rsa_key_size=4096
 data_path="./data/certbot"
 email="it.admin@tigerapps.org" # Adding a valid address is strongly recommended
