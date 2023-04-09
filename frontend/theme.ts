@@ -1,6 +1,11 @@
 import { CustomFlowbiteTheme } from "flowbite-react/lib/esm/components/Flowbite/FlowbiteTheme";
 
 export const flowbiteTheme: CustomFlowbiteTheme = {
+  navbar: {
+    link: {
+
+    },
+  },
   footer: {
     base: "flex flex-col",
     brand: {

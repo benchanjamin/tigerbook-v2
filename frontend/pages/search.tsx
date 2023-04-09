@@ -1,46 +1,138 @@
 import Head from 'next/head';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
+import {SidebarProvider} from "../context/SidebarContext";
+import React from "react";
+import {BiBuoy} from "react-icons/bi";
+import {
+    BsDribbble,
+    BsFacebook,
+    BsGithub,
+    BsInstagram,
+    BsTwitter,
+} from "react-icons/bs";
+import {
+    HiAdjustments,
+    HiArrowNarrowRight,
+    HiArrowSmRight,
+    HiChartPie,
+    HiCheck,
+    HiClipboardList,
+    HiCloudDownload,
+    HiDatabase,
+    HiExclamation,
+    HiEye,
+    HiHome,
+    HiInbox,
+    HiOutlineAdjustments,
+    HiShoppingBag,
+    HiTable,
+    HiUser,
+    HiUserCircle,
+    HiViewBoards,
+    HiX,
+} from "react-icons/hi";
+import Sidebar from "@components/ui/Sidebar";
+import Header from "@components/ui/Header";
+
 
 export default function Search() {
     return (
-        <div className="bg-gray-100">
+        <>
             <Head>
                 <title>Tigerbook</title>
             </Head>
-
-            <header className="bg-white shadow">
-                <nav className="container mx-auto px-4 py-2">
-                    <ul className="flex items-center justify-between">
-                        <li>
-                            <a href="#" className="font-bold text-lg text-gray-800">Home</a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-gray-600 hover:text-gray-800">About</a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-gray-600 hover:text-gray-800">Contact</a>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
-
-            <main className="container mx-auto px-4 py-8">
-                <div className="flex flex-col md:flex-row items-center justify-between">
-                    <div className="w-full md:w-1/2 mb-4 md:mb-0">
-                        <input type="text" placeholder="Search..." className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" />
+            <SidebarProvider>
+                <Header/>
+                <div className="flex dark:bg-gray-900 h-full">
+                    <main className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
+                        {/* Search container */}
+                        <div className="flex flex-col md:flex-row items-center justify-center gap-x-4 pt-20">
+                            {/* Search bar */}
+                            <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
+                                <input type="text" placeholder="Search..."
+                                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent"/>
+                            </div>
+                            <button
+                                className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-50">Search
+                            </button>
+                        </div>
+                        <div className="absolute h-full z-0">
+                        </div>
+                    </main>
+                    <div className="order-1">
+                        <ActualSidebar/>
                     </div>
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">Search</button>
+                    <Image src="/nassau.jpg" alt="Nassau Hall" className="absolute h-full z-0 top-9"
+                           layout={"fill"} objectFit={"cover"}
+                    />
                 </div>
-                <div className="relative h-80 md:h-96 mt-8">
-                    <Image src="/placeholder-cover-image.jpg" alt="Cover Image" layout="fill" objectFit="cover" />
-                </div>
-            </main>
 
-            <footer className="bg-white border-t border-gray-200">
-                <div className="container mx-auto px-4 py-4">
-                    <p className="text-gray-500 text-center">&copy; My Next.js App 2023</p>
-                </div>
-            </footer>
+                {/*<footer className="bg-white border-t border-gray-200">*/}
+                {/*    <div className="container mx-auto px-4 py-4">*/}
+                {/*        <p className="text-gray-500 text-center">&copy; My Next.js App 2023</p>*/}
+                {/*    </div>*/}
+                {/*</footer>*/}
+                {/*</div>*/}
+
+            </SidebarProvider>
+        </>
+    );
+}
+
+function HomePage(): JSX.Element {
+    return (
+        <div className="p-6">
+            <section>
+                <header>
+                    <h1 className="mb-6 text-5xl font-extrabold dark:text-white">
+                        Welcome to <code>Flowbite</code> on <code>Next.js</code>!
+                    </h1>
+                </header>
+            </section>
         </div>
+    );
+}
+
+
+function ActualSidebar(): JSX.Element {
+    return (
+        <Sidebar>
+            <Sidebar.Items>
+                <Sidebar.ItemGroup>
+                    <Sidebar.Item href="#" icon={HiChartPie}>
+                        Dashboard
+                    </Sidebar.Item>
+                    <Sidebar.Item href="#" icon={HiViewBoards}>
+                        Kanban
+                    </Sidebar.Item>
+                    <Sidebar.Item href="#" icon={HiInbox}>
+                        Inbox
+                    </Sidebar.Item>
+                    <Sidebar.Item href="#" icon={HiUser}>
+                        Users
+                    </Sidebar.Item>
+                    <Sidebar.Item href="#" icon={HiShoppingBag}>
+                        Products
+                    </Sidebar.Item>
+                    <Sidebar.Item href="#" icon={HiArrowSmRight}>
+                        Sign In
+                    </Sidebar.Item>
+                    <Sidebar.Item href="#" icon={HiTable}>
+                        Sign Up
+                    </Sidebar.Item>
+                </Sidebar.ItemGroup>
+                <Sidebar.ItemGroup>
+                    <Sidebar.Item href="#" icon={HiChartPie}>
+                        Upgrade to Pro
+                    </Sidebar.Item>
+                    <Sidebar.Item href="#" icon={HiViewBoards}>
+                        Documentation
+                    </Sidebar.Item>
+                    <Sidebar.Item href="#" icon={BiBuoy}>
+                        Help
+                    </Sidebar.Item>
+                </Sidebar.ItemGroup>
+            </Sidebar.Items>
+        </Sidebar>
     );
 }

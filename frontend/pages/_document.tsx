@@ -1,7 +1,5 @@
 import {Html, Head, Main, NextScript} from 'next/document';
 import Script from "next/script";
-import FlowbiteContext from "../context/FlowbiteContext"
-
 
 export default function Document() {
     return (
@@ -11,10 +9,8 @@ export default function Document() {
                 <Script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js" strategy="beforeInteractive"></Script>
             </Head>
             <body>
-            <FlowbiteContext>
                 <Main/>
                 <NextScript/>
-            </FlowbiteContext>
             </body>
         </Html>
     )
