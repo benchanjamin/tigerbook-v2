@@ -33,10 +33,13 @@ class Command(BaseCommand):
         # print(auth_response.json())
 
         # if auth_response.status_code == 200:
-        token ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc4NTQ1MTAyLCJpYXQiOjE2Nzg1NDQ4MDIsImp0aSI6IjUwYjNkNzNlMDU2YTQ3NDlhYTQzYTNlOWY0N2ZlZDIxIiwidXNlcl9pZCI6MTl9.yzBlwJfN5oe7lUKdLwrQqSFsNRd8yRWkG6IaHBkGLwo'
+
+
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjIxODIxLCJpYXQiOjE2ODEyMjE1MjEsImp0aSI6ImVkNDg4MDNiODM5ZTQ3MjA4YjI5NTY0YmZlNDEzYmYyIiwidXNlcl9pZCI6MX0.xG7tD8wK3lbbTaqAcm10LFeqCFZPFm9JU2zZUBQ-zx8"
         headers = {
             "Authorization": f"Bearer {token}"
         }
-        endpoint = "http://localhost:8000/api/setup/"
-        get_response = requests.get(endpoint, headers=headers)
+        endpoint = "http://tiger-book.com/api/list/"
+        get_response = requests.get(endpoint, headers=headers, verify=False)
+        print(get_response.status_code)
         print(get_response.json())

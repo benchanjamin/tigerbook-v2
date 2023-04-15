@@ -1,5 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+    safelist: [
+        'z-[1]',
+        'z-[2]',
+        'z-[3]',
+        'z-[4]',
+        'z-[5]',
+        'z-[6]',
+        'z-[7]',
+        'z-[8]',
+        'z-[9]',
+    ],
     content: [
         "./node_modules/flowbite/**/*.js",
         "./node_modules/flowbite-react/**/*.js",
@@ -22,6 +33,11 @@ module.exports = {
                     "800": "#3F2000",
                     "900": "#070300"
                 }
+            },
+            zIndex: {
+                '5': '5',
+                '15': '15',
+                '100': '100',
             }
         },
         fontFamily: {

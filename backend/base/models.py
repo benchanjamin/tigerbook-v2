@@ -509,6 +509,12 @@ class TigerBookCities(models.Model):
     longitude = models.FloatField(default=0)
     date_added = models.DateField(auto_now_add=True)
 
+    @property
+    def complete_city(self):
+        if self.admin_name == "":
+            return self.city + ", " + self.country
+        return self.city + ", " + self.admin_name + ", " + self.country
+
     def __repr__(self):
         return f"{self.city}, {self.admin_name}, {self.country}"
 

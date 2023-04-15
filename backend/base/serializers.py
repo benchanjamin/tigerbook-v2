@@ -19,18 +19,69 @@ from base.models import (
     UndergraduateTigerBookResidentialColleges, TigerBookInterests, TigerBookExtracurriculars,
     TigerBookExtracurricularPositions, TigerBookResearchTypes,
     UndergraduateTigerBookHousing, TigerBookNotes, GenericTigerBookDirectory, CASProfile,
-    UndergraduateToBeApprovedSubmissions, UndergraduateToBeApprovedCategories, TigerBookExtracurricularSubgroups
+    UndergraduateToBeApprovedSubmissions, UndergraduateToBeApprovedCategories, TigerBookExtracurricularSubgroups,
+    UndergraduateTigerBookClassYears
 )
 from base.utils import get_display_username
 from drf_writable_nested.serializers import WritableNestedModelSerializer
 from django.contrib.auth.models import User
 
 
-class UndergraduateTigerBookTracksSerializer(serializers.ModelSerializer):
+class UndergraduateConcentrationsListAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UndergraduateTigerBookConcentrations
+        fields = [
+            'concentration'
+        ]
+
+
+class UndergraduateClassYearsListAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UndergraduateTigerBookClassYears
+        fields = [
+            'class_year'
+        ]
+
+
+class UndergraduateResidentialCollegesListAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UndergraduateTigerBookResidentialColleges
+        fields = [
+            'residential_college'
+        ]
+
+
+class CitiesListAPISerializer(serializers.ModelSerializer):
+    # complete_city = serializers.ReadOnlyField()
+
+    class Meta:
+        model = TigerBookCities
+        fields = [
+            'complete_city'
+        ]
+
+
+class UndergraduateCertificatesListAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UndergraduateTigerBookCertificates
+        fields = [
+            'certificate'
+        ]
+
+
+class UndergraduateTracksListAPISerializer(serializers.ModelSerializer):
     class Meta:
         model = UndergraduateTigerBookTracks
         fields = [
             'track'
+        ]
+
+
+class PronounsAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TigerBookPronouns
+        fields = [
+            'pronouns'
         ]
 
 
@@ -293,10 +344,12 @@ class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelS
                                             allow_null=True,
                                             required=False)
     class_year = serializers.SlugRelatedField(slug_field='class_year',
-                                              read_only=True)
+                                              queryset=UndergraduateTigerBookClassYears.objects.all(),
+                                              allow_null=False)
     residential_college = serializers.SlugRelatedField(slug_field='residential_college',
                                                        queryset=UndergraduateTigerBookResidentialColleges.objects.all(),
                                                        allow_null=False)
+    profile_pic = serializers.FileField(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -314,7 +367,8 @@ class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelS
             'certificates',
             # the following below are read-only
             'class_year',
-            'residential_college'
+            'residential_college',
+            'profile_pic'
         ]
 
     def get_username(self, obj):

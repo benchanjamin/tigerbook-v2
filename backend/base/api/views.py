@@ -4,12 +4,14 @@ from django.urls import reverse
 from rest_framework import status, serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.mixins import UpdateModelMixin, ListModelMixin, RetrieveModelMixin, CreateModelMixin, \
     DestroyModelMixin
 
 from base.models import UndergraduateTigerBookDirectory, TigerBookNotes, GenericTigerBookDirectory, \
-    UndergraduateToBeApprovedSubmissions
+    UndergraduateToBeApprovedSubmissions, UndergraduateTigerBookConcentrations, UndergraduateTigerBookClassYears, \
+    UndergraduateTigerBookResidentialColleges, TigerBookCities, UndergraduateTigerBookCertificates, \
+    UndergraduateTigerBookTracks, TigerBookPronouns
 from base.serializers import (
     UndergraduateTigerBookDirectorySetupFirstPageSerializer,
     UndergraduateTigerBookDirectoryProfileFullSerializer,
@@ -18,6 +20,10 @@ from base.serializers import (
     TigerBookNotesListSerializer, TigerBookNotesUpdateSerializer, UndergraduateToBeApprovedSubmissionsCreateSerializer,
     UndergraduateToBeApprovedSubmissionsListSerializer, UndergraduateToBeApprovedSubmissionsDeleteSerializer,
     UndergraduateToBeApprovedSubmissionsApproveSerializer, UndergraduateTigerBookDirectorySearchSerializer,
+    UndergraduateConcentrationsListAPISerializer, UndergraduateClassYearsListAPISerializer,
+    UndergraduateResidentialCollegesListAPISerializer, CitiesListAPISerializer,
+    UndergraduateCertificatesListAPISerializer, UndergraduateTracksListAPISerializer,
+    PronounsAPISerializer,
 )
 
 from django.conf import settings
@@ -35,6 +41,41 @@ def get_routes(request):
     return Response(routes)
 
 
+class UndergraduateConcentrationsListAPIView(ListAPIView):
+    serializer_class = UndergraduateConcentrationsListAPISerializer
+    queryset = UndergraduateTigerBookConcentrations.objects.all()
+
+
+class UndergraduateClassYearsListAPIView(ListAPIView):
+    serializer_class = UndergraduateClassYearsListAPISerializer
+    queryset = UndergraduateTigerBookClassYears.objects.all()
+
+
+class UndergraduateResidentialCollegesListAPIView(ListAPIView):
+    serializer_class = UndergraduateResidentialCollegesListAPISerializer
+    queryset = UndergraduateTigerBookResidentialColleges.objects.all()
+
+
+class CitiesListAPIView(ListAPIView):
+    serializer_class = CitiesListAPISerializer
+    queryset = TigerBookCities.objects.all()
+
+
+class UndergraduateCertificatesListAPIView(ListAPIView):
+    serializer_class = UndergraduateCertificatesListAPISerializer
+    queryset = UndergraduateTigerBookCertificates.objects.all()
+
+
+class UndergraduateTracksListAPIView(ListAPIView):
+    serializer_class = UndergraduateTracksListAPISerializer
+    queryset = UndergraduateTigerBookTracks.objects.all()
+
+
+class PronounsListAPIView(ListAPIView):
+    serializer_class = PronounsAPISerializer
+    queryset = TigerBookPronouns.objects.all()
+
+
 class TigerBookRedirectURLView(GenericAPIView):
     queryset = UndergraduateTigerBookDirectory.objects.all().select_related("user")
 
@@ -50,7 +91,7 @@ class TigerBookRedirectURLView(GenericAPIView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        result = {"redirect_url": reverse('undergraduates-all')}
+        result = {"redirect_url": reverse('search')}
         # if user does not have a tigerbook directory entry, redirect to list page
         if not hasattr(user, 'undergraduate_tigerbook_directory_entry'):
             return Response(result)
@@ -121,7 +162,7 @@ class UndergraduateFullProfileEditView(UndergraduateProfileEdit):
         if instance.has_setup_profile.has_setup_page_one and instance.has_setup_profile.has_setup_page_two:
             return self.update(request, *args, **kwargs)
         return Response({"invalid": "full profile post request is not allowed until setup profile is complete"},
-                        status=status.HTTP_404_NOT_FOUND)
+                        status=status.HTTP_403_FORBIDDEN)
 
 
 class UndergraduateFullProfilePreviewView(UndergraduateProfileEdit):
@@ -132,8 +173,8 @@ class UndergraduateFullProfilePreviewView(UndergraduateProfileEdit):
         if instance.has_setup_profile.has_setup_page_one and instance.has_setup_profile.has_setup_page_two:
             serializer = self.serializer_class(instance)
             return Response(serializer.data)
-        return Response({"invalid": "full profile get request is not allowed until setup profile is complete"},
-                        status=status.HTTP_404_NOT_FOUND)
+        return Response({"invalid": "full profile post request is not allowed until setup profile is complete"},
+                        status=status.HTTP_403_FORBIDDEN)
 
 
 # TODO: make search page the default page instead of list page
@@ -326,7 +367,7 @@ class TigerBookNotesUpdateView(RetrieveModelMixin,
         for username in serializer.validated_data.get('target_directory_entries'):
             try:
                 GenericTigerBookDirectory.objects.get(tigerbook_directory_username__iexact
-                                                                               =username)
+                                                      =username)
             except GenericTigerBookDirectory.DoesNotExist:
                 try:
                     GenericTigerBookDirectory.objects.get(

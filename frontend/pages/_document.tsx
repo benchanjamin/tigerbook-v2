@@ -8,7 +8,7 @@ export default function Document() {
                 <link rel="icon" href="/favicon.ico"/>
                 <Script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js" strategy="beforeInteractive"></Script>
             </Head>
-            <body>
+            <body className="dark">
                 <Main/>
                 <NextScript/>
             </body>

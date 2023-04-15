@@ -1,19 +1,14 @@
 import '../styles/globals.css'
 import type {AppProps} from 'next/app'
-import {SessionProvider} from "next-auth/react"
-import FlowbiteContext from "../context/FlowbiteContext"
+import {NotificationContextProvider} from "../context/NotificationContext"
+import Layout from "@components/Layout";
 
-// import AuthenticationProvider from '../context/AuthenticationContext'
-
-export default function App({
-                                Component,
-                                pageProps: {session, ...pageProps},
-                            }: AppProps) {
+export default function App({Component, pageProps,}: AppProps) {
     return (
-        <SessionProvider session={session}>
-            <FlowbiteContext>
+        <NotificationContextProvider>
+            <Layout>
                 <Component {...pageProps} />
-            </FlowbiteContext>
-        </SessionProvider>
+            </Layout>
+        </NotificationContextProvider>
     )
 }

@@ -1,20 +1,23 @@
 from django.urls import path
-from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
+from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView, TokenObtainPairView
 from .views import (UndergraduateProfileSetupFirstPageView, get_routes, UndergraduateFullProfileEditView,
                     UndergraduateProfileSetupSecondPageView, UndergraduateTigerBookDirectoryListView,
                     UndergraduateTigerBookDirectoryRetrieveView, TigerBookRedirectURLView,
                     UndergraduateFullProfilePreviewView, TigerBookNotesCreateView, TigerBookNotesListView,
                     TigerBookNotesUpdateView, TigerBookNotesDeleteView, UndergraduateToBeApprovedSubmissionsCreateView,
                     UndergraduateToBeApprovedSubmissionsListView, UndergraduateToBeApprovedSubmissionsDeleteView,
-                    UndergraduateToBeApprovedSubmissionsApproveView, UndergraduateTigerBookDirectorySearchView)
+                    UndergraduateToBeApprovedSubmissionsApproveView, UndergraduateTigerBookDirectorySearchView,
+                    UndergraduateConcentrationsListAPIView, UndergraduateTracksListAPIView,
+                    UndergraduateCertificatesListAPIView, CitiesListAPIView, UndergraduateClassYearsListAPIView,
+                    UndergraduateResidentialCollegesListAPIView, PronounsListAPIView)
 from uniauth.views import get_jwt_tokens_from_session
 
 urlpatterns = [
     path('', get_routes),
     path('redirect/', TigerBookRedirectURLView.as_view()),
-    path('undergraduate/profile/setup/1/', UndergraduateProfileSetupFirstPageView.as_view(),
+    path('undergraduate/profile/setup/one/', UndergraduateProfileSetupFirstPageView.as_view(),
          name="undergraduate-setup-first-page"),
-    path('undergraduate/profile/setup/2/', UndergraduateProfileSetupSecondPageView.as_view(),
+    path('undergraduate/profile/setup/two/', UndergraduateProfileSetupSecondPageView.as_view(),
          name="undergraduate-setup-second-page"),
     path('undergraduate/profile/edit/', UndergraduateFullProfileEditView.as_view()),
     path('undergraduate/profile/preview/', UndergraduateFullProfilePreviewView.as_view()),
@@ -46,4 +49,12 @@ urlpatterns = [
          name='individual-note-update'),
     path('note/delete/<str:id>/', TigerBookNotesDeleteView.as_view(),
          name='individual-note-delete'),
+    path('concentrations/', UndergraduateConcentrationsListAPIView.as_view()),
+    path('tracks/', UndergraduateTracksListAPIView.as_view()),
+    path('residential-colleges/', UndergraduateResidentialCollegesListAPIView.as_view()),
+    path('class-years/', UndergraduateClassYearsListAPIView.as_view()),
+    path('cities/', CitiesListAPIView.as_view()),
+    path('certificates/', UndergraduateCertificatesListAPIView.as_view()),
+    path('pronouns/', PronounsListAPIView.as_view()),
+
 ]

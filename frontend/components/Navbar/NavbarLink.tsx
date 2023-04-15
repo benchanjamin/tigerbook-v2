@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import type {FC, PropsWithChildren} from 'react';
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 
 export type NavbarLinkProps = PropsWithChildren<{
     active?: boolean;

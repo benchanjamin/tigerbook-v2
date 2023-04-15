@@ -2,8 +2,41 @@ import Head from 'next/head';
 import Image from 'next/image';
 import {Link as ReactScrollLink} from "react-scroll";
 import Link from 'next/link';
+import {axiosInstance} from "../utils/axiosInstance";
+import {AxiosResponse} from "axios";
+import {useRouter} from "next/router";
+
+export const getServerSideProps = async (context) => {
+    let RESPONSE_ERROR = 0
+    const axios = await axiosInstance();
+    const response: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/redirect/`,
+        {
+            headers: {
+                Cookie: context.req.headers.cookie
+            }
+        }).catch(function (error) {
+        RESPONSE_ERROR = 1
+        console.log(error)
+    });
+
+    if (RESPONSE_ERROR === 0) {
+        const redirectURL = response.data['redirect_url'].split('/').slice(2).join('/');
+        return {
+            redirect: {
+                destination: redirectURL,
+                permanent: false,
+            },
+        };
+    }
+
+    return {
+        props: {}
+    }
+};
 
 export default function Home() {
+    const router = useRouter();
+
     return (
         <>
             <Head>
@@ -17,9 +50,11 @@ export default function Home() {
                                    alt="Tigerbook Logo" width={149} height={40}/>
                         </Link>
                         <div className="flex items-center max-[435px]:justify-between max-[435px]:flex-grow lg:order-2">
-                            <Link href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/accounts/login`}
-                                  className="text-white bg-primary-400 hover:bg-primary-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Log
-                                in with Princeton CAS</Link>
+                            <button
+                                onClick={async () => await router.push('/accounts/login')}
+                                className="text-white bg-primary-400 hover:bg-primary-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Log
+                                in with Princeton CAS
+                            </button>
                             <button data-collapse-toggle="mobile-menu-2" type="button"
                                     className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                                     aria-controls="mobile-menu-2" aria-expanded="false">
@@ -48,19 +83,19 @@ export default function Home() {
                                 {/*</li>*/}
                                 <li>
                                     <ReactScrollLink to="features"
-                                          spy={false}
-                                          smooth={true}
-                                          offset={0}
-                                          duration={500}
-                                          className="cursor-pointer block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Features</ReactScrollLink>
+                                                     spy={false}
+                                                     smooth={true}
+                                                     offset={0}
+                                                     duration={500}
+                                                     className="cursor-pointer block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Features</ReactScrollLink>
                                 </li>
                                 <li>
                                     <ReactScrollLink to="team"
-                                          spy={false}
-                                          smooth={true}
-                                          offset={0}
-                                          duration={500}
-                                          className="cursor-pointer block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Team</ReactScrollLink>
+                                                     spy={false}
+                                                     smooth={true}
+                                                     offset={0}
+                                                     duration={500}
+                                                     className="cursor-pointer block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Team</ReactScrollLink>
                                 </li>
                             </ul>
                         </div>
@@ -75,8 +110,9 @@ export default function Home() {
                         <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Search
                             for student involvement in extracurriculars, hometown affiliations, pursued concentrations &
                             certificates, and more!</p>
-                        <a href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/accounts/login`}
-                           className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-400 hover:bg-primary-500 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                        <button
+                            onClick={async () => await router.push('/accounts/login')}
+                            className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-400 hover:bg-primary-500 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                             Log in with Princeton CAS
                             <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +120,7 @@ export default function Home() {
                                       d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                                       clipRule="evenodd"></path>
                             </svg>
-                        </a>
+                        </button>
                     </div>
                     <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
                         <Image src="/networking.svg"
@@ -246,14 +282,14 @@ export default function Home() {
                     {/*<div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">*/}
                     <div
                         className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
-                        <a href="#">
+                        <a href="pages#">
                             <Image className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
                                    src="/ben.jpg"
                                    alt="Bonnie Avatar" width={200} height={200}/>
                         </a>
                         <div className="p-5">
                             <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                <a href="#">Ben Chan &apos;23</a>
+                                <a href="pages#">Ben Chan &apos;23</a>
                             </h3>
                             <span className="text-gray-500 dark:text-gray-400">Full-Stack Developer</span>
                             <p className="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">Reimagining the flow of
@@ -279,3 +315,5 @@ export default function Home() {
         </>
     );
 }
+
+

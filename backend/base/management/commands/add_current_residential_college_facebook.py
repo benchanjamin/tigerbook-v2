@@ -27,7 +27,7 @@ class Command(BaseCommand):
         # UndergraduateTigerBookConcentrations.objects.all().delete()
         # UndergraduateTigerBookClassYears.objects.all().delete()
         # UndergraduateTigerBookResidentialColleges.objects.all().delete()
-        # CurrentUndergraduateResidentialCollegeFacebookDirectory.objects.all().delete()
+        CurrentUndergraduateResidentialCollegeFacebookDirectory.objects.all().delete()
         # UndergraduateTigerBookTracks.objects.create(track="UNDECLARED")
 
         backend_app_file_path = BASE_DIR

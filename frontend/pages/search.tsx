@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/legacy/image';
 import {SidebarProvider} from "../context/SidebarContext";
-import React from "react";
 import {BiBuoy} from "react-icons/bi";
 import {
     BsDribbble,
@@ -62,7 +61,7 @@ export default function Search() {
                     <div className="order-1">
                         <ActualSidebar/>
                     </div>
-                    <Image src="/nassau.jpg" alt="Nassau Hall" className="absolute h-full z-0 top-9"
+                    <Image src="/nassau.jpg" alt="Nassau Hall" className="absolute h-full z-0"
                            layout={"fill"} objectFit={"cover"}
                     />
                 </div>
