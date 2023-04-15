@@ -1,6 +1,6 @@
 import Header from "@components/ui/Header";
 import Image from "next/image";
-import React from "react";
+import React, {useContext} from "react";
 import {SidebarProvider} from "../../../../context/SidebarContext";
 import {SetupOneGet, SetupTwoGet, SetupTwoPost} from "@types/setup/one/types";
 import {axiosInstance, axiosLocalhost} from "../../../../utils/axiosInstance";
@@ -10,6 +10,7 @@ import {useRouter} from "next/navigation";
 import ImageUpload from "@components/file-upload/ImageUpload";
 import {GetServerSideProps} from "next";
 import {Spinner} from "flowbite-react";
+import NotificationContext from "../../../../context/NotificationContext";
 
 interface ServerSideProps {
     data: SetupTwoGet
@@ -37,6 +38,7 @@ const Two: React.FC<Props> = ({data}) => {
     const [isImageReady, setIsImageReady] = useState(false);
     const [files, setFiles] = useState([]);
     const router = useRouter();
+    const context = useContext(NotificationContext);
 
 
     const onLoadCallBack = (e) => {
@@ -53,8 +55,10 @@ const Two: React.FC<Props> = ({data}) => {
         event.preventDefault();
 
         // TODO: Add notification for no files submitted
-        if (files.length > 1) {
-            console.log("No files selected")
+        if (files.length == 0) {
+            context.showNotification({
+                description: String("No file selected to save"),
+            })
             return;
         }
 
