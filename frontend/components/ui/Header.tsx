@@ -6,15 +6,20 @@ import {NavbarLink} from "@components/Navbar/NavbarLink";
 import useColorMode from "../../hooks/useColorMode";
 import DropdownMenu from "@components/dropdown-menu/DropdownMenu";
 
-const Header: FC<Record<string, never>> = function ({
-                                                        disableSideBar,
-                                                        disableLinks,
-                                                        profilePicSrc,
-                                                        username
-                                                    }: {
-        disableSideBar: boolean, disableLinks: boolean, profilePicSrc: string | null | undefined,
-        username: string | null | undefined
-    }) {
+
+interface Props {
+    disableSideBar: boolean,
+    disableLinks: boolean,
+    profilePicSrc: string | undefined,
+    username: string
+}
+
+const Header: FC<Props> = function ({
+                                        disableSideBar,
+                                        disableLinks,
+                                        profilePicSrc,
+                                        username
+                                    }) {
         const {
             isOpenOnSmallScreens, isPageWithSidebar, setOpenOnSmallScreens
         } =
@@ -63,13 +68,13 @@ const Header: FC<Record<string, never>> = function ({
                     <Navbar.Brand href="/">
                         <Image
                             alt="Tigerbook logo"
-                            height="150"
+                            height="100"
                             src="/Tigerbook.png"
-                            width="150"
+                            width="100"
                         />
                     </Navbar.Brand>
 
-                    <div className="flex md:order-2 md:w-[150px] justify-center items-center gap-x-4">
+                    <div className="flex md:order-2 md:w-[150px] justify-center  items-center gap-x-4">
                         {!disableLinks && <Navbar.Toggle/>}
                         <DarkThemeToggle onClick={() => setColorMode(colorMode === 'light' ? 'dark' : 'light')}/>
                         <DropdownMenu profilePicSrc={profilePicSrc} username={username}/>
@@ -79,8 +84,8 @@ const Header: FC<Record<string, never>> = function ({
                             <Navbar.Collapse>
                                 <NavbarLink href="/search">Search</NavbarLink>
                                 <NavbarLink href="/list">List</NavbarLink>
-                                {/*<NavbarLink href="/services">Services</NavbarLink>*/}
-                                {/*<NavbarLink href="/pricing">Pricing</NavbarLink>*/}
+                                <NavbarLink href="/map">Map</NavbarLink>
+                                <NavbarLink href="/suggest">Suggest</NavbarLink>
                                 {/*<NavbarLink href="/contact">Contact</NavbarLink>*/}
                             </Navbar.Collapse>
                         </>
@@ -90,5 +95,9 @@ const Header: FC<Record<string, never>> = function ({
         );
     }
 ;
+
+Header.defaultProps = {
+    profilePicSrc: undefined,
+}
 
 export default Header;

@@ -61,7 +61,7 @@ interface Props {
 }
 
 
-export default function Search({data}) {
+export default function List({data}) {
     return (
         <>
             <Head>
@@ -79,23 +79,23 @@ export default function Search({data}) {
                 }
                 <div className="flex dark:bg-gray-900 h-full">
                     <main className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
-                        {/* Search container */}
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-x-4 pt-20">
-                            {/* Search bar */}
-                            <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
-                                <input type="text" placeholder="Search..."
-                                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent"/>
-                            </div>
-                            <button
-                                className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-50">Search
-                            </button>
-                        </div>
-                        <div className="absolute h-full z-0">
-                        </div>
+                        {/*/!* Search container *!/*/}
+                        {/*<div className="flex flex-col md:flex-row items-center justify-center gap-x-4 pt-20">*/}
+                        {/*    /!* Search bar *!/*/}
+                        {/*    <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">*/}
+                        {/*        <input type="text" placeholder="Search..."*/}
+                        {/*               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent"/>*/}
+                        {/*    </div>*/}
+                        {/*    <button*/}
+                        {/*        className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-50">Search*/}
+                        {/*    </button>*/}
+                        {/*</div>*/}
+                        {/*<div className="absolute h-full z-0">*/}
+                        {/*</div>*/}
                     </main>
-                    {/*<div className="order-1">*/}
-                    {/*    <ActualSidebar/>*/}
-                    {/*</div>*/}
+                    <div className="order-1">
+                        <ActualSidebar/>
+                    </div>
                     <Image src="/nassau.jpg" alt="Nassau Hall" className="absolute h-full z-0"
                            layout={"fill"} objectFit={"cover"}
                     />
