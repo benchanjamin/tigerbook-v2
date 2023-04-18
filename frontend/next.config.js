@@ -17,6 +17,10 @@ const nextConfig = {
       {
         source: '/:userId(@[a-zA-Z0-9]+)',
         destination: "/user/:userId",
+      },
+      {
+        source: '/accounts/login',
+        destination: "api.tiger-book.com/accounts/login",
       }
     ]
   }
