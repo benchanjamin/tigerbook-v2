@@ -15,7 +15,11 @@ import environ
 from pathlib import Path
 from datetime import timedelta
 
-env = environ.Env()
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False),
+    RENDER_EXTERNAL_HOSTNAME = (bool, False),
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -246,6 +250,11 @@ ALLOWED_HOSTS = [
     'api.tiger-book.com',
     'www.api.tiger-book.com',
 ]
+
+RENDER_EXTERNAL_HOSTNAME = env('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['http://tiger-book.com',
