@@ -243,8 +243,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '0.0.0.0',
     'localhost',
-    'tiger-book.com',
-    'www.tiger-book.com',
+    'api.tiger-book.com',
+    'www.api.tiger-book.com',
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
