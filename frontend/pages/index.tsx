@@ -50,11 +50,11 @@ export default function Home() {
                                    alt="Tigerbook Logo" width={149} height={40}/>
                         </Link>
                         <div className="flex items-center max-[435px]:justify-between max-[435px]:flex-grow lg:order-2">
-                            <button
-                                onClick={async () => await router.push('/accounts/login')}
+                            <Link
+                                href="https://api.tigerbook.com/accounts/login"
                                 className="text-white bg-primary-400 hover:bg-primary-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-500 dark:hover:bg-primary-600 focus:outline-none dark:focus:ring-primary-800">Log
                                 in with Princeton CAS
-                            </button>
+                            </Link>
                             <button data-collapse-toggle="mobile-menu-2" type="button"
                                     className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                                     aria-controls="mobile-menu-2" aria-expanded="false">
@@ -110,8 +110,8 @@ export default function Home() {
                         <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Search
                             for student involvement in extracurriculars, hometown affiliations, pursued concentrations &
                             certificates, and more!</p>
-                        <button
-                            onClick={async () => await router.push('/accounts/login')}
+                        <Link
+                            href="https://api.tigerbook.com/accounts/login"
                             className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-400 hover:bg-primary-500 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                             Log in with Princeton CAS
                             <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
@@ -120,7 +120,7 @@ export default function Home() {
                                       d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                                       clipRule="evenodd"></path>
                             </svg>
-                        </button>
+                        </Link>
                     </div>
                     <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
                         <Image src="/networking.svg"
