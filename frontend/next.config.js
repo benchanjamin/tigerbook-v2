@@ -20,7 +20,7 @@ const nextConfig = {
       },
       {
         source: '/accounts/login',
-        destination: "api.tiger-book.com/accounts/login",
+        destination: "https://api.tiger-book.com/accounts/login",
       }
     ]
   }
