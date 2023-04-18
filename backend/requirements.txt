@@ -13,3 +13,4 @@ Pillow
 drf-writable-nested
 django-filter
 gunicorn
+whitenoise
