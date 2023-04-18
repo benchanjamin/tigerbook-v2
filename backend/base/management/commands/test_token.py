@@ -39,7 +39,7 @@ class Command(BaseCommand):
         headers = {
             "Authorization": f"Bearer {token}"
         }
-        endpoint = "http://tiger-book.com/api/list/"
+        endpoint = "https://tiger-book.com/api/list/"
         get_response = requests.get(endpoint, headers=headers, verify=False)
         print(get_response.status_code)
         print(get_response.json())
