@@ -14,9 +14,6 @@ import os
 import environ
 from pathlib import Path
 from datetime import timedelta
-import mimetypes
-
-mimetypes.add_type("text/css", ".css", True)
 
 env = environ.Env(
     # set casting, default value
