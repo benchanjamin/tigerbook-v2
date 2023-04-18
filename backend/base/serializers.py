@@ -688,6 +688,8 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
             return obj.profile_pic.url
         # TODO: check if this works with people who don't have a profile pic on residential college facebook
         elif hasattr(obj, 'residential_college_facebook_entry'):
+            if obj.residential_college_facebook_entry is None:
+                return None
             return obj.residential_college_facebook_entry.residential_college_picture_url.url
         else:
             return None
@@ -726,6 +728,9 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
     residential_college = serializers.SerializerMethodField(read_only=True)
     pronouns = serializers.SerializerMethodField(read_only=True)
     profile_pic_url = serializers.SerializerMethodField(read_only=True)
+    aliases = serializers.SerializerMethodField(read_only=True)
+    certificates = serializers.SerializerMethodField(read_only=True)
+    hometown = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -738,13 +743,16 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             'residential_college',
             'pronouns',
             'profile_pic_url',
+            'aliases',
+            'certificates',
+            'hometown'
         ]
 
     def get_username(self, obj):
         request = self.context.get('request')
         if request.user.username in obj.permissions.username_prohibited_usernames:
             return None
-        return get_display_username(obj.user.username)
+        return get_display_username(request.user.username)
 
     def get_full_name(self, obj):
         request = self.context.get('request')
@@ -796,9 +804,37 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             return obj.profile_pic.url
         # TODO: check if this works with people who don't have a profile pic on residential college facebook
         elif hasattr(obj, 'residential_college_facebook_entry'):
+            if obj.residential_college_facebook_entry is None:
+                return None
             return obj.residential_college_facebook_entry.residential_college_picture_url.url
         else:
             return None
+
+    def get_aliases(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.aliases_prohibited_usernames:
+            return None
+        return obj.aliases if hasattr(obj, 'aliases') else None
+
+    def get_certificates(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.certificates_prohibited_usernames:
+            return None
+        certificates = UndergraduateTigerBookCertificatesRetrieveSerializer(obj.certificates, many=True).data \
+            if hasattr(obj, 'certificates') \
+            else None
+        result = []
+        for certificate in certificates:
+            result.append(certificate['certificate'])
+        return result
+
+    def get_hometown(self, obj):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.hometown_prohibited_usernames:
+            return None
+        if hasattr(obj.hometown, 'complete_city'):
+            return obj.hometown.complete_city
+        return None
 
 
 class TigerBookNotesListSerializer(serializers.ModelSerializer):
@@ -838,6 +874,16 @@ class TigerBookNotesCreateSerializer(serializers.ModelSerializer):
         fields = [
             'note_title',
             'note_description'
+        ]
+
+
+class UndergraduateTigerBookCertificatesRetrieveSerializer(serializers.ModelSerializer):
+    certificate = serializers.CharField(read_only=True)
+
+    class Meta:
+        model = UndergraduateTigerBookCertificates
+        fields = [
+            'certificate'
         ]
 
 

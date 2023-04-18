@@ -15,6 +15,8 @@ module.exports = {
         "./node_modules/flowbite/**/*.js",
         "./node_modules/flowbite-react/**/*.js",
         "./components/**/*.{ts,tsx}",
+        "./context/**/*.{ts,tsx}",
+        "./hooks/**/*.{ts,tsx}",
         "./pages/**/*.{ts,tsx}",
     ],
     darkMode: 'class',
@@ -32,7 +34,8 @@ module.exports = {
                     "700": "#773C00",
                     "800": "#3F2000",
                     "900": "#070300"
-                }
+                },
+                dark: "#0e090f"
             },
             zIndex: {
                 '5': '5',

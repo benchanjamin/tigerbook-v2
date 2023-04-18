@@ -36,7 +36,9 @@ import {SetupOneGet} from "@types/setup/one/types";
 import {GetServerSideProps} from "next";
 import {axiosLocalhost} from "../utils/axiosInstance";
 import {AxiosResponse} from "axios/index";
-import React from "react";
+import React, {useState} from "react";
+import TigerBookSearchBar from "@components/headless-ui/TigerBookSearchBar";
+import {useRouter} from "next/router";
 
 interface ServerSideProps {
     data: SetupOneGet
@@ -45,9 +47,15 @@ interface ServerSideProps {
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
 
     const axios = await axiosLocalhost();
-    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`)
+    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,
+        {
+            headers: {
+                Cookie: req.headers.cookie
+            }
+        })
     console.log(axiosResponse.data)
     const data: SetupOneGet = axiosResponse.data;
+
 
     return {
         props: {
@@ -62,6 +70,11 @@ interface Props {
 
 
 export default function Search({data}) {
+    const [query, setQuery] = useState('');
+    const router = useRouter();
+
+    // console.log("Search", query)
+
     return (
         <>
             <Head>
@@ -83,11 +96,11 @@ export default function Search({data}) {
                         <div className="flex flex-col md:flex-row items-center justify-center gap-x-4 pt-20">
                             {/* Search bar */}
                             <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
-                                <input type="text" placeholder="Search..."
-                                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent"/>
+                               <TigerBookSearchBar defaultText="Search by PUID, NetID, nickname, or full name" zIndex={100} setterFunction={setQuery}/>
                             </div>
-                            <button
-                                className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-50">Search
+                            <button onClick={async () => await router.push(`/list/?q=${encodeURIComponent(query)}`)}
+                                className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-50">
+                                List
                             </button>
                         </div>
                         <div className="absolute h-full z-0">

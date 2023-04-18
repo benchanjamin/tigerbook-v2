@@ -16,10 +16,15 @@ interface ServerSideProps {
     data: SetupOneGet
 }
 
-export const getServerSideProps: GetServerSideProps<ServerSideProps> = async () => {
+export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
 
     const axios = await axiosLocalhost();
-    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`)
+    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,
+        {
+            headers: {
+                Cookie: req.headers.cookie
+            }
+        })
     console.log(axiosResponse.data)
     const data: SetupOneGet = axiosResponse.data;
 
@@ -74,10 +79,52 @@ const Two: React.FC<Props> = ({data}) => {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            }).catch((error) => {
-            console.log(error)
-            RESPONSE_ERROR = 1
+            }).then((response) => {
+            if (response.ok) {
+                return response
+            }
         })
+            .catch((error) => {
+                RESPONSE_ERROR = 1
+                const errorObject = error.response.data
+                let errorString = errorObject == undefined ? error.message : ''
+                for (const property in errorObject) {
+                    errorString = errorString + `${property}: ${errorObject[property]}\n`;
+                }
+                context.showNotification({
+                    description: String(errorString),
+                })
+            })
+
+        console.log(axiosResponse)
+        if (RESPONSE_ERROR === 0) {
+            await router.push("/search")
+        }
+    }
+
+    async function onClick() {
+        const postData = {
+            profile_pic: null
+        }
+        let RESPONSE_ERROR = 0
+        const axios = await axiosLocalhost();
+        let axiosResponse: AxiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/setup/two/`,
+            postData).then((response) => {
+            if (response.ok) {
+                return response
+            }
+        })
+            .catch((error) => {
+                RESPONSE_ERROR = 1
+                const errorObject = error.response.data
+                let errorString = errorObject == undefined ? error.message : ''
+                for (const property in errorObject) {
+                    errorString = errorString + `${property}: ${errorObject[property]}\n`;
+                }
+                context.showNotification({
+                    description: String(errorString),
+                })
+            })
 
         console.log(axiosResponse)
         if (RESPONSE_ERROR === 0) {
@@ -88,11 +135,12 @@ const Two: React.FC<Props> = ({data}) => {
     return (
         <SidebarProvider>
             {data.profile_pic != undefined ?
-                <Header disableSideBar={true} disableLinks={true} profilePicSrc={data.profile_pic}/>
+                <Header disableSideBar={true} disableLinks={true} profilePicSrc={data.profile_pic}
+                        username={data.username}/>
                 : (data.residential_college_facebook_entry != undefined ?
-                    <Header disableSideBar={true} disableLinks={true}
+                    <Header disableSideBar={true} disableLinks={true} username={data.username}
                             profilePicSrc={data.residential_college_facebook_entry.photo_url}/>
-                    : <Header disableSideBar={true} disableLinks={true}/>)
+                    : <Header disableSideBar={true} disableLinks={true} username={data.username}/>)
             }
             <div className="fixed -z-10 h-screen w-screen">
                 <Image src="/nassau.jpg" alt="Nassau Hall" className="bg-repeat bg-repeat-y"
@@ -103,7 +151,7 @@ const Two: React.FC<Props> = ({data}) => {
             </div>
             <main className="flex flex-col justify-center items-center">
                 <section
-                    className="w-[90%] bg-white m-2 p-6 dark:bg-gray-900 z-10 lg:w-[50%] rounded-2xl relative">
+                    className="w-[90%] bg-white m-2 p-6 dark:bg-gray-900 z-10 lg:w-[50%] rounded-2xl relative shadow-2xl">
                     <div className="px-4 mt-2 mb-4 text-center mx-auto max-w-2xl ">
                         <h5 className="text-gray-600 dark:text-gray-200 text-medium font-medium">
                             Let&apos;s setup your profile picture!
@@ -170,12 +218,16 @@ const Two: React.FC<Props> = ({data}) => {
                     </div>
                     <form onSubmit={submitHandler}>
                         <div className="flex justify-center mb-2 max-2xl gap-x-16">
+                            <div onClick={onClick}
+                                 className="cursor-pointer inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-gray-400 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-gray-900 hover:bg-gray-500"
+                            >
+                                Use placeholder image
+                            </div>
                             <div onClick={() => router.push("/search")}
-                                    className="cursor-pointer inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-gray-400 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-gray-900 hover:bg-gray-500"
+                                 className="cursor-pointer inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-gray-400 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-gray-900 hover:bg-gray-500"
                             >
                                 Skip for now
                             </div>
-
                             <button type="submit"
                                     className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"
                             >

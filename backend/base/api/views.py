@@ -12,6 +12,7 @@ from base.models import UndergraduateTigerBookDirectory, TigerBookNotes, Generic
     UndergraduateToBeApprovedSubmissions, UndergraduateTigerBookConcentrations, UndergraduateTigerBookClassYears, \
     UndergraduateTigerBookResidentialColleges, TigerBookCities, UndergraduateTigerBookCertificates, \
     UndergraduateTigerBookTracks, TigerBookPronouns
+from base.pagination import StandardResultsSetPagination
 from base.serializers import (
     UndergraduateTigerBookDirectorySetupFirstPageSerializer,
     UndergraduateTigerBookDirectoryProfileFullSerializer,
@@ -143,6 +144,10 @@ class UndergraduateProfileSetupSecondPageView(UndergraduateProfileEdit):
 
     def get(self, request):
         instance = self.get_object()
+        if not instance.has_setup_profile.has_setup_page_one:
+            return Response(
+                {"invalid": "setup profile page two is not allowed until setup profile page one is complete"},
+                status=status.HTTP_403_FORBIDDEN)
         serializer = self.serializer_class(instance)
         return Response(serializer.data)
 
@@ -151,7 +156,8 @@ class UndergraduateProfileSetupSecondPageView(UndergraduateProfileEdit):
         if instance.has_setup_profile.has_setup_page_one:
             return self.update(request, *args, **kwargs)
         return Response(
-            {"invalid": "setup profile page two is not allowed until setup profile page one is complete"})
+            {"invalid": "setup profile page two is not allowed until setup profile page one is complete"},
+            status=status.HTTP_403_FORBIDDEN)
 
 
 class UndergraduateFullProfileEditView(UndergraduateProfileEdit):
@@ -187,13 +193,15 @@ class UndergraduateTigerBookDirectorySearchView(ListModelMixin,
     def get_queryset(self, **kwargs):
         qs = super().get_queryset()
         query = self.request.GET.get('q', None)
-        if query is None:
+        if query is None or query == '':
             return None
         lookup = Q(active_directory_entry__puid__icontains=query) | Q(
             active_directory_entry__net_id__icontains=query) | Q(
             aliases__icontains=query) | Q(
-            active_directory_entry__email__icontains=query) | Q(
             active_directory_entry__full_name__icontains=query)
+        # if query contains @ symbol, assume it's an email address
+        if '@' in query:
+            lookup = Q(active_directory_entry__email__icontains=query)
         return qs.filter(lookup).order_by('active_directory_entry__full_name')
 
     def get(self, request, *args, **kwargs):
@@ -210,24 +218,33 @@ class UndergraduateTigerBookDirectoryListView(ListModelMixin,
     serializer_class = UndergraduateTigerBookDirectoryListSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = UndergraduateDirectoryListFilter
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         qs = super().get_queryset()
         request = self.request
         pu_status = request.user.cas_profile.pu_status
-        lookup = None
+        first_lookup = None
         match pu_status:
             case 'fac':
-                lookup = Q(permissions__is_visible_to_faculty=False)
+                first_lookup = Q(permissions__is_visible_to_faculty=False)
             case 'undergraduate':
-                lookup = Q(permissions__is_visible_to_undergrads=False)
+                first_lookup = Q(permissions__is_visible_to_undergrads=False)
             case 'graduate':
-                lookup = Q(permissions__is_visible_to_graduate_students=False)
+                first_lookup = Q(permissions__is_visible_to_graduate_students=False)
             case 'stf':
-                lookup = Q(permissions__is_visible_to_staff=False)
+                first_lookup = Q(permissions__is_visible_to_staff=False)
             case '#sv':
-                lookup = Q(permissions__is_visible_to_service_accounts=False)
-        return qs.exclude(lookup)
+                first_lookup = Q(permissions__is_visible_to_service_accounts=False)
+        query = request.GET.get('q', '')
+        second_lookup = Q(active_directory_entry__puid__icontains=query) | Q(
+            active_directory_entry__net_id__icontains=query) | Q(
+            aliases__icontains=query) | Q(
+            active_directory_entry__full_name__icontains=query)
+        # if query contains @ symbol, assume it's an email address
+        if '@' in query:
+            second_lookup = Q(active_directory_entry__email__icontains=query)
+        return qs.exclude(first_lookup).filter(second_lookup).order_by('active_directory_entry__full_name')
 
     def get_object(self):
         queryset = self.get_queryset()

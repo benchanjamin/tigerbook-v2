@@ -27,9 +27,14 @@ interface ServerSideProps {
     pronouns: SetupOnePost['pronouns'],
 }
 
-export const getServerSideProps: GetServerSideProps<ServerSideProps> = async () => {
+export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
     const axios = await axiosLocalhost();
-    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`)
+    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,
+        {
+            headers: {
+                Cookie: req.headers.cookie
+            }
+        })
     console.log(axiosResponse.data)
     const data: SetupOneGet = axiosResponse.data;
 
@@ -66,7 +71,11 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async () 
     const listData = {}
 
     for (const [index, apiRoute] of apiListAPIRoutes.entries()) {
-        const axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}${apiRoute}`)
+        const axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}${apiRoute}`, {
+            headers: {
+                Cookie: req.headers.cookie
+            }
+        })
         listData[keys[index]] = axiosResponse.data.map((item) => item[indices[index]])
     }
 
@@ -175,7 +184,8 @@ const One: React.FC<Props> = ({
     return (
         <SidebarProvider>
             {data.profile_pic != undefined ?
-                <Header disableSideBar={true} disableLinks={true} profilePicSrc={data.profile_pic} username={data.username}/>
+                <Header disableSideBar={true} disableLinks={true} profilePicSrc={data.profile_pic}
+                        username={data.username}/>
                 : (data.residential_college_facebook_entry != undefined ?
                     <Header disableSideBar={true} disableLinks={true}
                             profilePicSrc={data.residential_college_facebook_entry.photo_url}
@@ -184,16 +194,14 @@ const One: React.FC<Props> = ({
                               username={data.username}/>)
             }
             <div className="fixed -z-10 h-screen w-screen">
-                <Image src="/nassau.jpg" alt="Nassau Hall" className="bg-repeat bg-repeat-y"
+                <Image src="/nassau.jpg" alt="Nassau Hall"
                        fill
                        style={{objectFit: "cover"}}
-
                 />
             </div>
             <main className="flex flex-col justify-center items-center">
-
                 <section
-                    className="w-[90%] bg-white m-2 p-6 dark:bg-gray-900 z-10 lg:w-[50%] rounded-2xl relative">
+                    className="w-[90%] bg-white m-2 p-6 dark:bg-gray-900 z-10 lg:w-[50%] rounded-2xl relative shadow-2xl">
                     <div className="px-4 py-2 text-center mx-auto max-w-2xl ">
                         <h1 className="text-2xl font-bold dark:text-white">
                             Welcome, {data.active_directory_entry.full_name}!

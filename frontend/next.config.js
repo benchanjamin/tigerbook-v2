@@ -11,29 +11,15 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-  // images: {
-  //   // formats: ['image/avif', 'image/webp', 'image/jpg'],
-  //   // remotePatterns: [
-  //   //   {
-  //   //     protocol: 'https',
-  //   //     hostname: 'tigerbook-v2.s3.amazonaws.com',
-  //   //     port: '',
-  //   //     pathname: '/static/**',
-  //   //   },
-  //   // ],
-  //   domains: ['tigerbook-v2.s3.amazonaws.com'],
-  // },
   reactStrictMode: true,
-  async redirects() {
+  async rewrites() {
     return [
       {
-        source: '/login',
-        destination: 'http://localhost:8000/accounts/login',
-        permanent: false,
-        basePath: false
-      },
+        source: '/:userId(@[a-zA-Z0-9]+)',
+        destination: "/user/:userId",
+      }
     ]
-  },
+  }
 }
 
 module.exports = nextConfig

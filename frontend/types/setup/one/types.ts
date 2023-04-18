@@ -42,3 +42,36 @@ export interface SetupTwoGet {
 }
 
 export type SetupTwoPost = FormData
+
+export interface ListData {
+    count: number;
+    next: null | string
+    previous: null | string;
+    results: ListUser[];
+}
+
+export interface ListUser {
+    username: string;
+    full_name: string;
+    track: string;
+    concentration: string;
+    class_year: number;
+    residential_college: string;
+    pronouns: string | null;
+    profile_pic_url: string;
+    url: string;
+}
+
+export interface User {
+    username:            string;
+    full_name:           string;
+    track:               string;
+    concentration:       string;
+    class_year:          number;
+    residential_college: string;
+    pronouns:            null | string
+    profile_pic_url:     null | string;
+    aliases:             string[];
+    certificates:        string[];
+    hometown:            null | string;
+}

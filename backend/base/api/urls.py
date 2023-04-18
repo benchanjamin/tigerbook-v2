@@ -26,7 +26,7 @@ urlpatterns = [
     path('list/', UndergraduateTigerBookDirectoryListView.as_view(),
          name="undergraduates-all"),
     # TODO: add search functionality
-    path('directory/search/', UndergraduateTigerBookDirectorySearchView.as_view(), name="search"),
+    path('search/', UndergraduateTigerBookDirectorySearchView.as_view(), name="search"),
     path('notes/', TigerBookNotesListView.as_view(), name='individual-notes-list'),
     # TODO: add validation for categories
     path('category-submission/create/', UndergraduateToBeApprovedSubmissionsCreateView.as_view()),

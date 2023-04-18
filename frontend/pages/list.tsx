@@ -32,67 +32,112 @@ import {
 } from "react-icons/hi";
 import Sidebar from "@components/ui/Sidebar";
 import Header from "@components/ui/Header";
-import {SetupOneGet} from "@types/setup/one/types";
+import {ListData, SetupOneGet} from "@types/setup/one/types";
 import {GetServerSideProps} from "next";
 import {axiosLocalhost} from "../utils/axiosInstance";
-import {AxiosResponse} from "axios/index";
-import React from "react";
+import {AxiosResponse} from "axios";
+import React, {useEffect, useState} from "react";
+import Container from "@components/list/Container";
+import Heading from "@components/list/Heading";
+import Card from "@components/list/Card";
+import TigerBookSearchBar from "@components/headless-ui/TigerBookListBar";
+import TigerBookListBar from "@components/headless-ui/TigerBookListBar";
+import {useRouter} from "next/router";
 
 interface ServerSideProps {
     data: SetupOneGet
 }
 
-export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
+export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({query,req}) => {
 
     const axios = await axiosLocalhost();
-    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`)
+    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,
+        {
+            headers: {
+                Cookie: req.headers.cookie
+            }
+        })
     console.log(axiosResponse.data)
-    const data: SetupOneGet = axiosResponse.data;
+    const profileData: SetupOneGet = axiosResponse.data;
+
+    let listURL = `${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/list/`;
+    if ('q' in query) {
+        listURL += `?q=${query.q}`;
+    }
+    axiosResponse = await axios.get(listURL,
+        {
+            headers: {
+                Cookie: req.headers.cookie
+            }
+        })
+    const listData: ListData = axiosResponse.data;
+    console.log(listData)
 
     return {
         props: {
-            data
+            profileData,
+            listData
         },
     }
 };
 
 interface Props {
-    data: SetupOneGet
+    profileData: SetupOneGet
+    listData: ListData
 }
 
 
-export default function List({data}) {
+const List: React.FC<Props> = ({profileData, listData}) => {
+    const [query, setQuery] = useState('');
+    const router = useRouter();
+
+    // useEffect(() => {
+    //
+    //     return () => {
+    //         effect
+    //     };
+    // }, [query]);
+
+
     return (
         <>
             <Head>
                 <title>Tigerbook</title>
             </Head>
             <SidebarProvider>
-                {data.profile_pic != undefined ?
-                    <Header disableSideBar={true} disableLinks={false} profilePicSrc={data.profile_pic} username={data.username}/>
-                    : (data.residential_college_facebook_entry != undefined ?
+                {profileData.profile_pic != undefined ?
+                    <Header disableSideBar={true} disableLinks={false} profilePicSrc={profileData.profile_pic}
+                            username={profileData.username}/>
+                    : (profileData.residential_college_facebook_entry != undefined ?
                         <Header disableSideBar={true} disableLinks={false}
-                                profilePicSrc={data.residential_college_facebook_entry.photo_url}
-                                username={data.username}/>
+                                profilePicSrc={profileData.residential_college_facebook_entry.photo_url}
+                                username={profileData.username}/>
                         : <Header disableSideBar={true} disableLinks={false}
-                                  username={data.username}/>)
+                                  username={profileData.username}/>)
                 }
                 <div className="flex dark:bg-gray-900 h-full">
                     <main className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
-                        {/*/!* Search container *!/*/}
-                        {/*<div className="flex flex-col md:flex-row items-center justify-center gap-x-4 pt-20">*/}
-                        {/*    /!* Search bar *!/*/}
-                        {/*    <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">*/}
-                        {/*        <input type="text" placeholder="Search..."*/}
-                        {/*               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent"/>*/}
-                        {/*    </div>*/}
-                        {/*    <button*/}
-                        {/*        className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-50">Search*/}
-                        {/*    </button>*/}
-                        {/*</div>*/}
-                        {/*<div className="absolute h-full z-0">*/}
-                        {/*</div>*/}
+                        <Container className="bg-gray-50 pt-4 rounded-2xl pb-10 dark:bg-gray-800">
+                            <div className="flex flex-col md:flex-row items-center justify-center gap-x-4">
+                                <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
+                                    <TigerBookListBar defaultText="Search by PUID, NetID, nickname, or full name"
+                                                      zIndex={100} setterFunction={setQuery}/>
+                                </div>
+                                <button onClick={async () => await router.push(`/list/?q=${encodeURIComponent(query)}`)}
+                                        className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-50">
+                                    List
+                                </button>
+                            </div>
+                            <div
+                                className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4xl:grid-cols-5 2xl:grid-cols-6 gap-8"
+                            >
+                                {listData.results.map((item, index) => (
+                                    <Card key={index} personData={item}/>
+                                ))}
+                            </div>
+                        </Container>
                     </main>
+
                     <div className="order-1">
                         <ActualSidebar/>
                     </div>
@@ -162,3 +207,5 @@ function ActualSidebar(): JSX.Element {
         </Sidebar>
     );
 }
+
+export default List;
