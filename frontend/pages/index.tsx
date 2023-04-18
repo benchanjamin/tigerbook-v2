@@ -51,7 +51,7 @@ export default function Home() {
                         </Link>
                         <div className="flex items-center max-[435px]:justify-between max-[435px]:flex-grow lg:order-2">
                             <Link
-                                href="https://api.tigerbook.com/accounts/login"
+                                href="https://api.tiger-book.com/accounts/login"
                                 className="text-white bg-primary-400 hover:bg-primary-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-500 dark:hover:bg-primary-600 focus:outline-none dark:focus:ring-primary-800">Log
                                 in with Princeton CAS
                             </Link>
@@ -111,7 +111,7 @@ export default function Home() {
                             for student involvement in extracurriculars, hometown affiliations, pursued concentrations &
                             certificates, and more!</p>
                         <Link
-                            href="https://api.tigerbook.com/accounts/login"
+                            href="https://api.tiger-book.com/accounts/login"
                             className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-400 hover:bg-primary-500 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                             Log in with Princeton CAS
                             <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
