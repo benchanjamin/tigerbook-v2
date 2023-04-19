@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         '/api-django/tracks/',
         '/api-django/residential-colleges/',
         '/api-django/class-years/',
-        '/api-django/cities/',
+        // '/api-django/cities/',
         '/api-django/certificates/',
         '/api-django/pronouns/',
     ]
