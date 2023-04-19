@@ -108,7 +108,7 @@ const One: React.FC<Props> = ({
     const [myTrack, setMyTrack] = useState(data.track);
     const [myResidentialCollege, setMyResidentialCollege] = useState(data.residential_college);
     const [myClassYear, setMyClassYear] = useState(data.class_year);
-    const [myHometown, setMyHometown] = useState([]);
+    const [myHometown, setMyHometown] = useState(data.hometown);
     const [myPronouns, setMyPronouns] = useState(data.pronouns);
     const [myCertificates, setMyCertificates] = useState(data.certificates);
     const [myAliases, setMyAliases] = useState(data.aliases);
@@ -349,7 +349,7 @@ const One: React.FC<Props> = ({
                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hometown
                                     </label>
                                     <TigerBookComboBoxSingleStrictSelect
-                                        data={cities}
+                                        data={[]}
                                         defaultText="Select hometown"
                                         initialSelected={myHometown}
                                         zIndex={8}
