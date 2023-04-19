@@ -349,7 +349,7 @@ const One: React.FC<Props> = ({
                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hometown
                                     </label>
                                     <TigerBookComboBoxSingleStrictSelect
-                                        data={[]}
+                                        data={cities}
                                         defaultText="Select hometown"
                                         initialSelected={myHometown}
                                         zIndex={8}
