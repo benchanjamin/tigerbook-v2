@@ -1,7 +1,7 @@
 import {Menu, Transition} from '@headlessui/react'
 import {Fragment, useEffect, useRef, useState} from 'react'
 import {ChevronDownIcon} from '@heroicons/react/20/solid'
-import Avatar from "@components/dropdown-menu/Avatar";
+import Avatar from "@components/dropdown-menu/Avatar/Avatar";
 import {useRouter} from "next/navigation";
 
 export default function DropdownMenu({profilePicSrc, username}) {
