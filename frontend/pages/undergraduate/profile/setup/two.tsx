@@ -221,13 +221,13 @@ const Two: React.FC<Props> = ({data}) => {
                             <div onClick={onClick}
                                  className="cursor-pointer inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-gray-400 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-gray-900 hover:bg-gray-500"
                             >
-                                Use placeholder image
+                                Use default image
                             </div>
-                            <div onClick={() => router.push("/search")}
-                                 className="cursor-pointer inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-gray-400 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-gray-900 hover:bg-gray-500"
-                            >
-                                Skip for now
-                            </div>
+                            {/*<div onClick={() => router.push("/search")}*/}
+                            {/*     className="cursor-pointer inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-gray-400 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-gray-900 hover:bg-gray-500"*/}
+                            {/*>*/}
+                            {/*    Skip for now*/}
+                            {/*</div>*/}
                             <button type="submit"
                                     className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"
                             >
