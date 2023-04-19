@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         'tracks',
         'residentialColleges',
         'classYears',
-        'cities',
+        // 'cities',
         'certificates',
         'pronouns',
     ]
@@ -62,7 +62,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         'track',
         'residential_college',
         'class_year',
-        'complete_city',
+        // 'complete_city',
         'certificate',
         'pronouns',
     ]
@@ -108,7 +108,7 @@ const One: React.FC<Props> = ({
     const [myTrack, setMyTrack] = useState(data.track);
     const [myResidentialCollege, setMyResidentialCollege] = useState(data.residential_college);
     const [myClassYear, setMyClassYear] = useState(data.class_year);
-    const [myHometown, setMyHometown] = useState(data.hometown);
+    const [myHometown, setMyHometown] = useState([]);
     const [myPronouns, setMyPronouns] = useState(data.pronouns);
     const [myCertificates, setMyCertificates] = useState(data.certificates);
     const [myAliases, setMyAliases] = useState(data.aliases);
