@@ -118,8 +118,8 @@ class UndergraduateProfileEdit(UpdateModelMixin, GenericAPIView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        lookup = Q(user=self.request.user) & Q(user__cas_profile__pu_status=
-                                               settings.PU_STATUS_UNDERGRADUATE)
+        lookup = Q(user__username__exact=self.request.user.username) & Q(user__cas_profile__pu_status=
+                                                                         settings.PU_STATUS_UNDERGRADUATE)
         return qs.filter(lookup)
 
     def get_object(self):
