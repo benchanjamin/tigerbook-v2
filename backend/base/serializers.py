@@ -52,7 +52,7 @@ class UndergraduateResidentialCollegesListAPISerializer(serializers.ModelSeriali
 
 
 class CitiesListAPISerializer(serializers.ModelSerializer):
-    # complete_city = serializers.ReadOnlyField()
+    complete_city = serializers.ReadOnlyField()
 
     class Meta:
         model = TigerBookCities
