@@ -5,7 +5,7 @@ export const axiosInstance = async () => {
         withCredentials: true,
         xsrfCookieName: 'csrftoken',
         xsrfHeaderName: 'X-CSRFToken',
-        timeout: 5000,
+        // timeout: 10000,
 
     });
 }
@@ -23,7 +23,7 @@ export const axiosLocalhost = async () => {
         withCredentials: true,
         xsrfCookieName: 'csrftoken',
         xsrfHeaderName: 'X-CSRFToken',
-        timeout: 5000,
+        // timeout: 10000,
     });
 }
 

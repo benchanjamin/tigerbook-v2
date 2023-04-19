@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         '/api-django/tracks/',
         '/api-django/residential-colleges/',
         '/api-django/class-years/',
-        // '/api-django/cities/',
+        '/api-django/cities/',
         '/api-django/certificates/',
         '/api-django/pronouns/',
     ]
@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         'tracks',
         'residentialColleges',
         'classYears',
-        // 'cities',
+        'cities',
         'certificates',
         'pronouns',
     ]
@@ -62,7 +62,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         'track',
         'residential_college',
         'class_year',
-        // 'complete_city',
+        'complete_city',
         'certificate',
         'pronouns',
     ]
