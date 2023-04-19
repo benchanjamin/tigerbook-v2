@@ -35,7 +35,6 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
                 Cookie: req.headers.cookie
             }
         })
-    console.log(axiosResponse.data)
     const data: SetupOneGet = axiosResponse.data;
 
     const apiListAPIRoutes = [
@@ -78,8 +77,6 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         })
         listData[keys[index]] = axiosResponse.data.map((item) => item[indices[index]])
     }
-
-    console.log("listData", listData)
 
     return {
         props: {
