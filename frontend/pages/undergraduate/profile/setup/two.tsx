@@ -157,36 +157,36 @@ const Two: React.FC<Props> = ({data}) => {
                             Let&apos;s setup your profile picture!
                         </h5>
                     </div>
-                    {data.residential_college_facebook_entry != undefined ?
-                        (<div className="flex relative justify-center items-center w-full ">
+                    {data.profile_pic != undefined ?
+                        (<div className="flex relative justify-center items-center w-full">
                             {!isImageReady &&
                                 <Spinner
                                     id="spinner"
                                     color="warning"
                                     className="h-[200px] w-[200px]"/>}
                             <div id='height-adjustment' className="relative opacity-0">
-                                <Image src={data.residential_college_facebook_entry.photo_url}
+                                <Image src={data.profile_pic}
                                        alt={`Photo of ${data.username}`}
-                                       className="border-2 border-primary-100 dark:border-opacity-50 rounded-2xl"
                                        onLoad={onLoadCallBack}
+                                       className="border-2 border-primary-100 dark:border-opacity-50 rounded-2xl"
                                        fill
                                        style={{objectFit: "cover"}}
                                 />
                             </div>
                         </div>)
                         :
-                        (data.profile_pic != undefined ?
-                                (<div className="flex relative justify-center items-center w-full">
+                        (data.residential_college_facebook_entry != undefined ?
+                                (<div className="flex relative justify-center items-center w-full ">
                                     {!isImageReady &&
                                         <Spinner
                                             id="spinner"
                                             color="warning"
                                             className="h-[200px] w-[200px]"/>}
                                     <div id='height-adjustment' className="relative opacity-0">
-                                        <Image src={data.profile_pic}
+                                        <Image src={data.residential_college_facebook_entry.photo_url}
                                                alt={`Photo of ${data.username}`}
-                                               onLoad={onLoadCallBack}
                                                className="border-2 border-primary-100 dark:border-opacity-50 rounded-2xl"
+                                               onLoad={onLoadCallBack}
                                                fill
                                                style={{objectFit: "cover"}}
                                         />
