@@ -12,9 +12,9 @@ function Card({personData}: { personData: ListUser }) {
     return (
         <div
             onClick={() => router.push(`/@${personData.username}`)}
-            className="col-span-1 cursor-pointer group"
+            className="flex flex-col col-span-1 cursor-pointer group"
         >
-            <div className="flex flex-col w-full">
+            {/*<div className="w-full">*/}
                 <div
                     className="aspect-square w-full relative overflow-hidden rounded-t-xl bg-gray-200"
                 >
@@ -48,7 +48,7 @@ function Card({personData}: { personData: ListUser }) {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-y-1 rounded-b-xl bg-gray-200 dark:bg-dark p-2 px-3">
+                <div className="flex flex-col gap-y-1 rounded-b-xl bg-gray-200 dark:bg-dark p-2 px-3 h-1/2">
                     <h5 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">
                         {personData.full_name} {`\'${String(personData.class_year).substring(2, 4)}`} {personData.pronouns && `(${personData.pronouns})`}
                     </h5>
@@ -56,7 +56,7 @@ function Card({personData}: { personData: ListUser }) {
                         {personData.concentration}
                     </p>
                 </div>
-            </div>
+            {/*</div>*/}
         </div>
     );
 }
