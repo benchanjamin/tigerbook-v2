@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, {useContext, useState} from "react";
 import {GetServerSideProps, NextPage} from "next";
 import {SetupOneGet, SetupOnePost} from "@types/setup/one/types";
-import {axiosInstance, axiosInstance} from "../../../../utils/axiosInstance";
+import {axiosInstance} from "../../../../utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import axios from "axios";
 import TigerBookListBox from "@components/headless-ui/TigerBookListBox";

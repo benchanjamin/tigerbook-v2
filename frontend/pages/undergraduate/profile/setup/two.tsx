@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, {useContext} from "react";
 import {SidebarProvider} from "../../../../context/SidebarContext";
 import {SetupOneGet, SetupTwoGet, SetupTwoPost} from "@types/setup/one/types";
-import {axiosInstance, axiosInstance} from "../../../../utils/axiosInstance";
+import {axiosInstance} from "../../../../utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import {useState} from 'react';
 import {useRouter} from "next/navigation";
