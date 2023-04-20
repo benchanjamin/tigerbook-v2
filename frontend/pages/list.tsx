@@ -48,7 +48,7 @@ interface ServerSideProps {
     data: SetupOneGet
 }
 
-export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({query,req}) => {
+export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({query, req}) => {
 
     const axios = await axiosLocalhost();
     let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,
@@ -121,7 +121,8 @@ const List: React.FC<Props> = ({profileData, listData}) => {
                             <div className="flex flex-col md:flex-row items-center justify-center gap-x-4">
                                 <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
                                     <TigerBookListBar defaultText="Search by PUID, NetID, nickname, or full name"
-                                                      zIndex={100} setterFunction={setQuery}/>
+                                                      zIndex={100} setterFunction={setQuery}
+                                                      autoComplete="off"/>
                                 </div>
                                 <button onClick={async () => await router.push(`/list/?q=${encodeURIComponent(query)}`)}
                                         className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-50">
