@@ -12,7 +12,7 @@ function Card({personData}: { personData: ListUser }) {
     return (
         <div
             onClick={() => router.push(`/@${personData.username}`)}
-            className="flex flex-col col-span-1 cursor-pointer group"
+            className="flex flex-col col-span-1 cursor-pointer group overflow-hidden"
         >
             {/*<div className="w-full">*/}
                 <div
