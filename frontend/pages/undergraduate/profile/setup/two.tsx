@@ -68,7 +68,7 @@ const Two: React.FC<Props> = ({data}) => {
         }
 
         let formData: SetupTwoPost = new FormData()
-        formData.append('profile_pic', files[0])
+        formData.append('profile_pic', files[0], 'profile_pic')
 
         let RESPONSE_ERROR = 0
         const axios = await axiosLocalhost();
