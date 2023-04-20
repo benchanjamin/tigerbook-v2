@@ -12,7 +12,7 @@ class PublicMediaStorage(S3Boto3Storage):
 
     def get_available_name(self, name):
         now = time.time()
-        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S-%f')
         return '{0}_{1}'.format(name, str(stamp))
 
 
@@ -29,7 +29,7 @@ class PrivateResidentialCollegeFacebookMediaStorage(S3Boto3Storage):
 
     def get_available_name(self, name):
         now = time.time()
-        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S-%f')
         return '{0}_{1}'.format(name, str(stamp))
 
 
@@ -47,7 +47,7 @@ class PrivateTigerBookUndergraduateMediaStorage(S3Boto3Storage):
 
     def get_available_name(self, name):
         now = time.time()
-        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S-%f')
         return '{0}_{1}'.format(name, str(stamp))
 
 
@@ -63,7 +63,7 @@ class PrivateTigerBookGraduateMediaStorage(S3Boto3Storage):
 
     def get_available_name(self, name):
         now = time.time()
-        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S-%f')
         return '{0}_{1}'.format(name, str(stamp))
 
 
@@ -79,7 +79,7 @@ class PrivateTigerBookUndergraduateAlumniMediaStorage(S3Boto3Storage):
 
     def get_available_name(self, name):
         now = time.time()
-        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S-%f')
         return '{0}_{1}'.format(name, str(stamp))
 
 
@@ -95,7 +95,7 @@ class PrivateTigerBookGraduateAlumniMediaStorage(S3Boto3Storage):
 
     def get_available_name(self, name):
         now = time.time()
-        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S-%f')
         return '{0}_{1}'.format(name, str(stamp))
 
 
@@ -111,7 +111,7 @@ class PrivateTigerBookGraduateAlumniMediaStorage(S3Boto3Storage):
 
     def get_available_name(self, name):
         now = time.time()
-        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S-%f')
         return '{0}_{1}'.format(name, str(stamp))
 
 
@@ -127,5 +127,5 @@ class PrivateTigerBookExtracurricularsMediaStorage(S3Boto3Storage):
 
     def get_available_name(self, name):
         now = time.time()
-        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S-%f')
         return '{0}_{1}'.format(name, str(stamp))
