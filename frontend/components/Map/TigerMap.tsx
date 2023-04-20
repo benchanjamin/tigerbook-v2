@@ -248,17 +248,9 @@ function TigerMap() {
 
 
     return (
-        <>
-            <div
-                className={`flex items-start md:pt-[7rem] pt-[3rem] pb-[5rem] mb-[4.25rem] md:pb-0 md:mb-0 section-container mb-4`}>
-                <h2 className={classes.map_header_title}>
-                    Data Visualization of Mappable Locations in the Nineteenth-Century Literary Fairy Tale
-                </h2>
-            </div>
-            <div id="chart" className="relative">
-                <svg ref={svgRef} id="svg-main" xmlns="http://www.w3.org/1999/xhtml"/>
-            </div>
-        </>
+        <div id="chart" className="relative">
+            <svg ref={svgRef} id="svg-main" xmlns="http://www.w3.org/1999/xhtml"/>
+        </div>
     );
 }
 
