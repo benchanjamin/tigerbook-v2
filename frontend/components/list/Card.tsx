@@ -29,7 +29,7 @@ function Card({personData}: { personData: ListUser }) {
                             setIsImageReady(true)
                             setIsImageReady(false)
                         }}
-                        className="object-cover h-full w-full group-hover:scale-110 transition"
+                        className="object-cover h-full w-full group-hover:scale-110 transition rounded-t-xl"
                         src={personData.profile_pic_url != null ? personData.profile_pic_url : "/static/placeholder.jpg"}
                         alt={`Picture of ${personData.full_name}`}
                     />
