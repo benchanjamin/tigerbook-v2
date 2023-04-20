@@ -66,7 +66,7 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
             <main className="flex flex-col justify-center items-center">
                 <section
                     className=" bg-white m-2 p-6 px-4 sm:px-20 dark:bg-gray-900 z-10 rounded-2xl relative shadow-2xl">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-30">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
                         <div className="flex flex-col items-center sm:items-start">
                             <div className="relative w-[200px] h-[200px]">
                                 {!isImageReady &&
