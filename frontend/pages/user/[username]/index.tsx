@@ -2,20 +2,19 @@ import React, {useState} from 'react';
 import {GetServerSideProps} from "next";
 import {axiosLocalhost} from "../../../utils/axiosInstance";
 import {AxiosResponse} from "axios";
-import {SetupOneGet, User} from "@types/setup/one/types";
+import {HeaderType, User} from "@types/setup/one/types";
 import Image from "next/image";
-import Header from "@components/ui/Header";
 import {SidebarProvider} from "../../../context/SidebarContext";
 import {Spinner} from "flowbite-react";
-import TigerBookComboBoxMultipleFFASelect from "@components/headless-ui/TigerBookComboBoxMultipleFFASelect";
-import TigerBookListBox from "@components/headless-ui/TigerBookListBox";
-import TigerBookComboBoxSingleStrictSelect from "@components/headless-ui/TigerBookComboBoxSingleStrictSelect";
-import TigerBookComboBoxMultipleStrictSelect from "@components/headless-ui/TigerBookComboBoxMultipleStrictSelect";
+import Header from "@components/ui/Header";
 
 
-export const getServerSideProps = async ({query, req}) => {
+export const getServerSideProps: GetServerSideProps<Props> = async ({query, req}) => {
     const axios = await axiosLocalhost();
-    const username = query.username.slice(1)
+    let username = query.username
+    if (username !== undefined) {
+        username = username.slice(1)
+    }
     let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/directory/${username}/`,
         {
             headers: {
@@ -25,23 +24,38 @@ export const getServerSideProps = async ({query, req}) => {
     console.log(axiosResponse.data)
     const userData: User = axiosResponse.data;
 
+    axiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/header/`,
+        {
+            headers: {
+                Cookie: req.headers.cookie
+            }
+        })
+    console.log(axiosResponse.data)
+    const headerData: HeaderType = axiosResponse.data;
+
     return {
         props: {
-            userData
+            userData,
+            headerData
         }
     }
 }
 
-const Index: React.FC<User> = ({userData}: { userData: User }) => {
+interface Props {
+    userData: User
+    headerData: HeaderType
+}
+
+const Index: React.FC<Props> = ({userData, headerData}) => {
     const [isImageReady, setIsImageReady] = useState(false);
 
     return (
         <SidebarProvider>
             {userData.profile_pic_url != undefined ?
-                <Header disableSideBar={true} disableLinks={false} profilePicSrc={userData.profile_pic_url}
-                        username={userData.username}/>
+                <Header disableSideBar={true} disableLinks={false} profilePicSrc={headerData.profile_pic_url}
+                        username={headerData.username}/>
                 : <Header disableSideBar={true} disableLinks={false}
-                          username={userData.username}/>
+                          username={headerData.username}/>
             }
             <div className="fixed -z-10 h-screen w-screen">
                 <Image src="/nassau.jpg" alt="Nassau Hall"
@@ -96,7 +110,8 @@ const Index: React.FC<User> = ({userData}: { userData: User }) => {
                             <div className="flex justify-left items-center whitespace-nowrap">
                                 <div className="h-6 w-6">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                         strokeWidth={1.5} stroke="currentColor" className="inline-flex w-6 h-6 dark:text-white">
+                                         strokeWidth={1.5} stroke="currentColor"
+                                         className="inline-flex w-6 h-6 dark:text-white">
                                         <path strokeLinecap="round" strokeLinejoin="round"
                                               d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
                                     </svg>
@@ -108,7 +123,8 @@ const Index: React.FC<User> = ({userData}: { userData: User }) => {
                             </div>
                         </div>
 
-                        <div className="flex flex-col items-center sm:items-start order-first mb-4 sm:order-last sm:mb-0">
+                        <div
+                            className="flex flex-col items-center sm:items-start order-first mb-4 sm:order-last sm:mb-0">
                             <h1 className="text-3xl font-medium tracking-wide text-left dark:text-white">
                                 {userData.full_name}&nbsp;&lsquo;{String(userData.class_year).slice(2)}&nbsp;
                                 <span className="text-gray-500 text-lg">({userData.pronouns})</span>

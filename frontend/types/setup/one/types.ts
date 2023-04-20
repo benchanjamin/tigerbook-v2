@@ -75,3 +75,8 @@ export interface User {
     certificates:        string[];
     hometown:            null | string;
 }
+
+export interface HeaderType {
+    username: string;
+    profile_pic_url: string | null;
+}
