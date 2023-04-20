@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import classes from "./Map.module.css"
 import {axiosLocalhost} from "../../utils/axiosInstance";
 import {AxiosResponse} from "axios";
+import {TigerBookMap} from "@types/setup/one/types";
 // import TitleListBox from "@components/TitleListBox/TitleListBox";
 // import AuthorListBox from "@components/AuthorListBox/AuthorListBox";
 // import AuthorAndTitleRadioGroup from "@components/AuthorAndTitleRadioGroup/AuthorAndTitleRadioGroup";
@@ -53,28 +54,28 @@ function TigerMap(props) {
         async function drawPointsOfInterest() {
             let axios = await axiosLocalhost()
             let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/map/`)
-            console.log(axiosResponse.data)
-            d3.json('/static/cleaned-data-12-4.geojson').then(function (data) {
-                let pointsOfInterest = data.features.filter(d => d.geometry.type === 'Point');
-                pointsOfInterest.sort((a, b) => d3.descending(a.properties.original_total_count, b.properties.original_total_count));
+            const mapData: TigerBookMap[] = axiosResponse.data
+            // d3.json('/static/cleaned-data-12-4.geojson').then(function (data) {
+            // let pointsOfInterest = mapData.filter(d => d.geometry.type === 'Point');
+            mapData.sort((a, b) => d3.descending(a.count, b.count));
 
-                svg.select("g").selectAll("g.city").data(pointsOfInterest).enter()
-                    .append("g").attr("class", "city")
-                    .attr("transform", d => `translate(${[projection(d.geometry.coordinates)]})`)
-                    .each(function (d1) {
-                        d3.select(this).append("circle").raise()
-                            .attr('r', Math.sqrt(d1.properties.original_total_count) + 2)
-                            .attr('transform', `scale(${(1)})`)
-                            .on("mouseenter", (d2) => {
-                                // showTooltip(d2);
-                                d3.select(this).select("circle").style("fill", highlightColor);
-                            })
-                            .on("mouseleave", () => {
-                                hideTooltip();
-                                d3.select(this).select("circle").style("fill", "#5a9294");
-                            })
-                    });
-            })
+            svg.select("g").selectAll("g.city").data(mapData).enter()
+                .append("g").attr("class", "city")
+                .attr("transform", d => `translate(${[projection([d.longitude, d.latitude])]})`)
+                .each(function (d1) {
+                    d3.select(this).append("circle").raise()
+                        .attr('r', Math.sqrt(d1.count) + 2)
+                        .attr('transform', `scale(${(1)})`)
+                        .on("mouseenter", (d2) => {
+                            // showTooltip(d2);
+                            d3.select(this).select("circle").style("fill", highlightColor);
+                        })
+                        .on("mouseleave", () => {
+                            hideTooltip();
+                            d3.select(this).select("circle").style("fill", "#5a9294");
+                        })
+                });
+            // })
         }
 
 
@@ -243,13 +244,13 @@ function TigerMap(props) {
         }
 
 
-
     }, []);
 
 
     return (
         <>
-            <div className={`flex items-start md:pt-[7rem] pt-[3rem] pb-[5rem] mb-[4.25rem] md:pb-0 md:mb-0 section-container mb-4`}>
+            <div
+                className={`flex items-start md:pt-[7rem] pt-[3rem] pb-[5rem] mb-[4.25rem] md:pb-0 md:mb-0 section-container mb-4`}>
                 <h2 className={classes.map_header_title}>
                     Data Visualization of Mappable Locations in the Nineteenth-Century Literary Fairy Tale
                 </h2>
