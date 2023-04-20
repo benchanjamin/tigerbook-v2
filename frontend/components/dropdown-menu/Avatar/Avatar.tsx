@@ -14,7 +14,7 @@ const Avatar: React.FC<AvatarProps> = ({profilePicSrc}) => {
                 fill
                 style={{borderRadius: '50%', objectFit: 'cover'}}
                 alt="Avatar"
-                src={profilePicSrc || '/placeholder.jpg'}
+                src={profilePicSrc || '/static/placeholder.jpg'}
             />
         </div>
     );

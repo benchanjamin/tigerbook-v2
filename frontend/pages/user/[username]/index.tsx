@@ -48,7 +48,7 @@ interface Props {
 
 const Index: React.FC<Props> = ({userData, headerData}) => {
     const [isImageReady, setIsImageReady] = useState(false);
-    const residentialCollegeLogoSrc = `/${userData.residential_college.toLowerCase().replace(/\s/g, '')}.webp`
+    const residentialCollegeLogoSrc = `/static/${userData.residential_college.toLowerCase().replace(/\s/g, '')}.webp`
 
     return (
         <SidebarProvider>
@@ -59,7 +59,7 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                           username={headerData.username}/>
             }
             <div className="fixed -z-10 h-screen w-screen">
-                <Image src="/nassau.jpg" alt="Nassau Hall"
+                <Image src="/static/nassau.jpg" alt="Nassau Hall"
                        fill
                        style={{objectFit: "cover"}}
                 />
@@ -75,7 +75,7 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                                         id="spinner"
                                         color="warning"
                                         className="absolute m-auto left-0 right-0 top-0 bottom-0"/>}
-                                <Image src={userData.profile_pic_url ?? "/placeholder.jpg"}
+                                <Image src={userData.profile_pic_url ?? "/static/placeholder.jpg"}
                                        fill
                                        alt={`Profile picture of ${userData.full_name}`}
                                        style={{objectFit: "cover"}}

@@ -30,7 +30,7 @@ function Card({personData}: { personData: ListUser }) {
                             setIsImageReady(false)
                         }}
                         className="object-cover h-full w-full group-hover:scale-110 transition"
-                        src={personData.profile_pic_url != null ? personData.profile_pic_url : "/placeholder.jpg"}
+                        src={personData.profile_pic_url != null ? personData.profile_pic_url : "/static/placeholder.jpg"}
                         alt={`Picture of ${personData.full_name}`}
                     />
                     <div className="absolute top-0 left-0 right-0 bottom-0 py-6 px-4 text-white duration-500 bg-gray-700

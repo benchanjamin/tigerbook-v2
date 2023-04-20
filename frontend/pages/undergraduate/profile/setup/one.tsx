@@ -191,7 +191,7 @@ const One: React.FC<Props> = ({
                               username={data.username}/>)
             }
             <div className="fixed -z-10 h-screen w-screen">
-                <Image src="/nassau.jpg" alt="Nassau Hall"
+                <Image src="/static/nassau.jpg" alt="Nassau Hall"
                        fill
                        style={{objectFit: "cover"}}
                 />
@@ -247,7 +247,7 @@ const One: React.FC<Props> = ({
                                             color="warning"
                                             className="h-[200px] w-[200px]"/>}
                                     <div id='height-adjustment' className="relative opacity-0">
-                                        <Image src="/placeholder.jpg"
+                                        <Image src="/static/placeholder.jpg"
                                                alt="placeholder"
                                                className="border-2 border-primary-100 dark:border-opacity-50 rounded-2xl"
                                                onLoad={onLoadCallBack}

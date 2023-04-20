@@ -143,7 +143,7 @@ const Two: React.FC<Props> = ({data}) => {
                     : <Header disableSideBar={true} disableLinks={true} username={data.username}/>)
             }
             <div className="fixed -z-10 h-screen w-screen">
-                <Image src="/nassau.jpg" alt="Nassau Hall" className="bg-repeat bg-repeat-y"
+                <Image src="/static/nassau.jpg" alt="Nassau Hall" className="bg-repeat bg-repeat-y"
                        fill
                        style={{objectFit: "cover"}}
 
@@ -199,7 +199,7 @@ const Two: React.FC<Props> = ({data}) => {
                                             color="warning"
                                             className="h-[200px] w-[200px]"/>}
                                     <div id='height-adjustment' className="relative opacity-0">
-                                        <Image src="/placeholder.jpg"
+                                        <Image src="/static/placeholder.jpg"
                                                alt="placeholder"
                                                className="border-2 border-primary-100 dark:border-opacity-50 rounded-2xl"
                                                onLoad={onLoadCallBack}

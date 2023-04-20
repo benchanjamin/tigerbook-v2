@@ -111,7 +111,7 @@ export default function Search({data}) {
                     {/*<div className="order-1">*/}
                     {/*    <ActualSidebar/>*/}
                     {/*</div>*/}
-                    <Image src="/nassau.jpg" alt="Nassau Hall" className="absolute h-full z-0"
+                    <Image src="/static/nassau.jpg" alt="Nassau Hall" className="absolute h-full z-0"
                            layout={"fill"} objectFit={"cover"}
                     />
                 </div>

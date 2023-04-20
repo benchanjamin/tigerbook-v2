@@ -69,7 +69,7 @@ const Header: FC<Props> = function ({
                         <Image
                             alt="Tigerbook logo"
                             height="100"
-                            src="/Tigerbook.png"
+                            src="/static/Tigerbook.png"
                             width="100"
                         />
                     </Navbar.Brand>

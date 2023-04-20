@@ -6,11 +6,11 @@ export default function Document() {
         <Html lang="en">
             <Head>
                 <link rel="icon" href="/favicon.ico"/>
-                <Script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js" strategy="beforeInteractive"></Script>
+                <Script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js" strategy="beforeInteractive"/>
             </Head>
             <body className="dark">
-                <Main/>
-                <NextScript/>
+            <Main/>
+            <NextScript/>
             </body>
         </Html>
     )

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import {SidebarProvider} from "../context/SidebarContext";
 import {BiBuoy} from "react-icons/bi";
 import {
@@ -142,8 +142,8 @@ const List: React.FC<Props> = ({profileData, listData}) => {
                     <div className="order-1">
                         <ActualSidebar/>
                     </div>
-                    <Image src="/nassau.jpg" alt="Nassau Hall" className="absolute h-full z-0"
-                           layout={"fill"} objectFit={"cover"}
+                    <Image src="/static/nassau.jpg" alt="Nassau Hall" className="absolute h-full z-0"
+                           fill style={{objectFit: "cover"}}
                     />
                 </div>
             </SidebarProvider>
