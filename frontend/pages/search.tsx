@@ -96,7 +96,7 @@ export default function Search({data}) {
                         <div className="flex flex-col md:flex-row items-center justify-center gap-x-4 pt-20">
                             {/* Search bar */}
                             <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
-                               <TigerBookSearchBar defaultText="Search by PUID, NetID, nickname, or full name"
+                               <TigerBookSearchBar defaultText="Search PUID, NetID, nickname, or full name"
                                                    autoComplete="off"
                                                    zIndex={100} setterFunction={setQuery}/>
                             </div>

@@ -43,7 +43,7 @@ export default function TigerBookListBar(
                      focus-visible:ring-offset-teal-300 sm:text-sm">
                     {/*<div className="flex flex-wrap overflow-auto items-center pl-2 pr-2">*/}
                     <Combobox.Input
-                        className="w-full py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0
+                        className="w-full py-2 pl-3 text-sm leading-5 text-gray-900 focus:ring-0
                         focus:outline-none
                         focus-visible:border-primary-500"
                         displayValue={(dataString) => dataString}

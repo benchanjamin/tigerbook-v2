@@ -120,7 +120,7 @@ const List: React.FC<Props> = ({profileData, listData}) => {
                         <Container className="bg-gray-50 pt-4 rounded-2xl pb-10 dark:bg-gray-800">
                             <div className="flex flex-col md:flex-row items-center justify-center gap-x-4">
                                 <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
-                                    <TigerBookListBar defaultText="Search by PUID, NetID, nickname, or full name"
+                                    <TigerBookListBar defaultText="Search PUID, NetID, nickname, or full name"
                                                       zIndex={100} setterFunction={setQuery}
                                                       autoComplete="off"/>
                                 </div>
