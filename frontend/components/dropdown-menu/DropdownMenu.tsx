@@ -3,6 +3,7 @@ import {Fragment, useEffect, useRef, useState} from 'react'
 import {ChevronDownIcon} from '@heroicons/react/20/solid'
 import Avatar from "@components/dropdown-menu/Avatar/Avatar";
 import {useRouter} from "next/navigation";
+import Link from "next/link";
 
 export default function DropdownMenu({profilePicSrc, username}) {
     const router = useRouter()
@@ -44,7 +45,8 @@ export default function DropdownMenu({profilePicSrc, username}) {
                         </Menu.Item>
                         <Menu.Item>
                             {({active}) => (
-                                <button
+                                <Link
+                                    href="https://api.tiger-book.com/accounts/logout"
                                     // onClick={async () => await router.push('/accounts/login')}
                                     className={`${
                                         active ? 'bg-primary-300 text-white' : 'text-gray-900'
@@ -62,7 +64,7 @@ export default function DropdownMenu({profilePicSrc, username}) {
                                         />
                                     )}
                                     Logout
-                                </button>
+                                </Link>
                             )}
                         </Menu.Item>
                     </div>
