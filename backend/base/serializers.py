@@ -751,7 +751,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
         request = self.context.get('request')
         if request.user.username in obj.permissions.username_prohibited_usernames:
             return None
-        return get_display_username(request.user.username)
+        return get_display_username(obj.user.username)
 
     def get_full_name(self, obj):
         request = self.context.get('request')
