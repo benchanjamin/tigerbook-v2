@@ -34,7 +34,6 @@
     "typescript": "5.0.3"
   },
   "devDependencies": {
-    "@types/d3": "^7.4.0",
     "@types/react-scroll": "^1.8.6",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
