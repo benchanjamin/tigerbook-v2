@@ -9,13 +9,16 @@ from .views import (UndergraduateProfileSetupFirstPageView, get_routes, Undergra
                     UndergraduateToBeApprovedSubmissionsApproveView, UndergraduateTigerBookDirectorySearchView,
                     UndergraduateConcentrationsListAPIView, UndergraduateTracksListAPIView,
                     UndergraduateCertificatesListAPIView, CitiesListAPIView, UndergraduateClassYearsListAPIView,
-                    UndergraduateResidentialCollegesListAPIView, PronounsListAPIView, TigerBookHeaderView)
+                    UndergraduateResidentialCollegesListAPIView, PronounsListAPIView, TigerBookHeaderView,
+                    TigerBookMapView)
 from uniauth.views import get_jwt_tokens_from_session
 
 urlpatterns = [
     path('', get_routes),
     path('redirect/', TigerBookRedirectURLView.as_view()),
     path('header/', TigerBookHeaderView.as_view(),
+         name="header"),
+    path('map/', TigerBookMapView.as_view(),
          name="header"),
     path('undergraduate/profile/setup/one/', UndergraduateProfileSetupFirstPageView.as_view(),
          name="undergraduate-setup-first-page"),

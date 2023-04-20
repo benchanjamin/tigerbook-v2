@@ -90,8 +90,8 @@ export default function Search({data}) {
                         : <Header disableSideBar={true} disableLinks={false}
                                   username={data.username}/>)
                 }
-                <div className="flex dark:bg-gray-900 h-full">
-                    <main className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
+                <main className="flex dark:bg-gray-900 h-full">
+                    <div className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
                         {/* Search container */}
                         <div className="flex flex-col md:flex-row items-center justify-center gap-x-4 pt-20">
                             {/* Search bar */}
@@ -107,14 +107,14 @@ export default function Search({data}) {
                         </div>
                         <div className="absolute h-full z-0">
                         </div>
-                    </main>
+                    </div>
                     {/*<div className="order-1">*/}
                     {/*    <ActualSidebar/>*/}
                     {/*</div>*/}
                     <Image src="/static/nassau.jpg" alt="Nassau Hall" className="absolute h-full z-0"
                            layout={"fill"} objectFit={"cover"}
                     />
-                </div>
+                </main>
             </SidebarProvider>
         </>
     );

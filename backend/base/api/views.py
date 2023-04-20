@@ -25,7 +25,7 @@ from base.serializers import (
     UndergraduateConcentrationsListAPISerializer, UndergraduateClassYearsListAPISerializer,
     UndergraduateResidentialCollegesListAPISerializer, CitiesListAPISerializer,
     UndergraduateCertificatesListAPISerializer, UndergraduateTracksListAPISerializer,
-    PronounsAPISerializer, TigerBookHeaderSerializer,
+    PronounsAPISerializer, TigerBookHeaderSerializer, TigerBookMapSerializer,
 )
 
 from django.conf import settings
@@ -127,6 +127,19 @@ class UndergraduateProfileEdit(UpdateModelMixin, GenericAPIView):
     def get_object(self):
         queryset = self.get_queryset()
         return get_object_or_404(queryset, user=self.request.user)
+
+
+class TigerBookMapView(ListModelMixin, GenericAPIView):
+    queryset = TigerBookCities.objects.all()
+    serializer_class = TigerBookMapSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.exclude(undergraduates_hometown__isnull=True)
+        return qs
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
 
 class TigerBookHeaderView(GenericAPIView):

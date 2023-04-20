@@ -1,7 +1,7 @@
 import Header from "@components/ui/Header";
 import {SidebarProvider} from "../context/SidebarContext";
 import Head from 'next/head';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import {BiBuoy} from "react-icons/bi";
 import {
     BsDribbble,
@@ -43,6 +43,7 @@ import Card from "@components/list/Card";
 import TigerBookSearchBar from "@components/headless-ui/TigerBookListBar";
 import TigerBookListBar from "@components/headless-ui/TigerBookListBar";
 import {useRouter} from "next/router";
+import TigerMap from "@components/Map/TigerMap";
 
 interface ServerSideProps {
     data: SetupOneGet
@@ -86,6 +87,22 @@ const Map : React.FC<Props> = ({headerData}) => {
                     : <Header disableSideBar={true} disableLinks={false}
                               username={headerData.username}/>
                 }
+                <div className="fixed -z-10 h-screen w-screen">
+                    <Image src="/static/nassau.jpg" alt="Nassau Hall"
+                           fill
+                           style={{objectFit: "cover"}}
+
+                    />
+                </div>
+                <main className="flex flex-col dark:bg-gray-900 justify-center items-center h-full">
+                    <h1 className="text-dark dark:text-white py-6 text-2xl font-bold tracking-wide">Map</h1>
+                    <div className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
+                        <Container className="bg-gray-50 pt-4 rounded-2xl pb-10 dark:bg-gray-800">
+                            <TigerMap />
+
+                        </Container>
+                    </div>
+                </main>
             </SidebarProvider>
         </>
 

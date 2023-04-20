@@ -121,7 +121,7 @@ export default function Home() {
                         </Link>
                     </div>
                     <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                        <Image src="/networking.svg"
+                        <Image src="/static/networking.svg"
                                alt="networking" width={411} height={297}/>
                     </div>
                 </div>

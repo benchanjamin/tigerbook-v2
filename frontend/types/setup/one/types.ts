@@ -80,3 +80,11 @@ export interface HeaderType {
     username: string;
     profile_pic_url: string | null;
 }
+
+export interface TigerBookMap {
+    complete_city: string;
+    count:         number;
+    latitude:      number;
+    longitude:     number;
+}
+
