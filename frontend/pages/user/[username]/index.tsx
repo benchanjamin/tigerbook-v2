@@ -86,7 +86,7 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                                 />
                             </div>
                             <h4 className="text-primary-500 text-left mt-10 font-bold tracking-wide">
-                                BIOGRAPHY
+                                CERTIFICATES
                             </h4>
                             {userData.certificates.map((certificate, index) => {
                                 return (
@@ -107,6 +107,9 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                                     </div>
                                 )
                             })}
+                            <h4 className="text-primary-500 text-left mt-4 font-bold tracking-wide">
+                                HOMETOWN
+                            </h4>
                             <div className="flex justify-left items-center whitespace-nowrap">
                                 <div className="h-6 w-6">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -127,7 +130,11 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                             className="flex flex-col items-center sm:items-start order-first mb-4 sm:order-last sm:mb-0">
                             <h1 className="text-3xl font-medium tracking-wide text-left dark:text-white">
                                 {userData.full_name}&nbsp;&lsquo;{String(userData.class_year).slice(2)}&nbsp;
-                                <span className="text-gray-500 text-lg">({userData.pronouns})</span>
+                                {userData.pronouns &&
+                                    <span className="text-gray-500 text-lg">
+                                        ({userData.pronouns})
+                                </span>
+                                }
                             </h1>
                             <div className="text-gray-500 text-left font-medium tracking-wide">
                                 {userData.aliases.map((alias, index) => {
