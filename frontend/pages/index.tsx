@@ -4,7 +4,6 @@ import {Link as ReactScrollLink} from "react-scroll";
 import Link from 'next/link';
 import {axiosInstance} from "../utils/axiosInstance";
 import {AxiosResponse} from "axios";
-import {useRouter} from "next/router";
 
 export const getServerSideProps = async (context) => {
     let RESPONSE_ERROR = 0
@@ -35,7 +34,6 @@ export const getServerSideProps = async (context) => {
 };
 
 export default function Home() {
-    const router = useRouter();
 
     return (
         <>
@@ -46,7 +44,7 @@ export default function Home() {
                 <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
                     <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                         <Link href="/" className="flex items-center">
-                            <Image src="/Tigerbook.png"
+                            <Image src="/static/Tigerbook.png"
                                    alt="Tigerbook Logo" width={149} height={40}/>
                         </Link>
                         <div className="flex items-center max-[435px]:justify-between max-[435px]:flex-grow lg:order-2">
