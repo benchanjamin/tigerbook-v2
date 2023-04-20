@@ -2,11 +2,9 @@ import {Menu, Transition} from '@headlessui/react'
 import {Fragment, useEffect, useRef, useState} from 'react'
 import {ChevronDownIcon} from '@heroicons/react/20/solid'
 import Avatar from "@components/dropdown-menu/Avatar/Avatar";
-import {useRouter} from "next/navigation";
 import Link from "next/link";
 
 export default function DropdownMenu({profilePicSrc, username}) {
-    const router = useRouter()
 
     return (
         <Menu as="div" className="relative inline-block text-left">
@@ -47,7 +45,6 @@ export default function DropdownMenu({profilePicSrc, username}) {
                             {({active}) => (
                                 <Link
                                     href="https://api.tiger-book.com/accounts/logout"
-                                    // onClick={async () => await router.push('/accounts/login')}
                                     className={`${
                                         active ? 'bg-primary-300 text-white' : 'text-gray-900'
                                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
