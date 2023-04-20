@@ -34,7 +34,7 @@ import {
 import Sidebar from "@components/ui/Sidebar";
 import {HeaderType, ListData, SetupOneGet} from "@types/setup/one/types";
 import {GetServerSideProps} from "next";
-import {axiosLocalhost} from "../utils/axiosInstance";
+import {axiosInstance} from "../utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import React, {useEffect, useState} from "react";
 import Container from "@components/list/Container";
@@ -50,7 +50,7 @@ interface ServerSideProps {
 
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({query, req}) => {
 
-    const axios = await axiosLocalhost();
+    const axios = await axiosInstance();
     let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/header/`,
         {
             headers: {

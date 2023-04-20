@@ -34,7 +34,7 @@ import Sidebar from "@components/ui/Sidebar";
 import Header from "@components/ui/Header";
 import {SetupOneGet} from "@types/setup/one/types";
 import {GetServerSideProps} from "next";
-import {axiosLocalhost} from "../utils/axiosInstance";
+import {axiosInstance} from "../utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import React, {useState} from "react";
 import TigerBookSearchBar from "@components/headless-ui/TigerBookSearchBar";
@@ -46,7 +46,7 @@ interface ServerSideProps {
 
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
 
-    const axios = await axiosLocalhost();
+    const axios = await axiosInstance();
     let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,
         {
             headers: {

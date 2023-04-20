@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {GetServerSideProps} from "next";
-import {axiosLocalhost} from "../../../utils/axiosInstance";
+import {axiosInstance} from "../../../utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import {HeaderType, User} from "@types/setup/one/types";
 import Image from "next/image";
@@ -10,7 +10,7 @@ import Header from "@components/ui/Header";
 
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({query, req}) => {
-    const axios = await axiosLocalhost();
+    const axios = await axiosInstance();
     let username = query.username
     if (username !== undefined) {
         username = username.slice(1)

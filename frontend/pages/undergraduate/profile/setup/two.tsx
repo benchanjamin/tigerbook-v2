@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, {useContext} from "react";
 import {SidebarProvider} from "../../../../context/SidebarContext";
 import {SetupOneGet, SetupTwoGet, SetupTwoPost} from "@types/setup/one/types";
-import {axiosInstance, axiosLocalhost} from "../../../../utils/axiosInstance";
+import {axiosInstance, axiosInstance} from "../../../../utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import {useState} from 'react';
 import {useRouter} from "next/navigation";
@@ -18,7 +18,7 @@ interface ServerSideProps {
 
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
 
-    const axios = await axiosLocalhost();
+    const axios = await axiosInstance();
     let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,
         {
             headers: {
@@ -71,7 +71,7 @@ const Two: React.FC<Props> = ({data}) => {
         formData.append('profile_pic', files[0], 'profile_pic')
 
         let RESPONSE_ERROR = 0
-        const axios = await axiosLocalhost();
+        const axios = await axiosInstance();
         // TODO: Change this to the actual endpoint
         let axiosResponse: AxiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/setup/two/`,
             formData,
@@ -107,7 +107,7 @@ const Two: React.FC<Props> = ({data}) => {
             profile_pic: null
         }
         let RESPONSE_ERROR = 0
-        const axios = await axiosLocalhost();
+        const axios = await axiosInstance();
         let axiosResponse: AxiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/setup/two/`,
             postData).then((response) => {
             if (response.ok) {

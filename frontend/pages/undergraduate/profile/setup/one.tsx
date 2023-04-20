@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, {useContext, useState} from "react";
 import {GetServerSideProps, NextPage} from "next";
 import {SetupOneGet, SetupOnePost} from "@types/setup/one/types";
-import {axiosInstance, axiosLocalhost} from "../../../../utils/axiosInstance";
+import {axiosInstance, axiosInstance} from "../../../../utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import axios from "axios";
 import TigerBookListBox from "@components/headless-ui/TigerBookListBox";
@@ -28,7 +28,7 @@ interface ServerSideProps {
 }
 
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
-    const axios = await axiosLocalhost();
+    const axios = await axiosInstance();
     let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,
         {
             headers: {
@@ -143,7 +143,7 @@ const One: React.FC<Props> = ({
         console.log(postData)
 
         let RESPONSE_ERROR = 0
-        const axios = await axiosLocalhost();
+        const axios = await axiosInstance();
 
         // TODO: Change this to the actual endpoint
         let axiosResponse: AxiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,

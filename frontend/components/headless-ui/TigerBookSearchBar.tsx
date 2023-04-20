@@ -2,7 +2,7 @@ import {Fragment, useEffect, useRef, useState} from 'react'
 import {Combobox, Transition} from '@headlessui/react'
 import {CheckIcon, ChevronUpDownIcon, XMarkIcon} from '@heroicons/react/20/solid'
 import {useVirtualizer} from '@tanstack/react-virtual'
-import {axiosLocalhost} from "../../utils/axiosInstance";
+import {axiosInstance} from "../../utils/axiosInstance";
 import {Axios, AxiosResponse} from "axios";
 import { useRouter } from 'next/router'
 
@@ -20,7 +20,7 @@ export default function TigerBookSearchBar(
 
     useEffect(() => {
         const timer = setTimeout(async () => {
-            const axios = await axiosLocalhost();
+            const axios = await axiosInstance();
             const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/search/?q=${encodeURIComponent(query)}`
             console.log(url)
             let axiosResponse: AxiosResponse = await axios.get(url)

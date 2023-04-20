@@ -1,3 +1,70 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+#svg-main {
+    border: solid 1px gray;
+    background-color: #cdcccd;
+    /*background-color: #c4c2c2;*/
+}
+
+.font-change {
+    font-family: Lato, serif;
+}
+
+.country {
+    fill: #e8e8e8;
+    /*stroke: white;*/
+    /*stroke-width: .5;*/
+}
+
+.graticule {
+    fill: none;
+    stroke: green;
+    stroke-width: .25
+}
+
+.city circle {
+    fill: #5a9294;
+    /*stroke: black;*/
+    stroke-width: 0.3;
+    opacity: 0.7;
+    transition: ease-in 0.5s 0s;
+}
+
+#tooltip {
+    pointer-events: none;
+}
+
+#tooltip rect {
+    fill: white;
+    fill-opacity: .9;
+    stroke: black;
+    stroke-width: .5;
+}
+
+#tooltip text {
+    font-size: 12px;
+    text-anchor: middle;
+    font-family: Lato, sans-serif;
+    font-weight: lighter;
+}
+
+#chart {
+    /*margin: 50px 5rem 0 5rem;*/
+}
+
+#zoom_in, #zoom_out {
+    color: gray;
+}
+
+#zoom_in:hover, #zoom_out:hover {
+    color: black;
+}
+
+@media only screen and (max-width: 1400px) {
+    #chart {
+        margin: 20px 4px
+    }
+}

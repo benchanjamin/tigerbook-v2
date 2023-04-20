@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import * as d3 from "d3";
 import classes from "./Map.module.css"
-import {axiosLocalhost} from "../../utils/axiosInstance";
+import {axiosInstance} from "../../utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import {TigerBookMap} from "@types/setup/one/types";
 // import TitleListBox from "@components/TitleListBox/TitleListBox";
@@ -52,7 +52,7 @@ function TigerMap() {
             });
 
         async function drawPointsOfInterest() {
-            let axios = await axiosLocalhost()
+            let axios = await axiosInstance()
             let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/map/`)
             const mapData: TigerBookMap[] = axiosResponse.data
             // d3.json('/static/cleaned-data-12-4.geojson').then(function (data) {
