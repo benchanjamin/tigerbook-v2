@@ -12,11 +12,11 @@ function Card({personData}: { personData: ListUser }) {
     return (
         <div
             onClick={() => router.push(`/@${personData.username}`)}
-            className="flex flex-col col-span-1 cursor-pointer group overflow-hidden"
+            className="flex flex-col col-span-1 cursor-pointer group rounded-t-xl overflow-hidden"
         >
             {/*<div className="w-full">*/}
                 <div
-                    className="aspect-square w-full relative overflow-hidden rounded-t-xl bg-gray-200"
+                    className="aspect-square w-full relative bg-gray-200"
                 >
                     {!isImageReady &&
                         <Spinner
