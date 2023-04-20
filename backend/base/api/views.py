@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -24,7 +25,7 @@ from base.serializers import (
     UndergraduateConcentrationsListAPISerializer, UndergraduateClassYearsListAPISerializer,
     UndergraduateResidentialCollegesListAPISerializer, CitiesListAPISerializer,
     UndergraduateCertificatesListAPISerializer, UndergraduateTracksListAPISerializer,
-    PronounsAPISerializer,
+    PronounsAPISerializer, TigerBookHeaderSerializer,
 )
 
 from django.conf import settings
@@ -126,6 +127,25 @@ class UndergraduateProfileEdit(UpdateModelMixin, GenericAPIView):
     def get_object(self):
         queryset = self.get_queryset()
         return get_object_or_404(queryset, user=self.request.user)
+
+
+class TigerBookHeaderView(GenericAPIView):
+    queryset = User.objects.all().select_related("undergraduate_tigerbook_directory_entry")
+    serializer_class = TigerBookHeaderSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        lookup = Q(username__exact=self.request.user.username)
+        return qs.filter(lookup)
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        return queryset.first()
+
+    def get(self, request):
+        instance = self.get_object()
+        serializer = self.serializer_class(instance)
+        return Response(serializer.data)
 
 
 class UndergraduateProfileSetupFirstPageView(UndergraduateProfileEdit):

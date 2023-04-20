@@ -52,7 +52,6 @@ class UndergraduateResidentialCollegesListAPISerializer(serializers.ModelSeriali
 
 
 class CitiesListAPISerializer(serializers.ModelSerializer):
-
     class Meta:
         model = TigerBookCities
         fields = [
@@ -318,6 +317,29 @@ class PhotoUploadSetupSerializer(serializers.Serializer):
 
 
 # Serializers below are view-specific to urls in api Django app
+
+class TigerBookHeaderSerializer(serializers.ModelSerializer):
+    username = serializers.SerializerMethodField(read_only=True)
+    profile_pic_url = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['username',
+                  'profile_pic_url', ]
+
+    def get_username(self, obj):
+        return get_display_username(obj.username)
+
+    def get_profile_pic_url(self, obj):
+        directory = obj.undergraduate_tigerbook_directory_entry
+        if directory.profile_pic:
+            return directory.profile_pic.url
+        elif hasattr(directory, 'residential_college_facebook_entry'):
+            if directory.residential_college_facebook_entry is None:
+                return None
+            return directory.residential_college_facebook_entry.residential_college_picture_url.url
+        else:
+            return None
 
 
 # TODO: This is personal account information for setup, or initial page
