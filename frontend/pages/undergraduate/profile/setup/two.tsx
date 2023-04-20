@@ -217,9 +217,9 @@ const Two: React.FC<Props> = ({data}) => {
                                      setFiles={setFiles}/>
                     </div>
                     <form onSubmit={submitHandler}>
-                        <div className="flex justify-center mb-2 max-2xl gap-x-16">
+                        <div className="flex justify-center mb-2 max-2xl gap-x-4 sm:gap-x-16">
                             <div onClick={onClick}
-                                 className="cursor-pointer inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-gray-400 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-gray-900 hover:bg-gray-500"
+                                 className="cursor-pointer inline-flex items-center p-3 sm:px-5 sm:py-2.5 mt-1 text-sm font-medium text-center text-white bg-gray-400 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-gray-900 hover:bg-gray-500"
                             >
                                 Use default image
                             </div>
@@ -229,7 +229,7 @@ const Two: React.FC<Props> = ({data}) => {
                             {/*    Skip for now*/}
                             {/*</div>*/}
                             <button type="submit"
-                                    className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"
+                                    className="inline-flex items-center p-3 sm:px-5 sm:py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"
                             >
                                 Save
                             </button>
