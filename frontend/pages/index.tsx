@@ -282,7 +282,7 @@ export default function Home() {
                         className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
                         <a href="pages#">
                             <Image className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
-                                   src="/ben.jpg"
+                                   src="/static/ben.jpg"
                                    alt="Bonnie Avatar" width={200} height={200}/>
                         </a>
                         <div className="p-5">
