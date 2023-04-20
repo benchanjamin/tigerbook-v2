@@ -25,7 +25,7 @@ export default function TigerBookSearchBar(
             console.log(url)
             let axiosResponse: AxiosResponse = await axios.get(url)
             setData(axiosResponse.data)
-        }, 200)
+        }, 1000)
 
         // return () => {
         //     clearTimeout(timer)
