@@ -27,9 +27,9 @@ export default function TigerBookSearchBar(
             setData(axiosResponse.data)
         }, 1000)
 
-        // return () => {
-        //     clearTimeout(timer)
-        // }
+        return () => {
+            clearTimeout(timer)
+        }
     }, [query]);
 
     return (
