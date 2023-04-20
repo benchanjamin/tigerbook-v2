@@ -1,3 +1,5 @@
+import datetime
+import time
 from django.conf import settings
 from storages.backends.s3boto3 import S3Boto3Storage
 
@@ -7,6 +9,11 @@ class PublicMediaStorage(S3Boto3Storage):
     location = settings.PUBLIC_MEDIA_LOCATION
     default_acl = settings.PUBLIC_MEDIA_DEFAULT_ACL
     file_overwrite = False
+
+    def get_available_name(self, name):
+        now = time.time()
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        return '{0}_{1}'.format(name, str(stamp))
 
 
 class PrivateResidentialCollegeFacebookMediaStorage(S3Boto3Storage):
@@ -19,6 +26,11 @@ class PrivateResidentialCollegeFacebookMediaStorage(S3Boto3Storage):
     default_acl = settings.PRIVATE_RS_COLLEGE_FB_MEDIA_DEFAULT_ACL
     file_overwrite = True
     custom_domain = False
+
+    def get_available_name(self, name):
+        now = time.time()
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        return '{0}_{1}'.format(name, str(stamp))
 
 
 # TODO: separate media storage locations for undergrads, grads, undergrad + grad alumni
@@ -33,6 +45,11 @@ class PrivateTigerBookUndergraduateMediaStorage(S3Boto3Storage):
     file_overwrite = True
     custom_domain = False
 
+    def get_available_name(self, name):
+        now = time.time()
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        return '{0}_{1}'.format(name, str(stamp))
+
 
 class PrivateTigerBookGraduateMediaStorage(S3Boto3Storage):
     """
@@ -43,6 +60,11 @@ class PrivateTigerBookGraduateMediaStorage(S3Boto3Storage):
     default_acl = settings.PRIVATE_TIGERBOOK_MEDIA_DEFAULT_ACL
     file_overwrite = False
     custom_domain = False
+
+    def get_available_name(self, name):
+        now = time.time()
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        return '{0}_{1}'.format(name, str(stamp))
 
 
 class PrivateTigerBookUndergraduateAlumniMediaStorage(S3Boto3Storage):
@@ -55,16 +77,10 @@ class PrivateTigerBookUndergraduateAlumniMediaStorage(S3Boto3Storage):
     file_overwrite = False
     custom_domain = False
 
-
-class PrivateTigerBookGraduateAlumniMediaStorage(S3Boto3Storage):
-    """
-    Used to store & serve dynamic media files using access keys
-	and short-lived expirations to ensure more privacy control
-    """
-    location = settings.PRIVATE_GRADUATE_ALUMNI_TIGERBOOK_MEDIA_LOCATION
-    default_acl = settings.PRIVATE_TIGERBOOK_MEDIA_DEFAULT_ACL
-    file_overwrite = False
-    custom_domain = False
+    def get_available_name(self, name):
+        now = time.time()
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        return '{0}_{1}'.format(name, str(stamp))
 
 
 class PrivateTigerBookGraduateAlumniMediaStorage(S3Boto3Storage):
@@ -76,6 +92,27 @@ class PrivateTigerBookGraduateAlumniMediaStorage(S3Boto3Storage):
     default_acl = settings.PRIVATE_TIGERBOOK_MEDIA_DEFAULT_ACL
     file_overwrite = False
     custom_domain = False
+
+    def get_available_name(self, name):
+        now = time.time()
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        return '{0}_{1}'.format(name, str(stamp))
+
+
+class PrivateTigerBookGraduateAlumniMediaStorage(S3Boto3Storage):
+    """
+    Used to store & serve dynamic media files using access keys
+	and short-lived expirations to ensure more privacy control
+    """
+    location = settings.PRIVATE_GRADUATE_ALUMNI_TIGERBOOK_MEDIA_LOCATION
+    default_acl = settings.PRIVATE_TIGERBOOK_MEDIA_DEFAULT_ACL
+    file_overwrite = False
+    custom_domain = False
+
+    def get_available_name(self, name):
+        now = time.time()
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        return '{0}_{1}'.format(name, str(stamp))
 
 
 class PrivateTigerBookExtracurricularsMediaStorage(S3Boto3Storage):
@@ -87,3 +124,8 @@ class PrivateTigerBookExtracurricularsMediaStorage(S3Boto3Storage):
     default_acl = settings.PRIVATE_TIGERBOOK_MEDIA_DEFAULT_ACL
     file_overwrite = False
     custom_domain = False
+
+    def get_available_name(self, name):
+        now = time.time()
+        stamp = datetime.datetime.fromtimestamp(now).strftime('%Y-%m-%d-%H-%M-%S')
+        return '{0}_{1}'.format(name, str(stamp))
