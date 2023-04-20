@@ -35,7 +35,7 @@ import Header from "@components/ui/Header";
 import {SetupOneGet} from "@types/setup/one/types";
 import {GetServerSideProps} from "next";
 import {axiosLocalhost} from "../utils/axiosInstance";
-import {AxiosResponse} from "axios/index";
+import {AxiosResponse} from "axios";
 import React, {useState} from "react";
 import TigerBookSearchBar from "@components/headless-ui/TigerBookSearchBar";
 import {useRouter} from "next/router";

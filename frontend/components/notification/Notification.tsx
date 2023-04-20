@@ -6,6 +6,8 @@ import NotificationContext from "../../context/NotificationContext";
 function Notification({description}) {
     const context = useContext(NotificationContext);
 
+    // TODO: add more types of notifications
+    //   currently only error notifications are supported
     return (
         <div className="fixed bottom-2 right-2 z-100">
             <Toast>

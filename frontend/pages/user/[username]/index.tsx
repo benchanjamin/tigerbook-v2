@@ -48,10 +48,11 @@ interface Props {
 
 const Index: React.FC<Props> = ({userData, headerData}) => {
     const [isImageReady, setIsImageReady] = useState(false);
+    const residentialCollegeLogoSrc = `/${userData.residential_college.toLowerCase().replace(/\s/g, '')}.webp`
 
     return (
         <SidebarProvider>
-            {userData.profile_pic_url != undefined ?
+            {headerData.profile_pic_url != undefined ?
                 <Header disableSideBar={true} disableLinks={false} profilePicSrc={headerData.profile_pic_url}
                         username={headerData.username}/>
                 : <Header disableSideBar={true} disableLinks={false}
@@ -173,7 +174,7 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                                 <div className="flex justify-left items-center whitespace-nowrap mt-1">
                                     <div className="h-6 w-6 relative mt-1">
                                         <Image
-                                            src="/residential-college-logos/rocky.webp"
+                                            src={residentialCollegeLogoSrc}
                                             fill
                                             style={{objectFit: 'contain'}}
                                             alt="Forbes"

@@ -108,7 +108,7 @@ const List: React.FC<Props> = ({profileData, listData}) => {
                 {profileData.profile_pic != undefined ?
                     <Header disableSideBar={true} disableLinks={false} profilePicSrc={profileData.profile_pic}
                             username={profileData.username}/>
-                    : (profileData.residential_college_facebook_entry != undefined ?
+                    : (profileData.residential_college_facebook_entry !== null ?
                         <Header disableSideBar={true} disableLinks={false}
                                 profilePicSrc={profileData.residential_college_facebook_entry.photo_url}
                                 username={profileData.username}/>

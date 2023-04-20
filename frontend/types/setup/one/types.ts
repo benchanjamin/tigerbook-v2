@@ -15,7 +15,7 @@ export interface SetupOnePost {
 export interface SetupOneGet {
     username: string;
     active_directory_entry: ActiveDirectoryEntry;
-    residential_college_facebook_entry: ResidentialCollegeFacebookEntry;
+    residential_college_facebook_entry: ResidentialCollegeFacebookEntry | null;
     aliases: string[];
     concentration: string | null;
     track: string | null;

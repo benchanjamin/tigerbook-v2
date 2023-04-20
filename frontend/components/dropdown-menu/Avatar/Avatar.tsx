@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./Avatar.module.css";
+import React from "react";
 
 interface AvatarProps {
     profilePicSrc: string | null | undefined;

@@ -137,7 +137,7 @@ const Two: React.FC<Props> = ({data}) => {
             {data.profile_pic != undefined ?
                 <Header disableSideBar={true} disableLinks={true} profilePicSrc={data.profile_pic}
                         username={data.username}/>
-                : (data.residential_college_facebook_entry != undefined ?
+                : (data.residential_college_facebook_entry !== null ?
                     <Header disableSideBar={true} disableLinks={true} username={data.username}
                             profilePicSrc={data.residential_college_facebook_entry.photo_url}/>
                     : <Header disableSideBar={true} disableLinks={true} username={data.username}/>)
@@ -175,7 +175,7 @@ const Two: React.FC<Props> = ({data}) => {
                             </div>
                         </div>)
                         :
-                        (data.residential_college_facebook_entry != undefined ?
+                        (data.residential_college_facebook_entry !== null ?
                                 (<div className="flex relative justify-center items-center w-full ">
                                     {!isImageReady &&
                                         <Spinner
