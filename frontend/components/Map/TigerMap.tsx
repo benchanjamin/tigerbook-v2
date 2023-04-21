@@ -150,9 +150,9 @@ function TigerMap() {
                 .attr("transform", `translate(${[coords[0], coords[1] + 40]})`)
                 .style("opacity", 1);
             tooltip.select("text:first-of-type")
-                .text(`Location: \"${d.complete_city}\"`)
+                .text(`Location: ${d.complete_city}`)
             tooltip.select("text:nth-of-type(2)")
-                .text(`# of Hometown Affiliations: \"${Number(d.count)}\"`)
+                .text(`# of Hometown Affiliations: ${d.count}`)
             // tooltip.select("text:nth-of-type(3)")
             //     .text(`Author: ${authorMapper[titleMapper[d.properties.original_book_title]]}`)
             // tooltip.select("text:nth-of-type(4)")
