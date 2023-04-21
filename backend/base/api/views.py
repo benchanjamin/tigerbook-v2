@@ -45,17 +45,17 @@ def get_routes(request):
 
 class UndergraduateConcentrationsListAPIView(ListAPIView):
     serializer_class = UndergraduateConcentrationsListAPISerializer
-    queryset = UndergraduateTigerBookConcentrations.objects.all()
+    queryset = UndergraduateTigerBookConcentrations.objects.all().order_by('concentration')
 
 
 class UndergraduateClassYearsListAPIView(ListAPIView):
     serializer_class = UndergraduateClassYearsListAPISerializer
-    queryset = UndergraduateTigerBookClassYears.objects.all()
+    queryset = UndergraduateTigerBookClassYears.objects.all().order_by('-class_year')
 
 
 class UndergraduateResidentialCollegesListAPIView(ListAPIView):
     serializer_class = UndergraduateResidentialCollegesListAPISerializer
-    queryset = UndergraduateTigerBookResidentialColleges.objects.all()
+    queryset = UndergraduateTigerBookResidentialColleges.objects.all().order_by('residential_college')
 
 
 class CitiesListAPIView(ListAPIView):
@@ -65,12 +65,12 @@ class CitiesListAPIView(ListAPIView):
 
 class UndergraduateCertificatesListAPIView(ListAPIView):
     serializer_class = UndergraduateCertificatesListAPISerializer
-    queryset = UndergraduateTigerBookCertificates.objects.all()
+    queryset = UndergraduateTigerBookCertificates.objects.all().order_by('certificate')
 
 
 class UndergraduateTracksListAPIView(ListAPIView):
     serializer_class = UndergraduateTracksListAPISerializer
-    queryset = UndergraduateTigerBookTracks.objects.all()
+    queryset = UndergraduateTigerBookTracks.objects.all().order_by('track')
 
 
 class PronounsListAPIView(ListAPIView):
