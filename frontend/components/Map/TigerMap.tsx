@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import * as d3 from "d3";
 import classes from "./Map.module.css"
-import {axiosInstance} from "../../utils/axiosInstance";
+import {axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import {TigerBookMap} from "@types/setup/one/types";
 // import TitleListBox from "@components/TitleListBox/TitleListBox";
@@ -64,7 +64,7 @@ function TigerMap() {
                 .append("g").attr("class", "city")
                 .attr("transform", d => `translate(${[projection([d.longitude, d.latitude])]})`)
                 .each(function (d1) {
-                    d3.select(this).append("circle").raise()
+                    d3.select(this).append("circle").style("fill", highlightColor).raise()
                         .attr('r', Math.sqrt(d1.count) + 2)
                         .attr('transform', `scale(${(1)})`)
                         .on("mouseenter", (d2) => {
