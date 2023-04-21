@@ -65,16 +65,17 @@ def update_undergraduate_tigerbook_directory(user):
     net_id = user.cas_profile.net_id
     req_lib = ReqLib()
     req = req_lib.get_info_for_tigerbook(net_id)
+    if not req:
+        PermissionDenied("OIT Active Directory does not contain your Princeton netID")
     active_directory_entry = OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(**req).first()
     if not active_directory_entry:
-        PermissionDenied("OIT Active Directory does not contain your Princeton netID")
+        active_directory_entry = OITActiveDirectoryUndergraduateGraduateInfo.objects.create(**req)
+        user.undergraduate_tigerbook_directory_entry.active_directory_entry.delete()
+        user.undergraduate_tigerbook_directory_entry.active_directory_entry = active_directory_entry
     residential_college_facebook_entry = CurrentUndergraduateResidentialCollegeFacebookDirectory.objects.filter(
         email=active_directory_entry.email).first()
-    UndergraduateTigerBookDirectory.objects.update(
-        active_directory_entry=
-        active_directory_entry,
-        residential_college_facebook_entry=
-        residential_college_facebook_entry)
+    user.undergraduate_tigerbook_directory_entry.residential_college_facebook_entry = residential_college_facebook_entry
+    user.undergraduate_tigerbook_directory_entry.save()
 
     # def add_to_graduate_tigerbook_directory(user):
     #     # TODO: add this condition if statement always before using `get_account_username_split`
