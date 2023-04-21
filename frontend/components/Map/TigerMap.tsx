@@ -124,9 +124,9 @@ function TigerMap() {
                 .each(function (d) {
                     d3.select(this).append("rect")
                         .attr("height", 45)
-                        .attr("width", 500)
+                        .attr("width", 600)
                         .attr("rx", 5).attr("ry", 5)
-                        .attr("x", -140).attr("y", -20)
+                        .attr("x", -300).attr("y", -20)
                     d3.select(this).append("text")
                         .attr("x", 0)
                         .attr("y", -5)
