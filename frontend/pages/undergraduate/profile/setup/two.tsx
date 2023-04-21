@@ -1,9 +1,9 @@
 import Header from "@components/ui/Header";
 import Image from "next/image";
 import React, {useContext} from "react";
-import {SidebarProvider} from "../../../../context/SidebarContext";
-import {SetupOneGet, SetupTwoGet, SetupTwoPost} from "@types/setup/one/types";
-import {axiosInstance} from "../../../../utils/axiosInstance";
+import {SidebarProvider} from "@context/SidebarContext";
+import {HeaderType, SetupOneGet, SetupTwoGet, SetupTwoPost} from "@types/setup/one/types";
+import {axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import {useState} from 'react';
 import {useRouter} from "next/navigation";
@@ -48,10 +48,10 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
 };
 
 interface Props {
-    data: SetupOneGet
+    headerData: HeaderType
 }
 
-const Two: React.FC<Props> = ({data}) => {
+const Two: React.FC<Props> = ({headerData}) => {
     const [isImageReady, setIsImageReady] = useState(false);
     const [files, setFiles] = useState([]);
     const router = useRouter();
@@ -146,13 +146,11 @@ const Two: React.FC<Props> = ({data}) => {
 
     return (
         <SidebarProvider>
-            {data.profile_pic != undefined ?
-                <Header disableSideBar={true} disableLinks={true} profilePicSrc={data.profile_pic}
-                        username={data.username}/>
-                : (data.residential_college_facebook_entry !== null ?
-                    <Header disableSideBar={true} disableLinks={true} username={data.username}
-                            profilePicSrc={data.residential_college_facebook_entry.photo_url}/>
-                    : <Header disableSideBar={true} disableLinks={true} username={data.username}/>)
+            {headerData.profile_pic_url != undefined ?
+                <Header disableSideBar={true} disableLinks={false} profilePicSrc={headerData.profile_pic_url}
+                        username={headerData.username} hasProfile={false}/>
+                : <Header disableSideBar={true} disableLinks={false}
+                          username={headerData.username} hasProfile={false}/>
             }
             <div className="fixed -z-10 h-screen w-screen">
                 <Image src="/static/nassau.png" alt="Nassau Hall"
@@ -169,7 +167,7 @@ const Two: React.FC<Props> = ({data}) => {
                             Let&apos;s setup your profile picture!
                         </h5>
                     </div>
-                    {data.profile_pic != undefined ?
+                    {headerData.profile_pic_url !== null ?
                         (<div className="flex relative justify-center items-center w-full">
                             {!isImageReady &&
                                 <Spinner
@@ -177,8 +175,8 @@ const Two: React.FC<Props> = ({data}) => {
                                     color="warning"
                                     className="h-[200px] w-[200px]"/>}
                             <div id='height-adjustment' className="relative opacity-0">
-                                <Image src={data.profile_pic}
-                                       alt={`Photo of ${data.username}`}
+                                <Image src={headerData.profile_pic_url}
+                                       alt={`Photo of ${headerData.username}`}
                                        onLoad={onLoadCallBack}
                                        className="border-2 border-primary-100 dark:border-opacity-50 rounded-2xl"
                                        fill
@@ -187,44 +185,26 @@ const Two: React.FC<Props> = ({data}) => {
                             </div>
                         </div>)
                         :
-                        (data.residential_college_facebook_entry !== null ?
-                                (<div className="flex relative justify-center items-center w-full ">
-                                    {!isImageReady &&
-                                        <Spinner
-                                            id="spinner"
-                                            color="warning"
-                                            className="h-[200px] w-[200px]"/>}
-                                    <div id='height-adjustment' className="relative opacity-0">
-                                        <Image src={data.residential_college_facebook_entry.photo_url}
-                                               alt={`Photo of ${data.username}`}
-                                               className="border-2 border-primary-100 dark:border-opacity-50 rounded-2xl"
-                                               onLoad={onLoadCallBack}
-                                               fill
-                                               style={{objectFit: "cover"}}
-                                        />
-                                    </div>
-                                </div>) :
-                                (<div className="flex relative justify-center items-center w-full ">
-                                    {!isImageReady &&
-                                        <Spinner
-                                            id="spinner"
-                                            color="warning"
-                                            className="h-[200px] w-[200px]"/>}
-                                    <div id='height-adjustment' className="relative opacity-0">
-                                        <Image src="/static/placeholder.jpg"
-                                               alt="placeholder"
-                                               className="border-2 border-primary-100 dark:border-opacity-50 rounded-2xl"
-                                               onLoad={onLoadCallBack}
-                                               fill
-                                               style={{objectFit: "cover"}}
-                                        />
-                                    </div>
-                                </div>)
-                        )
+                        (<div className="flex relative justify-center items-center w-full ">
+                            {!isImageReady &&
+                                <Spinner
+                                    id="spinner"
+                                    color="warning"
+                                    className="h-[200px] w-[200px]"/>}
+                            <div id='height-adjustment' className="relative opacity-0">
+                                <Image src="/static/placeholder.jpg"
+                                       alt="placeholder"
+                                       className="border-2 border-primary-100 dark:border-opacity-50 rounded-2xl"
+                                       onLoad={onLoadCallBack}
+                                       fill
+                                       style={{objectFit: "cover"}}
+                                />
+                            </div>
+                        </div>)
                     }
                     <div className="px-4 py-2 mx-auto max-w-2xl">
 
-                        <ImageUpload data={data}
+                        <ImageUpload data={headerData}
                                      files={files}
                                      setFiles={setFiles}/>
                     </div>

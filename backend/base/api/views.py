@@ -176,14 +176,14 @@ class UndergraduateProfileSetupFirstPageView(UndergraduateProfileEdit):
 class UndergraduateProfileSetupSecondPageView(UndergraduateProfileEdit):
     serializer_class = UndergraduateTigerBookDirectorySetupSecondPageSerializer
 
-    def get(self, request):
-        instance = self.get_object()
-        if not instance.has_setup_profile.has_setup_page_one:
-            return Response(
-                {"invalid": "setup profile page two is not allowed until setup profile page one is complete"},
-                status=status.HTTP_403_FORBIDDEN)
-        serializer = self.serializer_class(instance)
-        return Response(serializer.data)
+    # def get(self, request):
+    #     instance = self.get_object()
+    #     if not instance.has_setup_profile.has_setup_page_one:
+    #         return Response(
+    #             {"invalid": "setup profile page two is not allowed until setup profile page one is complete"},
+    #             status=status.HTTP_403_FORBIDDEN)
+    #     serializer = self.serializer_class(instance)
+    #     return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
         instance = self.get_object()

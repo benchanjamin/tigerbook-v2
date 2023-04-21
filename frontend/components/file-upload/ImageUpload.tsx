@@ -1,8 +1,9 @@
 import {useDropzone} from 'react-dropzone';
 import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
+import {HeaderType} from "@types/setup/one/types";
 
-function ImageUpload({data, files, setFiles}) {
+function ImageUpload({data, files, setFiles} : {data: HeaderType}) {
     const {getRootProps, getInputProps} = useDropzone({
         accept: {
             'image/*': []
@@ -38,8 +39,7 @@ function ImageUpload({data, files, setFiles}) {
                 <div className="sm:col-span-2">
                     <label htmlFor="name"
                            className="block mb-2 text-sm mt-4 mb-4 font-medium text-gray-900 dark:text-white">
-                        {data.residential_college_facebook_entry !== undefined ||
-                        data.residential_college_facebook_entry !== null ?
+                        {data.profile_pic_url !== null ?
                             'Upload Picture to Replace Your Current Above' :
                             'Upload Picture'}
                     </label>
