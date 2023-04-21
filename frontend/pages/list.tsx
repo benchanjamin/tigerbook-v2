@@ -115,7 +115,7 @@ const List: React.FC<Props> = ({profileData, listData}) => {
                         : <Header disableSideBar={true} disableLinks={false}
                                   username={profileData.username}/>)
                 }
-                <main className="flex dark:bg-gray-900 h-full px-4">
+                <main className="flex dark:bg-gray-900 h-full">
                     <div className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
                         <Container className="bg-gray-50 pt-4 rounded-2xl pb-10 dark:bg-gray-800">
                             <div className="flex flex-col md:flex-row items-center justify-center gap-x-4">
