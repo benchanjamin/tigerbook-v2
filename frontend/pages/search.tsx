@@ -47,7 +47,7 @@ interface ServerSideProps {
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
 
     const axios = await axiosInstance();
-    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,
+    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/header/`,
         {
             headers: {
                 Cookie: req.headers.cookie
