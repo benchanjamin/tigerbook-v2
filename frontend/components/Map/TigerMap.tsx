@@ -10,6 +10,7 @@ import {TigerBookMap} from "@types/setup/one/types";
 // import AuthorAndTitleListBox from "@components/AuthorAndTitleListBox/AuthorAndTitleListBox";
 
 function TigerMap() {
+    let defaultColor = '#FF8911';
     let highlightColor = '#FF9E3A';
 
 
@@ -72,7 +73,7 @@ function TigerMap() {
                         })
                         .on("mouseleave", () => {
                             hideTooltip();
-                            d3.select(this).select("circle").style("fill", "#5a9294");
+                            d3.select(this).select("circle").style("fill", defaultColor);
                         })
                 });
             // })
@@ -250,7 +251,7 @@ function TigerMap() {
                             .on("mouseleave", () => {
                                 hideTooltip();
                                 // Add +1 to i1 index because 0th index is path.country while rest are g.city
-                                d3.select(this).select("circle").style("fill", "#5a9294")
+                                d3.select(this).select("circle").style("fill", defaultColor)
                             })
                     });
             })
