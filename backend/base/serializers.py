@@ -322,7 +322,7 @@ class TigerBookHeaderSerializer(serializers.ModelSerializer):
         return get_display_username(obj.username)
 
     def get_profile_pic_url(self, obj):
-        if hasattr(obj, 'undergraduate_tigerbook_directory_entry'):
+        if not hasattr(obj, 'undergraduate_tigerbook_directory_entry'):
             return None
         directory = obj.undergraduate_tigerbook_directory_entry
         if directory.profile_pic:
