@@ -10,7 +10,7 @@ import {TigerBookMap} from "@types/setup/one/types";
 // import AuthorAndTitleListBox from "@components/AuthorAndTitleListBox/AuthorAndTitleListBox";
 
 function TigerMap() {
-    let highlightColor = '#5ce1e6';
+    let highlightColor = '#FF9E3A';
 
 
     const svgRef = React.useRef(null);
