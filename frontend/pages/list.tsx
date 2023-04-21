@@ -49,18 +49,19 @@ interface ServerSideProps {
 }
 
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({query, req}) => {
-    let RESPONSE_ERROR = 0;
+    let REDIRECT_ERROR = 0
     const axios = await axiosInstance();
-    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/header/`,
+    const axiosRedirect: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/redirect/`,
         {
             headers: {
                 Cookie: req.headers.cookie
             }
-        }).catch(function () {
-        RESPONSE_ERROR = 1
-    })
+        })
+        .catch(function () {
+            REDIRECT_ERROR = 1
+        })
 
-    if (RESPONSE_ERROR == 1) {
+    if (REDIRECT_ERROR == 1) {
         return {
             redirect: {
                 destination: '/',
@@ -68,7 +69,23 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({q
             },
         }
     }
-    console.log(axiosResponse.data)
+    const redirectURL = axiosRedirect.data['redirect_url'].split('/').slice(2).join('/');
+
+    if (redirectURL.includes('setup')) {
+        return {
+            redirect: {
+                destination: redirectURL,
+                permanent: false,
+            },
+        };
+    }
+
+    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/header/`,
+        {
+            headers: {
+                Cookie: req.headers.cookie
+            }
+        })
     const headerData: HeaderType = axiosResponse.data;
 
     let listURL = `${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/list/`;
@@ -82,7 +99,6 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({q
             }
         })
     const listData: ListData = axiosResponse.data;
-    console.log(listData)
 
     return {
         props: {

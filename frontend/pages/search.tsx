@@ -83,7 +83,6 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
             }
         })
 
-    console.log(axiosResponse.data)
     const headerData: HeaderType = axiosResponse.data;
 
     return {

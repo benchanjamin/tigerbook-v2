@@ -10,8 +10,37 @@ import Header from "@components/ui/Header";
 
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({query, req}) => {
-    let RESPONSE_ERROR = 0;
+    let REDIRECT_ERROR = 0
     const axios = await axiosInstance();
+    const axiosRedirect: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/redirect/`,
+        {
+            headers: {
+                Cookie: req.headers.cookie
+            }
+        })
+        .catch(function () {
+            REDIRECT_ERROR = 1
+        })
+
+    if (REDIRECT_ERROR == 1) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    }
+    const redirectURL = axiosRedirect.data['redirect_url'].split('/').slice(2).join('/');
+
+    if (redirectURL.includes('setup')) {
+        return {
+            redirect: {
+                destination: redirectURL,
+                permanent: false,
+            },
+        };
+    }
+
     let username = query.username
     if (username !== undefined) {
         username = username.slice(1)
@@ -21,19 +50,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({query, req}
             headers: {
                 Cookie: req.headers.cookie
             }
-        }).catch(function () {
-        RESPONSE_ERROR = 1
-    })
+        })
 
-    if (RESPONSE_ERROR == 1) {
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            },
-        }
-    }
-    console.log(axiosResponse.data)
     const userData: User = axiosResponse.data;
 
     axiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/header/`,
@@ -42,7 +60,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({query, req}
                 Cookie: req.headers.cookie
             }
         })
-    console.log(axiosResponse.data)
     const headerData: HeaderType = axiosResponse.data;
 
     return {
