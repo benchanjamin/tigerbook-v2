@@ -27,7 +27,37 @@ interface ServerSideProps {
 }
 
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
+    let REDIRECT_ERROR = 0
     const axios = await axiosInstance();
+    const axiosRedirect: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/redirect/`,
+        {
+            headers: {
+                Cookie: req.headers.cookie
+            }
+        })
+        .catch(function () {
+            REDIRECT_ERROR = 1
+        })
+
+    if (REDIRECT_ERROR == 1) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    }
+    const redirectURL = `/${axiosRedirect.data['redirect_url'].split('/').slice(2).join('/')}`;
+
+    if (redirectURL.includes('setup')) {
+        return {
+            redirect: {
+                destination: redirectURL,
+                permanent: false,
+            },
+        };
+    }
+
     let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,
         {
             headers: {
@@ -181,13 +211,13 @@ const One: React.FC<Props> = ({
         <SidebarProvider>
             {data.profile_pic != undefined ?
                 <Header disableSideBar={true} disableLinks={true} profilePicSrc={data.profile_pic}
-                        username={data.username}/>
+                        username={data.username} hasProfile={true}/>
                 : (data.residential_college_facebook_entry !== null ?
                     <Header disableSideBar={true} disableLinks={true}
                             profilePicSrc={data.residential_college_facebook_entry.photo_url}
-                            username={data.username}/>
+                            username={data.username} hasProfile={true}/>
                     : <Header disableSideBar={true} disableLinks={true}
-                              username={data.username}/>)
+                              username={data.username} hasProfile={true}/>)
             }
             <div className="fixed -z-10 h-screen w-screen">
                 <Image src="/static/nassau.png" alt="Nassau Hall"
