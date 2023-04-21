@@ -542,8 +542,7 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
         ]
 
     def get_username(self, obj):
-        request = self.context.get('request')
-        return get_display_username(request.user.username)
+        return get_display_username(obj.user.username)
 
     def update(self, instance, validated_data):
         with contextlib.suppress(ValueError):
