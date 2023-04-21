@@ -122,7 +122,7 @@ function TigerMap() {
                 .style("opacity", 0)
                 .each(function (d) {
                     d3.select(this).append("rect")
-                        .attr("height", 25)
+                        .attr("height", 45)
                         .attr("width", 280)
                         .attr("rx", 5).attr("ry", 5)
                         .attr("x", -140).attr("y", -20)
