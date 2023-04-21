@@ -142,7 +142,7 @@ const List: React.FC<Props> = ({profileData, listData}) => {
                     <div className="order-1">
                         <ActualSidebar/>
                     </div>
-                    <Image src="/static/nassau.jpg" alt="Nassau Hall" className="absolute h-full z-0"
+                    <Image src="/static/nassau.png" alt="Nassau Hall" className="absolute h-full z-0"
                            fill style={{objectFit: "cover"}}
                     />
                 </main>

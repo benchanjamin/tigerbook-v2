@@ -191,7 +191,7 @@ const One: React.FC<Props> = ({
                               username={data.username}/>)
             }
             <div className="fixed -z-10 h-screen w-screen">
-                <Image src="/static/nassau.jpg" alt="Nassau Hall"
+                <Image src="/static/nassau.png" alt="Nassau Hall"
                        fill
                        style={{objectFit: "cover"}}
                 />
