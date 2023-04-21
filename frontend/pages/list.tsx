@@ -69,7 +69,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({q
             },
         }
     }
-    const redirectURL = axiosRedirect.data['redirect_url'].split('/').slice(2).join('/');
+    const redirectURL = `/${axiosRedirect.data['redirect_url'].split('/').slice(2).join('/')}`;
 
     if (redirectURL.includes('setup')) {
         return {
