@@ -102,7 +102,7 @@ function VirtualizedList({
             >
                 {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
                     <Combobox.Option
-                        onClick={async () => await router.push(`/user/${items?.[virtualRow.index].username}`)}
+                        onClick={async () => await router.push(`/@${items?.[virtualRow.index].username}`)}
                         key={virtualRow.index}
                         style={{
                             position: 'absolute',
