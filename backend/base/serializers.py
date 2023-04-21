@@ -315,7 +315,8 @@ class TigerBookHeaderSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username',
-                  'profile_pic_url', ]
+                  'profile_pic_url',
+                  'has_profile']
 
     def get_username(self, obj):
         return get_display_username(obj.username)
