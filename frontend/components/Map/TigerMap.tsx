@@ -94,6 +94,32 @@ function TigerMap() {
 
         svg.call(zoom).on("dblclick.zoom", null)
 
+
+        function dragStart(d,i,nodes){
+            d3.select(nodes[i])
+                .style("stroke", "red")
+        }
+
+        function dragging(d,i,nodes){
+            let xCoor = d3.event.x;
+            let yCoor = d3.event.y;
+
+            d3.select(nodes[i])
+                .attr("x", xCoor)
+                .attr("y", yCoor);
+        }
+
+        function dragEnd(d,i,nodes){
+            d3.select(nodes[i])
+                .style("stroke", "black")
+        }
+
+        svg.call(d3.drag()
+            .on('start', dragStart)
+            .on('drag', dragging)
+            .on('end', dragEnd)
+        )
+
         function drawButtons() {
             const buttonDiv = svg.append("foreignObject")
                 .attr("x", 920).attr("y", 435).attr("width", "29px").attr("height", "49px").style("border-radius", "8px")
