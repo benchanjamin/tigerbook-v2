@@ -60,7 +60,7 @@ class UndergraduateResidentialCollegesListAPIView(ListAPIView):
 
 class CitiesListAPIView(ListAPIView):
     serializer_class = CitiesListAPISerializer
-    queryset = TigerBookCities.objects.all()
+    queryset = TigerBookCities.objects.all().order_by('city')
 
 
 class UndergraduateCertificatesListAPIView(ListAPIView):
@@ -75,7 +75,7 @@ class UndergraduateTracksListAPIView(ListAPIView):
 
 class PronounsListAPIView(ListAPIView):
     serializer_class = PronounsAPISerializer
-    queryset = TigerBookPronouns.objects.all()
+    queryset = TigerBookPronouns.objects.all().order_by('pronouns')
 
 
 class TigerBookRedirectURLView(GenericAPIView):
