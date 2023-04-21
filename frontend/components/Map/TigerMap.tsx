@@ -66,8 +66,8 @@ function TigerMap() {
                     d3.select(this).append("circle").raise()
                         .attr('r', Math.sqrt(d1.count) + 2)
                         .attr('transform', `scale(${(1)})`)
-                        .on("mouseenter", () => {
-                            // showTooltip(d2);
+                        .on("mouseenter", (d2) => {
+                            showTooltip(d2);
                             d3.select(this).select("circle").style("fill", highlightColor);
                         })
                         .on("mouseleave", () => {
@@ -144,8 +144,21 @@ function TigerMap() {
                 })
         }
 
-        function showTooltip(d) {
-
+        function showTooltip(d : TigerBookMap) {
+            const coords = d3.mouse(svg.node())
+            const tooltip = d3.select("#tooltip")
+                .attr("transform", `translate(${[coords[0], coords[1] + 40]})`)
+                .style("opacity", 1);
+            tooltip.select("text:first-of-type")
+                .text(`Location: \"${d.complete_city}\"`)
+            tooltip.select("text:nth-of-type(2)")
+                .text(`# of Hometown Affiliations: \"${d.count}\"`)
+            // tooltip.select("text:nth-of-type(3)")
+            //     .text(`Author: ${authorMapper[titleMapper[d.properties.original_book_title]]}`)
+            // tooltip.select("text:nth-of-type(4)")
+            //     .text(`Count in Text: ${d.properties.original_count}`)
+            // tooltip.select("text:last-child")
+            //     .text(`Total Count Across All Texts: ${d.properties.original_total_count}`)
         }
 
         function hideTooltip() {
@@ -177,23 +190,23 @@ function TigerMap() {
             .center([20, 30])
             .translate([width / 2, height / 2]);
 
-        // function showTooltip(d) {
-        //     // @ts-ignore
-        //     const coords = d3.mouse(d3.select(svgRef.current).node())
-        //     const tooltip = d3.select("#tooltip")
-        //         .attr("transform", `translate(${[coords[0], coords[1] + 40]})`)
-        //         .style("opacity", 1);
-        //     tooltip.select("text:first-of-type")
-        //         .text(`Location: \"${d.properties.original_text}\"`)
-        //     tooltip.select("text:nth-of-type(2)")
-        //         .text(`Text: \"${titleMapper[d.properties.original_book_title]}\"`)
-        //     tooltip.select("text:nth-of-type(3)")
-        //         .text(`Author: ${authorMapper[titleMapper[d.properties.original_book_title]]}`)
-        //     tooltip.select("text:nth-of-type(4)")
-        //         .text(`Count in Text: ${d.properties.original_count}`)
-        //     tooltip.select("text:last-child")
-        //         .text(`Total Count Across All Texts: ${d.properties.original_total_count}`)
-        // }
+        function showTooltip(d) {
+            // @ts-ignore
+            const coords = d3.mouse(d3.select(svgRef.current).node())
+            const tooltip = d3.select("#tooltip")
+                .attr("transform", `translate(${[coords[0], coords[1] + 40]})`)
+                .style("opacity", 1);
+            tooltip.select("text:first-of-type")
+                .text(`Location: \"${d.properties.original_text}\"`)
+            tooltip.select("text:nth-of-type(2)")
+                .text(`Text: \"${titleMapper[d.properties.original_book_title]}\"`)
+            tooltip.select("text:nth-of-type(3)")
+                .text(`Author: ${authorMapper[titleMapper[d.properties.original_book_title]]}`)
+            tooltip.select("text:nth-of-type(4)")
+                .text(`Count in Text: ${d.properties.original_count}`)
+            tooltip.select("text:last-child")
+                .text(`Total Count Across All Texts: ${d.properties.original_total_count}`)
+        }
 
         function hideTooltip() {
             d3.select("#tooltip").style("opacity", 0)
