@@ -49,7 +49,7 @@ export default function DropdownMenu({profilePicSrc, username, hasProfile}) {
                                     onClick={async () => await router.push(`/profile/edit`)}
                                     className={`${
                                         active ? 'bg-primary-300 text-white' : 'text-gray-900'
-                                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                                    } group flex w-full items-center rounded-md px-2 py-2 text-sm cursor-pointer`}
                                 >
                                     {active ? (
                                         <ProfileEditActiveIcon
