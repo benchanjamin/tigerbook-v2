@@ -39,7 +39,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
     }
     const redirectURL = `/${axiosRedirect.data['redirect_url'].split('/').slice(2).join('/')}`;
 
-    if (redirectURL.includes('setup')) {
+    if (redirectURL.includes('setup/one')) {
         return {
             redirect: {
                 destination: redirectURL,
