@@ -247,7 +247,8 @@ SIMPLE_JWT = {
 ALLOWED_HOSTS = [
     '127.0.0.1',
     '0.0.0.0',
-    'localhost',
+    # TODO: remove this for render
+    # 'localhost',
     'api.tiger-book.com',
     'www.api.tiger-book.com',
 ]
