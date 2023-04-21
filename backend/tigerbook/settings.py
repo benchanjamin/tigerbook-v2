@@ -260,8 +260,10 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['https://tiger-book.com',
                         'https://www.tiger-book.com',
-                        'http://localhost:3000'
+                        'http://localhost:3000',
+                        'http://localhost:8000'
                         ]
+
 CSRF_COOKIE_NAME = "csrftoken"
 CSRF_COOKIE_HTTPONLY = False
 CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
