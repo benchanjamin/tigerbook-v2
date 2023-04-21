@@ -11,14 +11,16 @@ interface Props {
     disableSideBar: boolean,
     disableLinks: boolean,
     profilePicSrc: string | undefined,
-    username: string
+    username: string,
+    hasProfile: boolean
 }
 
 const Header: FC<Props> = function ({
                                         disableSideBar,
                                         disableLinks,
                                         profilePicSrc,
-                                        username
+                                        username,
+                                        hasProfile
                                     }) {
         const {
             isOpenOnSmallScreens, isPageWithSidebar, setOpenOnSmallScreens

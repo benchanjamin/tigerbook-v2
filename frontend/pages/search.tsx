@@ -83,9 +83,9 @@ const Search : React.FC<Props> = ({headerData}) => {
             <SidebarProvider>
                 {headerData.profile_pic_url != undefined ?
                     <Header disableSideBar={true} disableLinks={false} profilePicSrc={headerData.profile_pic_url}
-                            username={headerData.username}/>
+                            username={headerData.username} hasProfile={headerData.has_profile}/>
                     : <Header disableSideBar={true} disableLinks={false}
-                              username={headerData.username}/>
+                              username={headerData.username} hasProfile={headerData.has_profile}/>
                 }
                 <main className="flex dark:bg-gray-900 h-full">
                     <div className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
@@ -105,9 +105,6 @@ const Search : React.FC<Props> = ({headerData}) => {
                         <div className="absolute h-full z-0">
                         </div>
                     </div>
-                    {/*<div className="order-1">*/}
-                    {/*    <ActualSidebar/>*/}
-                    {/*</div>*/}
                     <Image src="/static/nassau.png" alt="Nassau Hall" className="absolute h-full z-0"
                            layout={"fill"} objectFit={"cover"}
                     />
@@ -117,60 +114,4 @@ const Search : React.FC<Props> = ({headerData}) => {
     );
 }
 
-function HomePage(): JSX.Element {
-    return (
-        <div className="p-6">
-            <section>
-                <header>
-                    <h1 className="mb-6 text-5xl font-extrabold dark:text-white">
-                        Welcome to <code>Flowbite</code> on <code>Next.js</code>!
-                    </h1>
-                </header>
-            </section>
-        </div>
-    );
-}
-
-
-function ActualSidebar(): JSX.Element {
-    return (
-        <Sidebar>
-            <Sidebar.Items>
-                <Sidebar.ItemGroup>
-                    <Sidebar.Item href="#" icon={HiChartPie}>
-                        Dashboard
-                    </Sidebar.Item>
-                    <Sidebar.Item href="#" icon={HiViewBoards}>
-                        Kanban
-                    </Sidebar.Item>
-                    <Sidebar.Item href="#" icon={HiInbox}>
-                        Inbox
-                    </Sidebar.Item>
-                    <Sidebar.Item href="#" icon={HiUser}>
-                        Users
-                    </Sidebar.Item>
-                    <Sidebar.Item href="#" icon={HiShoppingBag}>
-                        Products
-                    </Sidebar.Item>
-                    <Sidebar.Item href="#" icon={HiArrowSmRight}>
-                        Sign In
-                    </Sidebar.Item>
-                    <Sidebar.Item href="#" icon={HiTable}>
-                        Sign Up
-                    </Sidebar.Item>
-                </Sidebar.ItemGroup>
-                <Sidebar.ItemGroup>
-                    <Sidebar.Item href="#" icon={HiChartPie}>
-                        Upgrade to Pro
-                    </Sidebar.Item>
-                    <Sidebar.Item href="#" icon={HiViewBoards}>
-                        Documentation
-                    </Sidebar.Item>
-                    <Sidebar.Item href="#" icon={BiBuoy}>
-                        Help
-                    </Sidebar.Item>
-                </Sidebar.ItemGroup>
-            </Sidebar.Items>
-        </Sidebar>
-    );
-}
+export default Search;

@@ -1,5 +1,5 @@
 import Header from "@components/ui/Header";
-import {SidebarProvider} from "../context/SidebarContext";
+import {SidebarProvider} from "@context/SidebarContext";
 import Head from 'next/head';
 import Image from 'next/image';
 import {BiBuoy} from "react-icons/bi";
@@ -34,7 +34,7 @@ import {
 import Sidebar from "@components/ui/Sidebar";
 import {HeaderType, ListData, SetupOneGet} from "@types/setup/one/types";
 import {GetServerSideProps} from "next";
-import {axiosInstance} from "../utils/axiosInstance";
+import {axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import React, {useEffect, useState} from "react";
 import Container from "@components/list/Container";
@@ -83,9 +83,9 @@ const Map : React.FC<Props> = ({headerData}) => {
             <SidebarProvider>
                 {headerData.profile_pic_url != undefined ?
                     <Header disableSideBar={true} disableLinks={false} profilePicSrc={headerData.profile_pic_url}
-                            username={headerData.username}/>
+                            username={headerData.username} hasProfile={headerData.has_profile}/>
                     : <Header disableSideBar={true} disableLinks={false}
-                              username={headerData.username}/>
+                              username={headerData.username} hasProfile={headerData.has_profile}/>
                 }
                 <div className="fixed -z-10 h-screen w-screen">
                     <Image src="/static/nassau.png" alt="Nassau Hall"

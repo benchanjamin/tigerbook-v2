@@ -63,28 +63,30 @@ export interface ListUser {
 }
 
 export interface User {
-    username:            string;
-    full_name:           string;
-    track:               string;
-    concentration:       string;
-    class_year:          number;
+    username: string;
+    full_name: string;
+    track: string;
+    concentration: string;
+    class_year: number;
     residential_college: string;
-    pronouns:            null | string
-    profile_pic_url:     null | string;
-    aliases:             string[];
-    certificates:        string[];
-    hometown:            null | string;
+    pronouns: null | string
+    profile_pic_url: null | string;
+    aliases: string[];
+    certificates: string[];
+    hometown: null | string;
 }
 
 export interface HeaderType {
     username: string;
     profile_pic_url: string | null;
+
+    has_profile: boolean;
 }
 
 export interface TigerBookMap {
     complete_city: string;
-    count:         number;
-    latitude:      number;
-    longitude:     number;
+    count: number;
+    latitude: number;
+    longitude: number;
 }
 
