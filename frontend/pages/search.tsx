@@ -32,7 +32,7 @@ import {
 } from "react-icons/hi";
 import Sidebar from "@components/ui/Sidebar";
 import Header from "@components/ui/Header";
-import {SetupOneGet} from "@types/setup/one/types";
+import {HeaderType, SetupOneGet} from "@types/setup/one/types";
 import {GetServerSideProps} from "next";
 import {axiosInstance} from "../utils/axiosInstance";
 import {AxiosResponse} from "axios";
@@ -54,22 +54,22 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
             }
         })
     console.log(axiosResponse.data)
-    const data: SetupOneGet = axiosResponse.data;
+    const headerData: HeaderType = axiosResponse.data;
 
 
     return {
         props: {
-            data
+            headerData
         },
     }
 };
 
 interface Props {
-    data: SetupOneGet
+    headerData: HeaderType
 }
 
 
-export default function Search({data}) {
+const Search : React.FC<Props> = ({headerData}) => {
     const [query, setQuery] = useState('');
     const router = useRouter();
 
@@ -81,14 +81,11 @@ export default function Search({data}) {
                 <title>Tigerbook</title>
             </Head>
             <SidebarProvider>
-                {data.profile_pic != undefined ?
-                    <Header disableSideBar={true} disableLinks={false} profilePicSrc={data.profile_pic} username={data.username}/>
-                    : (data.residential_college_facebook_entry != undefined ?
-                        <Header disableSideBar={true} disableLinks={false}
-                                profilePicSrc={data.residential_college_facebook_entry.photo_url}
-                                username={data.username}/>
-                        : <Header disableSideBar={true} disableLinks={false}
-                                  username={data.username}/>)
+                {headerData.profile_pic_url != undefined ?
+                    <Header disableSideBar={true} disableLinks={false} profilePicSrc={headerData.profile_pic_url}
+                            username={headerData.username}/>
+                    : <Header disableSideBar={true} disableLinks={false}
+                              username={headerData.username}/>
                 }
                 <main className="flex dark:bg-gray-900 h-full">
                     <div className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">

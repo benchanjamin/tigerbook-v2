@@ -4,7 +4,6 @@ import {GetServerSideProps, NextPage} from "next";
 import {SetupOneGet, SetupOnePost} from "@types/setup/one/types";
 import {axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
-import axios from "axios";
 import TigerBookListBox from "@components/headless-ui/TigerBookListBox";
 import TigerBookComboBoxSingleStrictSelect from "@components/headless-ui/TigerBookComboBoxSingleStrictSelect";
 import TigerBookComboBoxMultipleFFASelect from "@components/headless-ui/TigerBookComboBoxMultipleFFASelect";
@@ -12,7 +11,7 @@ import Header from "@components/ui/Header";
 import {SidebarProvider} from "@context/SidebarContext";
 import TigerBookComboBoxMultipleStrictSelect from "@components/headless-ui/TigerBookComboBoxMultipleStrictSelect";
 import {useRouter} from 'next/navigation'
-import NotificationContext from "../../../../context/NotificationContext";
+import NotificationContext from "@context/NotificationContext";
 import {Spinner} from "flowbite-react";
 
 

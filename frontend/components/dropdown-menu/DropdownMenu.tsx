@@ -1,10 +1,12 @@
 import {Menu, Transition} from '@headlessui/react'
-import {Fragment, useEffect, useRef, useState} from 'react'
+import {Fragment} from 'react'
 import {ChevronDownIcon} from '@heroicons/react/20/solid'
 import Avatar from "@components/dropdown-menu/Avatar/Avatar";
 import Link from "next/link";
+import {useRouter} from "next/router";
 
 export default function DropdownMenu({profilePicSrc, username}) {
+    const router = useRouter()
 
     return (
         <Menu as="div" className="relative inline-block text-left">
@@ -38,6 +40,29 @@ export default function DropdownMenu({profilePicSrc, username}) {
                                     <span className="font-medium">Username:</span>
                                     &nbsp;
                                     <span>{username}</span>
+                                </div>
+                            )}
+                        </Menu.Item>
+                        <Menu.Item>
+                            {({active}) => (
+                                <div
+                                    onClick={async () => await router.push(`/profile/edit`)}
+                                    className={`${
+                                        active ? 'bg-primary-300 text-white' : 'text-gray-900'
+                                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                                >
+                                    {active ? (
+                                        <ProfileEditActiveIcon
+                                            className="mr-2 h-5 w-5 pr-2"
+                                            aria-hidden="true"
+                                        />
+                                    ) : (
+                                        <ProfileEditInactiveIcon
+                                            className="mr-2 h-5 w-5 pr-2"
+                                            aria-hidden="true"
+                                        />
+                                    )}
+                                    Edit Profile
                                 </div>
                             )}
                         </Menu.Item>
@@ -95,6 +120,32 @@ function LogoutInactiveIcon(props) {
                   stroke="#FFC68B"
                   strokeLinejoin="round"
                   d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"/>
+        </svg>
+    )
+}
+
+function ProfileEditActiveIcon(props) {
+    return (
+        <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+             stroke="currentColor"
+             className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round"
+                  fill="#E77500"
+                  stroke="#FFC68B"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+        </svg>
+    )
+}
+
+function ProfileEditInactiveIcon(props) {
+    return (
+        <svg {...props}
+             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
+             className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round"
+                  fill="#E77500"
+                  stroke="#FFC68B"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
         </svg>
     )
 }

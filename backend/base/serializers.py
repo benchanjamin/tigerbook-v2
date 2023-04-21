@@ -310,6 +310,7 @@ class PhotoUploadSetupSerializer(serializers.Serializer):
 class TigerBookHeaderSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField(read_only=True)
     profile_pic_url = serializers.SerializerMethodField(read_only=True)
+    has_profile = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
@@ -329,6 +330,13 @@ class TigerBookHeaderSerializer(serializers.ModelSerializer):
             return directory.residential_college_facebook_entry.residential_college_picture_url.url
         else:
             return None
+
+    def get_has_profile(self, obj):
+        # TODO: add more checks for alums and grad students
+        if hasattr(obj, 'undergraduate_tigerbook_directory_entry'):
+            return True
+        else:
+            return False
 
 
 class TigerBookMapSerializer(serializers.ModelSerializer):
