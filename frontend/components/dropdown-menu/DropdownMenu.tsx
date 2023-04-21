@@ -5,7 +5,7 @@ import Avatar from "@components/dropdown-menu/Avatar/Avatar";
 import Link from "next/link";
 import {useRouter} from "next/router";
 
-export default function DropdownMenu({profilePicSrc, username}) {
+export default function DropdownMenu({profilePicSrc, username, hasProfile}) {
     const router = useRouter()
 
     return (
@@ -43,7 +43,7 @@ export default function DropdownMenu({profilePicSrc, username}) {
                                 </div>
                             )}
                         </Menu.Item>
-                        <Menu.Item>
+                        {hasProfile && <Menu.Item>
                             {({active}) => (
                                 <div
                                     onClick={async () => await router.push(`/profile/edit`)}
@@ -65,7 +65,7 @@ export default function DropdownMenu({profilePicSrc, username}) {
                                     Edit Profile
                                 </div>
                             )}
-                        </Menu.Item>
+                        </Menu.Item>}
                         <Menu.Item>
                             {({active}) => (
                                 <Link

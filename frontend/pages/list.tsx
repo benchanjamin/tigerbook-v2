@@ -32,7 +32,7 @@ import {
 } from "react-icons/hi";
 import Sidebar from "@components/ui/Sidebar";
 import Header from "@components/ui/Header";
-import {ListData, SetupOneGet} from "@types/setup/one/types";
+import {HeaderType, ListData, SetupOneGet} from "@types/setup/one/types";
 import {GetServerSideProps} from "next";
 import {axiosInstance} from "../utils/axiosInstance";
 import {AxiosResponse} from "axios";
@@ -51,14 +51,14 @@ interface ServerSideProps {
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({query, req}) => {
 
     const axios = await axiosInstance();
-    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,
+    let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/header/`,
         {
             headers: {
                 Cookie: req.headers.cookie
             }
         })
     console.log(axiosResponse.data)
-    const profileData: SetupOneGet = axiosResponse.data;
+    const headerData: HeaderType = axiosResponse.data;
 
     let listURL = `${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/list/`;
     if ('q' in query) {
@@ -75,19 +75,19 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({q
 
     return {
         props: {
-            profileData,
+            headerData,
             listData
         },
     }
 };
 
 interface Props {
-    profileData: SetupOneGet
+    headerData: HeaderType
     listData: ListData
 }
 
 
-const List: React.FC<Props> = ({profileData, listData}) => {
+const List: React.FC<Props> = ({headerData, listData}) => {
     const [query, setQuery] = useState('');
     const router = useRouter();
 
@@ -105,15 +105,11 @@ const List: React.FC<Props> = ({profileData, listData}) => {
                 <title>Tigerbook</title>
             </Head>
             <SidebarProvider>
-                {profileData.profile_pic != undefined ?
-                    <Header disableSideBar={true} disableLinks={false} profilePicSrc={profileData.profile_pic}
-                            username={profileData.username}/>
-                    : (profileData.residential_college_facebook_entry !== null ?
-                        <Header disableSideBar={true} disableLinks={false}
-                                profilePicSrc={profileData.residential_college_facebook_entry.photo_url}
-                                username={profileData.username}/>
-                        : <Header disableSideBar={true} disableLinks={false}
-                                  username={profileData.username}/>)
+                {headerData.profile_pic_url != undefined ?
+                    <Header disableSideBar={true} disableLinks={false} profilePicSrc={headerData.profile_pic_url}
+                            username={headerData.username} hasProfile={headerData.has_profile}/>
+                    : <Header disableSideBar={true} disableLinks={false}
+                              username={headerData.username} hasProfile={headerData.has_profile}/>
                 }
                 <main className="flex dark:bg-gray-900 h-full">
                     <div className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">

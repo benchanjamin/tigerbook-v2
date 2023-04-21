@@ -79,7 +79,7 @@ const Header: FC<Props> = function ({
                     <div className="flex md:order-2 md:w-[150px] justify-center  items-center gap-x-4">
                         {!disableLinks && <Navbar.Toggle/>}
                         <DarkThemeToggle onClick={() => setColorMode(colorMode === 'light' ? 'dark' : 'light')}/>
-                        <DropdownMenu profilePicSrc={profilePicSrc} username={username}/>
+                        <DropdownMenu profilePicSrc={profilePicSrc} username={username} hasProfile={hasProfile}/>
                     </div>
                     {!disableLinks &&
                         <>
