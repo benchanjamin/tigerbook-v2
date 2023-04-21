@@ -10,6 +10,7 @@ import Header from "@components/ui/Header";
 
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({query, req}) => {
+    let RESPONSE_ERROR = 0;
     const axios = await axiosInstance();
     let username = query.username
     if (username !== undefined) {
@@ -20,7 +21,18 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({query, req}
             headers: {
                 Cookie: req.headers.cookie
             }
-        })
+        }).catch(function () {
+        RESPONSE_ERROR = 1
+    })
+
+    if (RESPONSE_ERROR == 1) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    }
     console.log(axiosResponse.data)
     const userData: User = axiosResponse.data;
 

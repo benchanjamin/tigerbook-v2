@@ -28,13 +28,26 @@ interface ServerSideProps {
 }
 
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
+    let RESPONSE_ERROR = 0
     const axios = await axiosInstance();
     let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/setup/one/`,
         {
             headers: {
                 Cookie: req.headers.cookie
             }
-        })
+        }).catch(function () {
+        RESPONSE_ERROR = 1
+    })
+
+    if (RESPONSE_ERROR == 1) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    }
+
     const data: SetupOneGet = axiosResponse.data;
 
     const apiListAPIRoutes = [

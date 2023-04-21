@@ -45,17 +45,28 @@ interface ServerSideProps {
 }
 
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
-
+    let RESPONSE_ERROR = 0
     const axios = await axiosInstance();
     let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/header/`,
         {
             headers: {
                 Cookie: req.headers.cookie
             }
-        })
+        }).catch(function () {
+        RESPONSE_ERROR = 1
+    })
+
+    if (RESPONSE_ERROR == 1) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    }
+
     console.log(axiosResponse.data)
     const headerData: HeaderType = axiosResponse.data;
-
 
     return {
         props: {
@@ -69,7 +80,7 @@ interface Props {
 }
 
 
-const Search : React.FC<Props> = ({headerData}) => {
+const Search: React.FC<Props> = ({headerData}) => {
     const [query, setQuery] = useState('');
     const router = useRouter();
 
@@ -93,12 +104,12 @@ const Search : React.FC<Props> = ({headerData}) => {
                         <div className="flex flex-col md:flex-row items-center justify-center gap-x-4 pt-20">
                             {/* Search bar */}
                             <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
-                               <TigerBookSearchBar defaultText="Search PUID, NetID, nickname, or full name"
-                                                   autoComplete="off"
-                                                   zIndex={100} setterFunction={setQuery}/>
+                                <TigerBookSearchBar defaultText="Search PUID, NetID, nickname, or full name"
+                                                    autoComplete="off"
+                                                    zIndex={100} setterFunction={setQuery}/>
                             </div>
                             <button onClick={async () => await router.push(`/list/?q=${encodeURIComponent(query)}`)}
-                                className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-50">
+                                    className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-50">
                                 List
                             </button>
                         </div>
