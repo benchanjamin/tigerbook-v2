@@ -122,7 +122,7 @@ function TigerMap() {
                 .style("opacity", 0)
                 .each(function (d) {
                     d3.select(this).append("rect")
-                        .attr("height", 100)
+                        .attr("height", 25)
                         .attr("width", 280)
                         .attr("rx", 5).attr("ry", 5)
                         .attr("x", -140).attr("y", -20)
@@ -132,15 +132,15 @@ function TigerMap() {
                     d3.select(this).append("text")
                         .attr("x", 0)
                         .attr("y", 15);
-                    d3.select(this).append("text")
-                        .attr("x", 0)
-                        .attr("y", 35);
-                    d3.select(this).append("text")
-                        .attr("x", 0)
-                        .attr("y", 55);
-                    d3.select(this).append("text")
-                        .attr("x", 0)
-                        .attr("y", 75);
+                    // d3.select(this).append("text")
+                    //     .attr("x", 0)
+                    //     .attr("y", 35);
+                    // d3.select(this).append("text")
+                    //     .attr("x", 0)
+                    //     .attr("y", 55);
+                    // d3.select(this).append("text")
+                    //     .attr("x", 0)
+                    //     .attr("y", 75);
                 })
         }
 
