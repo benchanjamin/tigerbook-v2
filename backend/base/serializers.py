@@ -115,13 +115,13 @@ class TigerBookCitiesSerializer(serializers.RelatedField):
             if len(data) == 2:
                 city, country = data
                 return self.get_queryset().get(city=city, country=country)
-            elif len(data) == 3:
+            elif len(data) >= 3:
                 city, admin_name, country = data
                 return self.get_queryset().get(city=city,
                                                admin_name=admin_name,
                                                country=country)
             else:
-                raise serializers.ValidationError('Entered # of commas is not 2 or 3, each followed by a space,'
+                raise serializers.ValidationError('Entered # of commas is less than 2, each followed by a space,'
                                                   ' for a city location')
         except TigerBookCities.DoesNotExist as exception:
             raise serializers.ValidationError(
