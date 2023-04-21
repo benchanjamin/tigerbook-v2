@@ -96,10 +96,10 @@ const Map : React.FC<Props> = ({headerData}) => {
                 </div>
                 <main className="flex flex-col dark:bg-gray-900 justify-center items-center h-full">
                     {/*<div className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">*/}
-                        <Container className="bg-gray-50 pt-4 rounded-2xl pb-10 dark:bg-gray-800 w-full">
+                        <div className="bg-gray-50 pt-4 rounded-2xl pb-10 dark:bg-gray-800 w-full max-w-[2520px] mx-auto">
                             <h1 className="text-center text-dark dark:text-white py-6 text-2xl font-bold tracking-wide">Map</h1>
                             <TigerMap />
-                        </Container>
+                        </div>
                     {/*</div>*/}
                 </main>
             </SidebarProvider>

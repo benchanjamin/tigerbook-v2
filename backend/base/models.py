@@ -508,6 +508,7 @@ class TigerBookCities(models.Model):
     latitude = models.FloatField(default=0)
     longitude = models.FloatField(default=0)
     date_added = models.DateField(auto_now_add=True)
+    entire_location_string = models.TextField(null=False, blank=False)
 
     @property
     def complete_city(self):

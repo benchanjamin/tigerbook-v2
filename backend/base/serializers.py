@@ -103,26 +103,15 @@ class TigerBookCitiesSerializer(serializers.RelatedField):
 
     # TODO: referenced
     #  https://stackoverflow.com/questions/35257698/what-is-serializers-to-internal-value-method-used-for-in-django
-    def to_internal_value(self, data):
+    def to_internal_value(self, complete_city):
         # data is the city str, e.g. "Fort Worth, Texas, United States"
         # enforce that the data type is a string
-        if not isinstance(data, str):
+        if not isinstance(complete_city, str):
             raise serializers.ValidationError(
                 'City location must be a string.'
             )
-        data = data.split(", ")
         try:
-            if len(data) == 2:
-                city, country = data
-                return self.get_queryset().get(city=city, country=country)
-            elif len(data) >= 3:
-                city, admin_name, country = data
-                return self.get_queryset().get(city=city,
-                                               admin_name=admin_name,
-                                               country=country)
-            else:
-                raise serializers.ValidationError('Entered # of commas is less than 2, each followed by a space,'
-                                                  ' for a city location')
+            return self.get_queryset().get(entire_location_string=complete_city)
         except TigerBookCities.DoesNotExist as exception:
             raise serializers.ValidationError(
                 'TigerBookCities object does not exist.'

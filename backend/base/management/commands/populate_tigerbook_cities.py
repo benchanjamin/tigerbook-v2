@@ -27,7 +27,8 @@ class Command(BaseCommand):
                                                latitude=latitude,
                                                longitude=longitude,
                                                country=country,
-                                               admin_name=admin_name
+                                               admin_name=admin_name,
+                                               entire_location_string=f"{city}, {admin_name}, {country}",
                                                )
                 log.info(
                     f"Added city to TigerBookCities: {city} {admin_name} {country}"
