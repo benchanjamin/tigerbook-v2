@@ -83,9 +83,9 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
         <SidebarProvider>
             {headerData.profile_pic_url != undefined ?
                 <Header disableSideBar={true} disableLinks={false} profilePicSrc={headerData.profile_pic_url}
-                        username={headerData.username}/>
+                        username={headerData.username} hasProfile={headerData.has_profile}/>
                 : <Header disableSideBar={true} disableLinks={false}
-                          username={headerData.username}/>
+                          username={headerData.username} hasProfile={headerData.has_profile}/>
             }
             <div className="fixed -z-10 h-screen w-screen">
                 <Image src="/static/nassau.png" alt="Nassau Hall"
