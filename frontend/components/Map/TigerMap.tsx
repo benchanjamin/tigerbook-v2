@@ -66,7 +66,7 @@ function TigerMap() {
                     d3.select(this).append("circle").raise()
                         .attr('r', Math.sqrt(d1.count) + 2)
                         .attr('transform', `scale(${(1)})`)
-                        .on("mouseenter", (d2) => {
+                        .on("mouseenter", () => {
                             // showTooltip(d2);
                             d3.select(this).select("circle").style("fill", highlightColor);
                         })
@@ -248,9 +248,11 @@ function TigerMap() {
 
 
     return (
-        <div id="chart" className="relative">
-            <svg ref={svgRef} id="svg-main" xmlns="http://www.w3.org/1999/xhtml"/>
-        </div>
+        <>
+            <div id="chart">
+                <svg className="w-full h-full rounded-2xl" ref={svgRef} id="svg-main" xmlns="http://www.w3.org/1999/xhtml"/>
+            </div>
+        </>
     );
 }
 
