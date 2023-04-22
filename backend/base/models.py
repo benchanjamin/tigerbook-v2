@@ -500,6 +500,10 @@ class UndergraduateTigerBookHousing(models.Model):
     def __repr__(self):
         return f"{self.building} {self.room_no}"
 
+    @property
+    def complete_housing(self):
+        return self.building + ", " + self.room_no
+
 
 class TigerBookCities(models.Model):
     city = models.TextField(null=False, blank=False)

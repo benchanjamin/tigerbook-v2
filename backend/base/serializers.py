@@ -75,11 +75,43 @@ class UndergraduateTracksListAPISerializer(serializers.ModelSerializer):
         ]
 
 
-class PronounsAPISerializer(serializers.ModelSerializer):
+class PronounsListAPISerializer(serializers.ModelSerializer):
     class Meta:
         model = TigerBookPronouns
         fields = [
             'pronouns'
+        ]
+
+
+class InterestsListAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TigerBookInterests
+        fields = [
+            'interest'
+        ]
+
+
+class ExtracurricularsListAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TigerBookExtracurriculars
+        fields = [
+            'extracurricular'
+        ]
+
+
+class ExtracurricularsPositionsListAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TigerBookExtracurricularPositions
+        fields = [
+            'position'
+        ]
+
+
+class HousingListAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UndergraduateTigerBookHousing
+        fields = [
+            'complete_housing'
         ]
 
 

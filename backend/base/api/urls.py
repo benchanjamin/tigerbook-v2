@@ -10,7 +10,7 @@ from .views import (UndergraduateProfileSetupFirstPageView, get_routes, Undergra
                     UndergraduateConcentrationsListAPIView, UndergraduateTracksListAPIView,
                     UndergraduateCertificatesListAPIView, CitiesListAPIView, UndergraduateClassYearsListAPIView,
                     UndergraduateResidentialCollegesListAPIView, PronounsListAPIView, TigerBookHeaderView,
-                    TigerBookMapView)
+                    TigerBookMapView, InterestsListAPIView, ExtracurricularsListAPIView, HousingListAPIView)
 from uniauth.views import get_jwt_tokens_from_session
 
 urlpatterns = [
@@ -61,5 +61,8 @@ urlpatterns = [
     path('cities/', CitiesListAPIView.as_view()),
     path('certificates/', UndergraduateCertificatesListAPIView.as_view()),
     path('pronouns/', PronounsListAPIView.as_view()),
-
+    path('interests/', InterestsListAPIView.as_view()),
+    path('extracurriculars/', ExtracurricularsListAPIView.as_view()),
+    path('extracurricular-positions/', ExtracurricularsListAPIView.as_view()),
+    path('housing/', HousingListAPIView.as_view()),
 ]

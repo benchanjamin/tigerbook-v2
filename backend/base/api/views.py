@@ -12,7 +12,8 @@ from rest_framework.mixins import UpdateModelMixin, ListModelMixin, RetrieveMode
 from base.models import UndergraduateTigerBookDirectory, TigerBookNotes, GenericTigerBookDirectory, \
     UndergraduateToBeApprovedSubmissions, UndergraduateTigerBookConcentrations, UndergraduateTigerBookClassYears, \
     UndergraduateTigerBookResidentialColleges, TigerBookCities, UndergraduateTigerBookCertificates, \
-    UndergraduateTigerBookTracks, TigerBookPronouns
+    UndergraduateTigerBookTracks, TigerBookPronouns, TigerBookInterests, TigerBookExtracurriculars, \
+    UndergraduateTigerBookHousing, TigerBookExtracurricularPositions
 from base.pagination import StandardResultsSetPagination
 from base.serializers import (
     UndergraduateTigerBookDirectorySetupFirstPageSerializer,
@@ -25,7 +26,8 @@ from base.serializers import (
     UndergraduateConcentrationsListAPISerializer, UndergraduateClassYearsListAPISerializer,
     UndergraduateResidentialCollegesListAPISerializer, CitiesListAPISerializer,
     UndergraduateCertificatesListAPISerializer, UndergraduateTracksListAPISerializer,
-    PronounsAPISerializer, TigerBookHeaderSerializer, TigerBookMapSerializer,
+    PronounsListAPISerializer, TigerBookHeaderSerializer, TigerBookMapSerializer, InterestsListAPISerializer,
+    ExtracurricularsListAPISerializer, HousingListAPISerializer, ExtracurricularsPositionsListAPISerializer,
 )
 
 from django.conf import settings
@@ -74,8 +76,26 @@ class UndergraduateTracksListAPIView(ListAPIView):
 
 
 class PronounsListAPIView(ListAPIView):
-    serializer_class = PronounsAPISerializer
+    serializer_class = PronounsListAPISerializer
     queryset = TigerBookPronouns.objects.all().order_by('pronouns')
+
+
+class InterestsListAPIView(ListAPIView):
+    serializer_class = InterestsListAPISerializer
+    queryset = TigerBookInterests.objects.all().order_by('interest')
+
+
+class ExtracurricularsListAPIView(ListAPIView):
+    serializer_class = ExtracurricularsListAPISerializer
+    queryset = TigerBookExtracurriculars.objects.all().order_by('extracurricular')
+
+class ExtracurricularsPositionsListAPIView(ListAPIView):
+    serializer_class = ExtracurricularsPositionsListAPISerializer
+    queryset = TigerBookExtracurricularPositions.objects.all().order_by('position')
+
+class HousingListAPIView(ListAPIView):
+    serializer_class = HousingListAPISerializer
+    queryset = UndergraduateTigerBookHousing.objects.all().order_by('building', 'room_no')
 
 
 class TigerBookRedirectURLView(GenericAPIView):
