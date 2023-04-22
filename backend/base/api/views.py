@@ -89,7 +89,7 @@ class ExtracurricularsListAPIView(ListAPIView):
     serializer_class = ExtracurricularsListAPISerializer
     queryset = TigerBookExtracurriculars.objects.all().order_by('extracurricular')
 
-class ExtracurricularsPositionsListAPIView(ListAPIView):
+class ExtracurricularPositionsListAPIView(ListAPIView):
     serializer_class = ExtracurricularsPositionsListAPISerializer
     queryset = TigerBookExtracurricularPositions.objects.all().order_by('position')
 
