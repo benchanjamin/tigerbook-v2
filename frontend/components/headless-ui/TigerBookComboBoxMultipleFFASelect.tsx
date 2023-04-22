@@ -93,7 +93,7 @@ function TigerBookComboBoxMultipleFFASelect({placeholder, dropdownDefaultDescrip
                      focus-visible:ring-offset-teal-300 sm:text-sm ">
 
                     <div className="flex flex-wrap overflow-auto items-center pl-2 pr-2">
-                        <div className="shrink-[10]">
+                        <div className="shrink-[10] overflow-x-auto w-[220px] sm:w-full">
                             {selected.map((item, index) => {
                                 return (
                                     <span key={index}

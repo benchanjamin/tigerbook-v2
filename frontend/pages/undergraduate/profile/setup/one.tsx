@@ -271,7 +271,7 @@ const One: React.FC<Props> = ({
                                 </div>)
                         )
                     }
-                    <div className="px-4 mx-auto max-w-2xl">
+                    <div className="sm:px-4 mx-auto max-w-2xl">
                         <h2 className="mb-4 mt-2 text-xl font-bold text-gray-900 dark:text-white">Biographical
                             Information</h2>
                         <form onSubmit={submitHandler}>
