@@ -2,7 +2,7 @@ import Header from "@components/ui/Header";
 import Image from "next/image";
 import React, {useContext} from "react";
 import {SidebarProvider} from "@context/SidebarContext";
-import {HeaderType, SetupOneGet, SetupTwoPost} from "@types/setup/one/types";
+import {HeaderType, SetupOneGet, SetupTwoPost} from "@types/types";
 import {axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import {useState} from 'react';

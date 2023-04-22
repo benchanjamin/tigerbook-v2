@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import classes from "./Map.module.css"
 import {axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
-import {TigerBookMap} from "@types/setup/one/types";
+import {TigerBookMap} from "@types/types";
 // import TitleListBox from "@components/TitleListBox/TitleListBox";
 // import AuthorListBox from "@components/AuthorListBox/AuthorListBox";
 // import AuthorAndTitleRadioGroup from "@components/AuthorAndTitleRadioGroup/AuthorAndTitleRadioGroup";

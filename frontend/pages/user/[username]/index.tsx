@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {GetServerSideProps} from "next";
 import {axiosInstance} from "../../../utils/axiosInstance";
 import {AxiosResponse} from "axios";
-import {HeaderType, User} from "@types/setup/one/types";
+import {HeaderType, User} from "@types/types";
 import Image from "next/image";
 import {SidebarProvider} from "../../../context/SidebarContext";
 import {Spinner} from "flowbite-react";

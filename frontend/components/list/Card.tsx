@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Image from "next/legacy/image";
-import {ListUser} from "@types/setup/one/types";
+import {ListUser} from "@types/types";
 import {useRouter} from "next/router";
 import {Spinner} from "flowbite-react";
 

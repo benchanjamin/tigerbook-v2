@@ -32,7 +32,7 @@ import {
     HiX,
 } from "react-icons/hi";
 import Sidebar from "@components/ui/Sidebar";
-import {HeaderType, ListData, SetupOneGet} from "@types/setup/one/types";
+import {HeaderType, ListData, SetupOneGet} from "@types/types";
 import {GetServerSideProps} from "next";
 import {axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";

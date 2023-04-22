@@ -1,7 +1,7 @@
 import {useDropzone} from 'react-dropzone';
 import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
-import {HeaderType} from "@types/setup/one/types";
+import {HeaderType} from "@types/types";
 
 function ImageUpload({data, files, setFiles} : {data: HeaderType}) {
     const {getRootProps, getInputProps} = useDropzone({
