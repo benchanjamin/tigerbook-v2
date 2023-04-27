@@ -225,7 +225,7 @@ const ProfileEdit: React.FC<Props> = ({
             pronouns: myPronouns,
             aliases: myAliases,
             current_city: myCurrentCity,
-            extracurriculars: myExtracurriculars,
+            extracurriculars: JSON.stringify(myExtracurriculars),
         }
         console.log(postData)
 
@@ -246,7 +246,9 @@ const ProfileEdit: React.FC<Props> = ({
             formData.append('profile_pic', null, 'profile_pic')
         }
         for (let key in postData) {
-            formData.append(key, postData[key]);
+            if (postData[key] != null) {
+                formData.append(key, postData[key]);
+            }
         }
 
         // // TODO: Change this to the actual endpoint
