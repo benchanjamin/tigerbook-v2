@@ -585,12 +585,12 @@ const ProfileEdit: React.FC<Props> = ({
                                     </>))}
                                 <div className="sm:col-span-2 mx-auto">
                                     <div className="flex justify-content">
-                                        <button
+                                        <div
                                             onClick={addExtracurricular}
                                             className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"
                                         >
                                             Add Extracurricular Activity
-                                        </button>
+                                        </div>
                                     </div>
                                 </div>
 
