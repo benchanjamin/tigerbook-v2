@@ -266,34 +266,35 @@ const ProfileEdit: React.FC<Props> = ({
                     description: String(errorString),
                 })
             })
-
-        axiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/setup/two/`,
-            formData,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+        if (changePhoto) {
+            axiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/setup/two/`,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
                 }
-            }
-        ).then((response) => {
-            if (response.ok) {
-                return response
-            }
-        })
-            .catch((error) => {
-                RESPONSE_ERROR = 1
-                const errorObject = error.response.data
-                let errorString = errorObject == undefined ? error.message : ''
-                for (const property in errorObject) {
-                    errorString = errorString + `${property}: ${errorObject[property]}\n`;
+            ).then((response) => {
+                if (response.ok) {
+                    return response
                 }
-                context.showNotification({
-                    description: String(errorString),
-                })
             })
+                .catch((error) => {
+                    RESPONSE_ERROR = 1
+                    const errorObject = error.response.data
+                    let errorString = errorObject == undefined ? error.message : ''
+                    for (const property in errorObject) {
+                        errorString = errorString + `${property}: ${errorObject[property]}\n`;
+                    }
+                    context.showNotification({
+                        description: String(errorString),
+                    })
+                })
 
-        console.log(axiosResponse)
-        if (RESPONSE_ERROR === 0) {
-            await router.push('/search')
+            console.log(axiosResponse)
+            if (RESPONSE_ERROR === 0) {
+                await router.push('/search')
+            }
         }
     }
 
