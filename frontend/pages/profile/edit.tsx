@@ -291,10 +291,11 @@ const ProfileEdit: React.FC<Props> = ({
                     })
                 })
 
-            console.log(axiosResponse)
-            if (RESPONSE_ERROR === 0) {
-                await router.push('/search')
-            }
+
+        }
+        console.log(axiosResponse)
+        if (RESPONSE_ERROR === 0) {
+            await router.push('/search')
         }
     }
 
