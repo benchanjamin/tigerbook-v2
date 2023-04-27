@@ -9,7 +9,7 @@ import {
     SetupOnePost,
     SetupTwoPost
 } from "@types/types";
-import {axiosInstance, axiosLocalhost} from "@utils/axiosInstance";
+import {axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import TigerBookListBox from "@components/headless-ui/TigerBookListBox";
 import TigerBookComboBoxSingleStrictSelect from "@components/headless-ui/TigerBookComboBoxSingleStrictSelect";
@@ -37,7 +37,7 @@ interface ServerSideProps {
 
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
     let REDIRECT_ERROR = 0
-    const axios = await axiosLocalhost();
+    const axios = await axiosInstance();
     const axiosRedirect: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/redirect/`,
         {
             headers: {
