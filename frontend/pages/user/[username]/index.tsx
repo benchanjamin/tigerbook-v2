@@ -116,31 +116,31 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                                 />
                             </div>
                             {userData.certificates.length !== 0 &&
-                            (<>
-                                <h4 className="text-primary-500 text-left mt-10 font-bold tracking-wide">
-                                    CERTIFICATES
-                                </h4>
-                                {userData.certificates.map((certificate, index) => {
-                                    return (
-                                        <div key={index}
-                                             className="flex justify-left items-center whitespace-nowrap">
-                                            <div className="h-6 w-6">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                                     stroke="currentColor"
-                                                     className="w-6 h-6 inline-flex dark:text-white">
-                                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                                          d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/>
-                                                </svg>
-                                            </div>
-                                            <span
-                                                className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
+                                (<>
+                                    <h4 className="text-primary-500 text-left mt-10 font-bold tracking-wide">
+                                        CERTIFICATES
+                                    </h4>
+                                    {userData.certificates.map((certificate, index) => {
+                                        return (
+                                            <div key={index}
+                                                 className="flex justify-left items-center whitespace-nowrap">
+                                                <div className="h-6 w-6">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                                                         stroke="currentColor"
+                                                         className="w-6 h-6 inline-flex dark:text-white">
+                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                              d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/>
+                                                    </svg>
+                                                </div>
+                                                <span
+                                                    className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
                                             {certificate}
                                         </span>
-                                        </div>
-                                    )
-                                })}
-                            </>)
+                                            </div>
+                                        )
+                                    })}
+                                </>)
                             }
                             {userData.hometown && (
                                 <>
@@ -164,22 +164,97 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                                 </>
                             )
                             }
+                            {userData.current_city && (
+                                <>
+                                    <h4 className="text-primary-500 text-left mt-4 font-bold tracking-wide">
+                                        CURRENT CITY
+                                    </h4>
+                                    <div className="flex justify-left items-center whitespace-nowrap">
+                                        <div className="h-6 w-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                 strokeWidth={1.5} stroke="currentColor"
+                                                 className="inline-flex w-6 h-6 dark:text-white">
+                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                      d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+                                            </svg>
+                                        </div>
+                                        <span
+                                            className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
+                            {userData.current_city}
+                                </span>
+                                    </div>
+                                </>
+                            )
+                            }
+                            {userData.interests?.length !== 0 &&
+                                (<>
+                                    <h4 className="text-primary-500 text-left mt-3 font-bold tracking-wide">
+                                        INTERESTS
+                                    </h4>
+                                    {userData.interests?.map((interest, index) => {
+                                        return (
+                                            <div key={index}
+                                                 className="flex justify-left items-center whitespace-nowrap">
+                                                <div className="h-6 w-6">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                         viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
+                                                         className="w-6 h-6 inline-flex dark:text-white">
+                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                              d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+                                                    </svg>
+                                                </div>
+                                                <span
+                                                    className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
+                                            {interest}
+                                        </span>
+                                            </div>
+                                        )
+                                    })}
+                                </>)
+                            }
+                            {userData.extracurriculars?.length !== 0 &&
+                                (<>
+                                    <h4 className="text-primary-500 text-left mt-3 font-bold tracking-wide">
+                                        EXTRACURRICULARS
+                                    </h4>
+                                    {userData.extracurriculars?.map((extracurricular, index) => {
+                                        return (
+                                            <div key={index}
+                                                 className="flex justify-left items-center whitespace-nowrap">
+                                                <div className="h-6 w-6">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                         viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
+                                                         className="w-6 h-6 inline-flex dark:text-white">
+                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                              d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
+                                                    </svg>
+
+                                                </div>
+                                                <p
+                                                    className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
+                                                    {extracurricular.extracurricular} ({extracurricular.positions.join(', ')})
+                                                </p>
+                                            </div>
+                                        )
+                                    })}
+                                </>)
+                            }
                         </div>
 
                         <div
                             className="flex flex-col items-center sm:items-start order-first mb-4 sm:order-last sm:mb-0">
-                            <h1 className="text-3xl font-medium tracking-wide text-left dark:text-white">
+                            <h1 className="flex flex-wrap text-3xl justify-center items-center font-medium tracking-wide text-left dark:text-white">
                                 {userData.full_name}&nbsp;&lsquo;{String(userData.class_year).slice(2)}&nbsp;
                                 {userData.pronouns &&
-                                    <span className="text-gray-500 text-lg">
+                                    <span className="text-gray-500 text-lg text-center sm:text-left">
                                         ({userData.pronouns})
                                 </span>
                                 }
                             </h1>
-                            <div className="text-gray-500 text-left font-medium tracking-wide">
+                            <div className="text-gray-500 text-left font-medium tracking-wide mt-3">
                                 {userData.aliases.map((alias, index) => {
                                     return (
-                                        <span key={index}>
+                                        <span key={index} className="text-gray-300">
                                             {alias}
                                         </span>
                                     )
@@ -221,7 +296,10 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
+
                 </section>
             </main>
 
