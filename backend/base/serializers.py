@@ -914,7 +914,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
         if request.user.username in obj.permissions.hometown_prohibited_usernames:
             return None
         if hasattr(obj.current_city, 'complete_city'):
-            return obj.current_city.complete_city
+            return obj.hometown.complete_city
         return None
 
     def get_housing(self, obj: UndergraduateTigerBookDirectory) -> str | None:
