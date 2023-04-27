@@ -804,6 +804,10 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
     aliases = serializers.SerializerMethodField(read_only=True)
     certificates = serializers.SerializerMethodField(read_only=True)
     hometown = serializers.SerializerMethodField(read_only=True)
+    housing = serializers.SerializerMethodField(read_only=True)
+    current_city = serializers.SerializerMethodField(read_only=True)
+    interests = serializers.SerializerMethodField(read_only=True)
+    extracurriculars = serializers.JSONField(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -818,7 +822,11 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             'profile_pic_url',
             'aliases',
             'certificates',
-            'hometown'
+            'hometown',
+            'housing',
+            'current_city',
+            'interests',
+            'extracurriculars'
         ]
 
     def get_username(self, obj):
@@ -889,7 +897,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             return None
         return obj.aliases if hasattr(obj, 'aliases') else None
 
-    def get_certificates(self, obj):
+    def get_certificates(self, obj: UndergraduateTigerBookDirectory):
         request = self.context.get('request')
         if request.user.username in obj.permissions.certificates_prohibited_usernames:
             return None
@@ -901,13 +909,41 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             result.append(certificate['certificate'])
         return result
 
-    def get_hometown(self, obj):
+    def get_hometown(self, obj: UndergraduateTigerBookDirectory) -> str | None:
         request = self.context.get('request')
         if request.user.username in obj.permissions.hometown_prohibited_usernames:
             return None
-        if hasattr(obj.hometown, 'complete_city'):
-            return obj.hometown.complete_city
+        if hasattr(obj.current_city, 'complete_city'):
+            return obj.current_city.complete_city
         return None
+
+    def get_housing(self, obj: UndergraduateTigerBookDirectory) -> str | None:
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.housing_prohibited_usernames:
+            return None
+        if hasattr(obj.housing, 'complete_housing'):
+            return obj.housing.complete_housing
+        return None
+
+    def get_current_city(self, obj: UndergraduateTigerBookDirectory):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.hometown_prohibited_usernames:
+            return None
+        if hasattr(obj.current_city, 'complete_city'):
+            return obj.current_city.complete_city
+        return None
+
+    def get_interests(self, obj: UndergraduateTigerBookDirectory) -> list[str] | None:
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.interests_prohibited_usernames:
+            return None
+        interests = TigerBookInterestsRetrieveSerializer(obj.interests, many=True).data \
+            if hasattr(obj, 'interests') \
+            else None
+        result = []
+        for interest in interests:
+            result.append(interest['interest'])
+        return result
 
 
 class TigerBookNotesListSerializer(serializers.ModelSerializer):
@@ -957,6 +993,16 @@ class UndergraduateTigerBookCertificatesRetrieveSerializer(serializers.ModelSeri
         model = UndergraduateTigerBookCertificates
         fields = [
             'certificate'
+        ]
+
+
+class TigerBookInterestsRetrieveSerializer(serializers.ModelSerializer):
+    interest = serializers.CharField(read_only=True)
+
+    class Meta:
+        model = TigerBookInterests
+        fields = [
+            'interest'
         ]
 
 
