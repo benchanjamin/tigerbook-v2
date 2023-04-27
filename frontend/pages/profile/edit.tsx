@@ -227,6 +227,7 @@ const ProfileEdit: React.FC<Props> = ({
             current_city: myCurrentCity,
             extracurriculars: myExtracurriculars,
             housing: myCurrentHousing,
+            interests: myInterests,
         }
         console.log(postData)
 
