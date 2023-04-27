@@ -289,12 +289,16 @@ class PermissionsSerializer(WritableNestedModelSerializer):
 
     def validate(self, data):
         usernames = itertools.chain(
-            data['username_prohibited_usernames'], data['profile_pic_prohibited_usernames'],
-            data['track_prohibited_usernames'], data['concentration_prohibited_usernames'],
+            data['username_prohibited_usernames'],
+            data['profile_pic_prohibited_usernames'],
+            data['track_prohibited_usernames'],
+            data['concentration_prohibited_usernames'],
             data['class_year_prohibited_usernames'],
             data['residential_college_prohibited_usernames'],
-            data['housing_prohibited_usernames'], data['aliases_prohibited_usernames'],
-            data['pronouns_prohibited_usernames'], data['certificates_prohibited_usernames'],
+            data['housing_prohibited_usernames'],
+            data['aliases_prohibited_usernames'],
+            data['pronouns_prohibited_usernames'],
+            data['certificates_prohibited_usernames'],
             data['hometown_prohibited_usernames'],
             data['current_city_prohibited_usernames'],
             data['interests_prohibited_usernames'],
@@ -313,6 +317,7 @@ class PermissionsSerializer(WritableNestedModelSerializer):
             raise serializers.ValidationError(
                 f'User with username {username} does not exist.'
             )
+        return data
 
 
 # Serializers below are for the initial user setup page
