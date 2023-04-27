@@ -272,7 +272,8 @@ class UndergraduateTigerBookDirectoryListView(ListModelMixin,
     serializer_class = UndergraduateTigerBookDirectoryListSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = UndergraduateDirectoryListFilter
-    pagination_class = StandardResultsSetPagination
+    # TODO: Add pagination
+    # pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         qs = super().get_queryset()
