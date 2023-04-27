@@ -510,7 +510,7 @@ class UndergraduateTigerBookHousingSerializer(serializers.RelatedField):
             ) from exception
 
     def to_representation(self, value):
-        return f"{value.building.capitalize()}, {value.room_no}"
+        return f"{value.building}, {value.room_no}"
 
 
 class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSerializer):
