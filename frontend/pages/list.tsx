@@ -155,7 +155,7 @@ const List: React.FC<Props> = ({headerData, listData}) => {
                             <div
                                 className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8"
                             >
-                                {listData.results.map((item, index) => (
+                                {listData.map((item, index) => (
                                     <Card key={index} personData={item}/>
                                 ))}
                             </div>

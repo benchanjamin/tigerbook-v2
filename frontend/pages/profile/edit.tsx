@@ -9,7 +9,7 @@ import {
     SetupOnePost,
     SetupTwoPost
 } from "@types/types";
-import {axiosInstance} from "@utils/axiosInstance";
+import {axiosInstance, axiosLocalhost} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import TigerBookListBox from "@components/headless-ui/TigerBookListBox";
 import TigerBookComboBoxSingleStrictSelect from "@components/headless-ui/TigerBookComboBoxSingleStrictSelect";
@@ -184,8 +184,8 @@ const ProfileEdit: React.FC<Props> = ({
     const [myClassYear, setMyClassYear] = useState(data.class_year);
     const [myHometown, setMyHometown] = useState(data.hometown);
     const [myPronouns, setMyPronouns] = useState(data.pronouns);
-    const [myCertificates, setMyCertificates] = useState(data.certificates);
-    const [myAliases, setMyAliases] = useState(data.aliases);
+    const [myCertificates, setMyCertificates] = useState<string[] | null>(data.certificates);
+    const [myAliases, setMyAliases] = useState<string[] | null>(data.aliases);
     const [myCurrentCity, setMyCurrentCity] = useState(data.current_city);
     const [myCurrentHousing, setMyCurrentHousing] = useState(data.housing);
     const [myInterests, setMyInterests] = useState(data.interests);
@@ -211,27 +211,27 @@ const ProfileEdit: React.FC<Props> = ({
 
     console.log("extra", myExtracurriculars)
 
-    // console.log("certs", myCertificates)
+    console.log("certs", myCertificates)
 
     async function submitHandler(event) {
         event.preventDefault();
         const postData: FullProfileEditPost = {
-            certificates: JSON.stringify(myCertificates),
+            certificates: myCertificates,
             concentration: myConcentration,
             track: myTrack,
             residential_college: myResidentialCollege,
             class_year: myClassYear,
             hometown: myHometown,
             pronouns: myPronouns,
-            aliases: JSON.stringify(myAliases),
+            aliases: myAliases,
             current_city: myCurrentCity,
-            extracurriculars: JSON.stringify(myExtracurriculars),
+            extracurriculars: myExtracurriculars,
             housing: myCurrentHousing,
         }
         console.log(postData)
 
         let RESPONSE_ERROR = 0
-        const axios = await axiosInstance();
+        const axios = await axiosLocalhost();
 
         if (files.length == 0 && changePhoto) {
             context.showNotification({
@@ -246,20 +246,35 @@ const ProfileEdit: React.FC<Props> = ({
         } else if (changePhoto && files.length == 0) {
             formData.append('profile_pic', null, 'profile_pic')
         }
-        for (let key in postData) {
-            if (postData[key] != null) {
-                formData.append(key, postData[key]);
-            }
-        }
 
         // // TODO: Change this to the actual endpoint
         let axiosResponse: AxiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/edit/`,
+            postData
+        ).then((response) => {
+            if (response.ok) {
+                return response
+            }
+        })
+            .catch((error) => {
+                RESPONSE_ERROR = 1
+                const errorObject = error.response.data
+                let errorString = errorObject == undefined ? error.message : ''
+                for (const property in errorObject) {
+                    errorString = errorString + `${property}: ${errorObject[property]}\n`;
+                }
+                context.showNotification({
+                    description: String(errorString),
+                })
+            })
+
+        axiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/setup/two/`,
             formData,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            }).then((response) => {
+            }
+        ).then((response) => {
             if (response.ok) {
                 return response
             }
@@ -587,7 +602,7 @@ const ProfileEdit: React.FC<Props> = ({
                                     <div className="flex justify-content">
                                         <div
                                             onClick={addExtracurricular}
-                                            className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"
+                                            className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600 cursor-pointer"
                                         >
                                             Add Extracurricular Activity
                                         </div>

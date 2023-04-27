@@ -43,12 +43,7 @@ export interface SetupTwoGet {
 
 export type SetupTwoPost = FormData
 
-export interface ListData {
-    count: number;
-    next: null | string
-    previous: null | string;
-    results: ListUser[];
-}
+export type ListData = ListUser[]
 
 export interface ListUser {
     username: string;
