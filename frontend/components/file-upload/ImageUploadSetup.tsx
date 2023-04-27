@@ -1,5 +1,4 @@
 import {useDropzone} from 'react-dropzone';
-import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
 import {HeaderType} from "@types/types";
 

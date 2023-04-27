@@ -24,7 +24,7 @@ export interface SetupOneGet {
     certificates: string[];
     class_year: number | null;
     residential_college: string | null;
-    profile_pic: string;
+    profile_pic: string | null;
 }
 
 export interface ActiveDirectoryEntry {
@@ -90,3 +90,81 @@ export interface TigerBookMap {
     longitude: number;
 }
 
+export interface FullProfileEditPost {
+    permissions:         Permissions | undefined;
+    profile_pic:         null;
+    track:               string;
+    concentration:       string;
+    residential_college: string;
+    housing:             null;
+    aliases:             string[];
+    pronouns:            string | null;
+    certificates:        string[];
+    hometown:            string | null;
+    current_city:        string | null;
+    interests:           string[];
+    extracurriculars:    null;
+    research:            null;
+    miscellaneous:       null;
+}
+
+export interface FullProfileEditGet {
+    username:                           string;
+    active_directory_entry:             ActiveDirectoryEntry;
+    residential_college_facebook_entry: ResidentialCollegeFacebookEntry;
+    permissions:                        Permissions;
+    profile_pic:                        null;
+    track:                              string;
+    concentration:                      string;
+    class_year:                         number;
+    residential_college:                string;
+    housing:                            null;
+    aliases:                            string[];
+    pronouns:                           null;
+    certificates:                       string[];
+    hometown:                           string;
+    current_city:                       null;
+    interests:                          string[];
+    extracurriculars:                   null | Extracurricular[]
+    research:                           null;
+    miscellaneous:                      null;
+}
+
+
+export interface Permissions {
+    is_visible_to_undergrads:                 boolean;
+    is_visible_to_faculty:                    boolean;
+    is_visible_to_service_accounts:           boolean;
+    is_visible_to_graduate_students:          boolean;
+    is_visible_to_staff:                      boolean;
+    username_prohibited_usernames:            string[];
+    profile_pic_prohibited_usernames:         string[];
+    track_prohibited_usernames:               string[];
+    concentration_prohibited_usernames:       string[];
+    class_year_prohibited_usernames:          string[];
+    residential_college_prohibited_usernames: string[];
+    housing_prohibited_usernames:             string[];
+    aliases_prohibited_usernames:             string[];
+    pronouns_prohibited_usernames:            string[];
+    certificates_prohibited_usernames:        string[];
+    hometown_prohibited_usernames:            string[];
+    current_city_prohibited_usernames:        string[];
+    interests_prohibited_usernames:           string[];
+    extracurriculars_prohibited_usernames:    string[];
+    research_prohibited_usernames:            string[];
+    miscellaneous_prohibited_usernames:       string[];
+}
+
+export interface ActiveDirectoryEntry {
+    full_name: string;
+    email:     string;
+}
+
+export interface ResidentialCollegeFacebookEntry {
+    photo_url: string;
+}
+
+export interface Extracurricular {
+    extracurricular: string;
+    positions:       string[];
+}

@@ -7,7 +7,7 @@ import {axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import {useState} from 'react';
 import {useRouter} from "next/navigation";
-import ImageUpload from "@components/file-upload/ImageUpload";
+import ImageUploadSetup from "@components/file-upload/ImageUploadSetup";
 import {GetServerSideProps} from "next";
 import {Spinner} from "flowbite-react";
 import NotificationContext from "../../../../context/NotificationContext";
@@ -221,10 +221,9 @@ const Two: React.FC<Props> = ({headerData}) => {
                         </div>)
                     }
                     <div className="px-4 py-2 mx-auto max-w-2xl">
-
-                        <ImageUpload data={headerData}
-                                     files={files}
-                                     setFiles={setFiles}/>
+                        <ImageUploadSetup data={headerData}
+                                          files={files}
+                                          setFiles={setFiles}/>
                     </div>
                     <form onSubmit={submitHandler}>
                         <div className="flex justify-center mb-2 max-2xl gap-x-4 sm:gap-x-16">

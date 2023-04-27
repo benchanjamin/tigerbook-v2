@@ -17,18 +17,18 @@ export default function TigerBookComboBoxMultipleStrictSelect(
     //     }
     // }, [data, defaultOptionText]);
 
-    async function onChange(dataString:string) {
+    async function onChange(dataArray: string[]) {
         setSelected(() => {
-            let result = dataString
-            // result = [...new Set(result)];
+            let result = dataArray
             setterFunction(result)
             return result
         })
     }
 
-    async function onClick(event) {
+    async function onClick(event)
+    {
         event.stopPropagation()
-        event.preventDefault()
+        // event.preventDefault()
 
         // @ts-ignore
         const associatedText = event.target.parentNode.innerText
@@ -54,17 +54,17 @@ export default function TigerBookComboBoxMultipleStrictSelect(
                   onChange={onChange} className={`z-[${zIndex}] z-${zIndex}`} multiple>
             <div className="relative mt-1">
                 <div
-                    className="relative border border-primary-200 w-full cursor-pointer
+                    className="relative border border-primary-200 w-full cursor-default
                     overflow-hidden rounded-lg bg-white text-left shadow-md
                      focus:outline-none focus-visible:ring-2 focus-visible:ring-white
                      focus-visible:ring-opacity-75 focus-visible:ring-offset-2
-                     focus-visible:ring-offset-teal-300 sm:text-sm">
+                     sm:text-sm">
                     <div className="flex flex-wrap overflow-auto items-center pl-2 pr-2">
                         <div className="shrink-[10] overflow-x-auto w-[220px] sm:w-full">
                             {selected.map((item, index) => {
                                 return (
                                     <span key={index}
-                                          className="mr-2 mt-1 mb-1 flex items-center whitespace-nowrap cursor-default relative bg-primary-50 pl-2 pr-1 rounded-full inline-flex">
+                                          className="mr-2 select-none mt-1 mb-1 flex items-center whitespace-nowrap cursor-default relative bg-primary-50 pl-2 pr-1 rounded-full inline-flex">
                                             {item}
                                         <XMarkIcon className="h-5 w-5 cursor-pointer"
                                                    onClick={onClick}
@@ -75,7 +75,7 @@ export default function TigerBookComboBoxMultipleStrictSelect(
                             })}
                         </div>
                         <Combobox.Input
-                            className="w-full py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0
+                            className="w-full py-2 pl-1 pr-10 text-sm leading-5 text-gray-900 focus:ring-0
                         focus:outline-none
                         focus-visible:border-primary-500"
                             // displayValue={(dataString) => dataString === null || dataString.length === 0 ? '' : dataString.join(', ')}

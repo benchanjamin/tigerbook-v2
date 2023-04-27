@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {GetServerSideProps, NextPage} from "next";
 import {SetupOneGet, SetupOnePost} from "@types/types";
 import {axiosInstance} from "@utils/axiosInstance";
@@ -110,6 +110,16 @@ type Props = {
     certificates: string[]
 }
 
+type ListData = {
+    concentrations: string[]
+    tracks: string[]
+    residentialColleges: string[]
+    classYears: string[]
+    cities: string[]
+    pronouns: string[]
+    certificates: string[]
+}
+
 const One: React.FC<Props> = ({
                                   data, concentrations, tracks, residentialColleges,
                                   classYears, cities, pronouns, certificates,
@@ -127,6 +137,60 @@ const One: React.FC<Props> = ({
     const [myAliases, setMyAliases] = useState(data.aliases);
 
     const [isImageReady, setIsImageReady] = useState(false);
+
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         const apiListAPIRoutes = [
+    //             '/api-django/concentrations/',
+    //             '/api-django/tracks/',
+    //             '/api-django/residential-colleges/',
+    //             '/api-django/class-years/',
+    //             '/api-django/cities/',
+    //             '/api-django/certificates/',
+    //             '/api-django/pronouns/',
+    //         ]
+    //
+    //         const keys = [
+    //             'concentrations',
+    //             'tracks',
+    //             'residentialColleges',
+    //             'classYears',
+    //             'cities',
+    //             'certificates',
+    //             'pronouns',
+    //         ]
+    //
+    //         const indices = [
+    //             'concentration',
+    //             'track',
+    //             'residential_college',
+    //             'class_year',
+    //             'complete_city',
+    //             'certificate',
+    //             'pronouns',
+    //         ]
+    //
+    //         const listData = {}
+    //
+    //         for (const [index, apiRoute] of apiListAPIRoutes.entries()) {
+    //             const axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}${apiRoute}`,)
+    //             listData[keys[index]] = axiosResponse.data.map((item) => item[indices[index]])
+    //         }
+    //
+    //         return listData
+    //     }
+    //
+    //     fetchData().then((data: ListData) => {
+    //         setMyConcentration(data.concentrations)
+    //         setMyTrack(data.tracks)
+    //         setMyResidentialCollege(data.residentialColleges)
+    //         setMyClassYear(data.classYears)
+    //         setMyHometown(data.cities)
+    //         setMyCertificates(data.certificates)
+    //         setMyPronouns(data.pronouns)
+    //     });
+    // }, []);
+
 
     const onLoadCallBack = (e) => {
         setIsImageReady(true)
