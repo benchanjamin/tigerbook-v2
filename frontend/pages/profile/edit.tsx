@@ -216,16 +216,17 @@ const ProfileEdit: React.FC<Props> = ({
     async function submitHandler(event) {
         event.preventDefault();
         const postData: FullProfileEditPost = {
-            certificates: myCertificates,
+            certificates: JSON.stringify(myCertificates),
             concentration: myConcentration,
             track: myTrack,
             residential_college: myResidentialCollege,
             class_year: myClassYear,
             hometown: myHometown,
             pronouns: myPronouns,
-            aliases: myAliases,
+            aliases: JSON.stringify(myAliases),
             current_city: myCurrentCity,
             extracurriculars: JSON.stringify(myExtracurriculars),
+            housing: myCurrentHousing,
         }
         console.log(postData)
 
