@@ -121,7 +121,7 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
 
                         <div
                             className="flex flex-col items-center sm:items-start order-first mb-4 sm:order-0 sm:mb-0">
-                            <h1 className="flex flex-1 sm:flex-0 flex-wrap text-3xl justify-center items-center font-medium tracking-wide text-left dark:text-white">
+                            <h1 className="flex flex-1 sm:flex-0 flex-wrap text-3xl justify-center items-center font-medium tracking-wide text-center sm:text-left dark:text-white">
                                 {userData.full_name}&nbsp;&lsquo;{String(userData.class_year).slice(2)}&nbsp;
                                 {userData.pronouns &&
                                     <div className="text-gray-500 text-lg text-center sm:text-left">
