@@ -808,6 +808,8 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
     current_city = serializers.SerializerMethodField(read_only=True)
     interests = serializers.SerializerMethodField(read_only=True)
     extracurriculars = serializers.JSONField(read_only=True)
+    miscellaneous = serializers.JSONField(read_only=True)
+    research = serializers.JSONField(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -826,7 +828,9 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             'housing',
             'current_city',
             'interests',
-            'extracurriculars'
+            'extracurriculars',
+            'miscellaneous',
+            'research'
         ]
 
     def get_username(self, obj):
@@ -962,6 +966,8 @@ class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializ
     current_city = serializers.SerializerMethodField(read_only=True)
     interests = serializers.SerializerMethodField(read_only=True)
     extracurriculars = serializers.JSONField(read_only=True)
+    miscellaneous = serializers.JSONField(read_only=True)
+    research = serializers.JSONField(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -980,7 +986,9 @@ class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializ
             'housing',
             'current_city',
             'interests',
-            'extracurriculars'
+            'extracurriculars',
+            'miscellaneous',
+            'research'
         ]
 
     def get_username(self, obj):
