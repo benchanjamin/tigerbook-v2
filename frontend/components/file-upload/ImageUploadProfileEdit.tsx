@@ -51,7 +51,7 @@ function ImageUploadProfileEdit({data, files, setFiles}: { data: SetupOneGet }) 
                                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center"><span
                                     className="font-semibold">Click to upload a profile picture </span>
                                 </p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400 text-center">Upload an image
+                                <p className="text-xs text-gray-500 dark:text-gray-400 text-center px-2">Upload an image
                                     type file (preferably cropped to a square image)</p>
                             </div>
                             <div {...getRootProps({className: 'dropzone'})}>
