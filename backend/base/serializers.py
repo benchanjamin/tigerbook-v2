@@ -913,7 +913,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
         request = self.context.get('request')
         if request.user.username in obj.permissions.hometown_prohibited_usernames:
             return None
-        if hasattr(obj.current_city, 'complete_city'):
+        if hasattr(obj.hometown, 'complete_city'):
             return obj.hometown.complete_city
         return None
 
