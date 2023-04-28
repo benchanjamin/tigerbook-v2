@@ -968,6 +968,7 @@ class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializ
     extracurriculars = serializers.JSONField(read_only=True)
     miscellaneous = serializers.JSONField(read_only=True)
     research = serializers.JSONField(read_only=True)
+    permissions = PermissionsSerializer(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -988,7 +989,8 @@ class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializ
             'interests',
             'extracurriculars',
             'miscellaneous',
-            'research'
+            'research',
+            'permissions'
         ]
 
     def get_username(self, obj):
