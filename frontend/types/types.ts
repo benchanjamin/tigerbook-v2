@@ -124,9 +124,9 @@ export interface FullProfileEditGet {
     hometown: string | null;
     current_city: null;
     interests: string[];
-    extracurriculars: null | Extracurricular[]
-    research: null;
-    miscellaneous: null;
+    extracurriculars: null | Extracurricular[];
+    research: null | Research[];
+    miscellaneous: null | Miscellaneous[];
 }
 
 
@@ -166,4 +166,14 @@ export interface ResidentialCollegeFacebookEntry {
 export interface Extracurricular {
     extracurricular: string;
     positions: string[];
+}
+
+export interface Miscellaneous {
+    miscellaneous_title : string;
+    miscellaneous_description : string;
+}
+
+export interface Research {
+    research_type: string;
+    research_title: string;
 }

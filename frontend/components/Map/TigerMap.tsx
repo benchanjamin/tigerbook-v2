@@ -54,7 +54,7 @@ function TigerMap() {
 
         async function drawPointsOfInterest() {
             let axios = await axiosInstance()
-            let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/map/`)
+            let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/map/hometown/`)
             const mapData: TigerBookMap[] = axiosResponse.data
             // d3.json('/static/cleaned-data-12-4.geojson').then(function (data) {
             // let pointsOfInterest = mapData.filter(d => d.geometry.type === 'Point');

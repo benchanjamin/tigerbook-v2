@@ -204,7 +204,7 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                                     })}
                                 </>)
                             }
-                            {userData.extracurriculars?.length !== 0 &&
+                            {userData.extracurriculars !== null &&
                                 (<>
                                     <h4 className="text-primary-500 text-left mt-3 font-bold tracking-wide">
                                         EXTRACURRICULARS
