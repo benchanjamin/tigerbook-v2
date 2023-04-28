@@ -10,8 +10,8 @@ from .views import (UndergraduateProfileSetupFirstPageView, get_routes, Undergra
                     UndergraduateConcentrationsListAPIView, UndergraduateTracksListAPIView,
                     UndergraduateCertificatesListAPIView, CitiesListAPIView, UndergraduateClassYearsListAPIView,
                     UndergraduateResidentialCollegesListAPIView, PronounsListAPIView, TigerBookHeaderView,
-                    TigerBookMapView, InterestsListAPIView, ExtracurricularsListAPIView, HousingListAPIView,
-                    ExtracurricularPositionsListAPIView)
+                    TigerBookHometownMapView, InterestsListAPIView, ExtracurricularsListAPIView, HousingListAPIView,
+                    ExtracurricularPositionsListAPIView, TigerBookCurrentCityMapView)
 from uniauth.views import get_jwt_tokens_from_session
 
 urlpatterns = [
@@ -19,7 +19,9 @@ urlpatterns = [
     path('redirect/', TigerBookRedirectURLView.as_view()),
     path('header/', TigerBookHeaderView.as_view(),
          name="header"),
-    path('map/', TigerBookMapView.as_view(),
+    path('map/hometown/', TigerBookHometownMapView.as_view(),
+         name="header"),
+    path('map/current-city/', TigerBookCurrentCityMapView.as_view(),
          name="header"),
     path('undergraduate/profile/setup/one/', UndergraduateProfileSetupFirstPageView.as_view(),
          name="undergraduate-setup-first-page"),

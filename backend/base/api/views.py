@@ -26,9 +26,9 @@ from base.serializers import (
     UndergraduateConcentrationsListAPISerializer, UndergraduateClassYearsListAPISerializer,
     UndergraduateResidentialCollegesListAPISerializer, CitiesListAPISerializer,
     UndergraduateCertificatesListAPISerializer, UndergraduateTracksListAPISerializer,
-    PronounsListAPISerializer, TigerBookHeaderSerializer, TigerBookMapSerializer, InterestsListAPISerializer,
+    PronounsListAPISerializer, TigerBookHeaderSerializer, TigerBookHometownMapSerializer, InterestsListAPISerializer,
     ExtracurricularsListAPISerializer, HousingListAPISerializer, ExtracurricularsPositionsListAPISerializer,
-    UndergraduateTigerBookDirectoryPreviewSerializer,
+    UndergraduateTigerBookDirectoryPreviewSerializer, TigerBookCurrentCityMapSerializer,
 )
 
 from django.conf import settings
@@ -152,13 +152,25 @@ class UndergraduateProfileEdit(UpdateModelMixin, GenericAPIView):
         return get_object_or_404(queryset, user=self.request.user)
 
 
-class TigerBookMapView(ListModelMixin, GenericAPIView):
+class TigerBookHometownMapView(ListModelMixin, GenericAPIView):
     queryset = TigerBookCities.objects.all()
-    serializer_class = TigerBookMapSerializer
+    serializer_class = TigerBookHometownMapSerializer
 
     def get_queryset(self):
         qs = super().get_queryset()
         qs = qs.exclude(undergraduates_hometown__isnull=True)
+        return qs
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+class TigerBookCurrentCityMapView(ListModelMixin, GenericAPIView):
+    queryset = TigerBookCities.objects.all()
+    serializer_class = TigerBookCurrentCityMapSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.exclude(undergraduates_current_city__isnull=True)
         return qs
 
     def get(self, request, *args, **kwargs):

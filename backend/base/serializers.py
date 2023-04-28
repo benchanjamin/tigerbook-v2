@@ -379,7 +379,7 @@ class TigerBookHeaderSerializer(serializers.ModelSerializer):
             return False
 
 
-class TigerBookMapSerializer(serializers.ModelSerializer):
+class TigerBookHometownMapSerializer(serializers.ModelSerializer):
     count = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
@@ -393,6 +393,22 @@ class TigerBookMapSerializer(serializers.ModelSerializer):
 
     def get_count(self, obj):
         return obj.undergraduates_hometown.count()
+
+
+class TigerBookCurrentCityMapSerializer(serializers.ModelSerializer):
+    count = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = TigerBookCities
+        fields = [
+            'complete_city',
+            'count',
+            'latitude',
+            'longitude'
+        ]
+
+    def get_count(self, obj):
+        return obj.undergraduates_current_city.count()
 
 
 # TODO: This is personal account information for setup, or initial page

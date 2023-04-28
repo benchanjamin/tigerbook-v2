@@ -108,7 +108,7 @@ class UndergraduateTigerBookDirectory(models.Model):
     #                                         blank=False)
     # TODO: the two below go together
     current_city = models.ForeignKey('TigerBookCities',
-                                     related_name='undergraduates_post_grad_city',
+                                     related_name='undergraduates_current_city',
                                      on_delete=models.RESTRICT, null=True, blank=False)
     # post_grad_country = models.ForeignKey('TigerBookCountries', on_delete=models.RESTRICT,
     #                                       related_name='undergraduates_post_grad_country',
