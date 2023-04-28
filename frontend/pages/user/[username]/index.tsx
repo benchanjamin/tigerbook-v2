@@ -233,7 +233,7 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                                     {userData.extracurriculars?.map((extracurricular, index) => {
                                         return (
                                             <div key={index}
-                                                 className="flex justify-left items-center whitespace-nowrap">
+                                                 className="flex justify-left items-center ">
                                                 <div className="h-6 w-6">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                          viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
@@ -245,7 +245,8 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                                                 </div>
                                                 <p
                                                     className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
-                                                    {extracurricular.extracurricular} ({extracurricular.positions.join(', ')})
+                                                    {extracurricular.extracurricular}
+                                                    {extracurricular.positions.length !== 0 && ` (${extracurricular.positions.join(', ')})`}
                                                 </p>
                                             </div>
                                         )

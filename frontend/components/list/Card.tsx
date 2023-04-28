@@ -48,7 +48,7 @@ function Card({personData}: { personData: ListUser }) {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-y-1 rounded-b-xl bg-gray-200 dark:bg-dark p-2 px-3 h-1/2">
+                <div className="flex flex-col flex-grow gap-y-1 rounded-b-xl bg-gray-200 dark:bg-dark p-2 px-3 h-1/2">
                     <h5 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">
                         {personData.full_name} {`\'${String(personData.class_year).substring(2, 4)}`} {personData.pronouns && `(${personData.pronouns})`}
                     </h5>
