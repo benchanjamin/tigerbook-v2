@@ -232,7 +232,7 @@ const ProfileEdit: React.FC<Props> = ({
         console.log(postData)
 
         let RESPONSE_ERROR = 0
-        const axios = await axiosLocalhost();
+        const axios = await axiosInstance();
 
         if (files.length == 0 && changePhoto) {
             context.showNotification({
