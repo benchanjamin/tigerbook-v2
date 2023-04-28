@@ -2,11 +2,11 @@ import Image from "next/image";
 import React, {useContext, useState} from "react";
 import {GetServerSideProps, NextPage} from "next";
 import {
+    Extracurricular,
     FullProfileEditGet,
     FullProfileEditPost,
     HeaderType,
     SetupOneGet,
-    SetupOnePost,
     SetupTwoPost
 } from "@types/types";
 import {axiosInstance, axiosLocalhost} from "@utils/axiosInstance";
@@ -189,7 +189,7 @@ const ProfileEdit: React.FC<Props> = ({
     const [myCurrentCity, setMyCurrentCity] = useState(data.current_city);
     const [myCurrentHousing, setMyCurrentHousing] = useState(data.housing);
     const [myInterests, setMyInterests] = useState(data.interests);
-    const [myExtracurriculars, setMyExtracurriculars] = useState(data.extracurriculars === null ? []
+    const [myExtracurriculars, setMyExtracurriculars] = useState<null | Extracurricular[]>(data.extracurriculars === null ? []
         : data.extracurriculars);
     // const [myExtracurriculars, setMyExtracurriculars] = useState(data.extracurriculars === null ? []
     //     : data.extracurriculars.map(extracurricular => extracurricular.extracurricular));
@@ -323,7 +323,7 @@ const ProfileEdit: React.FC<Props> = ({
 
     function setExtracurricularPositions(index, value) {
         let newFormValues = [...myExtracurriculars];
-        newFormValues[index].positions.push(value);
+        newFormValues[index].positions = value;
         setMyExtracurriculars(newFormValues)
     }
 
@@ -556,7 +556,7 @@ const ProfileEdit: React.FC<Props> = ({
                                 </div>
 
 
-                                {myExtracurriculars.map((extracurricular, index) => (
+                                {myExtracurriculars?.map((extracurricular, index) => (
                                     <>
                                         <div>
                                             <div className="flex justify-between items-center mb-2">

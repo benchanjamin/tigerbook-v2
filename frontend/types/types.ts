@@ -102,7 +102,7 @@ export interface FullProfileEditPost {
     hometown: string | null;
     current_city: string | null;
     interests: string[];
-    extracurriculars: null;
+    extracurriculars: null | Extracurricular[]
     research: null;
     miscellaneous: null;
 }

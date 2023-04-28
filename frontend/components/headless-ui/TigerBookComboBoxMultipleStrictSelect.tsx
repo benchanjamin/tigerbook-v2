@@ -20,6 +20,7 @@ export default function TigerBookComboBoxMultipleStrictSelect(
     async function onChange(dataArray: string[]) {
         setSelected(() => {
             let result = dataArray
+            result = [...new Set(result)]
             setterFunction(result)
             return result
         })
