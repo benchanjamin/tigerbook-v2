@@ -28,6 +28,7 @@ from base.serializers import (
     UndergraduateCertificatesListAPISerializer, UndergraduateTracksListAPISerializer,
     PronounsListAPISerializer, TigerBookHeaderSerializer, TigerBookMapSerializer, InterestsListAPISerializer,
     ExtracurricularsListAPISerializer, HousingListAPISerializer, ExtracurricularsPositionsListAPISerializer,
+    UndergraduateTigerBookDirectoryPreviewSerializer,
 )
 
 from django.conf import settings
@@ -89,9 +90,11 @@ class ExtracurricularsListAPIView(ListAPIView):
     serializer_class = ExtracurricularsListAPISerializer
     queryset = TigerBookExtracurriculars.objects.all().order_by('extracurricular')
 
+
 class ExtracurricularPositionsListAPIView(ListAPIView):
     serializer_class = ExtracurricularsPositionsListAPISerializer
     queryset = TigerBookExtracurricularPositions.objects.all().order_by('position')
+
 
 class HousingListAPIView(ListAPIView):
     serializer_class = HousingListAPISerializer
@@ -226,7 +229,7 @@ class UndergraduateFullProfileEditView(UndergraduateProfileEdit):
 
 
 class UndergraduateFullProfilePreviewView(UndergraduateProfileEdit):
-    serializer_class = UndergraduateTigerBookDirectoryProfileFullSerializer
+    serializer_class = UndergraduateTigerBookDirectoryPreviewSerializer
 
     def get(self, request):
         instance = self.get_object()
@@ -272,6 +275,7 @@ class UndergraduateTigerBookDirectoryListView(ListModelMixin,
     serializer_class = UndergraduateTigerBookDirectoryListSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = UndergraduateDirectoryListFilter
+
     # TODO: Add pagination
     # pagination_class = StandardResultsSetPagination
 

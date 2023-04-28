@@ -946,6 +946,118 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
         return result
 
 
+class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializer):
+    username = serializers.SerializerMethodField(read_only=True)
+    full_name = serializers.SerializerMethodField(read_only=True)
+    track = serializers.SerializerMethodField(read_only=True)
+    concentration = serializers.SerializerMethodField(read_only=True)
+    class_year = serializers.SerializerMethodField(read_only=True)
+    residential_college = serializers.SerializerMethodField(read_only=True)
+    pronouns = serializers.SerializerMethodField(read_only=True)
+    profile_pic_url = serializers.SerializerMethodField(read_only=True)
+    aliases = serializers.SerializerMethodField(read_only=True)
+    certificates = serializers.SerializerMethodField(read_only=True)
+    hometown = serializers.SerializerMethodField(read_only=True)
+    housing = serializers.SerializerMethodField(read_only=True)
+    current_city = serializers.SerializerMethodField(read_only=True)
+    interests = serializers.SerializerMethodField(read_only=True)
+    extracurriculars = serializers.JSONField(read_only=True)
+
+    class Meta:
+        model = UndergraduateTigerBookDirectory
+        fields = [
+            'username',
+            'full_name',
+            'track',
+            'concentration',
+            'class_year',
+            'residential_college',
+            'pronouns',
+            'profile_pic_url',
+            'aliases',
+            'certificates',
+            'hometown',
+            'housing',
+            'current_city',
+            'interests',
+            'extracurriculars'
+        ]
+
+    def get_username(self, obj):
+        return get_display_username(obj.user.username)
+
+    def get_full_name(self, obj):
+        return obj.active_directory_entry.full_name
+
+    def get_track(self, obj):
+        return obj.track.track if hasattr(obj.track, 'track') else None
+
+    def get_concentration(self, obj):
+        if hasattr(obj.concentration, 'concentration'):
+            return obj.concentration.concentration
+        return None
+
+    def get_class_year(self, obj):
+        if hasattr(obj.class_year, 'class_year'):
+            return obj.class_year.class_year
+        return None
+
+    def get_residential_college(self, obj):
+        if hasattr(obj.residential_college, 'residential_college'):
+            return obj.residential_college.residential_college
+        return None
+
+    def get_pronouns(self, obj):
+        return obj.pronouns.pronouns if hasattr(obj.pronouns, 'pronouns') else None
+
+    def get_profile_pic_url(self, obj):
+        if obj.profile_pic:
+            return obj.profile_pic.url
+        # TODO: check if this works with people who don't have a profile pic on residential college facebook
+        elif hasattr(obj, 'residential_college_facebook_entry'):
+            if obj.residential_college_facebook_entry is None:
+                return None
+            return obj.residential_college_facebook_entry.residential_college_picture_url.url
+        else:
+            return None
+
+    def get_aliases(self, obj):
+        return obj.aliases if hasattr(obj, 'aliases') else None
+
+    def get_certificates(self, obj: UndergraduateTigerBookDirectory):
+        certificates = UndergraduateTigerBookCertificatesRetrieveSerializer(obj.certificates, many=True).data \
+            if hasattr(obj, 'certificates') \
+            else None
+        result = []
+        for certificate in certificates:
+            result.append(certificate['certificate'])
+        return result
+
+    def get_hometown(self, obj: UndergraduateTigerBookDirectory) -> str | None:
+        if hasattr(obj.hometown, 'complete_city'):
+            return obj.hometown.complete_city
+        return None
+
+    def get_housing(self, obj: UndergraduateTigerBookDirectory) -> str | None:
+        if hasattr(obj.housing, 'complete_housing'):
+            return obj.housing.complete_housing
+        return None
+
+    def get_current_city(self, obj: UndergraduateTigerBookDirectory):
+        if hasattr(obj.current_city, 'complete_city'):
+            return obj.current_city.complete_city
+        return None
+
+    def get_interests(self, obj: UndergraduateTigerBookDirectory) -> list[str] | None:
+        interests = TigerBookInterestsRetrieveSerializer(obj.interests, many=True).data \
+            if hasattr(obj, 'interests') \
+            else None
+        result = []
+        for interest in interests:
+            result.append(interest['interest'])
+        return result
+
+
 class TigerBookNotesListSerializer(serializers.ModelSerializer):
     note_title = serializers.CharField(read_only=True)
     note_description = serializers.CharField(allow_blank=True, allow_null=True, read_only=True)
