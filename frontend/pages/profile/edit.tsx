@@ -11,7 +11,7 @@ import {
     SetupOneGet,
     SetupTwoPost
 } from "@types/types";
-import {axiosLocalhost} from "@utils/axiosInstance";
+import {axiosLocalhost, axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import TigerBookListBox from "@components/headless-ui/TigerBookListBox";
 import TigerBookComboBoxSingleStrictSelect from "@components/headless-ui/TigerBookComboBoxSingleStrictSelect";
