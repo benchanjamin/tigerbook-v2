@@ -1,15 +1,17 @@
 import Image from "next/image";
-import React, {useContext, useState, useReducer} from "react";
-import {GetServerSideProps, NextPage} from "next";
+import React, {useContext, useReducer, useState} from "react";
+import {GetServerSideProps} from "next";
 import {
     Extracurricular,
     FullProfileEditGet,
     FullProfileEditPost,
-    HeaderType, Miscellaneous, Research,
+    HeaderType,
+    Miscellaneous,
+    Research,
     SetupOneGet,
     SetupTwoPost
 } from "@types/types";
-import {axiosInstance, axiosLocalhost} from "@utils/axiosInstance";
+import {axiosLocalhost} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import TigerBookListBox from "@components/headless-ui/TigerBookListBox";
 import TigerBookComboBoxSingleStrictSelect from "@components/headless-ui/TigerBookComboBoxSingleStrictSelect";
@@ -21,8 +23,8 @@ import {useRouter} from 'next/navigation'
 import NotificationContext from "@context/NotificationContext";
 import {Spinner} from "flowbite-react";
 import ImageUploadProfileEdit from "@components/file-upload/ImageUploadProfileEdit";
-import {HiX} from "react-icons/hi";
 import TigerBookFFABar from "@components/headless-ui/TigerBookFFABar";
+import {Switch} from "@headlessui/react";
 
 
 interface ServerSideProps {
@@ -173,6 +175,10 @@ type Props = {
     researchTypes: string[]
 }
 
+const reducer = (prev: Permissions, next: Permissions) => {
+    return {...prev, ...next};
+}
+
 const ProfileEdit: React.FC<Props> = ({
                                           data, headerData, concentrations,
                                           tracks, residentialColleges,
@@ -205,7 +211,8 @@ const ProfileEdit: React.FC<Props> = ({
     const [changePhoto, setChangePhoto] = useState(false);
     const [changePermissions, setChangePermissions] = useState(false);
 
-    // const [state, dispatch] = useReducer(reducer, initialState, init);
+    const [myPermissions, updateMyPermissions]: [myPermissions: Permissions] =
+        useReducer(reducer, data.permissions);
 
     const [isImageReady, setIsImageReady] = useState(false);
 
@@ -216,7 +223,7 @@ const ProfileEdit: React.FC<Props> = ({
             .classList.add("opacity-100", "transition-opacity", "duration-1000", "block", "h-[200px]", "w-[200px]")
     }
 
-    console.log("data", myMiscellaneous)
+    console.log("permissions", myPermissions)
 
     async function submitHandler(event) {
         event.preventDefault();
@@ -236,6 +243,11 @@ const ProfileEdit: React.FC<Props> = ({
             miscellaneous: myMiscellaneous,
             research: myResearch,
         }
+
+        if (changePermissions) {
+            postData.permissions = myPermissions
+        }
+
         console.log(postData)
 
         let RESPONSE_ERROR = 0
@@ -274,6 +286,7 @@ const ProfileEdit: React.FC<Props> = ({
                     description: String(errorString),
                 })
             })
+
         if (changePhoto) {
             axiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/setup/two/`,
                 formData,
@@ -775,25 +788,326 @@ const ProfileEdit: React.FC<Props> = ({
 
                             </div>
 
-                            {/*<div className="flex flex-col justify-center items-center mt-10">*/}
-                            {/*    {!changePermissions && <div*/}
-                            {/*        className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"*/}
-                            {/*        onClick={() => setChangePermissions((prev) => !prev)}>*/}
-                            {/*        Change Permissions*/}
-                            {/*    </div>}*/}
-                            {/*    {changePermissions && <div*/}
-                            {/*        className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"*/}
-                            {/*        onClick={() => setChangePermissions((prev) => !prev)}>*/}
-                            {/*        Keep Permissions*/}
-                            {/*    </div>}*/}
-                            {/*</div>*/}
+                            <div className="flex flex-col justify-center items-center mt-10">
+                                {!changePermissions && <div
+                                    className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600 cursor-pointer"
+                                    onClick={() => setChangePermissions((prev) => !prev)}>
+                                    Change Permissions
+                                </div>}
+                                {changePermissions && <div
+                                    className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600 cursor-pointer"
+                                    onClick={() => setChangePermissions((prev) => !prev)}>
+                                    Keep Permissions
+                                </div>}
+                            </div>
 
-                            {/*{changePermissions &&*/}
-                            {/*    <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">*/}
-
-
-                            {/*    </div>*/}
-                            {/*}*/}
+                            {changePermissions &&
+                                <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 mt-4 justify-center items-center">
+                                    <div>
+                                        <span className="dark:text-white mr-2">Visible to Undergraduates</span>
+                                        <Switch
+                                            checked={myPermissions['is_visible_to_undergrads']}
+                                            onChange={(event) => {
+                                                updateMyPermissions({is_visible_to_undergrads: event})
+                                            }}
+                                            className={`${
+                                                myPermissions['is_visible_to_undergrads'] ? 'bg-primary-500' : 'bg-gray-200'
+                                            } relative inline-flex h-6 w-11 items-center rounded-full`}
+                                        >
+                                            <span className="sr-only">Enable notifications</span>
+                                            <span
+                                                className={`${
+                                                    myPermissions['is_visible_to_undergrads'] ? 'translate-x-6' : 'translate-x-1'
+                                                } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+                                            />
+                                        </Switch>
+                                    </div>
+                                    <div>
+                                        <span className="dark:text-white mr-2">Visible to Faculty</span>
+                                        <Switch
+                                            checked={myPermissions['is_visible_to_faculty']}
+                                            onChange={(event) => {
+                                                updateMyPermissions({is_visible_to_faculty: event})
+                                            }}
+                                            className={`${
+                                                myPermissions['is_visible_to_faculty'] ? 'bg-primary-500' : 'bg-gray-200'
+                                            } relative inline-flex h-6 w-11 items-center rounded-full`}
+                                        >
+                                            <span className="sr-only">Enable notifications</span>
+                                            <span
+                                                className={`${
+                                                    myPermissions['is_visible_to_faculty'] ? 'translate-x-6' : 'translate-x-1'
+                                                } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+                                            />
+                                        </Switch>
+                                    </div>
+                                    <div>
+                                        <span className="dark:text-white mr-2">Visible to Service Accounts</span>
+                                        <Switch
+                                            checked={myPermissions['is_visible_to_service_accounts']}
+                                            onChange={(event) => {
+                                                updateMyPermissions({is_visible_to_service_accounts: event})
+                                            }}
+                                            className={`${
+                                                myPermissions['is_visible_to_service_accounts'] ? 'bg-primary-500' : 'bg-gray-200'
+                                            } relative inline-flex h-6 w-11 items-center rounded-full`}
+                                        >
+                                            <span className="sr-only">Enable notifications</span>
+                                            <span
+                                                className={`${
+                                                    myPermissions['is_visible_to_service_accounts'] ? 'translate-x-6' : 'translate-x-1'
+                                                } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+                                            />
+                                        </Switch>
+                                    </div>
+                                    <div>
+                                        <span className="dark:text-white mr-2">Visible to Graduate Students</span>
+                                        <Switch
+                                            checked={myPermissions['is_visible_to_graduate_students']}
+                                            onChange={(event) => {
+                                                updateMyPermissions({is_visible_to_graduate_students: event})
+                                            }}
+                                            className={`${
+                                                myPermissions['is_visible_to_graduate_students'] ? 'bg-primary-500' : 'bg-gray-200'
+                                            } relative inline-flex h-6 w-11 items-center rounded-full`}
+                                        >
+                                            <span className="sr-only">Enable notifications</span>
+                                            <span
+                                                className={`${
+                                                    myPermissions['is_visible_to_graduate_students'] ? 'translate-x-6' : 'translate-x-1'
+                                                } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+                                            />
+                                        </Switch>
+                                    </div>
+                                    <div>
+                                        <span className="dark:text-white mr-2">Visible to Staff</span>
+                                        <Switch
+                                            checked={myPermissions['is_visible_to_staff']}
+                                            onChange={(event) => {
+                                                updateMyPermissions({is_visible_to_staff: event})
+                                            }}
+                                            className={`${
+                                                myPermissions['is_visible_to_staff'] ? 'bg-primary-500' : 'bg-gray-200'
+                                            } relative inline-flex h-6 w-11 items-center rounded-full`}
+                                        >
+                                            <span className="sr-only">Enable notifications</span>
+                                            <span
+                                                className={`${
+                                                    myPermissions['is_visible_to_staff'] ? 'translate-x-6' : 'translate-x-1'
+                                                } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+                                            />
+                                        </Switch>
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Profile at All</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['username_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({username_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Profile Picture</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['profile_pic_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({profile_pic_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Track</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['track_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({track_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Concentration</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['concentration_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({concentration_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Class Year</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['class_year_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({class_year_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Residential College</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['residential_college_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({residential_college_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Housing</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['housing_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({housing_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Nickname(s)</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['aliases_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({aliases_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Pronouns</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['pronouns_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({pronouns_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Certificates</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['certificates_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({certificates_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Hometown</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['hometown_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({hometown_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Current City</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['current_city_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({current_city_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Interests</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['interests_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({interests_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Extracurriculars</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['extracurriculars_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({extracurriculars_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Research</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['research_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({research_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                    <div className="col-span-2">
+                                        <span className="dark:text-white mr-2">Usernames Prohibited
+                                            From Seeing Your Miscellaneous</span>
+                                        <TigerBookComboBoxMultipleFFASelect
+                                            setterValue={myPermissions['miscellaneous_prohibited_usernames']}
+                                            setterFunction={(event) => {
+                                                updateMyPermissions({miscellaneous_prohibited_usernames: event})
+                                            }}
+                                            zIndex={50}
+                                            placeholder="Add usernames"
+                                            dropdownDefaultDescription="Add username"
+                                        />
+                                    </div>
+                                </div>
+                            }
 
 
                             <p className="text-xs text-red-500 text-right my-3 dark:text-red-300">Required fields are

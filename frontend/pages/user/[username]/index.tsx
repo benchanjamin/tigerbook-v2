@@ -1,12 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {GetServerSideProps} from "next";
 import {axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import {HeaderType, User} from "@types/types";
-import Image from "next/image";
-import {SidebarProvider} from "@context/SidebarContext";
-import {Spinner} from "flowbite-react";
-import Header from "@components/ui/Header";
 import ProfilePreview from "../../profile/preview";
 
 

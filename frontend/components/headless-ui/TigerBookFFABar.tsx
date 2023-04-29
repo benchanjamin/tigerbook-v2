@@ -19,7 +19,7 @@ export default function TigerBookFFABar(
 
     return (
         <Combobox value={query} className={`z-[${zIndex}] z-${zIndex}`}>
-            <div className="relative mt-1 ml-4 mr-4 sm:ml-0 sm:mr-0">
+            <div className="relative mt-1 sm:ml-0 sm:mr-0">
                 <div
                     className="relative border border-primary-200 w-full cursor-pointer
                     overflow-hidden rounded-lg bg-white text-left shadow-md
