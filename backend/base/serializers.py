@@ -986,6 +986,30 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             result.append(interest['interest'])
         return result
 
+    def get_extracurriculars(self, obj: UndergraduateTigerBookDirectory):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.extracurriculars_prohibited_usernames:
+            return None
+        if hasattr(obj, 'extracurriculars'):
+            return obj.extracurriculars
+        return None
+
+    def get_miscellaneous(self, obj: UndergraduateTigerBookDirectory):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.miscellaneous_prohibited_usernames:
+            return None
+        if hasattr(obj, 'miscellaneous'):
+            return obj.miscellaneous
+        return None
+
+    def get_research(self, obj: UndergraduateTigerBookDirectory):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.research_prohibited_usernames:
+            return None
+        if hasattr(obj, 'research'):
+            return obj.research
+        return None
+
 
 class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField(read_only=True)
