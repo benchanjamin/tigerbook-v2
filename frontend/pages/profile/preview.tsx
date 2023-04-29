@@ -9,7 +9,7 @@ import {Spinner} from "flowbite-react";
 import Header from "@components/ui/Header";
 
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({query, req}) => {
+export const getServerSideProps: GetServerSideProps<Props> = async ({ req}) => {
     let REDIRECT_ERROR = 0
     const axios = await axiosInstance();
     const axiosRedirect: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/redirect/`,
@@ -41,10 +41,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({query, req}
         };
     }
 
-    let username = query.username
-    if (username !== undefined) {
-        username = username.slice(1)
-    }
     let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/undergraduate/profile/preview/`,
         {
             headers: {
@@ -75,7 +71,7 @@ interface Props {
     headerData: HeaderType
 }
 
-const Index: React.FC<Props> = ({userData, headerData}) => {
+const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
     const [isImageReady, setIsImageReady] = useState(false);
     const residentialCollegeLogoSrc = `/static/${userData.residential_college.toLowerCase().replace(/\s/g, '')}.webp`
 
@@ -341,4 +337,4 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
     );
 }
 
-export default Index;
+export default ProfilePreview;
