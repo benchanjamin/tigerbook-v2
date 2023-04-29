@@ -1,11 +1,11 @@
 import Image from "next/image";
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useReducer} from "react";
 import {GetServerSideProps, NextPage} from "next";
 import {
     Extracurricular,
     FullProfileEditGet,
     FullProfileEditPost,
-    HeaderType,
+    HeaderType, Miscellaneous, Research,
     SetupOneGet,
     SetupTwoPost
 } from "@types/types";
@@ -22,6 +22,7 @@ import NotificationContext from "@context/NotificationContext";
 import {Spinner} from "flowbite-react";
 import ImageUploadProfileEdit from "@components/file-upload/ImageUploadProfileEdit";
 import {HiX} from "react-icons/hi";
+import TigerBookFFABar from "@components/headless-ui/TigerBookFFABar";
 
 
 interface ServerSideProps {
@@ -94,7 +95,8 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         '/api-django/interests/',
         '/api-django/extracurriculars/',
         '/api-django/extracurricular-positions/',
-        '/api-django/housing/'
+        '/api-django/housing/',
+        '/api-django/research-types/'
     ]
 
     const keys = [
@@ -108,7 +110,8 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         'interests',
         'extracurriculars',
         'positions',
-        'completeHousing'
+        'completeHousing',
+        'researchTypes'
     ]
 
     const indices = [
@@ -122,7 +125,8 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         'interest',
         'extracurricular',
         'position',
-        'complete_housing'
+        'complete_housing',
+        'research_type'
     ]
 
     const listData = {}
@@ -165,7 +169,8 @@ type Props = {
     interests: string[]
     extracurriculars: string[]
     positions: string[]
-    completeHousing: string[]
+    completeHousing: string[],
+    researchTypes: string[]
 }
 
 const ProfileEdit: React.FC<Props> = ({
@@ -173,7 +178,7 @@ const ProfileEdit: React.FC<Props> = ({
                                           tracks, residentialColleges,
                                           classYears, hometowns, pronouns, certificates,
                                           interests, extracurriculars, positions, completeHousing,
-                                          currentCities,
+                                          currentCities, researchTypes
                                       }) => {
     const context = useContext(NotificationContext);
     const router = useRouter()
@@ -191,14 +196,16 @@ const ProfileEdit: React.FC<Props> = ({
     const [myInterests, setMyInterests] = useState(data.interests);
     const [myExtracurriculars, setMyExtracurriculars] = useState<null | Extracurricular[]>(data.extracurriculars === null ? []
         : data.extracurriculars);
-    // const [myExtracurriculars, setMyExtracurriculars] = useState(data.extracurriculars === null ? []
-    //     : data.extracurriculars.map(extracurricular => extracurricular.extracurricular));
-    // const [myExtracurricularPositions, setMyExtracurricularPositions] =
-    //     useState(data.extracurriculars === null ? [] :
-    //         data.extracurriculars.map((extracurricular) => extracurricular.positions));
+    const [myMiscellaneous, setMyMiscellaneous] = useState<null | Miscellaneous[]>(data.miscellaneous === null
+        ? [] : data.miscellaneous);
+    const [myResearch, setMyResearch] = useState<null | Research[]>(data.research === null
+        ? [] : data.research);
 
     const [files, setFiles] = useState([]);
     const [changePhoto, setChangePhoto] = useState(false);
+    const [changePermissions, setChangePermissions] = useState(false);
+
+    // const [state, dispatch] = useReducer(reducer, initialState, init);
 
     const [isImageReady, setIsImageReady] = useState(false);
 
@@ -209,9 +216,7 @@ const ProfileEdit: React.FC<Props> = ({
             .classList.add("opacity-100", "transition-opacity", "duration-1000", "block", "h-[200px]", "w-[200px]")
     }
 
-    console.log("extra", myExtracurriculars)
-
-    console.log("certs", myCertificates)
+    console.log("data", myMiscellaneous)
 
     async function submitHandler(event) {
         event.preventDefault();
@@ -228,6 +233,8 @@ const ProfileEdit: React.FC<Props> = ({
             extracurriculars: myExtracurriculars,
             housing: myCurrentHousing,
             interests: myInterests,
+            miscellaneous: myMiscellaneous,
+            research: myResearch,
         }
         console.log(postData)
 
@@ -309,22 +316,79 @@ const ProfileEdit: React.FC<Props> = ({
         ])
     }
 
+    function addResearch() {
+        setMyResearch([...myResearch,
+            {
+                "research_type": "",
+                "research_title": "",
+            }
+        ])
+    }
+
+
+    function addMiscellaneous() {
+        setMyMiscellaneous([...myMiscellaneous,
+            {
+                "miscellaneous_title": "",
+                "miscellaneous_description": "",
+            }
+        ])
+    }
+
     function removeExtracurricular(index) {
         let newFormValues = [...myExtracurriculars];
         newFormValues.splice(index, 1);
         setMyExtracurriculars(newFormValues)
     }
 
-    function setExtracurriculars(index, value) {
+    function removeResearch(index) {
+        let newFormValues = [...myResearch];
+        newFormValues.splice(index, 1);
+        setMyResearch(newFormValues)
+    }
+
+    function removeMiscellaneous(index) {
+        let newFormValues = [...myMiscellaneous];
+        newFormValues.splice(index, 1);
+        setMyMiscellaneous(newFormValues)
+    }
+
+    function setExtracurricularActivity(index, value) {
         let newFormValues = [...myExtracurriculars];
         newFormValues[index].extracurricular = value;
         setMyExtracurriculars(newFormValues)
+    }
+
+    function setResearchType(index, value) {
+        let newFormValues = [...myResearch];
+        newFormValues[index].research_type = value;
+        setMyResearch(newFormValues)
+    }
+
+    function setMiscellaneousTitle(index, value) {
+        let newFormValues = [...myMiscellaneous];
+        console.log(newFormValues, index)
+        newFormValues[index].miscellaneous_title = value;
+        setMyMiscellaneous(newFormValues)
     }
 
     function setExtracurricularPositions(index, value) {
         let newFormValues = [...myExtracurriculars];
         newFormValues[index].positions = value;
         setMyExtracurriculars(newFormValues)
+    }
+
+
+    function setResearchTitle(index, value) {
+        let newFormValues = [...myResearch];
+        newFormValues[index].research_title = value;
+        setMyResearch(newFormValues)
+    }
+
+    function setMiscellaneousDescription(index, value) {
+        let newFormValues = [...myMiscellaneous];
+        newFormValues[index].miscellaneous_description = value;
+        setMyMiscellaneous(newFormValues)
     }
 
     return (
@@ -385,16 +449,16 @@ const ProfileEdit: React.FC<Props> = ({
                         </div>)
                     }
                     <div className="flex flex-col justify-center items-center mt-2">
-                        {!changePhoto && <button
+                        {!changePhoto && <div
                             className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"
                             onClick={() => setChangePhoto((prev) => !prev)}>
                             Change Photo
-                        </button>}
-                        {changePhoto && <button
+                        </div>}
+                        {changePhoto && <div
                             className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"
                             onClick={() => setChangePhoto((prev) => !prev)}>
                             Keep Photo
-                        </button>}
+                        </div>}
                         {changePhoto && <div className="px-4 py-2 mx-auto max-w-2xl">
                             <ImageUploadProfileEdit data={data}
                                                     files={files}
@@ -409,11 +473,6 @@ const ProfileEdit: React.FC<Props> = ({
                                 <div className="sm:col-span-2">
                                     <label htmlFor="name"
                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nickname(s)</label>
-
-                                    {/*<input type="text" name="name" id="name"*/}
-                                    {/*       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"*/}
-                                    {/*       placeholder="Type product name" required=""/>*/}
-
                                     <TigerBookComboBoxMultipleFFASelect
                                         setterValue={myAliases}
                                         setterFunction={setMyAliases}
@@ -578,7 +637,7 @@ const ProfileEdit: React.FC<Props> = ({
                                                 zIndex={3}
                                                 defaultOptionText={undefined}
                                                 setterFunction={(value: string) => {
-                                                    setExtracurriculars(index, value)
+                                                    setExtracurricularActivity(index, value)
                                                 }}
                                             />
                                         </div>
@@ -612,68 +671,130 @@ const ProfileEdit: React.FC<Props> = ({
                                     </div>
                                 </div>
 
+                                {myResearch?.map((research, index) => (
+                                    <>
+                                        <div>
+                                            <div className="flex justify-between items-center mb-2">
+                                                <label htmlFor="research-type"
+                                                       className="block text-sm font-medium text-gray-900 dark:text-white">
+                                                    Research Type #{index + 1}{' '}
+                                                    <abbr title="Required field">*</abbr>
 
-                                {/*<div>*/}
-                                {/*    <label htmlFor="housing"*/}
-                                {/*           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*/}
-                                {/*        Research Title*/}
-                                {/*    </label>*/}
-                                {/*    <TigerBookComboBoxSingleStrictSelect*/}
-                                {/*        data={cities}*/}
-                                {/*        defaultText="Select extracurricular activity"*/}
-                                {/*        initialSelected={myCurrentCity}*/}
-                                {/*        zIndex={6}*/}
-                                {/*        defaultOptionText="I am not my housing room"*/}
-                                {/*        setterFunction={setMyCurrentCity}*/}
-                                {/*    />*/}
-                                {/*</div>*/}
+                                                </label>
+                                                <div
+                                                    className="block ml-2 text-sm text-white bg-red-500 px-4 py-0.5 rounded-xl cursor-pointer"
+                                                    onClick={() => removeResearch(index)}>Remove
+                                                </div>
+                                            </div>
+                                            <TigerBookComboBoxSingleStrictSelect
+                                                data={researchTypes}
+                                                defaultText="Select research type"
+                                                initialSelected={research.research_type}
+                                                zIndex={3}
+                                                defaultOptionText={undefined}
+                                                setterFunction={(value: string) => {
+                                                    setResearchType(index, value)
+                                                }}
+                                            />
+                                        </div>
 
-                                {/*<div>*/}
-                                {/*    <label htmlFor="housing"*/}
-                                {/*           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*/}
-                                {/*        Research Description*/}
-                                {/*    </label>*/}
-                                {/*    <TigerBookComboBoxSingleStrictSelect*/}
-                                {/*        data={cities}*/}
-                                {/*        defaultText="Select extracurricular position"*/}
-                                {/*        initialSelected={myCurrentCity}*/}
-                                {/*        zIndex={6}*/}
-                                {/*        defaultOptionText="I am not my housing room"*/}
-                                {/*        setterFunction={setMyCurrentCity}*/}
-                                {/*    />*/}
-                                {/*</div>*/}
+                                        <div>
+                                            <label htmlFor="research-title"
+                                                   className="block mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                                                Research Title #{index + 1}{' '}
+                                                <abbr title="Required field">*</abbr>
+                                            </label>
+                                            <TigerBookFFABar
+                                                defaultText="Add research title"
+                                                initialSelected={research.research_title}
+                                                zIndex={2}
+                                                defaultOptionText={undefined}
+                                                setterFunction={(value: string[]) => {
+                                                    setResearchTitle(index, value)
+                                                }}
+                                            />
+                                        </div>
 
-                                {/*<div>*/}
-                                {/*    <label htmlFor="housing"*/}
-                                {/*           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*/}
-                                {/*        Miscellaneous Title*/}
-                                {/*    </label>*/}
-                                {/*    <TigerBookComboBoxSingleStrictSelect*/}
-                                {/*        data={cities}*/}
-                                {/*        defaultText="Select extracurricular activity"*/}
-                                {/*        initialSelected={myCurrentCity}*/}
-                                {/*        zIndex={6}*/}
-                                {/*        defaultOptionText="I am not my housing room"*/}
-                                {/*        setterFunction={setMyCurrentCity}*/}
-                                {/*    />*/}
-                                {/*</div>*/}
+                                    </>))}
+                                <div className="sm:col-span-2 mx-auto">
+                                    <div className="flex justify-content">
+                                        <div
+                                            onClick={addResearch}
+                                            className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600 cursor-pointer"
+                                        >
+                                            Add Research
+                                        </div>
+                                    </div>
+                                </div>
 
-                                {/*<div>*/}
-                                {/*    <label htmlFor="housing"*/}
-                                {/*           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*/}
-                                {/*        Miscellaneous Description*/}
-                                {/*    </label>*/}
-                                {/*    <TigerBookComboBoxSingleStrictSelect*/}
-                                {/*        data={cities}*/}
-                                {/*        defaultText="Select extracurricular position"*/}
-                                {/*        initialSelected={myCurrentCity}*/}
-                                {/*        zIndex={6}*/}
-                                {/*        defaultOptionText="I am not my housing room"*/}
-                                {/*        setterFunction={setMyCurrentCity}*/}
-                                {/*    />*/}
-                                {/*</div>*/}
+                                {myMiscellaneous?.map((miscellaneous, index) => (
+                                    <>
+                                        <div>
+                                            <div className="flex justify-between items-center mb-2">
+                                                <label htmlFor="miscellaneous-title"
+                                                       className="block text-sm font-medium text-gray-900 dark:text-white">
+                                                    Miscellaneous Title #{index + 1}{' '}
+                                                    <abbr title="Required field">*</abbr>
+                                                </label>
+                                                <div
+                                                    className="block ml-2 text-sm text-white bg-red-500 px-4 py-0.5 rounded-xl cursor-pointer"
+                                                    onClick={() => removeMiscellaneous(index)}>Remove
+                                                </div>
+                                            </div>
+                                            <TigerBookFFABar
+                                                zIndex={10}
+                                                defaultText='Add Miscellaneous Title'
+                                                initialSelected={miscellaneous.miscellaneous_title}
+                                                setterFunction={(value: string) => setMiscellaneousTitle(index, value)}/>
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="miscellaneous-description"
+                                                   className="block mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                                                Miscellaneous Description #{index + 1}{' '}
+                                                <abbr title="Required field">*</abbr>
+                                            </label>
+                                            <TigerBookFFABar
+                                                initialSelected={miscellaneous.miscellaneous_description}
+                                                zIndex={10}
+                                                defaultText='Add Miscellaneous Description'
+                                                setterFunction={(value: string) => setMiscellaneousDescription(index, value)}/>
+                                        </div>
+                                    </>))}
+
+                                <div className="sm:col-span-2 mx-auto">
+                                    <div className="flex justify-content">
+                                        <div
+                                            onClick={addMiscellaneous}
+                                            className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600 cursor-pointer"
+                                        >
+                                            Add Miscellaneous Item
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
+
+                            {/*<div className="flex flex-col justify-center items-center mt-10">*/}
+                            {/*    {!changePermissions && <div*/}
+                            {/*        className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"*/}
+                            {/*        onClick={() => setChangePermissions((prev) => !prev)}>*/}
+                            {/*        Change Permissions*/}
+                            {/*    </div>}*/}
+                            {/*    {changePermissions && <div*/}
+                            {/*        className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"*/}
+                            {/*        onClick={() => setChangePermissions((prev) => !prev)}>*/}
+                            {/*        Keep Permissions*/}
+                            {/*    </div>}*/}
+                            {/*</div>*/}
+
+                            {/*{changePermissions &&*/}
+                            {/*    <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">*/}
+
+
+                            {/*    </div>*/}
+                            {/*}*/}
+
 
                             <p className="text-xs text-red-500 text-right my-3 dark:text-red-300">Required fields are
                                 marked with an
