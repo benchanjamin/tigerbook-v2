@@ -135,7 +135,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                 })}
                             </div>
                             <div className="mt-3">
-                                <div className="flex justify-left items-center whitespace-nowrap">
+                                <div className="flex justify-left items-center ">
                                     <div className="h-6 w-6">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                              fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
@@ -145,11 +145,11 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                         </svg>
                                     </div>
                                     <div
-                                        className="pl-1 text-black dark:text-white text-left mt-2 font-medium tracking-wide">
+                                        className="pl-2 text-black dark:text-white text-left mt-2 font-medium tracking-wide">
                                         {userData.track}&nbsp;{userData.concentration}
                                     </div>
                                 </div>
-                                <div className="flex justify-left items-center whitespace-nowrap mt-1">
+                                <div className="flex justify-left items-center  mt-1">
                                     <div className="h-6 w-6 relative mt-1">
                                         <Image
                                             src={residentialCollegeLogoSrc}
@@ -159,7 +159,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                         />
                                     </div>
                                     <div
-                                        className="pl-1 text-black dark:text-white text-left mt-2 font-medium tracking-wide">
+                                        className="pl-2 text-black dark:text-white text-left mt-2 font-medium tracking-wide">
                                         {userData.residential_college}&nbsp;College
                                     </div>
                                 </div>
@@ -182,7 +182,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                     {userData.interests?.map((interest, index) => {
                                         return (
                                             <div key={index}
-                                                 className="flex justify-left items-center whitespace-nowrap">
+                                                 className="flex justify-left items-center ">
                                                 <div className="h-6 w-6">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                          viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
@@ -192,7 +192,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                                     </svg>
                                                 </div>
                                                 <span
-                                                    className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
+                                                    className="pl-2 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
                                             {interest}
                                         </span>
                                             </div>
@@ -219,7 +219,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
 
                                                 </div>
                                                 <p
-                                                    className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
+                                                    className="pl-2 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
                                                     {extracurricular.extracurricular}
                                                     {extracurricular.positions.length !== 0 && ` (${extracurricular.positions.join(', ')})`}
                                                 </p>
@@ -233,7 +233,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                     <h4 className="text-primary-500 text-left mt-4 font-bold tracking-wide">
                                         HOUSING
                                     </h4>
-                                    <div className="flex justify-left items-center whitespace-nowrap">
+                                    <div className="flex justify-left items-center ">
                                         <div className="h-6 w-6">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                  strokeWidth={1.5} stroke="currentColor"
@@ -243,18 +243,46 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                             </svg>
                                         </div>
                                         <span
-                                            className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
+                                            className="pl-2 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
                             {userData.housing}
                                 </span>
                                     </div>
                                 </>
                             )
                             }
+                            {userData.research !== null &&
+                                (<>
+                                    <h4 className="text-primary-500 text-left mt-3 font-bold tracking-wide">
+                                        RESEARCH
+                                    </h4>
+                                    {userData.research?.map((research, index) => {
+                                        return (
+                                            <div key={index}
+                                                 className="flex justify-left items-center ">
+                                                <div className="h-6 w-6 pt-0.5">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         className="w-6 h-6 inline-flex dark:text-white "
+                                                    fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                                                    </svg>
+
+                                                </div>
+                                                <p
+                                                    className="pl-2 text-gray-600 dark:text-white text-left mt-2 font-bold tracking-wide">
+                                                    {research.research_type}
+                                                    <br/>
+                                                    <span className="font-light tracking-tight">{research.research_title}</span>
+                                                </p>
+                                            </div>
+                                        )
+                                    })}
+                                </>)
+                            }
                         </div>
 
                         <div
                             className="flex flex-col items-center sm:items-start order-4 sm:order-3 sm:mb-0">
-                            {userData.certificates.length !== 0 &&
+                            {userData.certificates?.length !== 0 &&
                                 (<>
                                     <h4 className="text-primary-500 text-left mt-4 font-bold tracking-wide">
                                         CERTIFICATES
@@ -262,7 +290,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                     {userData.certificates.map((certificate, index) => {
                                         return (
                                             <div key={index}
-                                                 className="flex justify-left items-center whitespace-nowrap">
+                                                 className="flex justify-left items-center ">
                                                 <div className="h-6 w-6">
                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                          fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
@@ -273,7 +301,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                                     </svg>
                                                 </div>
                                                 <span
-                                                    className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
+                                                    className="pl-2 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
                                             {certificate}
                                         </span>
                                             </div>
@@ -286,7 +314,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                     <h4 className="text-primary-500 text-left mt-4 font-bold tracking-wide">
                                         HOMETOWN
                                     </h4>
-                                    <div className="flex justify-left items-center whitespace-nowrap">
+                                    <div className="flex justify-left items-center ">
                                         <div className="h-6 w-6">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                  strokeWidth={1.5} stroke="currentColor"
@@ -296,7 +324,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                             </svg>
                                         </div>
                                         <span
-                                            className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
+                                            className="pl-2 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
                             {userData.hometown}
                                 </span>
                                     </div>
@@ -308,7 +336,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                     <h4 className="text-primary-500 text-left mt-4 font-bold tracking-wide">
                                         CURRENT CITY
                                     </h4>
-                                    <div className="flex justify-left items-center whitespace-nowrap">
+                                    <div className="flex justify-left items-center ">
                                         <div className="h-6 w-6">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                  strokeWidth={1.5} stroke="currentColor"
@@ -318,12 +346,32 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                             </svg>
                                         </div>
                                         <span
-                                            className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
+                                            className="pl-2 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
                             {userData.current_city}
                                 </span>
                                     </div>
                                 </>
                             )
+                            }
+                            {userData.miscellaneous !== null &&
+                                (<>
+                                    <h4 className="text-primary-500 text-left mt-3 font-bold tracking-wide">
+                                        MISCELLANEOUS
+                                    </h4>
+                                    {userData.miscellaneous?.map((miscellaneous, index) => {
+                                        return (
+                                            <div key={index}
+                                              >
+                                                <p
+                                                    className="text-gray-600 dark:text-white text-center sm:text-left mt-2 px-0 sm:pr-10 sm:pl-0 font-semibold tracking-normal">
+                                                    {miscellaneous.miscellaneous_title}
+                                                    <br/>
+                                                    <span className="font-light tracking-tight">{miscellaneous.miscellaneous_description}</span>
+                                                </p>
+                                            </div>
+                                        )
+                                    })}
+                                </>)
                             }
                         </div>
 

@@ -73,6 +73,8 @@ export interface User {
     interests: null | string[];
     housing: null | string;
     extracurriculars: null | Extracurricular[];
+    research: null | Research[];
+    miscellaneous: null | Miscellaneous[];
 }
 
 export interface HeaderType {
@@ -169,8 +171,8 @@ export interface Extracurricular {
 }
 
 export interface Miscellaneous {
-    miscellaneous_title : string;
-    miscellaneous_description : string;
+    miscellaneous_title: string;
+    miscellaneous_description: string;
 }
 
 export interface Research {
