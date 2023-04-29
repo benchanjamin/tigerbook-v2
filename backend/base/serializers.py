@@ -605,7 +605,7 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
     def get_username(self, obj):
         return get_display_username(obj.user.username)
 
-    def update(self, instance, validated_data):
+    def update(self, instance: UndergraduateTigerBookDirectory, validated_data):
         with contextlib.suppress(ValueError):
             # TODO: only change profile pic if profile pic is in validated data (i.e,
             #  if user is not including profile pic in post request, then don't delete the old one)
@@ -627,6 +627,9 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
                 # instance.extracurricular_position_objs.add(retrieved_position)
                 retrieved_positions_list.append(retrieved_position)
             instance.extracurricular_position_objs.add(*retrieved_positions_list)
+        # update current city last updated date
+        if instance.current_city is not None:
+            instance.last_updated_current_city = datetime.date.today()
         return super().update(instance, validated_data)
 
     # TODO: referenced https://stackoverflow.com/questions/56025763/serializer-for-jsonfield-nested-representation
@@ -834,6 +837,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
     extracurriculars = serializers.JSONField(read_only=True)
     miscellaneous = serializers.JSONField(read_only=True)
     research = serializers.JSONField(read_only=True)
+    last_updated_current_city = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -955,10 +959,18 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_current_city(self, obj: UndergraduateTigerBookDirectory):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.hometown_prohibited_usernames:
+        if request.user.username in obj.permissions.current_city_prohibited_usernames:
             return None
         if hasattr(obj.current_city, 'complete_city'):
             return obj.current_city.complete_city
+        return None
+
+    def get_last_updated_current_city(self, obj: UndergraduateTigerBookDirectory):
+        request = self.context.get('request')
+        if request.user.username in obj.permissions.current_city_prohibited_usernames:
+            return None
+        if hasattr(obj, 'last_updated_current_city'):
+            return obj.last_updated_current_city
         return None
 
     def get_interests(self, obj: UndergraduateTigerBookDirectory) -> list[str] | None:
@@ -993,6 +1005,7 @@ class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializ
     miscellaneous = serializers.JSONField(read_only=True)
     research = serializers.JSONField(read_only=True)
     permissions = PermissionsSerializer(read_only=True)
+    last_updated_current_city = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -1014,7 +1027,8 @@ class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializ
             'extracurriculars',
             'miscellaneous',
             'research',
-            'permissions'
+            'permissions',
+            'last_updated_current_city'
         ]
 
     def get_username(self, obj):
@@ -1080,6 +1094,11 @@ class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializ
     def get_current_city(self, obj: UndergraduateTigerBookDirectory):
         if hasattr(obj.current_city, 'complete_city'):
             return obj.current_city.complete_city
+        return None
+
+    def get_last_updated_current_city(self, obj: UndergraduateTigerBookDirectory):
+        if hasattr(obj, 'last_updated_current_city'):
+            return obj.last_updated_current_city
         return None
 
     def get_interests(self, obj: UndergraduateTigerBookDirectory) -> list[str] | None:

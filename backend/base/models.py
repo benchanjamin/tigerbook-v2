@@ -110,6 +110,7 @@ class UndergraduateTigerBookDirectory(models.Model):
     current_city = models.ForeignKey('TigerBookCities',
                                      related_name='undergraduates_current_city',
                                      on_delete=models.RESTRICT, null=True, blank=False)
+    last_updated_current_city = models.DateField(auto_now_add=False, null=True, blank=True)
     # post_grad_country = models.ForeignKey('TigerBookCountries', on_delete=models.RESTRICT,
     #                                       related_name='undergraduates_post_grad_country',
     #                                       null=True, blank=False)
