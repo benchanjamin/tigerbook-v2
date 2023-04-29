@@ -858,7 +858,8 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             'interests',
             'extracurriculars',
             'miscellaneous',
-            'research'
+            'research',
+            'last_updated_current_city'
         ]
 
     def get_username(self, obj):
