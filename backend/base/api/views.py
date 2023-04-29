@@ -13,7 +13,7 @@ from base.models import UndergraduateTigerBookDirectory, TigerBookNotes, Generic
     UndergraduateToBeApprovedSubmissions, UndergraduateTigerBookConcentrations, UndergraduateTigerBookClassYears, \
     UndergraduateTigerBookResidentialColleges, TigerBookCities, UndergraduateTigerBookCertificates, \
     UndergraduateTigerBookTracks, TigerBookPronouns, TigerBookInterests, TigerBookExtracurriculars, \
-    UndergraduateTigerBookHousing, TigerBookExtracurricularPositions
+    UndergraduateTigerBookHousing, TigerBookExtracurricularPositions, TigerBookResearchTypes
 from base.pagination import StandardResultsSetPagination
 from base.serializers import (
     UndergraduateTigerBookDirectorySetupFirstPageSerializer,
@@ -28,7 +28,7 @@ from base.serializers import (
     UndergraduateCertificatesListAPISerializer, UndergraduateTracksListAPISerializer,
     PronounsListAPISerializer, TigerBookHeaderSerializer, TigerBookHometownMapSerializer, InterestsListAPISerializer,
     ExtracurricularsListAPISerializer, HousingListAPISerializer, ExtracurricularsPositionsListAPISerializer,
-    UndergraduateTigerBookDirectoryPreviewSerializer, TigerBookCurrentCityMapSerializer,
+    UndergraduateTigerBookDirectoryPreviewSerializer, TigerBookCurrentCityMapSerializer, ResearchTypesAPISerializer,
 )
 
 from django.conf import settings
@@ -101,6 +101,11 @@ class HousingListAPIView(ListAPIView):
     queryset = UndergraduateTigerBookHousing.objects.all().order_by('building', 'room_no')
 
 
+class ResearchTypesListAPIView(ListAPIView):
+    serializer_class = ResearchTypesAPISerializer
+    queryset = TigerBookResearchTypes.objects.all().order_by('research_type')
+
+
 class TigerBookRedirectURLView(GenericAPIView):
     queryset = UndergraduateTigerBookDirectory.objects.all().select_related("user")
 
@@ -163,6 +168,7 @@ class TigerBookHometownMapView(ListModelMixin, GenericAPIView):
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
 
 class TigerBookCurrentCityMapView(ListModelMixin, GenericAPIView):
     queryset = TigerBookCities.objects.all()

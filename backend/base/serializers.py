@@ -115,6 +115,14 @@ class HousingListAPISerializer(serializers.ModelSerializer):
         ]
 
 
+class ResearchTypesAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TigerBookResearchTypes
+        fields = [
+            'research_type'
+        ]
+
+
 class TigerBookMiscellaneousSerializer(serializers.Serializer):
     miscellaneous_title = serializers.CharField(allow_null=False)
     miscellaneous_description = serializers.CharField(allow_null=False)
