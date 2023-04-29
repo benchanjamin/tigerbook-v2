@@ -121,7 +121,7 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
 
                         <div
                             className="flex flex-col items-center sm:items-start order-first mb-4 sm:order-0 sm:mb-0">
-                            <h1 className="flex flex-1 sm:flex-0 flex-wrap text-3xl justify-center items-center font-medium tracking-wide text-left dark:text-white">
+                            <h1 className="flex flex-1 sm:flex-0 flex-wrap text-3xl justify-center items-center font-medium tracking-wide text-center sm:text-left dark:text-white">
                                 {userData.full_name}&nbsp;&lsquo;{String(userData.class_year).slice(2)}&nbsp;
                                 {userData.pronouns &&
                                     <div className="text-gray-500 text-lg text-center sm:text-left">
@@ -176,29 +176,8 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                         </div>
 
                         <div
-                            className="flex flex-col items-center sm:items-start order-last mb-4 sm:order-3 sm:mb-0">
-                            {userData.housing && (
-                                <>
-                                    <h4 className="text-primary-500 text-left mt-4 font-bold tracking-wide">
-                                        HOUSING
-                                    </h4>
-                                    <div className="flex justify-left items-center whitespace-nowrap">
-                                        <div className="h-6 w-6">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 strokeWidth={1.5} stroke="currentColor"
-                                                 className="inline-flex w-6 h-6 dark:text-white">
-                                                <path strokeLinecap="round" strokeLinejoin="round"
-                                                      d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
-                                            </svg>
-                                        </div>
-                                        <span
-                                            className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
-                            {userData.housing}
-                                </span>
-                                    </div>
-                                </>
-                            )
-                            }
+                            className="flex flex-col items-center sm:items-start order-last mb-4 sm:order-4 sm:mb-0">
+
                             {userData.interests?.length !== 0 &&
                                 (<>
                                     <h4 className="text-primary-500 text-left mt-4 sm:mt-0 sm:mt-3 font-bold tracking-wide">
@@ -225,7 +204,7 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                                     })}
                                 </>)
                             }
-                            {userData.extracurriculars?.length !== 0 &&
+                            {userData.extracurriculars !== null &&
                                 (<>
                                     <h4 className="text-primary-500 text-left mt-3 font-bold tracking-wide">
                                         EXTRACURRICULARS
@@ -253,10 +232,32 @@ const Index: React.FC<Props> = ({userData, headerData}) => {
                                     })}
                                 </>)
                             }
+                            {userData.housing && (
+                                <>
+                                    <h4 className="text-primary-500 text-left mt-4 font-bold tracking-wide">
+                                        HOUSING
+                                    </h4>
+                                    <div className="flex justify-left items-center whitespace-nowrap">
+                                        <div className="h-6 w-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                 strokeWidth={1.5} stroke="currentColor"
+                                                 className="inline-flex w-6 h-6 dark:text-white">
+                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                      d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+                                            </svg>
+                                        </div>
+                                        <span
+                                            className="pl-1 text-gray-600 dark:text-white text-left mt-2 font-light tracking-tighter">
+                            {userData.housing}
+                                </span>
+                                    </div>
+                                </>
+                            )
+                            }
                         </div>
 
                         <div
-                            className="flex flex-col items-center sm:items-start order-4 sm:order-0 sm:mb-0">
+                            className="flex flex-col items-center sm:items-start order-4 sm:order-3 sm:mb-0">
                             {userData.certificates.length !== 0 &&
                                 (<>
                                     <h4 className="text-primary-500 text-left mt-4 font-bold tracking-wide">
