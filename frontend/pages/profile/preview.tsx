@@ -9,7 +9,7 @@ import {Spinner} from "flowbite-react";
 import Header from "@components/ui/Header";
 
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ req}) => {
+export const getServerSideProps: GetServerSideProps<Props> = async ({req}) => {
     let REDIRECT_ERROR = 0
     const axios = await axiosInstance();
     const axiosRedirect: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/redirect/`,
@@ -63,6 +63,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ req}) => {
             userData,
             headerData
         }
+    }
+}
+
+function format(inputDate) {
+    let date = new Date(inputDate);
+    if (!isNaN(date.getTime())) {
+        return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
     }
 }
 
@@ -262,8 +269,10 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                                 <div className="h-6 w-6 pt-0.5">
                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                          className="w-6 h-6 inline-flex dark:text-white "
-                                                    fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                                                         fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                                                         stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                              d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
                                                     </svg>
 
                                                 </div>
@@ -271,7 +280,8 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                                     className="pl-2 text-gray-600 dark:text-white text-left mt-2 font-bold tracking-wide">
                                                     {research.research_type}
                                                     <br/>
-                                                    <span className="font-light tracking-tight">{research.research_title}</span>
+                                                    <span
+                                                        className="font-light tracking-tight">{research.research_title}</span>
                                                 </p>
                                             </div>
                                         )
@@ -335,6 +345,9 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                 <>
                                     <h4 className="text-primary-500 text-left mt-4 font-bold tracking-wide">
                                         CURRENT CITY
+                                        <span className="text-xs text-gray-400">
+                                            {` (last updated: ${format(userData.last_updated_current_city)})`}
+                                        </span>
                                     </h4>
                                     <div className="flex justify-left items-center ">
                                         <div className="h-6 w-6">
@@ -361,12 +374,13 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                     {userData.miscellaneous?.map((miscellaneous, index) => {
                                         return (
                                             <div key={index}
-                                              >
+                                            >
                                                 <p
                                                     className="text-gray-600 dark:text-white text-center sm:text-left mt-2 px-0 sm:pr-10 sm:pl-0 font-semibold tracking-normal">
                                                     {miscellaneous.miscellaneous_title}
                                                     <br/>
-                                                    <span className="font-light tracking-tight">{miscellaneous.miscellaneous_description}</span>
+                                                    <span
+                                                        className="font-light tracking-tight">{miscellaneous.miscellaneous_description}</span>
                                                 </p>
                                             </div>
                                         )

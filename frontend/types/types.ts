@@ -75,6 +75,7 @@ export interface User {
     extracurriculars: null | Extracurricular[];
     research: null | Research[];
     miscellaneous: null | Miscellaneous[];
+    last_updated_current_city: null | string;
 }
 
 export interface HeaderType {
@@ -106,7 +107,7 @@ export interface FullProfileEditPost {
     interests: string[];
     extracurriculars: null | Extracurricular[]
     research: null;
-    miscellaneous: null;
+    miscellaneous: null | Miscellaneous[];
 }
 
 export interface FullProfileEditGet {
