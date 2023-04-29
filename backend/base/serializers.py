@@ -834,9 +834,9 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
     housing = serializers.SerializerMethodField(read_only=True)
     current_city = serializers.SerializerMethodField(read_only=True)
     interests = serializers.SerializerMethodField(read_only=True)
-    extracurriculars = serializers.JSONField(read_only=True)
-    miscellaneous = serializers.JSONField(read_only=True)
-    research = serializers.JSONField(read_only=True)
+    extracurriculars = serializers.SerializerMethodField(read_only=True)
+    miscellaneous = serializers.SerializerMethodField(read_only=True)
+    research = serializers.SerializerMethodField(read_only=True)
     last_updated_current_city = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
@@ -864,25 +864,25 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_username(self, obj):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.username_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.username_prohibited_usernames:
             return None
         return get_display_username(obj.user.username)
 
     def get_full_name(self, obj):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.username_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.username_prohibited_usernames:
             return None
         return obj.active_directory_entry.full_name
 
     def get_track(self, obj):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.track_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.track_prohibited_usernames:
             return None
         return obj.track.track if hasattr(obj.track, 'track') else None
 
     def get_concentration(self, obj):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.concentration_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.concentration_prohibited_usernames:
             return None
         if hasattr(obj.concentration, 'concentration'):
             return obj.concentration.concentration
@@ -890,7 +890,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_class_year(self, obj):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.class_year_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.class_year_prohibited_usernames:
             return None
         if hasattr(obj.class_year, 'class_year'):
             return obj.class_year.class_year
@@ -898,7 +898,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_residential_college(self, obj):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.residential_college_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.residential_college_prohibited_usernames:
             return None
         if hasattr(obj.residential_college, 'residential_college'):
             return obj.residential_college.residential_college
@@ -906,13 +906,13 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_pronouns(self, obj):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.pronouns_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.pronouns_prohibited_usernames:
             return None
         return obj.pronouns.pronouns if hasattr(obj.pronouns, 'pronouns') else None
 
     def get_profile_pic_url(self, obj):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.profile_pic_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.profile_pic_prohibited_usernames:
             return None
         if obj.profile_pic:
             return obj.profile_pic.url
@@ -926,13 +926,13 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_aliases(self, obj):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.aliases_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.aliases_prohibited_usernames:
             return None
         return obj.aliases if hasattr(obj, 'aliases') else None
 
     def get_certificates(self, obj: UndergraduateTigerBookDirectory):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.certificates_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.certificates_prohibited_usernames:
             return None
         certificates = UndergraduateTigerBookCertificatesRetrieveSerializer(obj.certificates, many=True).data \
             if hasattr(obj, 'certificates') \
@@ -944,7 +944,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_hometown(self, obj: UndergraduateTigerBookDirectory) -> str | None:
         request = self.context.get('request')
-        if request.user.username in obj.permissions.hometown_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.hometown_prohibited_usernames:
             return None
         if hasattr(obj.hometown, 'complete_city'):
             return obj.hometown.complete_city
@@ -952,7 +952,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_housing(self, obj: UndergraduateTigerBookDirectory) -> str | None:
         request = self.context.get('request')
-        if request.user.username in obj.permissions.housing_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.housing_prohibited_usernames:
             return None
         if hasattr(obj.housing, 'complete_housing'):
             return obj.housing.complete_housing
@@ -960,7 +960,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_current_city(self, obj: UndergraduateTigerBookDirectory):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.current_city_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.current_city_prohibited_usernames:
             return None
         if hasattr(obj.current_city, 'complete_city'):
             return obj.current_city.complete_city
@@ -968,7 +968,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_last_updated_current_city(self, obj: UndergraduateTigerBookDirectory):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.current_city_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.current_city_prohibited_usernames:
             return None
         if hasattr(obj, 'last_updated_current_city'):
             return obj.last_updated_current_city
@@ -976,7 +976,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_interests(self, obj: UndergraduateTigerBookDirectory) -> list[str] | None:
         request = self.context.get('request')
-        if request.user.username in obj.permissions.interests_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.interests_prohibited_usernames:
             return None
         interests = TigerBookInterestsRetrieveSerializer(obj.interests, many=True).data \
             if hasattr(obj, 'interests') \
@@ -988,7 +988,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_extracurriculars(self, obj: UndergraduateTigerBookDirectory):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.extracurriculars_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.extracurriculars_prohibited_usernames:
             return None
         if hasattr(obj, 'extracurriculars'):
             return obj.extracurriculars
@@ -996,7 +996,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_miscellaneous(self, obj: UndergraduateTigerBookDirectory):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.miscellaneous_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.miscellaneous_prohibited_usernames:
             return None
         if hasattr(obj, 'miscellaneous'):
             return obj.miscellaneous
@@ -1004,7 +1004,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
 
     def get_research(self, obj: UndergraduateTigerBookDirectory):
         request = self.context.get('request')
-        if request.user.username in obj.permissions.research_prohibited_usernames:
+        if get_display_username(request.user.username) in obj.permissions.research_prohibited_usernames:
             return None
         if hasattr(obj, 'research'):
             return obj.research
