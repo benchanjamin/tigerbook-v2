@@ -123,10 +123,10 @@ const List: React.FC<Props> = ({headerData}) => {
 
     async function onEnter() {
         await router.push(`/list?q=${encodeURIComponent(query)}`)
-        // setIsLoading(true)
-        // setListResults([])
-        // setPage(1)
-        // await fetchUserData(encodeURIComponent(query))
+        setIsLoading(true)
+        setListResults([])
+        setPage(1)
+        await fetchUserData(encodeURIComponent(query))
     }
 
     async function fetchUserData(explicitQuery) {
