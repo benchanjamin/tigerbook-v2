@@ -267,7 +267,7 @@ const List: React.FC<Props> = ({headerData}) => {
         }
         concentrationsQuery?.forEach((concentration, index) => {
             if (index !== concentrationsQuery.length - 1) {
-                additionalEncodedParameterizedQueries += `${encodeURIComponent(concentration + ',')}`
+                additionalEncodedParameterizedQueries += `${encodeURIComponent(concentration)},`
             } else {
                 additionalEncodedParameterizedQueries += `${encodeURIComponent(concentration)}`
             }
