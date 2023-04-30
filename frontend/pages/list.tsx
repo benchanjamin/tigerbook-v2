@@ -125,13 +125,14 @@ const List: React.FC<Props> = ({headerData}) => {
         const axios = await axiosInstance();
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
         const {query} = router;
-        console.log('query', query);
         console.log('page', page);
         console.log('listResults', listResults);
         if ('q' in query) {
             listURL += `&?q=${query.q}`;
         }
         const axiosResponse = await axios.get(listURL)
+        console.log('query', query);
+        console.log('listURL', listURL);
         const listData: List = axiosResponse.data;
         setListResults((prev) => [...prev, ...listData.results]);
     }
