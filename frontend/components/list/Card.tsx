@@ -22,7 +22,7 @@ function Card({personData, isLast, newLimit}: { personData: ListUser, isLast: bo
         });
 
         observer.observe(cardRef.current);
-    }, [isLast, newLimit]);
+    }, [isLast]);
 
     return (
         <div
