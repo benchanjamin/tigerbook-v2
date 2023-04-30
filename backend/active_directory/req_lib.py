@@ -87,11 +87,5 @@ class ReqLib:
         if email:
             result['email'] = email.lower()
         result['department'] = req.get('department', None)
-        result['pu_status'] = req.get('pustatus')
+        # result['pu_status'] = req.get('pustatus')
         return result
-
-
-if __name__ == '__main__':
-    req = ReqLib()
-    status = req.get_pu_status_from_net_id('bychan')
-    info = req.get_info_for_tigerbook('bychan')

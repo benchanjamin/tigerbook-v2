@@ -17,15 +17,15 @@ def add_to_undergraduate_tigerbook_directory(user):
     net_id = user.cas_profile.net_id
     req_lib = ReqLib()
     req = req_lib.get_info_for_tigerbook(net_id)
-    active_directory_entry = (
-        OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(
-            **req
-        ).first()
-        if OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(
-            **req
-        ).exists()
-        else OITActiveDirectoryUndergraduateGraduateInfo.objects.create(**req)
-    )
+    if OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(
+            **req).exists():
+        active_directory_entry = (
+            OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(
+                **req
+            ).first()
+        )
+    else:
+        active_directory_entry = OITActiveDirectoryUndergraduateGraduateInfo.objects.create(**req)
     if not req:
         PermissionDenied("OIT Active Directory does not contain your Princeton netID")
     residential_college_facebook_entry = CurrentUndergraduateResidentialCollegeFacebookDirectory.objects.filter(

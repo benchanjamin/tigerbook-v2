@@ -28,7 +28,7 @@ class OITActiveDirectoryUndergraduateGraduateInfo(models.Model):
     puid = models.TextField(db_index=True)
     email = models.EmailField(null=True)
     department = models.TextField()
-    # interoffice_address = models.TextField(null=True)
+    interoffice_address = models.TextField(null=True)
     pu_status = models.TextField(null=False, blank=False)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
@@ -56,7 +56,7 @@ class UndergraduateTigerBookDirectory(models.Model):
     has_setup_profile = models.OneToOneField(SetupTigerBookDirectoryStages, on_delete=models.RESTRICT, null=False,
                                              related_name='undergraduate_tigerbook_directory_entry')
     # 'user' field handles net_id and email
-    user = models.OneToOneField(User, on_delete=models.RESTRICT, null=False,
+    user = models.OneToOneField(User, on_delete=models.RESTRICT, null=True,
                                 related_name="undergraduate_tigerbook_directory_entry")
     # 'active_directory_entry' field handles puid, full_name, net_id, and email for CAS users
     active_directory_entry = models.OneToOneField(OITActiveDirectoryUndergraduateGraduateInfo,
