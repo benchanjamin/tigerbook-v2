@@ -119,6 +119,7 @@ const List: React.FC<Props> = ({headerData}) => {
     const [listResults, setListResults] = useState<ListUser[]>([]);
     const [hasNextPage, setHasNextPage] = useState(false);
     const [isExplicitSearching, setIsExplicitSearching] = useState(false);
+    const [count, setCount] = useState(0);
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -146,6 +147,7 @@ const List: React.FC<Props> = ({headerData}) => {
         const listData: List = axiosResponse.data;
         setIsLoading(false)
         setListResults((prev) => [...prev, ...listData.results]);
+        setCount(listData.count)
         setHasNextPage(listData.next !== null);
     }
 
@@ -197,6 +199,9 @@ const List: React.FC<Props> = ({headerData}) => {
                                         className="h-[200px] w-[200px]"/>
                                 </div>
                             }
+                            <div className="flex justify-end items-center dark:text-white text-sm w-full">
+                                {!isLoading && !isExplicitSearching && `Showing ${count} results`}
+                            </div>
                             <div
                                 className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8"
                             >
