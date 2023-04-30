@@ -118,11 +118,13 @@ const List: React.FC<Props> = ({headerData}) => {
     const [page, setPage] = useState(1);
     const [listResults, setListResults] = useState<ListUser[]>([]);
     const [hasNextPage, setHasNextPage] = useState(false);
+    const [isExplicitSearching, setIsExplicitSearching] = useState(false);
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     async function onEnter() {
         console.log('page1', page)
+        setIsExplicitSearching(true)
         console.log('page2', page)
 
         setIsLoading(true)
@@ -140,6 +142,7 @@ const List: React.FC<Props> = ({headerData}) => {
         setPage(1)
         console.log('page6', page)
 
+        setIsExplicitSearching(false)
         console.log('page7', page)
 
     }
@@ -164,7 +167,7 @@ const List: React.FC<Props> = ({headerData}) => {
     }
 
     useEffect(() => {
-        if (page === 1) return;
+        if (isExplicitSearching) return;
         fetchUserData();
     }, [page]);
 
