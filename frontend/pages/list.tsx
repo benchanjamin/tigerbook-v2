@@ -140,9 +140,9 @@ const List: React.FC<Props> = ({headerData}) => {
     const [isLoading, setIsLoading] = useState(false);
 
     // search queries
-    const [concentrationQuery, setConcentrationQuery] = useState(null);
+    const [concentrationsQuery, setConcentrationsQuery] = useState(null);
     const [tracksQuery, setTracksQuery] = useState(null);
-    const [resCollegeQuery, setResCollegeQuery] = useState(null);
+    const [resCollegesQuery, setResCollegesQuery] = useState(null);
     const [classYearsQuery, setClassYearsQuery] = useState(null);
     const [certificatesQuery, setCertificatesQuery] = useState(null);
     const [pronounsQuery, setPronounsQuery] = useState(null);
@@ -266,7 +266,7 @@ const List: React.FC<Props> = ({headerData}) => {
         })
         await router.push(`/list?q=${encodeURIComponent(query)}${searchFilterQueries}`)
         setPage(1)
-        await fetchUserData(encodeURIComponent(query + searchFilterQueries))
+        await fetchUserData(encodeURIComponent(query).concat(searchFilterQueries))
         setIsExplicitSearching(false)
     }
 
@@ -309,6 +309,19 @@ const List: React.FC<Props> = ({headerData}) => {
         if (isExplicitSearching) return;
         fetchUserData();
     }, [page]);
+
+    function clearAllFilters() {
+        // set all queries to empty
+        setTracksQuery([])
+        setConcentrationsQuery([])
+        setClassYearsQuery([])
+        setResCollegesQuery([])
+        setCertificatesQuery([])
+        setPronounsQuery([])
+        setInterestsQuery([])
+        setExtracurricularsQuery([])
+        setExtracurricularPositionsQuery([])
+    }
 
     return (
         <>
@@ -381,7 +394,8 @@ const List: React.FC<Props> = ({headerData}) => {
                         <Sidebar>
                             <Sidebar.Items>
                                 <Sidebar.ItemGroup>
-                                    <div className="block ml-2 text-sm text-white bg-primary-500 px-4 py-0.5 mb-2 rounded-xl hover:bg-primary-600 cursor-pointer active:bg-primary-700 focus:outline-none focus:ring focus:ring-primary-300">
+                                    <div className="block ml-2 text-sm text-white bg-primary-500 px-4 py-0.5 mb-2 rounded-xl hover:bg-primary-600 cursor-pointer active:bg-primary-700 focus:outline-none focus:ring focus:ring-primary-300"
+                                    onClick={clearAllFilters}>
                                         Clear All Filters
                                     </div>
                                     <li>
@@ -414,7 +428,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                                     defaultText="Select concentrations"
                                                     initialSelected={[]}
                                                     zIndex={50}
-                                                    setterFunction={setConcentrationQuery}
+                                                    setterFunction={setConcentrationsQuery}
                                                     className="ml-1"
                                                 />
                                             </li>
@@ -452,7 +466,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                                     defaultText="Select residential colleges"
                                                     initialSelected={[]}
                                                     zIndex={30}
-                                                    setterFunction={setResCollegeQuery}
+                                                    setterFunction={setResCollegesQuery}
                                                     className="ml-1"
                                                 />
                                             </li>
