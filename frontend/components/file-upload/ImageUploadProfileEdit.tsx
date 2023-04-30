@@ -1,9 +1,9 @@
 import {useDropzone} from 'react-dropzone';
 import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
-import {HeaderType, SetupOneGet} from "@types/types";
+import {FullProfileEditGet} from "@types/types";
 
-function ImageUploadProfileEdit({data, files, setFiles}: { data: SetupOneGet }) {
+function ImageUploadProfileEdit({data, files, setFiles}: { data: FullProfileEditGet }) {
     console.log(data)
     const {getRootProps, getInputProps} = useDropzone({
         accept: {
@@ -73,7 +73,7 @@ function ImageUploadProfileEdit({data, files, setFiles}: { data: SetupOneGet }) 
                                     src={data.residential_college_facebook_entry !== null ? data.residential_college_facebook_entry.photo_url : '/static/placeholder.jpg'}
                                     fill
                                     style={{objectFit: "cover"}}
-                                    alt={`Uploaded image of ${data.active_directory_entry.full_name}`}
+                                    alt={`Uploaded image of ${data.full_name}`}
                                     className={`border-2 border-primary-100 dark:border-opacity-50 rounded-2xl`}
                                 />
                             </div>

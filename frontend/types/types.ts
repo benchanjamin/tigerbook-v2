@@ -113,6 +113,7 @@ export interface FullProfileEditPost {
 
 export interface FullProfileEditGet {
     username: string;
+    full_name: string;
     active_directory_entry: ActiveDirectoryEntry;
     residential_college_facebook_entry: ResidentialCollegeFacebookEntry;
     permissions: Permissions;
