@@ -121,7 +121,7 @@ const List: React.FC<Props> = ({headerData}) => {
     const [listResults, setListResults] = useState<ListUser[]>([]);
     const router = useRouter();
 
-    async function fetchUserData(explicitURLString) {
+    async function fetchUserData(explicitQuery) {
         const axios = await axiosInstance();
         // if (explicitURLString !== undefined) {
         //     setPage(1)
@@ -131,9 +131,9 @@ const List: React.FC<Props> = ({headerData}) => {
 
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
         const {query} = router;
-        console.log('page', page);
-        console.log('listResults', listResults);
-        if ('q' in query) {
+        if (explicitQuery !== undefined) {
+            listURL += `&q=${explicitQuery}`;
+        } else if ('q' in query) {
             listURL += `&q=${query.q}`;
         }
         const axiosResponse = await axios.get(listURL)
@@ -169,9 +169,10 @@ const List: React.FC<Props> = ({headerData}) => {
                                                       autoComplete="off"/>
                                 </div>
                                 <button onClick={async () => {
-                                    await router.push(`/list/?q=${encodeURIComponent(query)}`)
+                                    // await router.push(`/list/?q=${encodeURIComponent(query)}`)
                                     setListResults([])
-                                    // await fetchUserData()
+                                    setPage(1)
+                                    await fetchUserData()
                                 }}
                                         className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-5 mt-1.50">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
