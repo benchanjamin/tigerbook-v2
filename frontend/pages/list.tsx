@@ -44,6 +44,7 @@ import {useRouter} from "next/router";
 import {Spinner} from "flowbite-react";
 import TigerBookListBox from "@components/headless-ui/TigerBookListBox";
 import TigerBookComboBoxSingleStrictSelect from "@components/headless-ui/TigerBookComboBoxSingleStrictSelect";
+import TigerBookComboBoxMultipleStrictSelect from "@components/headless-ui/TigerBookComboBoxMultipleStrictSelect";
 
 interface ServerSideProps {
     data: SetupOneGet
@@ -343,15 +344,14 @@ const List: React.FC<Props> = ({headerData}) => {
                                         </button>
                                         <ul id="dropdown-example" className="hidden">
                                             <li>
-                                                <label htmlFor="category"
-                                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Concentrations</label>
-                                                <TigerBookComboBoxSingleStrictSelect
+                                                <label htmlFor="concentrations"
+                                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white pl-1">Concentrations</label>
+                                                <TigerBookComboBoxMultipleStrictSelect
                                                     data={concentrationsList}
-                                                    defaultText="Select pronouns"
+                                                    defaultText="Select concentrations"
                                                     initialSelected={concentrationsList}
                                                     zIndex={28}
                                                     setterFunction={setConcentrationQuery}
-                                                    defaultOptionText="None"
                                                 />
                                             </li>
                                         </ul>
