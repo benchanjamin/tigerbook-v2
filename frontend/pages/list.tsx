@@ -127,9 +127,9 @@ const List: React.FC<Props> = ({headerData}) => {
         setIsLoading(true)
         setListResults([])
         await router.push(`/list?q=${encodeURIComponent(query)}`)
-        // setPage(1)
-        await fetchUserData(encodeURIComponent(query))
         setPage(1)
+        await fetchUserData(encodeURIComponent(query))
+        // setPage(1)
         setIsExplicitSearching(false)
     }
 
