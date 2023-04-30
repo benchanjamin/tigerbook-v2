@@ -34,7 +34,7 @@ import Sidebar from "@components/ui/Sidebar";
 import Header from "@components/ui/Header";
 import {HeaderType, List, SetupOneGet} from "@types/types";
 import {GetServerSideProps} from "next";
-import {axiosInstance} from "@utils/axiosInstance";
+import {axiosInstance, axiosLocalhost} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import React, {useEffect, useState} from "react";
 import Container from "@components/list/Container";
@@ -88,42 +88,58 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({q
         })
     const headerData: HeaderType = axiosResponse.data;
 
-    let listURL = `${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/list/`;
-    if ('q' in query) {
-        listURL += `?q=${query.q}`;
-    }
-    axiosResponse = await axios.get(listURL,
-        {
-            headers: {
-                Cookie: req.headers.cookie
-            }
-        })
-    const listData: List = axiosResponse.data;
+    // let listURL = `${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/list/`;
+    // if ('q' in query) {
+    //     listURL += `?q=${query.q}`;
+    // }
+    // axiosResponse = await axios.get(listURL,
+    //     {
+    //         headers: {
+    //             Cookie: req.headers.cookie
+    //         }
+    //     })
+    // const listData: List = axiosResponse.data;
 
     return {
         props: {
             headerData,
-            listData
+            // listData
         },
     }
 };
 
 interface Props {
     headerData: HeaderType
-    listData: List
+    // listData: List
 }
 
 
-const List: React.FC<Props> = ({headerData, listData}) => {
+const List: React.FC<Props> = ({headerData}) => {
     const [query, setQuery] = useState('');
+    const [pageNumber, setPageNumber] = useState(1);
+    const [listData, setListData] = useState<List>([]);
     const router = useRouter();
 
-    // useEffect(() => {
-    //
-    //     return () => {
-    //         effect
-    //     };
-    // }, [query]);
+    useEffect(() => {
+        async function effect() {
+            const axios = await axiosInstance();
+
+
+            let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
+            const {query} = router;
+            if ('q' in query) {
+                listURL += `?q=${query.q}`;
+            }
+            const axiosResponse = await axios.get(listURL)
+            console.log(axiosResponse)
+
+            const listData: List = axiosResponse.data;
+            return listData
+        }
+        effect().then(listData => setListData(listData))
+
+    }, [pageNumber, router]);
+
 
 
     return (
@@ -157,7 +173,7 @@ const List: React.FC<Props> = ({headerData, listData}) => {
                             <div
                                 className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8"
                             >
-                                {listData.results.map((item, index) => (
+                                {listData.results?.map((item, index) => (
                                     <Card key={index} personData={item}/>
                                 ))}
                             </div>
