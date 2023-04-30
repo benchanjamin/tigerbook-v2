@@ -123,13 +123,6 @@ const List: React.FC<Props> = ({headerData}) => {
 
     async function fetchUserData(explicitQuery) {
         const axios = await axiosInstance();
-        // if (explicitURLString !== undefined) {
-        //     setPage(1)
-        //     let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/?page=${page}`;
-        //     listURL += explicitURLString
-        // }
-
-        console.log('explicit', explicitQuery)
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
         const {query} = router;
         if (explicitQuery !== undefined) {
@@ -138,8 +131,6 @@ const List: React.FC<Props> = ({headerData}) => {
             listURL += `&q=${query.q}`;
         }
         const axiosResponse = await axios.get(listURL)
-        console.log('query', query);
-        console.log('listURL', listURL);
         const listData: List = axiosResponse.data;
         setListResults((prev) => [...prev, ...listData.results]);
     }
@@ -170,7 +161,6 @@ const List: React.FC<Props> = ({headerData}) => {
                                                       autoComplete="off"/>
                                 </div>
                                 <button onClick={async () => {
-                                    // await router.push(`/list/?q=${encodeURIComponent(query)}`)
                                     setListResults([])
                                     setPage(1)
                                     await fetchUserData(encodeURIComponent(query))
