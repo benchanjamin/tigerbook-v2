@@ -204,9 +204,10 @@ const List: React.FC<Props> = ({headerData}) => {
                 continue
             }
             listData[keys[index]] = axiosResponse.data.map((item) => item[indices[index]])
+            if (index === 0) {
+                setConcentrationsList(listData.concentrations)
+            }
         }
-
-        setConcentrationsList(listData.concentrations)
     }
 
     useEffect(() => {
