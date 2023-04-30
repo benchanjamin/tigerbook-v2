@@ -123,7 +123,7 @@ function VirtualizedList({
         count: items?.length,
         getScrollElement: () => parentRef.current,
         estimateSize: () => 35,
-        overscan: 100000,
+        overscan: 100,
     });
 
     return (
