@@ -94,7 +94,7 @@ function VirtualizedList({
     const rowVirtualizer = useVirtualizer({
         count: items?.length,
         getScrollElement: () => parentRef.current,
-        estimateSize: () => 35,
+        estimateSize: () => 100000,
         overscan: 5,
     });
 

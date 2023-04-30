@@ -198,7 +198,7 @@ const List: React.FC<Props> = ({headerData}) => {
 
 function ActualSidebar(): JSX.Element {
     return (
-        <Sidebar>
+        <Sidebar className="fixed">
             <Sidebar.Items>
                 <Sidebar.ItemGroup>
                     <Sidebar.Item href="#" icon={HiChartPie}>
