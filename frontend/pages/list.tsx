@@ -176,7 +176,7 @@ const List: React.FC<Props> = ({headerData}) => {
                     : <Header disableSideBar={false} disableLinks={false}
                               username={headerData.username} hasProfile={headerData.has_profile}/>
                 }
-                <main className="flex h-[93vh]">
+                <main className="flex h-full">
 
                     <div className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
                         <Container className="bg-gray-50 pt-4 rounded-2xl pb-10 dark:bg-gray-800">
