@@ -123,7 +123,6 @@ const List: React.FC<Props> = ({headerData}) => {
     const [isLoading, setIsLoading] = useState(false);
 
     async function onEnter() {
-        setPage(1)
         console.log('page1', page)
         setIsExplicitSearching(true)
         console.log('page2', page)
@@ -189,9 +188,15 @@ const List: React.FC<Props> = ({headerData}) => {
                                     <TigerBookListBar defaultText="Search PUID, NetID, nickname, or full name"
                                                       zIndex={100} setterFunction={setQuery}
                                                       autoComplete="off"
-                                                      onEnterFunction={onEnter}/>
+                                                      onEnterFunction={async () => {
+                                                          setPage(1)
+                                                          await onEnter()
+                                                      }}/>
                                 </div>
-                                <button onClick={onEnter}
+                                <button onClick={async () => {
+                                    setPage(1)
+                                    await onEnter()
+                                }}
                                         className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-5 mt-1.5">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                          strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 dark:text-white">
@@ -214,7 +219,8 @@ const List: React.FC<Props> = ({headerData}) => {
                                 {listResults?.map((listUser, index) => (
                                     <Card key={index} personData={listUser}
                                           isLast={index === listResults.length - 1}
-                                          newLimit={hasNextPage ? () => setPage((prev) => prev + 1) : () => {}}
+                                          newLimit={hasNextPage ? () => setPage((prev) => prev + 1) : () => {
+                                          }}
                                     />
                                 ))}
                             </div>
