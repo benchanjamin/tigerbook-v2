@@ -139,7 +139,7 @@ const List: React.FC<Props> = ({headerData}) => {
     useEffect(() => {
         fetchUserData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page, listResults]);
+    }, [page]);
 
     return (
         <>
