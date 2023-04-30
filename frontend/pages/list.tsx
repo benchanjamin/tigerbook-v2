@@ -148,8 +148,12 @@ const List: React.FC<Props> = ({headerData}) => {
     // search list
     const [concentrationsList, setConcentrationsList] = useState([]);
     const [tracksList, setTracksList] = useState([]);
-    const [resCollegeList, setResCollegeList] = useState([]);
+    const [resCollegesList, setResCollegesList] = useState([]);
     const [classYearsList, setClassYearsList] = useState([]);
+    const [certificatesList, setCertificatesList] = useState([]);
+    const [pronounsList, setPronounsList] = useState([]);
+
+    console.log(resCollegesList)
 
 
     async function fetch() {
@@ -220,7 +224,7 @@ const List: React.FC<Props> = ({headerData}) => {
                 setClassYearsList(listData.classYears)
             }
             if (index === 3) {
-                setResCollegeList(listData.residentialColleges)
+                setResCollegesList(listData.residentialColleges)
             }
         }
     }
@@ -465,7 +469,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                                 <label htmlFor="residential-colleges"
                                                        className="block my-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Residential Colleges</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
-                                                    data={resCollegeList}
+                                                    data={resCollegesList}
                                                     defaultText="Select residential colleges"
                                                     initialSelected={[]}
                                                     zIndex={30}
