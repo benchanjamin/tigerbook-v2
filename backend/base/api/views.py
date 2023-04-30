@@ -65,6 +65,12 @@ class CitiesListAPIView(ListAPIView):
     serializer_class = CitiesListAPISerializer
     queryset = TigerBookCities.objects.all().order_by('city')
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        data = [obj['complete_city'] for obj in serializer.data]
+        return Response(data)
+
 
 class UndergraduateCertificatesListAPIView(ListAPIView):
     serializer_class = UndergraduateCertificatesListAPISerializer
