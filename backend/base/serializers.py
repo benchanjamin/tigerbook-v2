@@ -694,16 +694,13 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
             return None
         return obj.active_directory_entry.full_name
 
-    def get_username(self, obj):
+    def get_username(self, obj:UndergraduateTigerBookDirectory):
         request = self.context.get('request')
-        if hasattr(request.user,
-                   'cas_profile') and request.user.cas_profile.net_id in obj.permissions.username_prohibited_usernames:
-            return None
         if request.user.username in obj.permissions.username_prohibited_usernames:
             return None
         if hasattr(obj.user, 'cas_profile'):
             return obj.user.cas_profile.net_id
-        return obj.username
+        return obj.active_directory_entry.net_id
 
     def get_track(self, obj):
         request = self.context.get('request')
