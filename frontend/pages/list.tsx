@@ -124,6 +124,8 @@ const List: React.FC<Props> = ({headerData}) => {
 
     async function onEnter() {
         setIsExplicitSearching(true)
+        setIsLoading(true)
+        setListResults([])
         await router.push(`/list?q=${encodeURIComponent(query)}`)
         setPage(1)
         await fetchUserData(encodeURIComponent(query))
@@ -176,12 +178,10 @@ const List: React.FC<Props> = ({headerData}) => {
                                                       zIndex={100} setterFunction={setQuery}
                                                       autoComplete="off"
                                                       onEnterFunction={async () => {
-                                                          setPage(1)
                                                           await onEnter()
                                                       }}/>
                                 </div>
                                 <button onClick={async () => {
-                                    setPage(1)
                                     await onEnter()
                                 }}
                                         className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-5 mt-1.5">
