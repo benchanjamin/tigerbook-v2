@@ -295,7 +295,7 @@ class UndergraduateTigerBookDirectoryListView(ListModelMixin,
     filterset_class = UndergraduateDirectoryListFilter
 
     # TODO: Add pagination
-    # pagination_class = StandardResultsSetPagination
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         qs = super().get_queryset()
