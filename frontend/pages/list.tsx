@@ -121,8 +121,14 @@ const List: React.FC<Props> = ({headerData}) => {
     const [listResults, setListResults] = useState<ListUser[]>([]);
     const router = useRouter();
 
-    async function fetchUserData() {
+    async function fetchUserData(explicitURLString) {
         const axios = await axiosInstance();
+        // if (explicitURLString !== undefined) {
+        //     setPage(1)
+        //     let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/?page=${page}`;
+        //     listURL += explicitURLString
+        // }
+
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
         const {query} = router;
         console.log('page', page);
@@ -165,7 +171,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                 <button onClick={async () => {
                                     await router.push(`/list/?q=${encodeURIComponent(query)}`)
                                     setListResults([])
-                                    await fetchUserData()
+                                    // await fetchUserData()
                                 }}
                                         className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-5 mt-1.50">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
