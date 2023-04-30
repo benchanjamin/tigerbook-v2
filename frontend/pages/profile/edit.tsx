@@ -234,7 +234,7 @@ const ProfileEdit: React.FC<Props> = ({
             .classList.add("opacity-100", "transition-opacity", "duration-1000", "block", "h-[200px]", "w-[200px]")
     }
 
-    console.log("permissions", myPermissions)
+    console.log("data", data)
 
     async function submitHandler(event) {
         event.preventDefault();
@@ -474,12 +474,12 @@ const ProfileEdit: React.FC<Props> = ({
                     }
                     <div className="flex flex-col justify-center items-center mt-2">
                         {!changePhoto && <div
-                            className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"
+                            className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600 cursor-pointer"
                             onClick={() => setChangePhoto((prev) => !prev)}>
                             Change Photo
                         </div>}
                         {changePhoto && <div
-                            className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"
+                            className="inline-flex items-center px-5 py-2.5 mt-1 text-sm font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600 cursor-pointer"
                             onClick={() => setChangePhoto((prev) => !prev)}>
                             Keep Photo
                         </div>}

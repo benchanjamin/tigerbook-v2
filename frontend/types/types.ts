@@ -32,10 +32,6 @@ export interface ActiveDirectoryEntry {
     email: string;
 }
 
-export interface ResidentialCollegeFacebookEntry {
-    photo_url: string;
-}
-
 export interface SetupTwoGet {
     profile_pic: string;
     username: string;
