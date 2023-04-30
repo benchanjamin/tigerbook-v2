@@ -128,7 +128,7 @@ const List: React.FC<Props> = ({headerData}) => {
         console.log('page', page);
         console.log('listResults', listResults);
         if ('q' in query) {
-            listURL += `?q=${query.q}`;
+            listURL += `&?q=${query.q}`;
         }
         const axiosResponse = await axios.get(listURL)
         const listData: List = axiosResponse.data;
