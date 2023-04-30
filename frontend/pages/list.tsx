@@ -43,6 +43,7 @@ import TigerBookListBar from "@components/headless-ui/TigerBookListBar";
 import {useRouter} from "next/router";
 import {Spinner} from "flowbite-react";
 import TigerBookListBox from "@components/headless-ui/TigerBookListBox";
+import TigerBookComboBoxSingleStrictSelect from "@components/headless-ui/TigerBookComboBoxSingleStrictSelect";
 
 interface ServerSideProps {
     data: SetupOneGet
@@ -342,11 +343,13 @@ const List: React.FC<Props> = ({headerData}) => {
                                         </button>
                                         <ul id="dropdown-example" className="hidden">
                                             <li>
-                                                <TigerBookListBox data={concentrationsList}
-                                                                  initialSelected={concentrationsList}
-                                                                  zIndex={40}
-                                                                  setterFunction={setConcentrationQuery}
-                                                                  defaultText={"Select Concentration"}
+                                                <TigerBookComboBoxSingleStrictSelect
+                                                    data={concentrationsList}
+                                                    defaultText="Select pronouns"
+                                                    initialSelected={concentrationsList}
+                                                    zIndex={28}
+                                                    setterFunction={setConcentrationQuery}
+                                                    defaultOptionText="None"
                                                 />
                                             </li>
                                         </ul>
