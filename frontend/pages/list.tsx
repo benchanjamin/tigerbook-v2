@@ -372,7 +372,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                             </li>
                                             <li>
                                                 <label htmlFor="tracks"
-                                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white pl-1">Concentrations</label>
+                                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white pl-1">Tracks</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
                                                     data={tracksList}
                                                     defaultText="Select tracks"
@@ -383,7 +383,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                             </li>
                                             <li>
                                                 <label htmlFor="class-years"
-                                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white pl-1">Concentrations</label>
+                                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white pl-1">Class Years</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
                                                     data={classYearsList}
                                                     defaultText="Select class years"
@@ -394,7 +394,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                             </li>
                                             <li>
                                                 <label htmlFor="residential-colleges"
-                                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white pl-1">Concentrations</label>
+                                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white pl-1">Residential Colleges</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
                                                     data={concentrationsList}
                                                     defaultText="Select residential colleges"
