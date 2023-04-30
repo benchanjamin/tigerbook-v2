@@ -380,7 +380,8 @@ class UndergraduateTigerBookDirectoryRetrieveView(RetrieveModelMixin,
         queryset = self.filter_queryset(self.get_queryset())
         lookup = Q(user__username__exact=
                    self.kwargs[self.lookup_field]) | Q(user__cas_profile__net_id__exact=
-                                                       self.kwargs[self.lookup_field])
+                                                       self.kwargs[self.lookup_field]) | \
+                 Q(active_directory_entry__net_id__exact=self.kwargs[self.lookup_field])
         return get_object_or_404(queryset, lookup)
 
     def get(self, request, *args, **kwargs):
