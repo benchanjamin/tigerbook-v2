@@ -161,9 +161,6 @@ const List: React.FC<Props> = ({headerData}) => {
     const [extracurricularsList, setExtracurricularsList] = useState([]);
     const [extracurricularPositionsList, setExtracurricularPositionsList] = useState([]);
 
-    console.log('res', resCollegesList)
-
-
     async function fetch() {
 
         const axios = await axiosInstance();
@@ -257,7 +254,7 @@ const List: React.FC<Props> = ({headerData}) => {
     }, []);
 
     async function onSearchFiltering() {
-        setIsExplicitSearching(true)
+        // setIsExplicitSearching(true)
         setIsLoading(true)
         setListResults([])
         let firstQuery = ''
@@ -274,7 +271,7 @@ const List: React.FC<Props> = ({headerData}) => {
         await router.push(`/list?${firstQuery}${searchFilterQueries}`)
         setPage(1)
         await fetchUserData(encodeURIComponent(query).concat(searchFilterQueries))
-        setIsExplicitSearching(false)
+        // setIsExplicitSearching(false)
     }
 
     useEffect(() => {
