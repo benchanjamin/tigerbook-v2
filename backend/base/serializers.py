@@ -1022,6 +1022,7 @@ class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializ
     research = serializers.JSONField(read_only=True)
     permissions = PermissionsSerializer(read_only=True)
     last_updated_current_city = serializers.SerializerMethodField(read_only=True)
+    residential_college_facebook_entry = ResidentialCollegeSetupSerializer(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -1044,7 +1045,8 @@ class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializ
             'miscellaneous',
             'research',
             'permissions',
-            'last_updated_current_city'
+            'last_updated_current_city',
+            'residential_college_facebook_entry'
         ]
 
     def get_username(self, obj):
