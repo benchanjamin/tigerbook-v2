@@ -129,6 +129,7 @@ const List: React.FC<Props> = ({headerData}) => {
         //     listURL += explicitURLString
         // }
 
+        console.log('explicit', explicitQuery)
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
         const {query} = router;
         if (explicitQuery !== undefined) {
