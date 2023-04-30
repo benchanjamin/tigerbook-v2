@@ -267,6 +267,7 @@ const List: React.FC<Props> = ({headerData}) => {
         })
         await router.push(`/list?${firstQuery}${searchFilterQueries}`)
         setPage(1)
+        setQuery(searchFilterQueries)
         await fetchUserData(firstQuery.concat(searchFilterQueries))
         setIsExplicitSearching(false)
     }
@@ -290,11 +291,11 @@ const List: React.FC<Props> = ({headerData}) => {
     async function fetchUserData(explicitQuery) {
         const axios = await axiosInstance();
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
-        const {query} = router;
+        const {routerQuery} = router;
         if (explicitQuery !== undefined) {
             listURL += `?page=1&${explicitQuery}`;
         } else if ('q' in query) {
-            listURL += `?page=${page}&q=${query.q}`;
+            listURL += `?page=${page}&q=${routerQuery.q}${query}`;
         } else {
             listURL += `?page=${page}`;
         }
