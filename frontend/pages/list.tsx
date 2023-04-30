@@ -147,6 +147,7 @@ const List: React.FC<Props> = ({headerData}) => {
     }
 
     useEffect(() => {
+        if (page === 1) return;
         fetchUserData();
     }, [page]);
 
