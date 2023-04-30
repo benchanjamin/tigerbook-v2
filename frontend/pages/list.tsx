@@ -161,6 +161,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                                       autoComplete="off"/>
                                 </div>
                                 <button onClick={async () => {
+                                    await router.push(`/list?q=${encodeURIComponent(query)}`)
                                     setListResults([])
                                     setPage(1)
                                     await fetchUserData(encodeURIComponent(query))
