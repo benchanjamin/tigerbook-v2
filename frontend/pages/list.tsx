@@ -260,11 +260,18 @@ const List: React.FC<Props> = ({headerData}) => {
         setIsExplicitSearching(true)
         setIsLoading(true)
         setListResults([])
+        let firstQuery = ''
+        if (query !== '') {
+            firstQuery = `q=${encodeURIComponent(query)}`
+        }
         let searchFilterQueries = ''
+        concentrationsQuery?.forEach((concentration) => {
+            searchFilterQueries += `&concentration=${encodeURIComponent(concentration)}`
+        })
         tracksQuery?.forEach((track) => {
             searchFilterQueries += `&track=${encodeURIComponent(track)}`
         })
-        await router.push(`/list?q=${encodeURIComponent(query)}${searchFilterQueries}`)
+        await router.push(`/list?${firstQuery}${searchFilterQueries}`)
         setPage(1)
         await fetchUserData(encodeURIComponent(query).concat(searchFilterQueries))
         setIsExplicitSearching(false)
@@ -272,14 +279,18 @@ const List: React.FC<Props> = ({headerData}) => {
 
     useEffect(() => {
         onSearchFiltering()
-    }, [tracksQuery]);
+    }, [concentrationsQuery, tracksQuery]);
 
 
     async function onEnter() {
         setIsExplicitSearching(true)
         setIsLoading(true)
         setListResults([])
-        await router.push(`/list?q=${encodeURIComponent(query)}`)
+        let firstQuery = ''
+        if (query !== '') {
+            firstQuery = `q=${encodeURIComponent(query)}`
+        }
+        await router.push(`/list?${firstQuery}`)
         setPage(1)
         await fetchUserData(encodeURIComponent(query))
         setIsExplicitSearching(false)
