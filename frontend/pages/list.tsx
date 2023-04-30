@@ -136,7 +136,7 @@ const List: React.FC<Props> = ({headerData}) => {
         }
 
         effect().then(listData => {
-            setListResults(listData.results)
+            setListResults((prev) => prev.concat(listData.results))
             setNextURL(listData.next)
         })
     }, [loadMore]);
@@ -174,8 +174,8 @@ const List: React.FC<Props> = ({headerData}) => {
                             <div
                                 className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8"
                             >
-                                {listResults?.map((item, index) => (
-                                    <Card key={index} personData={item}
+                                {listResults?.map((listUser, index) => (
+                                    <Card key={index} personData={listUser}
                                           isLast={index === listResults.length - 1}
                                           newLimit={() => loadMore(true)}
                                     />
