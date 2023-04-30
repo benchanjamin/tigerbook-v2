@@ -29,6 +29,7 @@ function Card({personData, isLast, newLimit}: { personData: ListUser, isLast: bo
         <div
             onClick={() => router.push(`/@${personData.username}`)}
             className="flex flex-col col-span-1 cursor-pointer group rounded-t-xl overflow-hidden"
+            ref={cardRef}
         >
             {/*<div className="w-full">*/}
                 <div

@@ -139,7 +139,6 @@ const List: React.FC<Props> = ({headerData}) => {
 
     useEffect(() => {
         fetchUserData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]);
 
     return (
@@ -178,7 +177,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                 {listResults?.map((listUser, index) => (
                                     <Card key={index} personData={listUser}
                                           isLast={index === listResults.length - 1}
-                                          newLimit={() => setPage(page + 1)}
+                                          newLimit={() => setPage((prev) => prev + 1)}
                                     />
                                 ))}
                             </div>
