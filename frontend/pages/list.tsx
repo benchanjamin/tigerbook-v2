@@ -138,6 +138,7 @@ const List: React.FC<Props> = ({headerData}) => {
         effect().then(listData => {
             setListResults((prev) => prev.concat(listData.results))
             setNextURL(listData.next)
+            setLoadMore(false)
         })
     }, [loadMore]);
 
@@ -177,7 +178,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                 {listResults?.map((listUser, index) => (
                                     <Card key={index} personData={listUser}
                                           isLast={index === listResults.length - 1}
-                                          newLimit={() => loadMore(true)}
+                                          newLimit={() => setLoadMore(true)}
                                     />
                                 ))}
                             </div>
