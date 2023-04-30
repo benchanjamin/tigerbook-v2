@@ -163,7 +163,7 @@ const List: React.FC<Props> = ({headerData}) => {
             <Head>
                 <title>Tigerbook</title>
             </Head>
-            <div className="fixed -z-10 h-screen w-screen">
+            <div className="fixed -z-10 h-screen w-screen top-0 left-0 right-0">
                 <Image src="/static/nassau.png" alt="Nassau Hall"
                        fill
                        style={{objectFit: "cover"}}
