@@ -146,9 +146,9 @@ const List: React.FC<Props> = ({headerData}) => {
     const [classYearsQuery, setClassYearsQuery] = useState(null);
     const [certificatesQuery, setCertificatesQuery] = useState(null);
     const [pronounsQuery, setPronounsQuery] = useState(null);
-    const [interestsQuery, setInterestsQuery] = useState([]);
-    const [extracurricularsQuery, setExtracurricularsQuery] = useState([]);
-    const [extracurricularPositionsQuery, setExtracurricularPositionsQuery] = useState([]);
+    const [interestsQuery, setInterestsQuery] = useState(null);
+    const [extracurricularsQuery, setExtracurricularsQuery] = useState(null);
+    const [extracurricularPositionsQuery, setExtracurricularPositionsQuery] = useState(null);
 
     // search list
     const [concentrationsList, setConcentrationsList] = useState([]);
