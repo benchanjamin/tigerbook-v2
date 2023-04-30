@@ -43,6 +43,7 @@ import Card from "@components/list/Card";
 import TigerBookSearchBar from "@components/headless-ui/TigerBookListBar";
 import TigerBookListBar from "@components/headless-ui/TigerBookListBar";
 import {useRouter} from "next/router";
+import {list} from "postcss";
 
 interface ServerSideProps {
     data: SetupOneGet
@@ -138,7 +139,7 @@ const List: React.FC<Props> = ({headerData}) => {
     useEffect(() => {
         fetchUserData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page]);
+    }, [page, listResults]);
 
     return (
         <>
