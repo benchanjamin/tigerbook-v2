@@ -219,7 +219,7 @@ const ProfileEdit: React.FC<Props> = ({
         const axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/cities/`)
         console.log('completed fetch')
         setHometowns(axiosResponse.data)
-        setCurrentCities(axiosResponse.data)
+        setCurrentCities(axiosResponse.data.slice())
     }
 
     useEffect(() => {
