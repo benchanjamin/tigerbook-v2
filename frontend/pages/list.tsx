@@ -124,6 +124,7 @@ const List: React.FC<Props> = ({headerData}) => {
     const [isLoading, setIsLoading] = useState(false);
 
     async function fetchUserData(explicitQuery) {
+        setIsLoading(true)
         const axios = await axiosInstance();
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
         const {query} = router;
@@ -132,7 +133,6 @@ const List: React.FC<Props> = ({headerData}) => {
         } else if ('q' in query) {
             listURL += `&q=${query.q}`;
         }
-        setIsLoading(true)
         const axiosResponse = await axios.get(listURL)
         const listData: List = axiosResponse.data;
         setIsLoading(false)
@@ -185,7 +185,6 @@ const List: React.FC<Props> = ({headerData}) => {
                                         color="warning"
                                         className="h-[200px] w-[200px]"/>
                                 </div>
-
                             }
                             <div
                                 className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8"
