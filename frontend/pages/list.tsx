@@ -465,7 +465,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                                 <label htmlFor="residential-colleges"
                                                        className="block my-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Residential Colleges</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
-                                                    data={concentrationsList}
+                                                    data={resCollegeList}
                                                     defaultText="Select residential colleges"
                                                     initialSelected={[]}
                                                     zIndex={30}
