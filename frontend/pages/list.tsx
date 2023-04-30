@@ -297,7 +297,7 @@ const List: React.FC<Props> = ({headerData}) => {
         if (explicitQuery !== undefined) {
             listURL += `?page=1&${explicitQuery}`;
         } else if ('q' in query) {
-            listURL += `?page=${page}&q=${query.q}`;
+            listURL += `?page=${page}&q=${query.q}${additionalQueries}`;
         } else {
             listURL += `?page=${page}`;
         }
