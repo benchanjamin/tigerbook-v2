@@ -129,7 +129,6 @@ const List: React.FC<Props> = ({headerData}) => {
         await router.push(`/list?q=${encodeURIComponent(query)}`)
         setPage(1)
         await fetchUserData(encodeURIComponent(query))
-        // setPage(1)
         setIsExplicitSearching(false)
     }
 
@@ -142,8 +141,6 @@ const List: React.FC<Props> = ({headerData}) => {
         } else if ('q' in query) {
             listURL += `?page=${page}&q=${query.q}`;
         }
-        console.log('page8', page)
-
         console.log('listURL', listURL)
         const axiosResponse = await axios.get(listURL)
         const listData: List = axiosResponse.data;
