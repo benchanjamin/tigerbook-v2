@@ -44,6 +44,7 @@ import TigerBookSearchBar from "@components/headless-ui/TigerBookListBar";
 import TigerBookListBar from "@components/headless-ui/TigerBookListBar";
 import {useRouter} from "next/router";
 import {list} from "postcss";
+import {Spinner} from "flowbite-react";
 
 interface ServerSideProps {
     data: SetupOneGet
@@ -120,6 +121,7 @@ const List: React.FC<Props> = ({headerData}) => {
     const [page, setPage] = useState(1);
     const [listResults, setListResults] = useState<ListUser[]>([]);
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
 
     async function fetchUserData(explicitQuery) {
         const axios = await axiosInstance();
@@ -130,8 +132,10 @@ const List: React.FC<Props> = ({headerData}) => {
         } else if ('q' in query) {
             listURL += `&q=${query.q}`;
         }
+        setIsLoading(true)
         const axiosResponse = await axios.get(listURL)
         const listData: List = axiosResponse.data;
+        setIsLoading(false)
         setListResults((prev) => [...prev, ...listData.results]);
     }
 
@@ -174,6 +178,15 @@ const List: React.FC<Props> = ({headerData}) => {
                                     </svg>
                                 </button>
                             </div>
+                            {isLoading &&
+                                <div className="flex justify-center mt-10">
+                                    <Spinner
+                                        id="spinner"
+                                        color="warning"
+                                        className="h-[200px] w-[200px]"/>
+                                </div>
+
+                            }
                             <div
                                 className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8"
                             >
