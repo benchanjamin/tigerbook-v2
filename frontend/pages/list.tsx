@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import {SidebarProvider} from "../context/SidebarContext";
+import {SidebarProvider} from "@context/SidebarContext";
 import {BiBuoy} from "react-icons/bi";
 import {
     BsDribbble,
@@ -122,20 +122,20 @@ const List: React.FC<Props> = ({headerData}) => {
 
     async function onEnter() {
         setIsLoading(true)
+        await router.push(`/list?q=${encodeURIComponent(query)}`)
         setListResults([])
         setPage(1)
         await fetchUserData(encodeURIComponent(query))
-        await router.push(`/list?q=${encodeURIComponent(query)}`)
     }
 
     async function fetchUserData(explicitQuery) {
         const axios = await axiosInstance();
-        let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
+        let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
         const {query} = router;
         if (explicitQuery !== undefined) {
-            listURL += `&q=${explicitQuery}`;
+            listURL += `?page=${page}&q=${explicitQuery}`;
         } else if ('q' in query) {
-            listURL += `&q=${query.q}`;
+            listURL += `?page=${page}&q=${query.q}`;
         }
         console.log('listURL', listURL)
         const axiosResponse = await axios.get(listURL)
