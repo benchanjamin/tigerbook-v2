@@ -32,9 +32,9 @@ import {
 } from "react-icons/hi";
 import Sidebar from "@components/ui/Sidebar";
 import Header from "@components/ui/Header";
-import {HeaderType, ListData, SetupOneGet} from "@types/types";
+import {HeaderType, List, SetupOneGet} from "@types/types";
 import {GetServerSideProps} from "next";
-import {axiosInstance} from "../utils/axiosInstance";
+import {axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import React, {useEffect, useState} from "react";
 import Container from "@components/list/Container";
@@ -98,7 +98,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({q
                 Cookie: req.headers.cookie
             }
         })
-    const listData: ListData = axiosResponse.data;
+    const listData: List = axiosResponse.data;
 
     return {
         props: {
@@ -110,7 +110,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({q
 
 interface Props {
     headerData: HeaderType
-    listData: ListData
+    listData: List
 }
 
 
@@ -157,7 +157,7 @@ const List: React.FC<Props> = ({headerData, listData}) => {
                             <div
                                 className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8"
                             >
-                                {listData.map((item, index) => (
+                                {listData.results.map((item, index) => (
                                     <Card key={index} personData={item}/>
                                 ))}
                             </div>
