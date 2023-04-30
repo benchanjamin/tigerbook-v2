@@ -129,7 +129,7 @@ const List: React.FC<Props> = ({headerData}) => {
         }
         const axiosResponse = await axios.get(listURL)
         const listData: List = axiosResponse.data;
-        return listData
+        setListResults((prev) => [...prev, ...listData.results]);
     }
 
     useEffect(() => {
