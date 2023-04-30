@@ -219,7 +219,44 @@ const List: React.FC<Props> = ({headerData}) => {
                     </div>
 
                     <div className="order-1">
-                        <Sidebar/>
+                        <Sidebar>
+                            <Sidebar.Items>
+                                <Sidebar.ItemGroup>
+                                    <Sidebar.Item href="#" icon={HiChartPie}>
+                                        Dashboard
+                                    </Sidebar.Item>
+                                    <Sidebar.Item href="#" icon={HiViewBoards}>
+                                        Kanban
+                                    </Sidebar.Item>
+                                    <Sidebar.Item href="#" icon={HiInbox}>
+                                        Inbox
+                                    </Sidebar.Item>
+                                    <Sidebar.Item href="#" icon={HiUser}>
+                                        Users
+                                    </Sidebar.Item>
+                                    <Sidebar.Item href="#" icon={HiShoppingBag}>
+                                        Products
+                                    </Sidebar.Item>
+                                    <Sidebar.Item href="#" icon={HiArrowSmRight}>
+                                        Sign In
+                                    </Sidebar.Item>
+                                    <Sidebar.Item href="#" icon={HiTable}>
+                                        Sign Up
+                                    </Sidebar.Item>
+                                </Sidebar.ItemGroup>
+                                <Sidebar.ItemGroup>
+                                    <Sidebar.Item href="#" icon={HiChartPie}>
+                                        Upgrade to Pro
+                                    </Sidebar.Item>
+                                    <Sidebar.Item href="#" icon={HiViewBoards}>
+                                        Documentation
+                                    </Sidebar.Item>
+                                    <Sidebar.Item href="#" icon={BiBuoy}>
+                                        Help
+                                    </Sidebar.Item>
+                                </Sidebar.ItemGroup>
+                            </Sidebar.Items>
+                        </Sidebar>
                     </div>
                     <Image src="/static/nassau.png" alt="Nassau Hall" className="absolute h-full z-0"
                            fill style={{objectFit: "cover"}}
