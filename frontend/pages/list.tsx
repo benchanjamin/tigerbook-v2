@@ -120,6 +120,15 @@ const List: React.FC<Props> = ({headerData}) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
+    async function onEnter() {
+        await router.push(`/list?q=${encodeURIComponent(query)}`)
+        setIsLoading(true)
+        setListResults([])
+        setPage(1)
+        await fetchUserData(encodeURIComponent(query))
+    }
+
+
     async function fetchUserData(explicitQuery) {
         const axios = await axiosInstance();
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
@@ -158,15 +167,10 @@ const List: React.FC<Props> = ({headerData}) => {
                                 <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
                                     <TigerBookListBar defaultText="Search PUID, NetID, nickname, or full name"
                                                       zIndex={100} setterFunction={setQuery}
-                                                      autoComplete="off"/>
+                                                      autoComplete="off"
+                                                      onEnterFunction={onEnter}/>
                                 </div>
-                                <button onClick={async () => {
-                                    await router.push(`/list?q=${encodeURIComponent(query)}`)
-                                    setIsLoading(true)
-                                    setListResults([])
-                                    setPage(1)
-                                    await fetchUserData(encodeURIComponent(query))
-                                }}
+                                <button onClick={onEnter}
                                         className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-5 mt-1.5">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                          strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 dark:text-white">

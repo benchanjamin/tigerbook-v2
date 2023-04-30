@@ -13,8 +13,8 @@ interface queryResult {
 }
 
 export default function TigerBookListBar(
-    {defaultText, zIndex, setterFunction}:
-        { defaultText: string, zIndex: number, setterFunction: (value: string) => void}) {
+    {defaultText, zIndex, setterFunction, onEnterFunction}:
+        { defaultText: string, zIndex: number, setterFunction: (value: string) => void, onEnterFunction: () => void}) {
     const [data, setData] = useState<queryResult[]>([])
     const [query, setQuery] = useState<string>('')
 
@@ -53,6 +53,7 @@ export default function TigerBookListBar(
                         }}
                         spellCheck={false}
                         placeholder={defaultText}
+                        onKeyUp={(e) => e.key === 'Enter' && onEnterFunction()}
                     />
                 </div>
                 <Transition
