@@ -153,7 +153,7 @@ const List: React.FC<Props> = ({headerData}) => {
     const [certificatesList, setCertificatesList] = useState([]);
     const [pronounsList, setPronounsList] = useState([]);
 
-    console.log(resCollegesList)
+    console.log('res', resCollegesList)
 
 
     async function fetch() {
