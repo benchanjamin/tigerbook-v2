@@ -141,6 +141,8 @@ const List: React.FC<Props> = ({headerData}) => {
             listURL += `?page=1&q=${explicitQuery}`;
         } else if ('q' in query) {
             listURL += `?page=${page}&q=${query.q}`;
+        } else {
+            listURL += `?page=${page}`;
         }
         console.log('listURL', listURL)
         const axiosResponse = await axios.get(listURL)
