@@ -164,6 +164,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                 </div>
                                 <button onClick={async () => {
                                     await router.push(`/list/?q=${encodeURIComponent(query)}`)
+                                    setListResults([])
                                     fetchUserData()
                                 }}
                                         className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-5 mt-1.50">
@@ -201,7 +202,7 @@ const List: React.FC<Props> = ({headerData}) => {
 
 function ActualSidebar(): JSX.Element {
     return (
-        <Sidebar className="fixed">
+        <Sidebar>
             <Sidebar.Items>
                 <Sidebar.ItemGroup>
                     <Sidebar.Item href="#" icon={HiChartPie}>
