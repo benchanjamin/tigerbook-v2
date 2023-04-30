@@ -136,7 +136,7 @@ const List: React.FC<Props> = ({headerData}) => {
         }
 
         effect().then(listData => {
-            setListResults(listData.results)
+            setListResults((prev) => prev.push(listData.results))
             setNextURL(listData.next)
         })
     }, [loadMore]);
