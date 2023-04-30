@@ -116,31 +116,25 @@ interface Props {
 
 const List: React.FC<Props> = ({headerData}) => {
     const [query, setQuery] = useState('');
-    const [loadMore, setLoadMore] = useState<boolean>(false);
-    const [nextURL, setNextURL] = useState<string>(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`);
+    const [page, setPage] = useState(1);
     const [listResults, setListResults] = useState<ListUser[]>([]);
     const router = useRouter();
 
-    useEffect(() => {
-        async function effect() {
-            const axios = await axiosInstance();
-
-            let listURL = nextURL;
-            const {query} = router;
-            if ('q' in query) {
-                listURL += `?q=${query.q}`;
-            }
-            const axiosResponse = await axios.get(listURL)
-            const listData: List = axiosResponse.data;
-            return listData
+    async function fetchUserData() {
+        const axios = await axiosInstance();
+        let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
+        const {query} = router;
+        if ('q' in query) {
+            listURL += `?q=${query.q}`;
         }
+        const axiosResponse = await axios.get(listURL)
+        const listData: List = axiosResponse.data;
+        return listData
+    }
 
-        effect().then(listData => {
-            setListResults((prev) => prev.concat(listData.results))
-            setNextURL(listData.next)
-            setLoadMore(false)
-        })
-    }, [loadMore]);
+    useEffect(() => {
+        fetchUserData();
+    }, [page]);
 
     return (
         <>
@@ -178,7 +172,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                 {listResults?.map((listUser, index) => (
                                     <Card key={index} personData={listUser}
                                           isLast={index === listResults.length - 1}
-                                          newLimit={() => setLoadMore(true)}
+                                          newLimit={() => setPage(page + 1)}
                                     />
                                 ))}
                             </div>
