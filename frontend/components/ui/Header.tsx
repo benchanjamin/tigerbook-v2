@@ -66,12 +66,14 @@ const Header: FC<Props> = function ({
                         </button>
                     )}
                     <Navbar.Brand href="/">
-                        <Image
-                            alt="Tigerbook logo"
-                            height="100"
-                            src="/static/Tigerbook.png"
-                            width="100"
-                        />
+                        <div className="hidden sm:block mt-1">
+                            <Image
+                                alt="Tigerbook logo"
+                                height="100"
+                                src="/static/Tigerbook.png"
+                                width="100"
+                            />
+                        </div>
                     </Navbar.Brand>
 
                     <div className="flex md:order-2 md:w-[150px] justify-center  items-center gap-x-4">

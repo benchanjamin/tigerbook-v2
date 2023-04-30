@@ -144,6 +144,11 @@ const List: React.FC<Props> = ({headerData}) => {
     const [tracksQuery, setTracksQuery] = useState(null);
     const [resCollegeQuery, setResCollegeQuery] = useState(null);
     const [classYearsQuery, setClassYearsQuery] = useState(null);
+    const [certificatesQuery, setCertificatesQuery] = useState(null);
+    const [pronounsQuery, setPronounsQuery] = useState(null);
+    const [interestsQuery, setInterestsQuery] = useState([]);
+    const [extracurricularsQuery, setExtracurricularsQuery] = useState([]);
+    const [extracurricularPositionsQuery, setExtracurricularPositionsQuery] = useState([]);
 
     // search list
     const [concentrationsList, setConcentrationsList] = useState([]);
@@ -152,6 +157,9 @@ const List: React.FC<Props> = ({headerData}) => {
     const [classYearsList, setClassYearsList] = useState([]);
     const [certificatesList, setCertificatesList] = useState([]);
     const [pronounsList, setPronounsList] = useState([]);
+    const [interestsList, setInterestsList] = useState([]);
+    const [extracurricularsList, setExtracurricularsList] = useState([]);
+    const [extracurricularPositionsList, setExtracurricularPositionsList] = useState([]);
 
     console.log('res', resCollegesList)
 
@@ -226,12 +234,45 @@ const List: React.FC<Props> = ({headerData}) => {
             if (index === 3) {
                 setResCollegesList(listData.residentialColleges)
             }
+            if (index === 4) {
+                setCertificatesList(listData.certificates)
+            }
+            if (index === 5) {
+                setPronounsList(listData.pronouns)
+            }
+            if (index === 6) {
+                setInterestsList(listData.interests)
+            }
+            if (index === 7) {
+                setExtracurricularsList(listData.extracurriculars)
+            }
+            if (index === 8) {
+                setExtracurricularPositionsList(listData.positions)
+            }
         }
     }
 
     useEffect(() => {
         fetch()
     }, []);
+
+    async function onSearchFiltering() {
+        setIsExplicitSearching(true)
+        setIsLoading(true)
+        setListResults([])
+        let searchFilterQueries = ''
+        tracksQuery?.forEach((track) => {
+            searchFilterQueries += `&track=${encodeURIComponent(track)}`
+        })
+        await router.push(`/list?q=${encodeURIComponent(query)}${searchFilterQueries}`)
+        setPage(1)
+        await fetchUserData(encodeURIComponent(query + searchFilterQueries))
+        setIsExplicitSearching(false)
+    }
+
+    useEffect(() => {
+        onSearchFiltering()
+    }, [tracksQuery]);
 
 
     async function onEnter() {
@@ -303,7 +344,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                 <button onClick={async () => {
                                     await onEnter()
                                 }}
-                                        className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-5 mt-1.5">
+                                        className="bg-primary-600 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none active:bg-primary-700 focus:ring focus:ring-primary-300 mt-1.5">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                          strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 dark:text-white">
                                         <path strokeLinecap="round" strokeLinejoin="round"
@@ -319,7 +360,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                         className="h-[200px] w-[200px]"/>
                                 </div>
                             }
-                            <div className="flex justify-end items-center dark:text-white text-sm w-full">
+                            <div className="flex justify-end items-center dark:text-white text-sm w-full mt-1">
                                 {!isLoading && !isExplicitSearching && `Showing ${count} results`}
                             </div>
                             <div
@@ -340,19 +381,21 @@ const List: React.FC<Props> = ({headerData}) => {
                         <Sidebar>
                             <Sidebar.Items>
                                 <Sidebar.ItemGroup>
+                                    <div className="block ml-2 text-sm text-white bg-primary-500 px-4 py-0.5 mb-2 rounded-xl hover:bg-primary-600 cursor-pointer active:bg-primary-700 focus:outline-none focus:ring focus:ring-primary-300">
+                                        Clear All Filters
+                                    </div>
                                     <li>
                                         <button type="button"
                                                 className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                                aria-controls="dropdown-example"
-                                                data-collapse-toggle="dropdown-example">
-                                            <svg aria-hidden="true"
-                                                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                                                 fill="currentColor" viewBox="0 0 20 20"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fillRule="evenodd"
-                                                      d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
-                                                      clipRule="evenodd"></path>
+                                                aria-controls="dropdown-1"
+                                                data-collapse-toggle="dropdown-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                 strokeWidth={1.5} stroke="currentColor"
+                                                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
+                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                      d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5"/>
                                             </svg>
+
                                             <span
                                                 className="flex-1 ml-3 text-left whitespace-nowrap">Basic Filters</span>
                                             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -362,49 +405,55 @@ const List: React.FC<Props> = ({headerData}) => {
                                                       clipRule="evenodd"></path>
                                             </svg>
                                         </button>
-                                        <ul id="dropdown-example" className="hidden">
+                                        <ul id="dropdown-1" className="hidden">
                                             <li>
                                                 <label htmlFor="concentrations"
-                                                       className="block my-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Concentrations</label>
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Concentrations</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
                                                     data={concentrationsList}
                                                     defaultText="Select concentrations"
                                                     initialSelected={[]}
                                                     zIndex={50}
                                                     setterFunction={setConcentrationQuery}
+                                                    className="ml-1"
                                                 />
                                             </li>
                                             <li>
                                                 <label htmlFor="tracks"
-                                                       className="block my-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Tracks</label>
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Tracks</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
                                                     data={tracksList}
                                                     defaultText="Select tracks"
                                                     initialSelected={[]}
                                                     zIndex={40}
                                                     setterFunction={setTracksQuery}
+                                                    className="ml-1"
                                                 />
                                             </li>
                                             <li>
                                                 <label htmlFor="class-years"
-                                                       className="block my-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Class Years</label>
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Class
+                                                    Years</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
                                                     data={classYearsList}
                                                     defaultText="Select class years"
                                                     initialSelected={[]}
                                                     zIndex={31}
                                                     setterFunction={setClassYearsQuery}
+                                                    className="ml-1"
                                                 />
                                             </li>
                                             <li>
                                                 <label htmlFor="residential-colleges"
-                                                       className="block my-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Residential Colleges</label>
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Residential
+                                                    Colleges</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
-                                                    data={concentrationsList}
+                                                    data={resCollegesList}
                                                     defaultText="Select residential colleges"
                                                     initialSelected={[]}
                                                     zIndex={30}
                                                     setterFunction={setResCollegeQuery}
+                                                    className="ml-1"
                                                 />
                                             </li>
                                         </ul>
@@ -412,15 +461,13 @@ const List: React.FC<Props> = ({headerData}) => {
                                     <li>
                                         <button type="button"
                                                 className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                                aria-controls="dropdown-example"
-                                                data-collapse-toggle="dropdown-example">
-                                            <svg aria-hidden="true"
-                                                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                                                 fill="currentColor" viewBox="0 0 20 20"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fillRule="evenodd"
-                                                      d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
-                                                      clipRule="evenodd"></path>
+                                                aria-controls="dropdown-2"
+                                                data-collapse-toggle="dropdown-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                 strokeWidth={1.5} stroke="currentColor"
+                                                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
+                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                      d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/>
                                             </svg>
                                             <span
                                                 className="flex-1 ml-3 text-left whitespace-nowrap">Advanced Filters</span>
@@ -431,82 +478,99 @@ const List: React.FC<Props> = ({headerData}) => {
                                                       clipRule="evenodd"></path>
                                             </svg>
                                         </button>
-                                        <ul id="dropdown-example" className="hidden">
+                                        <ul id="dropdown-2" className="hidden">
                                             <li>
-                                                <label htmlFor="concentrations"
-                                                       className="block my-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Concentrations</label>
+                                                <label htmlFor="certificates"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Certificates</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
-                                                    data={concentrationsList}
-                                                    defaultText="Select concentrations"
+                                                    data={certificatesList}
+                                                    defaultText="Select certificates"
                                                     initialSelected={[]}
-                                                    zIndex={50}
-                                                    setterFunction={setConcentrationQuery}
+                                                    zIndex={29}
+                                                    setterFunction={setCertificatesQuery}
+                                                    className="ml-1"
                                                 />
                                             </li>
                                             <li>
-                                                <label htmlFor="tracks"
-                                                       className="block my-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Tracks</label>
+                                                <label htmlFor="pronouns"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Pronouns</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
-                                                    data={tracksList}
-                                                    defaultText="Select tracks"
+                                                    data={pronounsList}
+                                                    defaultText="Select pronouns"
                                                     initialSelected={[]}
-                                                    zIndex={40}
-                                                    setterFunction={setTracksQuery}
+                                                    zIndex={28}
+                                                    setterFunction={setPronounsQuery}
+                                                    className="ml-1"
                                                 />
                                             </li>
                                             <li>
-                                                <label htmlFor="class-years"
-                                                       className="block my-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Class Years</label>
+                                                <label htmlFor="interests"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Interests</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
-                                                    data={classYearsList}
-                                                    defaultText="Select class years"
+                                                    data={interestsList}
+                                                    defaultText="Select interests"
                                                     initialSelected={[]}
-                                                    zIndex={31}
-                                                    setterFunction={setClassYearsQuery}
+                                                    zIndex={27}
+                                                    setterFunction={setInterestsQuery}
+                                                    className="ml-1"
                                                 />
                                             </li>
                                             <li>
-                                                <label htmlFor="residential-colleges"
-                                                       className="block my-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Residential Colleges</label>
+                                                <label htmlFor="extracurriculars"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Extracurriculars</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
-                                                    data={resCollegesList}
-                                                    defaultText="Select residential colleges"
+                                                    data={extracurricularsList}
+                                                    defaultText="Select extracurriculars"
                                                     initialSelected={[]}
-                                                    zIndex={30}
-                                                    setterFunction={setResCollegeQuery}
+                                                    zIndex={26}
+                                                    setterFunction={setExtracurricularsQuery}
+                                                    className="ml-1"
+                                                />
+                                            </li>
+                                            <li>
+                                                <label htmlFor="extracurricular-positions"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Extracurricular
+                                                    Positions</label>
+                                                <TigerBookComboBoxMultipleStrictSelect
+                                                    data={extracurricularPositionsList}
+                                                    defaultText="Select extracurricular positions"
+                                                    initialSelected={[]}
+                                                    zIndex={25}
+                                                    setterFunction={setExtracurricularPositionsQuery}
+                                                    className="ml-1"
                                                 />
                                             </li>
                                         </ul>
                                     </li>
-                                    <Sidebar.Item href="#" icon={HiViewBoards}>
-                                        Kanban
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiInbox}>
-                                        Inbox
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiUser}>
-                                        Users
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiShoppingBag}>
-                                        Products
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiArrowSmRight}>
-                                        Sign In
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiTable}>
-                                        Sign Up
-                                    </Sidebar.Item>
-                                </Sidebar.ItemGroup>
-                                <Sidebar.ItemGroup>
-                                    <Sidebar.Item href="#" icon={HiChartPie}>
-                                        Upgrade to Pro
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiViewBoards}>
-                                        Documentation
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={BiBuoy}>
-                                        Help
-                                    </Sidebar.Item>
+                                    {/*    <Sidebar.Item href="#" icon={HiViewBoards}>*/}
+                                    {/*        Kanban*/}
+                                    {/*    </Sidebar.Item>*/}
+                                    {/*    <Sidebar.Item href="#" icon={HiInbox}>*/}
+                                    {/*        Inbox*/}
+                                    {/*    </Sidebar.Item>*/}
+                                    {/*    <Sidebar.Item href="#" icon={HiUser}>*/}
+                                    {/*        Users*/}
+                                    {/*    </Sidebar.Item>*/}
+                                    {/*    <Sidebar.Item href="#" icon={HiShoppingBag}>*/}
+                                    {/*        Products*/}
+                                    {/*    </Sidebar.Item>*/}
+                                    {/*    <Sidebar.Item href="#" icon={HiArrowSmRight}>*/}
+                                    {/*        Sign In*/}
+                                    {/*    </Sidebar.Item>*/}
+                                    {/*    <Sidebar.Item href="#" icon={HiTable}>*/}
+                                    {/*        Sign Up*/}
+                                    {/*    </Sidebar.Item>*/}
+                                    {/*</Sidebar.ItemGroup>*/}
+                                    {/*<Sidebar.ItemGroup>*/}
+                                    {/*    <Sidebar.Item href="#" icon={HiChartPie}>*/}
+                                    {/*        Upgrade to Pro*/}
+                                    {/*    </Sidebar.Item>*/}
+                                    {/*    <Sidebar.Item href="#" icon={HiViewBoards}>*/}
+                                    {/*        Documentation*/}
+                                    {/*    </Sidebar.Item>*/}
+                                    {/*    <Sidebar.Item href="#" icon={BiBuoy}>*/}
+                                    {/*        Help*/}
+                                    {/*    </Sidebar.Item>*/}
                                 </Sidebar.ItemGroup>
                             </Sidebar.Items>
                         </Sidebar>

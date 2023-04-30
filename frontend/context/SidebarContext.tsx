@@ -26,21 +26,21 @@ export function SidebarProvider({
   }, [location]);
 
   // Close Sidebar on mobile tap inside main content
-  useEffect(() => {
-    function handleMobileTapInsideMain(event: MouseEvent) {
-      const main = document.querySelector("main");
-      const isClickInsideMain = main?.contains(event.target as Node);
-
-      if (isSmallScreen() && isClickInsideMain) {
-        setOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleMobileTapInsideMain);
-    return () => {
-      document.removeEventListener("mousedown", handleMobileTapInsideMain);
-    };
-  }, []);
+  // useEffect(() => {
+  //   function handleMobileTapInsideMain(event: MouseEvent) {
+  //     const main = document.querySelector("main");
+  //     const isClickInsideMain = main?.contains(event.target as Node);
+  //
+  //     if (isSmallScreen() && isClickInsideMain) {
+  //       setOpen(false);
+  //     }
+  //   }
+  //
+  //   document.addEventListener("mousedown", handleMobileTapInsideMain);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleMobileTapInsideMain);
+  //   };
+  // }, []);
 
   return (
     <SidebarContext.Provider

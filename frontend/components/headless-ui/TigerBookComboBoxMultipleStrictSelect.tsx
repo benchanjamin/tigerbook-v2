@@ -4,7 +4,7 @@ import {CheckIcon, ChevronUpDownIcon, XMarkIcon} from '@heroicons/react/20/solid
 import {useVirtualizer} from '@tanstack/react-virtual'
 
 export default function TigerBookComboBoxMultipleStrictSelect(
-    {data, defaultText, zIndex, initialSelected, setterFunction}:
+    {data, defaultText, zIndex, initialSelected, setterFunction, className}:
         { data: string[], defaultText: string, zIndex: number, initialSelected: string[], setterFunction: (value: string) => void }) {
     // const input = useRef<HTMLInputElement>(null)
     const [selected, setSelected] = useState<string[]>(initialSelected)
@@ -52,7 +52,7 @@ export default function TigerBookComboBoxMultipleStrictSelect(
 
     return (
         <Combobox value={selected}
-                  onChange={onChange} className={`z-[${zIndex}] z-${zIndex}`} multiple>
+                  onChange={onChange} className={`z-[${zIndex}] z-${zIndex} ${className}`} multiple>
             <div className="relative mt-1">
                 <div
                     className="relative border border-primary-200 w-full cursor-default
