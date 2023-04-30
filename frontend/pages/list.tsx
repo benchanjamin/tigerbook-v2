@@ -196,7 +196,7 @@ const List: React.FC<Props> = ({headerData}) => {
         const listData: ListData = {}
 
         for (const [index, apiRoute] of apiListAPIRoutes.entries()) {
-            const axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}${apiRoute}`)
+            const axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiRoute}`)
             console.log('incoming', axiosResponse.data)
             if (axiosResponse.data.length === 0) {
                 continue
