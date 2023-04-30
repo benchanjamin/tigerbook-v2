@@ -2,7 +2,7 @@
 const nextConfig = {
   images: {
     domains: ['tigerbook-v2.s3.amazonaws.com'],
-
+    unoptimized: true,
   },
   typescript: {
     // !! WARN !!
