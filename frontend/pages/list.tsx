@@ -130,7 +130,9 @@ interface ListData {
 }
 
 const List: React.FC<Props> = ({headerData}) => {
-    const [query, setQuery] = useState('');
+    const [firstQuery, setFirstQuery] = useState('');
+    const [additionalQueries, setAdditionalQueries] = useState('');
+
     const [page, setPage] = useState(1);
     const [listResults, setListResults] = useState<ListUser[]>([]);
     const [hasNextPage, setHasNextPage] = useState(false);
@@ -257,18 +259,18 @@ const List: React.FC<Props> = ({headerData}) => {
         setIsExplicitSearching(true)
         setIsLoading(true)
         setListResults([])
-        let firstQuery = `q=${encodeURIComponent(query)}`
-        let searchFilterQueries = ''
+        let firstEncodedParameterizedQuery = `q=${encodeURIComponent(firstQuery)}`
+        let additionalEncodedParameterizedQueries = ''
         concentrationsQuery?.forEach((concentration) => {
-            searchFilterQueries += `&concentration=${encodeURIComponent(concentration)}`
+            additionalEncodedParameterizedQueries += `&concentration=${encodeURIComponent(concentration)}`
         })
         tracksQuery?.forEach((track) => {
-            searchFilterQueries += `&track=${encodeURIComponent(track)}`
+            additionalEncodedParameterizedQueries += `&track=${encodeURIComponent(track)}`
         })
-        await router.push(`/list?${firstQuery}${searchFilterQueries}`)
+        await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
         setPage(1)
-        setQuery(searchFilterQueries)
-        await fetchUserData(firstQuery.concat(searchFilterQueries))
+        setAdditionalQueries(additionalEncodedParameterizedQueries)
+        await fetchUserData(firstEncodedParameterizedQuery.concat(additionalEncodedParameterizedQueries))
         setIsExplicitSearching(false)
     }
 
@@ -281,10 +283,10 @@ const List: React.FC<Props> = ({headerData}) => {
         setIsExplicitSearching(true)
         setIsLoading(true)
         setListResults([])
-        let firstQuery = `q=${encodeURIComponent(query)}`
-        await router.push(`/list?${firstQuery}`)
+        let firstEncodedParameterizedQuery = `q=${encodeURIComponent(firstQuery)}`
+        await router.push(`/list?${firstEncodedParameterizedQuery}`)
         setPage(1)
-        await fetchUserData(firstQuery)
+        await fetchUserData(firstEncodedParameterizedQuery)
         setIsExplicitSearching(false)
     }
 
@@ -294,9 +296,9 @@ const List: React.FC<Props> = ({headerData}) => {
         const {routerQuery} = router;
         if (explicitQuery !== undefined) {
             listURL += `?page=1&${explicitQuery}`;
-        } else if ('q' in query) {
-            listURL += `?page=${page}&q=${routerQuery.q}${query}`;
-        } else {
+        } else if ('q' in routerQuery) {
+            listURL += `?page=${page}&q=${routerQuery.q}`;
+        } else if (firstQuery !== '') {
             listURL += `?page=${page}`;
         }
         console.log('listURL', listURL)
@@ -361,7 +363,7 @@ const List: React.FC<Props> = ({headerData}) => {
                             <div className="flex flex-col md:flex-row items-center justify-center gap-x-4">
                                 <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
                                     <TigerBookListBar defaultText="Search PUID, NetID, nickname, or full name"
-                                                      zIndex={100} setterFunction={setQuery}
+                                                      zIndex={100} setterFunction={setFirstQuery}
                                                       autoComplete="off"
                                                       onEnterFunction={async () => {
                                                           await onEnter()
