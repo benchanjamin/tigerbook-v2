@@ -343,6 +343,8 @@ const List: React.FC<Props> = ({headerData}) => {
                                         </button>
                                         <ul id="dropdown-example" className="hidden">
                                             <li>
+                                                <label htmlFor="category"
+                                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Concentrations</label>
                                                 <TigerBookComboBoxSingleStrictSelect
                                                     data={concentrationsList}
                                                     defaultText="Select pronouns"
