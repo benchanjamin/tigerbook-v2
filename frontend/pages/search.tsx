@@ -115,7 +115,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                     : <Header disableSideBar={true} disableLinks={false}
                               username={headerData.username} hasProfile={headerData.has_profile}/>
                 }
-                <main className="flex dark:bg-gray-900 h-[91vh]">
+                <main className="flex dark:bg-gray-900 h-[93vh]">
                     <div className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
                         {/* Search container */}
                         <div className="flex flex-col md:flex-row items-center justify-center gap-x-4 pt-20">

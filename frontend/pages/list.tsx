@@ -121,7 +121,6 @@ const List: React.FC<Props> = ({headerData}) => {
     const [isLoading, setIsLoading] = useState(false);
 
     async function fetchUserData(explicitQuery) {
-        setIsLoading(true)
         const axios = await axiosInstance();
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
         const {query} = router;
@@ -163,6 +162,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                 </div>
                                 <button onClick={async () => {
                                     await router.push(`/list?q=${encodeURIComponent(query)}`)
+                                    setIsLoading(true)
                                     setListResults([])
                                     setPage(1)
                                     await fetchUserData(encodeURIComponent(query))
