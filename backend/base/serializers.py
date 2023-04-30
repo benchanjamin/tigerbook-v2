@@ -489,8 +489,8 @@ class UndergraduateTigerBookDirectorySetupSecondPageSerializer(serializers.Model
             'profile_pic'
         ]
 
-    def get_username(self, obj):
-        return get_display_username(obj.user.username)
+    def get_username(self, obj:UndergraduateTigerBookDirectory):
+        return get_display_username(obj.active_directory_entry.net_id)
 
     # TODO: https://stackoverflow.com/questions/29373983/remove-a-file-in-amazon-s3-using-django-storages
     #   to delete old profile pic on
@@ -603,7 +603,7 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
         ]
 
     def get_username(self, obj):
-        return get_display_username(obj.user.username)
+        return get_display_username(obj.active_directory_entry.net_id)
 
     def update(self, instance: UndergraduateTigerBookDirectory, validated_data):
         with contextlib.suppress(ValueError):
@@ -667,7 +667,6 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
     residential_college = serializers.SerializerMethodField(read_only=True)
     pronouns = serializers.SerializerMethodField(read_only=True)
     profile_pic_url = serializers.SerializerMethodField(read_only=True)
-    url = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -680,13 +679,7 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
             'residential_college',
             'pronouns',
             'profile_pic_url',
-            'url',
         ]
-
-    def get_url(self, obj):
-        if hasattr(obj.user, 'cas_profile'):
-            return reverse('undergraduate-retrieve', kwargs={'username': obj.user.cas_profile.net_id})
-        return reverse('undergraduate-retrieve', kwargs={'username': obj.user.username})
 
     def get_full_name(self, obj):
         request = self.context.get('request')
@@ -698,8 +691,9 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
         request = self.context.get('request')
         if request.user.username in obj.permissions.username_prohibited_usernames:
             return None
-        if hasattr(obj.user, 'cas_profile'):
-            return obj.user.cas_profile.net_id
+        # if hasattr(obj, 'user'):
+        #     if hasattr(obj.user, 'cas_profile'):
+        #         return obj.user.cas_profile.net_id
         return obj.active_directory_entry.net_id
 
     def get_track(self, obj):
@@ -863,7 +857,7 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
         request = self.context.get('request')
         if get_display_username(request.user.username) in obj.permissions.username_prohibited_usernames:
             return None
-        return get_display_username(obj.user.username)
+        return get_display_username(obj.active_directory_entry.net_id)
 
     def get_full_name(self, obj):
         request = self.context.get('request')
@@ -1054,7 +1048,7 @@ class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializ
         ]
 
     def get_username(self, obj):
-        return get_display_username(obj.user.username)
+        return get_display_username(obj.active_directory_entry.net_id)
 
     def get_full_name(self, obj):
         return obj.active_directory_entry.full_name
