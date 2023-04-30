@@ -161,12 +161,12 @@ const List: React.FC<Props> = ({headerData}) => {
             </Head>
             <SidebarProvider>
                 {headerData.profile_pic_url != undefined ?
-                    <Header disableSideBar={true} disableLinks={false} profilePicSrc={headerData.profile_pic_url}
+                    <Header disableSideBar={false} disableLinks={false} profilePicSrc={headerData.profile_pic_url}
                             username={headerData.username} hasProfile={headerData.has_profile}/>
-                    : <Header disableSideBar={true} disableLinks={false}
+                    : <Header disableSideBar={false} disableLinks={false}
                               username={headerData.username} hasProfile={headerData.has_profile}/>
                 }
-                <main className="flex dark:bg-gray-900 h-full">
+                <main className="flex dark:bg-gray-900 h-[93vh]">
                     <div className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
                         <Container className="bg-gray-50 pt-4 rounded-2xl pb-10 dark:bg-gray-800">
                             <div className="flex flex-col md:flex-row items-center justify-center gap-x-4">
@@ -212,44 +212,7 @@ const List: React.FC<Props> = ({headerData}) => {
                     </div>
 
                     <div className="order-1">
-                        <Sidebar>
-                            <Sidebar.Items>
-                                <Sidebar.ItemGroup>
-                                    <Sidebar.Item href="#" icon={HiChartPie}>
-                                        Dashboard
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiViewBoards}>
-                                        Kanban
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiInbox}>
-                                        Inbox
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiUser}>
-                                        Users
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiShoppingBag}>
-                                        Products
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiArrowSmRight}>
-                                        Sign In
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiTable}>
-                                        Sign Up
-                                    </Sidebar.Item>
-                                </Sidebar.ItemGroup>
-                                <Sidebar.ItemGroup>
-                                    <Sidebar.Item href="#" icon={HiChartPie}>
-                                        Upgrade to Pro
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={HiViewBoards}>
-                                        Documentation
-                                    </Sidebar.Item>
-                                    <Sidebar.Item href="#" icon={BiBuoy}>
-                                        Help
-                                    </Sidebar.Item>
-                                </Sidebar.ItemGroup>
-                            </Sidebar.Items>
-                        </Sidebar>
+                        <Sidebar/>
                     </div>
                     <Image src="/static/nassau.png" alt="Nassau Hall" className="absolute h-full z-0"
                            fill style={{objectFit: "cover"}}

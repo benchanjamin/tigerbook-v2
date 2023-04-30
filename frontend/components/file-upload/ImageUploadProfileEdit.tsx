@@ -83,7 +83,6 @@ function ImageUploadProfileEdit({data, files, setFiles}: { data: SetupOneGet }) 
                     {thumbs}
                 </aside>}
         </form>
-
     );
 }
 
