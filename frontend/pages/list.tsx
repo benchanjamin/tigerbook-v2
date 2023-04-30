@@ -293,11 +293,11 @@ const List: React.FC<Props> = ({headerData}) => {
     async function fetchUserData(explicitQuery) {
         const axios = await axiosInstance();
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
-        const {routerQuery} = router;
+        const {query} = router;
         if (explicitQuery !== undefined) {
             listURL += `?page=1&${explicitQuery}`;
-        } else if ('q' in routerQuery) {
-            listURL += `?page=${page}&q=${routerQuery.q}`;
+        } else if ('q' in query) {
+            listURL += `?page=${page}&q=${query.q}`;
         } else {
             listURL += `?page=${page}`;
         }
