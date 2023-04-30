@@ -363,8 +363,8 @@ class TigerBookHeaderSerializer(serializers.ModelSerializer):
                   'profile_pic_url',
                   'has_profile']
 
-    def get_username(self, obj):
-        return get_display_username(obj.username)
+    def get_username(self, obj: UndergraduateTigerBookDirectory):
+        return get_display_username(obj.active_directory_entry.net_id)
 
     def get_profile_pic_url(self, obj):
         if not hasattr(obj, 'undergraduate_tigerbook_directory_entry'):
@@ -469,8 +469,8 @@ class UndergraduateTigerBookDirectorySetupFirstPageSerializer(serializers.ModelS
             'profile_pic'
         ]
 
-    def get_username(self, obj):
-        return get_display_username(obj.user.username)
+    def get_username(self, obj: UndergraduateTigerBookDirectory):
+        return get_display_username(obj.active_directory_entry.net_id)
 
     def update(self, instance, validated_data):
         instance.has_setup_profile.has_setup_page_one = True
@@ -694,7 +694,7 @@ class UndergraduateTigerBookDirectoryListSerializer(serializers.ModelSerializer)
             return None
         return obj.active_directory_entry.full_name
 
-    def get_username(self, obj:UndergraduateTigerBookDirectory):
+    def get_username(self, obj: UndergraduateTigerBookDirectory):
         request = self.context.get('request')
         if request.user.username in obj.permissions.username_prohibited_usernames:
             return None
@@ -803,11 +803,11 @@ class UndergraduateTigerBookDirectorySearchSerializer(serializers.ModelSerialize
             'full_name',
         ]
 
-    def get_username(self, obj):
+    def get_username(self, obj: UndergraduateTigerBookDirectory):
         request = self.context.get('request')
         if request.user.username in obj.permissions.username_prohibited_usernames:
             return None
-        return get_display_username(obj.user.username)
+        return get_display_username(obj.active_directory_entry.net_id)
 
     def get_full_name(self, obj):
         request = self.context.get('request')
