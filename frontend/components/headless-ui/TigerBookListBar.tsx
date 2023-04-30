@@ -2,7 +2,7 @@ import {Fragment, useEffect, useRef, useState} from 'react'
 import {Combobox, Transition} from '@headlessui/react'
 import {CheckIcon, ChevronUpDownIcon, XMarkIcon} from '@heroicons/react/20/solid'
 import {useVirtualizer} from '@tanstack/react-virtual'
-import {axiosInstance} from "../../utils/axiosInstance";
+import {axiosInstance} from "@utils/axiosInstance";
 import {Axios, AxiosResponse} from "axios";
 import { useRouter } from 'next/router'
 

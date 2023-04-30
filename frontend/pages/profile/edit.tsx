@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, {useContext, useReducer, useState} from "react";
+import React, {useContext, useEffect, useReducer, useState} from "react";
 import {GetServerSideProps} from "next";
 import {
     Extracurricular,
@@ -91,7 +91,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         '/api-django/tracks/',
         '/api-django/residential-colleges/',
         '/api-django/class-years/',
-        '/api-django/cities/',
+        // '/api-django/cities/',
         '/api-django/certificates/',
         '/api-django/pronouns/',
         '/api-django/interests/',
@@ -106,7 +106,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         'tracks',
         'residentialColleges',
         'classYears',
-        'cities',
+        // 'cities',
         'certificates',
         'pronouns',
         'interests',
@@ -121,7 +121,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         'track',
         'residential_college',
         'class_year',
-        'complete_city',
+        // 'complete_city',
         'certificate',
         'pronouns',
         'interest',
@@ -151,8 +151,6 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
             data,
             headerData,
             ...listData,
-            hometowns: listData['cities'],
-            currentCities: listData['cities'],
         },
     }
 };
@@ -164,8 +162,6 @@ type Props = {
     tracks: string[]
     residentialColleges: string[]
     classYears: string[]
-    hometowns: string[]
-    currentCities: string[]
     pronouns: string[]
     certificates: string[]
     interests: string[]
@@ -182,12 +178,14 @@ const reducer = (prev: Permissions, next: Permissions) => {
 const ProfileEdit: React.FC<Props> = ({
                                           data, headerData, concentrations,
                                           tracks, residentialColleges,
-                                          classYears, hometowns, pronouns, certificates,
+                                          classYears,  pronouns, certificates,
                                           interests, extracurriculars, positions, completeHousing,
-                                          currentCities, researchTypes
+                                          researchTypes
                                       }) => {
     const context = useContext(NotificationContext);
     const router = useRouter()
+    const [hometowns, setHometowns] = useState([]);
+    const [currentCities, setCurrentCities] = useState([]);
 
     const [myConcentration, setMyConcentration] = useState(data.concentration);
     const [myTrack, setMyTrack] = useState(data.track);
@@ -215,6 +213,18 @@ const ProfileEdit: React.FC<Props> = ({
         useReducer(reducer, data.permissions);
 
     const [isImageReady, setIsImageReady] = useState(false);
+
+    async function fetch() {
+        const axios = await  axiosInstance()
+        const axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/cities/`)
+        setHometowns(axiosResponse.data)
+        setCurrentCities(axiosResponse.data)
+    }
+
+    useEffect(() => {
+        fetch()
+    }, []);
+
 
     const onLoadCallBack = () => {
         setIsImageReady(true)
