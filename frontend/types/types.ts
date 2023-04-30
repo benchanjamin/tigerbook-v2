@@ -115,7 +115,7 @@ export interface FullProfileEditGet {
     username: string;
     full_name: string;
     active_directory_entry: ActiveDirectoryEntry;
-    residential_college_facebook_entry: ResidentialCollegeFacebookEntry;
+    residential_college_facebook_entry: ResidentialCollegeFacebookEntry | null;
     permissions: Permissions;
     profile_pic: null;
     track: string;

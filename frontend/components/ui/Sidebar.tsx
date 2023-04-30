@@ -10,9 +10,9 @@ const Sidebar: FC<PropsWithChildren<Record<string, unknown>>> = function ({
     useSidebarContext();
 
   return (
-      <aside
+      <aside id="sidebar-multi-level-sidebar"
             className={classNames(
-              "fixed overflow-auto top-0 h-[93.4vh] z-10 lg:sticky lg:!block",
+          "fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0",
               {
                 hidden: !isSidebarOpenOnSmallScreens,
               }
