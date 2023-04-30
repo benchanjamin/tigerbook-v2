@@ -139,7 +139,7 @@ const List: React.FC<Props> = ({headerData}) => {
             setListResults(listData.results)
             setNextURL(listData.next)
         })
-    }, [loadMore, nextURL, router]);
+    }, [loadMore]);
 
     return (
         <>
