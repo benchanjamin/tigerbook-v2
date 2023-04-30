@@ -40,7 +40,7 @@ interface ServerSideProps {
 
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
     let REDIRECT_ERROR = 0
-    const axios = await axiosInstance();
+    const axios = await axiosLocalhost();
     const axiosRedirect: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/redirect/`,
         {
             headers: {
@@ -262,7 +262,7 @@ const ProfileEdit: React.FC<Props> = ({
         console.log(postData)
 
         let RESPONSE_ERROR = 0
-        const axios = await axiosInstance();
+        const axios = await axiosLocalhost();
 
         if (files.length == 0 && changePhoto) {
             context.showNotification({
