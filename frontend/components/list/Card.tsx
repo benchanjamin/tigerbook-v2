@@ -61,6 +61,9 @@ function Card({personData, isLast, newLimit}: { personData: ListUser, isLast: bo
                             <span className="text-sm text-center">
                                 Username: {personData.username}
                             </span>
+                            <span className="text-sm text-center">
+                                IsLast: {isLast.toString()}
+                            </span>
                         </div>
                     </div>
                 </div>
