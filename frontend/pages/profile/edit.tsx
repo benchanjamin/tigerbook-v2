@@ -524,7 +524,7 @@ const ProfileEdit: React.FC<Props> = ({
                                     </label>
                                     <TigerBookListBox data={tracks}
                                                       initialSelected={myTrack}
-                                                      zIndex={30}
+                                                      zIndex={31}
                                                       setterFunction={setMyTrack}
                                                       defaultText={"Select myTrack"}
                                     />
@@ -539,7 +539,7 @@ const ProfileEdit: React.FC<Props> = ({
                                     <TigerBookListBox data={residentialColleges}
                                                       initialSelected={myResidentialCollege}
                                                       defaultText={"Select residential college"}
-                                                      zIndex={20}
+                                                      zIndex={30}
                                                       setterFunction={setMyResidentialCollege}
                                     />
                                 </div>
@@ -552,7 +552,7 @@ const ProfileEdit: React.FC<Props> = ({
                                     </label>
                                     <TigerBookListBox data={classYears}
                                                       defaultText="Select class year"
-                                                      zIndex={10}
+                                                      zIndex={29}
                                                       initialSelected={myClassYear}
                                                       setterFunction={setMyClassYear}
                                     />
@@ -564,7 +564,7 @@ const ProfileEdit: React.FC<Props> = ({
                                         data={pronouns}
                                         defaultText="Select pronouns"
                                         initialSelected={myPronouns}
-                                        zIndex={9}
+                                        zIndex={28}
                                         setterFunction={setMyPronouns}
                                         defaultOptionText="I am not adding pronouns"
                                     />
@@ -577,7 +577,7 @@ const ProfileEdit: React.FC<Props> = ({
                                         data={hometowns}
                                         defaultText="Select hometown"
                                         initialSelected={myHometown}
-                                        zIndex={8}
+                                        zIndex={27}
                                         defaultOptionText="I am not adding my hometown"
                                         setterFunction={setMyHometown}
                                     />
@@ -590,7 +590,7 @@ const ProfileEdit: React.FC<Props> = ({
                                     <TigerBookComboBoxMultipleStrictSelect
                                         data={interests}
                                         initialSelected={myInterests}
-                                        zIndex={7}
+                                        zIndex={26}
                                         setterFunction={setMyInterests}
                                         defaultText='Add interests'/>
                                 </div>
@@ -604,7 +604,7 @@ const ProfileEdit: React.FC<Props> = ({
                                         data={currentCities}
                                         defaultText="Select current city"
                                         initialSelected={myCurrentCity}
-                                        zIndex={6}
+                                        zIndex={25}
                                         defaultOptionText="I am not adding my current city"
                                         setterFunction={setMyCurrentCity}
                                     />
@@ -619,7 +619,7 @@ const ProfileEdit: React.FC<Props> = ({
                                         data={completeHousing}
                                         defaultText="Select housing room"
                                         initialSelected={myCurrentHousing}
-                                        zIndex={5}
+                                        zIndex={24}
                                         defaultOptionText="I am not adding my housing room"
                                         setterFunction={setMyCurrentHousing}
                                     />
@@ -632,7 +632,7 @@ const ProfileEdit: React.FC<Props> = ({
                                     <TigerBookComboBoxMultipleStrictSelect
                                         data={certificates}
                                         initialSelected={myCertificates}
-                                        zIndex={4}
+                                        zIndex={23}
                                         setterFunction={setMyCertificates}
                                         defaultText='Add prospective certificates'/>
                                 </div>
@@ -657,7 +657,7 @@ const ProfileEdit: React.FC<Props> = ({
                                                 data={extracurriculars}
                                                 defaultText="Select extracurricular activity"
                                                 initialSelected={extracurricular.extracurricular}
-                                                zIndex={3}
+                                                zIndex={22}
                                                 defaultOptionText={undefined}
                                                 setterFunction={(value: string) => {
                                                     setExtracurricularActivity(index, value)
@@ -674,7 +674,7 @@ const ProfileEdit: React.FC<Props> = ({
                                                 data={positions}
                                                 defaultText="Select extracurricular position"
                                                 initialSelected={extracurricular.positions}
-                                                zIndex={2}
+                                                zIndex={21}
                                                 defaultOptionText={undefined}
                                                 setterFunction={(value: string[]) => {
                                                     setExtracurricularPositions(index, value)
@@ -713,7 +713,7 @@ const ProfileEdit: React.FC<Props> = ({
                                                 data={researchTypes}
                                                 defaultText="Select research type"
                                                 initialSelected={research.research_type}
-                                                zIndex={3}
+                                                zIndex={20}
                                                 defaultOptionText={undefined}
                                                 setterFunction={(value: string) => {
                                                     setResearchType(index, value)
@@ -730,7 +730,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             <TigerBookFFABar
                                                 defaultText="Add research title"
                                                 initialSelected={research.research_title}
-                                                zIndex={2}
+                                                zIndex={19}
                                                 defaultOptionText={undefined}
                                                 setterFunction={(value: string[]) => {
                                                     setResearchTitle(index, value)
@@ -765,7 +765,7 @@ const ProfileEdit: React.FC<Props> = ({
                                                 </div>
                                             </div>
                                             <TigerBookFFABar
-                                                zIndex={10}
+                                                zIndex={18}
                                                 defaultText='Add Miscellaneous Title'
                                                 initialSelected={miscellaneous.miscellaneous_title}
                                                 setterFunction={(value: string) => setMiscellaneousTitle(index, value)}/>
@@ -779,7 +779,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             </label>
                                             <TigerBookFFABar
                                                 initialSelected={miscellaneous.miscellaneous_description}
-                                                zIndex={10}
+                                                zIndex={17}
                                                 defaultText='Add Miscellaneous Description'
                                                 setterFunction={(value: string) => setMiscellaneousDescription(index, value)}/>
                                         </div>
@@ -916,7 +916,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({username_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={16}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -929,7 +929,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({profile_pic_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={15}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -942,7 +942,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({track_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={14}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -955,7 +955,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({concentration_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={13}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -968,7 +968,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({class_year_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={12}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -981,7 +981,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({residential_college_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={11}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -994,7 +994,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({housing_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={10}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -1007,7 +1007,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({aliases_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={9}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -1020,7 +1020,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({pronouns_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={8}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -1033,7 +1033,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({certificates_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={7}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -1046,7 +1046,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({hometown_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={6}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -1059,7 +1059,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({current_city_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={5}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -1072,7 +1072,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({interests_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={4}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -1085,7 +1085,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({extracurriculars_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={3}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -1098,7 +1098,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({research_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={2}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
@@ -1111,7 +1111,7 @@ const ProfileEdit: React.FC<Props> = ({
                                             setterFunction={(event) => {
                                                 updateMyPermissions({miscellaneous_prohibited_usernames: event})
                                             }}
-                                            zIndex={50}
+                                            zIndex={1}
                                             placeholder="Add usernames"
                                             dropdownDefaultDescription="Add username"
                                         />
