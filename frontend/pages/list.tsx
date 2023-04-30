@@ -142,7 +142,7 @@ const List: React.FC<Props> = ({headerData}) => {
             listURL += `?page=${page}&q=${query.q}`;
         }
         console.log('listURL', listURL)
-        // const axiosResponse = await axios.get(listURL)
+        const axiosResponse = await axios.get(listURL)
         const listData: List = axiosResponse.data;
         setIsLoading(false)
         setListResults((prev) => [...prev, ...listData.results]);
