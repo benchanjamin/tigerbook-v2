@@ -103,6 +103,11 @@ const Search: React.FC<Props> = ({headerData}) => {
 
     // console.log("Search", query)
 
+    async function onEnter() {
+        await router.push(`/list?q=${encodeURIComponent(query)}`)
+    }
+
+
     return (
         <>
             <Head>
@@ -123,7 +128,8 @@ const Search: React.FC<Props> = ({headerData}) => {
                             <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
                                 <TigerBookSearchBar defaultText="Search PUID, NetID, nickname, or full name"
                                                     autoComplete="off"
-                                                    zIndex={100} setterFunction={setQuery}/>
+                                                    zIndex={100} setterFunction={setQuery}
+                                onEnterFunction={onEnter}/>
                             </div>
                             <button
                                 onClick={async () => await router.push(`/list/?q=${encodeURIComponent(query)}`)}

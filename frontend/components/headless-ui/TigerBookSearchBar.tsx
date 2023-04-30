@@ -4,7 +4,7 @@ import {CheckIcon, ChevronUpDownIcon, XMarkIcon} from '@heroicons/react/20/solid
 import {useVirtualizer} from '@tanstack/react-virtual'
 import {axiosInstance} from "../../utils/axiosInstance";
 import {Axios, AxiosResponse} from "axios";
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
 
 
 interface queryResult {
@@ -13,8 +13,8 @@ interface queryResult {
 }
 
 export default function TigerBookSearchBar(
-    {defaultText, zIndex, setterFunction}:
-        { defaultText: string, zIndex: number, setterFunction: (value: string) => void}) {
+    {defaultText, zIndex, setterFunction, onEnterFunction}:
+        { defaultText: string, zIndex: number, setterFunction: (value: string) => void, onEnterFunction: () => void }) {
     const [data, setData] = useState<queryResult[]>([])
     const [query, setQuery] = useState<string>('')
 
@@ -43,18 +43,19 @@ export default function TigerBookSearchBar(
                      focus-visible:ring-opacity-75 focus-visible:ring-offset-2
                      focus-visible:ring-offset-teal-300 sm:text-sm">
                     {/*<div className="flex flex-wrap overflow-auto items-center pl-2 pr-2">*/}
-                        <Combobox.Input
-                            className="w-full py-2 pl-3 text-sm leading-5 text-gray-900 focus:ring-0
+                    <Combobox.Input
+                        className="w-full py-2 pl-3 text-sm leading-5 text-gray-900 focus:ring-0
                         focus:outline-none
                         focus-visible:border-primary-500"
-                            displayValue={(dataString) => dataString}
-                            onChange={(event) => {
-                                setQuery(event.target.value)
-                                setterFunction(event.target.value)
-                            }}
-                            spellCheck={false}
-                            placeholder={defaultText}
-                        />
+                        onKeyUp={(e) => e.key === 'Enter' && onEnterFunction()}
+                        displayValue={(dataString) => dataString}
+                        onChange={(event) => {
+                            setQuery(event.target.value)
+                            setterFunction(event.target.value)
+                        }}
+                        spellCheck={false}
+                        placeholder={defaultText}
+                    />
                 </div>
                 <Transition
                     as={Fragment}
