@@ -29,7 +29,7 @@ const Header: FC<Props> = function ({
         const [colorMode, setColorMode] = useColorMode();
 
         return (
-            <header className="sticky top-0 z-20">
+            <header className="fixed top-0 left-0 right-0 z-20">
                 <Navbar fluid className="space-x-12">
                     {!disableSideBar && isPageWithSidebar && (
                         <button
