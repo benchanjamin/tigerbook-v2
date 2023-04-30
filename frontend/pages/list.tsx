@@ -163,6 +163,12 @@ const List: React.FC<Props> = ({headerData}) => {
             <Head>
                 <title>Tigerbook</title>
             </Head>
+            <div className="fixed -z-10 h-screen w-screen">
+                <Image src="/static/nassau.png" alt="Nassau Hall"
+                       fill
+                       style={{objectFit: "cover"}}
+                />
+            </div>
             <SidebarProvider>
                 {headerData.profile_pic_url != undefined ?
                     <Header disableSideBar={false} disableLinks={false} profilePicSrc={headerData.profile_pic_url}
@@ -171,12 +177,7 @@ const List: React.FC<Props> = ({headerData}) => {
                               username={headerData.username} hasProfile={headerData.has_profile}/>
                 }
                 <main className="flex h-[93vh]">
-                    <div className="fixed -z-10 h-screen w-screen">
-                        <Image src="/static/nassau.png" alt="Nassau Hall"
-                               fill
-                               style={{objectFit: "cover"}}
-                        />
-                    </div>
+
                     <div className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
                         <Container className="bg-gray-50 pt-4 rounded-2xl pb-10 dark:bg-gray-800">
                             <div className="flex flex-col md:flex-row items-center justify-center gap-x-4">
