@@ -22,6 +22,7 @@ function Card({personData, isLast, newLimit}: { personData: ListUser, isLast: bo
         });
 
         observer.observe(cardRef.current);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLast]);
 
     return (
