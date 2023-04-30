@@ -141,9 +141,15 @@ const List: React.FC<Props> = ({headerData}) => {
 
     // search queries
     const [concentrationQuery, setConcentrationQuery] = useState(null);
+    const [tracksQuery, setTracksQuery] = useState(null);
+    const [resCollegeQuery, setResCollegeQuery] = useState(null);
+    const [classYearsQuery, setClassYearsQuery] = useState(null);
 
     // search list
     const [concentrationsList, setConcentrationsList] = useState([]);
+    const [tracksList, setTracksList] = useState([]);
+    const [resCollegeList, setResCollegeList] = useState([]);
+    const [classYearsList, setClassYearsList] = useState([]);
 
 
     async function fetch() {
@@ -206,6 +212,15 @@ const List: React.FC<Props> = ({headerData}) => {
             listData[keys[index]] = axiosResponse.data.map((item) => item[indices[index]])
             if (index === 0) {
                 setConcentrationsList(listData.concentrations)
+            }
+            if (index === 1) {
+                setTracksList(listData.tracks)
+            }
+            if (index === 2) {
+                setClassYearsList(listData.classYears)
+            }
+            if (index === 3) {
+                setResCollegeList(listData.residentialColleges)
             }
         }
     }
@@ -350,9 +365,42 @@ const List: React.FC<Props> = ({headerData}) => {
                                                 <TigerBookComboBoxMultipleStrictSelect
                                                     data={concentrationsList}
                                                     defaultText="Select concentrations"
-                                                    initialSelected={concentrationsList}
+                                                    initialSelected={[]}
                                                     zIndex={28}
                                                     setterFunction={setConcentrationQuery}
+                                                />
+                                            </li>
+                                            <li>
+                                                <label htmlFor="tracks"
+                                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white pl-1">Concentrations</label>
+                                                <TigerBookComboBoxMultipleStrictSelect
+                                                    data={tracksList}
+                                                    defaultText="Select tracks"
+                                                    initialSelected={[]}
+                                                    zIndex={28}
+                                                    setterFunction={setTracksQuery}
+                                                />
+                                            </li>
+                                            <li>
+                                                <label htmlFor="class-years"
+                                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white pl-1">Concentrations</label>
+                                                <TigerBookComboBoxMultipleStrictSelect
+                                                    data={classYearsList}
+                                                    defaultText="Select class years"
+                                                    initialSelected={[]}
+                                                    zIndex={28}
+                                                    setterFunction={setClassYearsQuery}
+                                                />
+                                            </li>
+                                            <li>
+                                                <label htmlFor="residential-colleges"
+                                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white pl-1">Concentrations</label>
+                                                <TigerBookComboBoxMultipleStrictSelect
+                                                    data={concentrationsList}
+                                                    defaultText="Select residential colleges"
+                                                    initialSelected={[]}
+                                                    zIndex={28}
+                                                    setterFunction={setResCollegeQuery}
                                                 />
                                             </li>
                                         </ul>
