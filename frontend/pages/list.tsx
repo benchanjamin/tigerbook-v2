@@ -257,10 +257,7 @@ const List: React.FC<Props> = ({headerData}) => {
         // setIsExplicitSearching(true)
         setIsLoading(true)
         setListResults([])
-        let firstQuery = ''
-        if (query !== '') {
-            firstQuery = `q=${encodeURIComponent(query)}`
-        }
+        let firstQuery = `q=${encodeURIComponent(query)}`
         let searchFilterQueries = ''
         concentrationsQuery?.forEach((concentration) => {
             searchFilterQueries += `&concentration=${encodeURIComponent(concentration)}`
@@ -283,10 +280,7 @@ const List: React.FC<Props> = ({headerData}) => {
         setIsExplicitSearching(true)
         setIsLoading(true)
         setListResults([])
-        let firstQuery = ''
-        if (query !== '') {
-            firstQuery = `q=${encodeURIComponent(query)}`
-        }
+        let firstQuery = `q=${encodeURIComponent(query)}`
         await router.push(`/list?${firstQuery}`)
         setPage(1)
         await fetchUserData(encodeURIComponent(query))
