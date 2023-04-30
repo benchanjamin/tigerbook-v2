@@ -332,6 +332,16 @@ const List: React.FC<Props> = ({headerData}) => {
         setInterestsQuery([])
         setExtracurricularsQuery([])
         setExtracurricularPositionsQuery([])
+        //     set all lists to empty
+        setTracksList([])
+        setConcentrationsList([])
+        setClassYearsList([])
+        setResCollegesList([])
+        setCertificatesList([])
+        setPronounsList([])
+        setInterestsList([])
+        setExtracurricularsList([])
+        setExtracurricularPositionsList([])
     }
 
     return (
@@ -405,8 +415,9 @@ const List: React.FC<Props> = ({headerData}) => {
                         <Sidebar>
                             <Sidebar.Items>
                                 <Sidebar.ItemGroup>
-                                    <div className="block ml-2 text-sm text-white bg-primary-500 px-4 py-0.5 mb-2 rounded-xl hover:bg-primary-600 cursor-pointer active:bg-primary-700 focus:outline-none focus:ring focus:ring-primary-300"
-                                    onClick={clearAllFilters}>
+                                    <div
+                                        className="block ml-2 text-sm text-white bg-primary-500 px-4 py-0.5 mb-2 rounded-xl hover:bg-primary-600 cursor-pointer active:bg-primary-700 focus:outline-none focus:ring focus:ring-primary-300"
+                                        onClick={clearAllFilters}>
                                         Clear All Filters
                                     </div>
                                     <li>
