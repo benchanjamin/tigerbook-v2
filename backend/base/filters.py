@@ -18,7 +18,7 @@ class MultiValueCharFilter(filters.BaseCSVFilter, filters.CharFilter):
 
 class UndergraduateDirectoryListFilter(filters.FilterSet):
     class_year = filters.NumberFilter(field_name="class_year__class_year", lookup_expr='iexact')
-    track = filters.CharFilter(field_name="track__track", lookup_expr='iexact')
+    track = MultiValueCharFilter(field_name="track__track", lookup_expr='iexact')
     residential_college = filters.CharFilter(field_name="residential_college__residential_college",
                                              lookup_expr='iexact')
     concentration = MultiValueCharFilter(field_name="concentration__concentration", lookup_expr='iexact')
