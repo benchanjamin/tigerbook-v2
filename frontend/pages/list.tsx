@@ -118,16 +118,18 @@ const List: React.FC<Props> = ({headerData}) => {
     const [page, setPage] = useState(1);
     const [listResults, setListResults] = useState<ListUser[]>([]);
     const [hasNextPage, setHasNextPage] = useState(false);
+    const [isExplicitSearching, setIsExplicitSearching] = useState(false);
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     async function onEnter() {
+        setIsExplicitSearching(true)
         setIsLoading(true)
         setListResults([])
         setPage(1)
         await router.push(`/list?q=${encodeURIComponent(query)}`)
-
         await fetchUserData(encodeURIComponent(query))
+        setIsExplicitSearching(false)
     }
 
     async function fetchUserData(explicitQuery) {
@@ -148,7 +150,7 @@ const List: React.FC<Props> = ({headerData}) => {
     }
 
     useEffect(() => {
-        if (page === 1) return;
+        if (page === 1 || isExplicitSearching) return;
         fetchUserData();
     }, [page]);
 
