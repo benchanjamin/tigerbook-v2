@@ -38,12 +38,9 @@ import {axiosInstance, axiosLocalhost} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import React, {useEffect, useState} from "react";
 import Container from "@components/list/Container";
-import Heading from "@components/list/Heading";
 import Card from "@components/list/Card";
-import TigerBookSearchBar from "@components/headless-ui/TigerBookListBar";
 import TigerBookListBar from "@components/headless-ui/TigerBookListBar";
 import {useRouter} from "next/router";
-import {list} from "postcss";
 import {Spinner} from "flowbite-react";
 
 interface ServerSideProps {

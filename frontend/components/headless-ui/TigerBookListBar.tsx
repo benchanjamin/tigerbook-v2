@@ -19,8 +19,8 @@ export default function TigerBookListBar(
     const [query, setQuery] = useState<string>('')
 
     useEffect(() => {
+        setData([])
         const timer = setTimeout(async () => {
-            setData([])
             const axios = await axiosInstance();
             const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/search/?q=${encodeURIComponent(query)}`
             let axiosResponse: AxiosResponse = await axios.get(url)
