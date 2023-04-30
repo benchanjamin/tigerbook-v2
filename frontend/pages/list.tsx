@@ -254,7 +254,7 @@ const List: React.FC<Props> = ({headerData}) => {
     }, []);
 
     async function onSearchFiltering() {
-        // setIsExplicitSearching(true)
+        setIsExplicitSearching(true)
         setIsLoading(true)
         setListResults([])
         let firstQuery = `q=${encodeURIComponent(query)}`
@@ -267,8 +267,8 @@ const List: React.FC<Props> = ({headerData}) => {
         })
         await router.push(`/list?${firstQuery}${searchFilterQueries}`)
         setPage(1)
-        await fetchUserData(encodeURIComponent(query).concat(searchFilterQueries))
-        // setIsExplicitSearching(false)
+        await fetchUserData(firstQuery.concat(searchFilterQueries))
+        setIsExplicitSearching(false)
     }
 
     useEffect(() => {
@@ -283,7 +283,7 @@ const List: React.FC<Props> = ({headerData}) => {
         let firstQuery = `q=${encodeURIComponent(query)}`
         await router.push(`/list?${firstQuery}`)
         setPage(1)
-        await fetchUserData(encodeURIComponent(query))
+        await fetchUserData(firstQuery)
         setIsExplicitSearching(false)
     }
 
@@ -292,7 +292,7 @@ const List: React.FC<Props> = ({headerData}) => {
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
         const {query} = router;
         if (explicitQuery !== undefined) {
-            listURL += `?page=1&q=${explicitQuery}`;
+            listURL += `?page=1&${explicitQuery}`;
         } else if ('q' in query) {
             listURL += `?page=${page}&q=${query.q}`;
         } else {
