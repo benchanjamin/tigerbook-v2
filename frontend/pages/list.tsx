@@ -128,7 +128,6 @@ const List: React.FC<Props> = ({headerData}) => {
         await router.push(`/list?q=${encodeURIComponent(query)}`)
     }
 
-
     async function fetchUserData(explicitQuery) {
         const axios = await axiosInstance();
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
@@ -138,6 +137,7 @@ const List: React.FC<Props> = ({headerData}) => {
         } else if ('q' in query) {
             listURL += `&q=${query.q}`;
         }
+        console.log('listURL', listURL)
         const axiosResponse = await axios.get(listURL)
         const listData: List = axiosResponse.data;
         setIsLoading(false)
