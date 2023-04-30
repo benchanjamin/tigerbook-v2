@@ -117,7 +117,7 @@ interface Props {
 const List: React.FC<Props> = ({headerData}) => {
     const [query, setQuery] = useState('');
     const [loadMore, setLoadMore] = useState<boolean>(false);
-    const [nextURL, setNextURL] = useState<string>('');
+    const [nextURL, setNextURL] = useState<string>(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`);
     const [listResults, setListResults] = useState<ListUser[]>([]);
     const router = useRouter();
 
@@ -125,7 +125,7 @@ const List: React.FC<Props> = ({headerData}) => {
         async function effect() {
             const axios = await axiosInstance();
 
-            let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
+            let listURL = nextURL;
             const {query} = router;
             if ('q' in query) {
                 listURL += `?q=${query.q}`;
@@ -134,11 +134,12 @@ const List: React.FC<Props> = ({headerData}) => {
             const listData: List = axiosResponse.data;
             return listData
         }
+
         effect().then(listData => {
             setListResults(listData.results)
             setNextURL(listData.next)
         })
-    }, [loadMore, router]);
+    }, [loadMore, nextURL, router]);
 
     return (
         <>
@@ -163,8 +164,10 @@ const List: React.FC<Props> = ({headerData}) => {
                                 </div>
                                 <button onClick={async () => await router.push(`/list/?q=${encodeURIComponent(query)}`)}
                                         className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-5 mt-1.50">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 dark:text-white">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 dark:text-white">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
                                     </svg>
                                 </button>
                             </div>
@@ -172,7 +175,10 @@ const List: React.FC<Props> = ({headerData}) => {
                                 className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8"
                             >
                                 {listResults?.map((item, index) => (
-                                    <Card key={index} personData={item}/>
+                                    <Card key={index} personData={item}
+                                          isLast={index === listResults.length - 1}
+                                          newLimit={() => loadMore(true)}
+                                    />
                                 ))}
                             </div>
                         </Container>

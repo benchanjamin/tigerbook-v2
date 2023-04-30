@@ -1,13 +1,28 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Image from "next/legacy/image";
 import {ListUser} from "@types/types";
 import {useRouter} from "next/router";
 import {Spinner} from "flowbite-react";
 
 
-function Card({personData}: { personData: ListUser }) {
+function Card({personData, isLast, newLimit}: { personData: ListUser, isLast: boolean, newLimit: () => void}) {
+    const cardRef = useRef();
     const router = useRouter();
     const [isImageReady, setIsImageReady] = useState(false);
+
+
+    useEffect(() => {
+        if (!cardRef?.current) return;
+
+        const observer = new IntersectionObserver(([entry]) => {
+            if (isLast && entry.isIntersecting) {
+                newLimit();
+                observer.unobserve(entry.target);
+            }
+        });
+
+        observer.observe(cardRef.current);
+    }, [isLast]);
 
     return (
         <div
