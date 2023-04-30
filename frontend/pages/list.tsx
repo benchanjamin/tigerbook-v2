@@ -123,28 +123,11 @@ const List: React.FC<Props> = ({headerData}) => {
     const [isLoading, setIsLoading] = useState(false);
 
     async function onEnter() {
-        console.log('page1', page)
         setIsExplicitSearching(true)
-        console.log('page2', page)
-
-        setIsLoading(true)
-        console.log('page3', page)
-
-        setListResults([])
-        console.log('page4', page)
-
+        setPage(1)
         await router.push(`/list?q=${encodeURIComponent(query)}`)
-        setPage(1)
-
-        console.log('page5', page)
-
         await fetchUserData(encodeURIComponent(query))
-        setPage(1)
-        console.log('page6', page)
-
         setIsExplicitSearching(false)
-        console.log('page7', page)
-
     }
 
     async function fetchUserData(explicitQuery) {
@@ -192,12 +175,10 @@ const List: React.FC<Props> = ({headerData}) => {
                                                       zIndex={100} setterFunction={setQuery}
                                                       autoComplete="off"
                                                       onEnterFunction={async () => {
-                                                          setPage(1)
                                                           await onEnter()
                                                       }}/>
                                 </div>
                                 <button onClick={async () => {
-                                    setPage(1)
                                     await onEnter()
                                 }}
                                         className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-opacity-5 mt-1.5">
