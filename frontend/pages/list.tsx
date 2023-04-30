@@ -137,7 +137,10 @@ const List: React.FC<Props> = ({headerData}) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
-    // search params
+    // search queries
+    const [concentrationQuery, setConcentrationQuery] = useState(null);
+
+    // search list
     const [concentrationsList, setConcentrationsList] = useState([]);
 
 
@@ -342,8 +345,8 @@ const List: React.FC<Props> = ({headerData}) => {
                                                 <TigerBookListBox data={concentrationsList}
                                                                   initialSelected={concentrationsList}
                                                                   zIndex={40}
-                                                                  setterFunction={setConcentrationsList}
-                                                                  defaultText={"Select myConcentration"}
+                                                                  setterFunction={setConcentrationQuery}
+                                                                  defaultText={"Select Concentration"}
                                                 />
                                             </li>
                                         </ul>
