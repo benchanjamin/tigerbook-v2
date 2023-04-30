@@ -1,3 +1,4 @@
+from django.db.models import QuerySet
 from django_filters import rest_framework as filters
 
 # from django_filters.rest_framework import DjangoFilterBackend
@@ -10,10 +11,19 @@ class MultiValueCharFilter(filters.BaseCSVFilter, filters.CharFilter):
         # value is either a list or an 'empty' value
         values = value or []
 
-        for value in values:
-            qs = super(MultiValueCharFilter, self).filter(qs, value)
+        query_sets = [
+            super(MultiValueCharFilter, self).filter(qs, value) for value in values
+        ]
 
-        return qs
+        if not query_sets:
+            return qs
+
+        results = query_sets[0]
+
+        for queryset in query_sets:
+            results.union(queryset)
+
+        return results
 
 
 class UndergraduateDirectoryListFilter(filters.FilterSet):
