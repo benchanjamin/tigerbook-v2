@@ -32,7 +32,7 @@ import {
 } from "react-icons/hi";
 import Sidebar from "@components/ui/Sidebar";
 import Header from "@components/ui/Header";
-import {HeaderType, List, SetupOneGet} from "@types/types";
+import {HeaderType, List, ListUser, SetupOneGet} from "@types/types";
 import {GetServerSideProps} from "next";
 import {axiosInstance, axiosLocalhost} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
@@ -116,14 +116,14 @@ interface Props {
 
 const List: React.FC<Props> = ({headerData}) => {
     const [query, setQuery] = useState('');
-    const [pageNumber, setPageNumber] = useState(1);
-    const [listData, setListData] = useState<List>([]);
+    const [loadMore, setLoadMore] = useState<boolean>(false);
+    const [nextURL, setNextURL] = useState<string>('');
+    const [listResults, setListResults] = useState<ListUser[]>([]);
     const router = useRouter();
 
     useEffect(() => {
         async function effect() {
             const axios = await axiosInstance();
-
 
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
             const {query} = router;
@@ -131,16 +131,14 @@ const List: React.FC<Props> = ({headerData}) => {
                 listURL += `?q=${query.q}`;
             }
             const axiosResponse = await axios.get(listURL)
-            console.log(axiosResponse)
-
             const listData: List = axiosResponse.data;
             return listData
         }
-        effect().then(listData => setListData(listData))
-
-    }, [pageNumber, router]);
-
-
+        effect().then(listData => {
+            setListResults(listData.results)
+            setNextURL(listData.next)
+        })
+    }, [loadMore, router]);
 
     return (
         <>
@@ -173,7 +171,7 @@ const List: React.FC<Props> = ({headerData}) => {
                             <div
                                 className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8"
                             >
-                                {listData.results?.map((item, index) => (
+                                {listResults?.map((item, index) => (
                                     <Card key={index} personData={item}/>
                                 ))}
                             </div>
