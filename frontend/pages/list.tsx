@@ -366,7 +366,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                                     data={concentrationsList}
                                                     defaultText="Select concentrations"
                                                     initialSelected={[]}
-                                                    zIndex={28}
+                                                    zIndex={50}
                                                     setterFunction={setConcentrationQuery}
                                                 />
                                             </li>
@@ -377,7 +377,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                                     data={tracksList}
                                                     defaultText="Select tracks"
                                                     initialSelected={[]}
-                                                    zIndex={28}
+                                                    zIndex={40}
                                                     setterFunction={setTracksQuery}
                                                 />
                                             </li>
@@ -388,7 +388,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                                     data={classYearsList}
                                                     defaultText="Select class years"
                                                     initialSelected={[]}
-                                                    zIndex={28}
+                                                    zIndex={31}
                                                     setterFunction={setClassYearsQuery}
                                                 />
                                             </li>
@@ -399,7 +399,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                                     data={concentrationsList}
                                                     defaultText="Select residential colleges"
                                                     initialSelected={[]}
-                                                    zIndex={28}
+                                                    zIndex={30}
                                                     setterFunction={setResCollegeQuery}
                                                 />
                                             </li>
