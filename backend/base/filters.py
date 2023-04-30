@@ -5,13 +5,23 @@ from django_filters import rest_framework as filters
 from base.models import UndergraduateTigerBookDirectory
 
 
+class MultiValueCharFilter(filters.BaseCSVFilter, filters.CharFilter):
+    def filter(self, qs, value):
+        # value is either a list or an 'empty' value
+        values = value or []
+
+        for value in values:
+            qs = super(MultiValueCharFilter, self).filter(qs, value)
+
+        return qs
+
+
 class UndergraduateDirectoryListFilter(filters.FilterSet):
-    class_year_min = filters.NumberFilter(field_name="class_year__class_year", lookup_expr='gte')
-    class_year_max = filters.NumberFilter(field_name="class_year__class_year", lookup_expr='lte')
+    class_year = filters.NumberFilter(field_name="class_year__class_year", lookup_expr='iexact')
     track = filters.CharFilter(field_name="track__track", lookup_expr='iexact')
     residential_college = filters.CharFilter(field_name="residential_college__residential_college",
                                              lookup_expr='iexact')
-    concentration = filters.CharFilter(field_name="concentration__concentration", lookup_expr='iexact')
+    concentration = MultiValueCharFilter(field_name="concentration__concentration", lookup_expr='iexact')
     housing_building = filters.CharFilter(field_name='housing__building', lookup_expr='iexact')
     housing_room_no = filters.CharFilter(field_name='housing__room_no', lookup_expr='iexact')
     # TODO: strip out all non-alphanumeric characters for aliases
