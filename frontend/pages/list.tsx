@@ -298,7 +298,7 @@ const List: React.FC<Props> = ({headerData}) => {
             listURL += `?page=1&${explicitQuery}`;
         } else if ('q' in routerQuery) {
             listURL += `?page=${page}&q=${routerQuery.q}`;
-        } else if (firstQuery !== '') {
+        } else {
             listURL += `?page=${page}`;
         }
         console.log('listURL', listURL)
