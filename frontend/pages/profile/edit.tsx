@@ -178,7 +178,7 @@ const reducer = (prev: Permissions, next: Permissions) => {
 const ProfileEdit: React.FC<Props> = ({
                                           data, headerData, concentrations,
                                           tracks, residentialColleges,
-                                          classYears,  pronouns, certificates,
+                                          classYears, pronouns, certificates,
                                           interests, extracurriculars, positions, completeHousing,
                                           researchTypes
                                       }) => {
@@ -215,8 +215,9 @@ const ProfileEdit: React.FC<Props> = ({
     const [isImageReady, setIsImageReady] = useState(false);
 
     async function fetch() {
-        const axios = await  axiosInstance()
+        const axios = await axiosInstance()
         const axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/cities/`)
+        console.log('completed fetch')
         setHometowns(axiosResponse.data)
         setCurrentCities(axiosResponse.data)
     }
