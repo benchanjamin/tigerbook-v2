@@ -124,12 +124,25 @@ const List: React.FC<Props> = ({headerData}) => {
 
     async function onEnter() {
         setPage(1)
+        console.log('page1', page)
         setIsExplicitSearching(true)
+        console.log('page2', page)
+
         setIsLoading(true)
+        console.log('page3', page)
+
         setListResults([])
+        console.log('page4', page)
+
         await router.push(`/list?q=${encodeURIComponent(query)}`)
+        console.log('page5', page)
+
         await fetchUserData(encodeURIComponent(query))
+        console.log('page6', page)
+
         setIsExplicitSearching(false)
+        console.log('page7', page)
+
     }
 
     async function fetchUserData(explicitQuery) {
@@ -141,6 +154,8 @@ const List: React.FC<Props> = ({headerData}) => {
         } else if ('q' in query) {
             listURL += `?page=${page}&q=${query.q}`;
         }
+        console.log('page8', page)
+
         console.log('listURL', listURL)
         const axiosResponse = await axios.get(listURL)
         const listData: List = axiosResponse.data;
