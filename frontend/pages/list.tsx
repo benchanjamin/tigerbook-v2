@@ -117,15 +117,16 @@ const List: React.FC<Props> = ({headerData}) => {
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const [listResults, setListResults] = useState<ListUser[]>([]);
+    const [hasNextPage, setHasNextPage] = useState(false);
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     async function onEnter() {
         await router.push(`/list?q=${encodeURIComponent(query)}`)
-        setIsLoading(true)
-        setListResults([])
-        setPage(1)
-        await fetchUserData(encodeURIComponent(query))
+        // setIsLoading(true)
+        // setListResults([])
+        // setPage(1)
+        // await fetchUserData(encodeURIComponent(query))
     }
 
     async function fetchUserData(explicitQuery) {
@@ -142,6 +143,7 @@ const List: React.FC<Props> = ({headerData}) => {
         const listData: List = axiosResponse.data;
         setIsLoading(false)
         setListResults((prev) => [...prev, ...listData.results]);
+        setHasNextPage(listData.next !== null);
     }
 
     useEffect(() => {
@@ -193,7 +195,7 @@ const List: React.FC<Props> = ({headerData}) => {
                                 {listResults?.map((listUser, index) => (
                                     <Card key={index} personData={listUser}
                                           isLast={index === listResults.length - 1}
-                                          newLimit={() => setPage((prev) => prev + 1)}
+                                          newLimit={hasNextPage ? () => setPage((prev) => prev + 1) : () => {}}
                                     />
                                 ))}
                             </div>

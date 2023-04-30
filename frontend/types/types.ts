@@ -45,7 +45,7 @@ export type SetupTwoPost = FormData
 
 export interface List {
     count: number,
-    next: string,
+    next: string | null,
     previous: string,
     results: ListUser[]
 }
