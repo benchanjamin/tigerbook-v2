@@ -61,16 +61,16 @@ function TigerMap() {
                 .append("g").attr("class", "city")
                 .attr("transform", d => `translate(${[projection([d.longitude, d.latitude])]})`)
                 .each(function (d1) {
-                    d3.select(this).append("circle").style("fill", highlightColor).raise()
+                    d3.select(this).append("circle").attr("fill", highlightColor).raise()
                         .attr('r', Math.sqrt(d1.count) + 2)
                         .attr('transform', `scale(${(1)})`)
                         .on("mouseenter", (d2) => {
                             showTooltip(d2);
-                            d3.select(this).select("circle").style("fill", highlightColor);
+                            d3.select(this).select("circle").attr("fill", highlightColor);
                         })
                         .on("mouseleave", () => {
                             hideTooltip();
-                            d3.select(this).select("circle").style("fill", defaultColor);
+                            d3.select(this).select("circle").attr("fill", defaultColor);
                         })
                 });
             // })
@@ -234,12 +234,12 @@ function TigerMap() {
                         .attr('transform', `scale(${currentScaleValue})`)
                         .on("mouseenter", (d2) => {
                             showTooltip(d2);
-                            d3.select(this).select("circle").style("fill", highlightColor);
+                            d3.select(this).select("circle").attr("fill", highlightColor);
                         })
                         .on("mouseleave", () => {
                             hideTooltip();
                             // Add +1 to i1 index because 0th index is path.country while rest are g.city
-                            d3.select(this).select("circle").style("fill", defaultColor)
+                            d3.select(this).select("circle").attr("fill", defaultColor)
                         })
                 });
         }
@@ -275,12 +275,12 @@ function TigerMap() {
                         .attr('transform', `scale(${currentScaleValue})`)
                         .on("mouseenter", (d2) => {
                             showTooltip(d2);
-                            d3.select(this).select("circle").style("fill", highlightColor);
+                            d3.select(this).select("circle").attr("fill", highlightColor);
                         })
                         .on("mouseleave", () => {
                             hideTooltip();
                             // Add +1 to i1 index because 0th index is path.country while rest are g.city
-                            d3.select(this).select("circle").style("fill", defaultColor)
+                            d3.select(this).select("circle").attr("fill", defaultColor)
                         })
                 });
         }
