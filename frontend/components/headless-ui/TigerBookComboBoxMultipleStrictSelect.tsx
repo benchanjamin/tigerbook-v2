@@ -85,9 +85,6 @@ export default function TigerBookComboBoxMultipleStrictSelect(
                                 )
                             })}
                         </div>
-                        {data && data.length === 0 &&
-                            <Spinner color="warning"/>
-                        }
                         <Combobox.Input
                             className="w-full py-2 pl-1 pr-10 text-sm leading-5 text-gray-900 focus:ring-0
                         focus:outline-none
@@ -114,7 +111,7 @@ export default function TigerBookComboBoxMultipleStrictSelect(
                 >
                     <Combobox.Options>
                         {(
-                            <VirtualizedList items={filteredStrings ?? []}
+                            <VirtualizedList data={data} items={filteredStrings ?? []}
                             />
                         )}
                     </Combobox.Options>
@@ -127,6 +124,7 @@ export default function TigerBookComboBoxMultipleStrictSelect(
 
 function VirtualizedList({
                              items,
+                             data
                          }: { items: string[] }) {
     const parentRef = useRef<HTMLDivElement>(null);
 
@@ -149,6 +147,9 @@ function VirtualizedList({
                     position: 'relative',
                 }}
             >
+                {data && data.length === 0 &&
+                    <Spinner color="warning"/>
+                }
                 {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
                     <Combobox.Option
                         key={virtualRow.index}
