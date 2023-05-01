@@ -415,26 +415,12 @@ const Search: React.FC<Props> = ({headerData}) => {
                     additionalEncodedParameterizedQueries += `${encodeURIComponent(extracurricularPosition)}`
                 }
             })
-            if (hometownCompleteCitiesQuery?.length > 0) {
-                additionalEncodedParameterizedQueries += `&hometown_complete_city=`
+            if (hometownCompleteCitiesQuery !== null) {
+                additionalEncodedParameterizedQueries += `&hometown_complete_city=${encodeURIComponent(hometownCompleteCitiesQuery)}`
             }
-            hometownCompleteCitiesQuery?.forEach((hometown, index) => {
-                if (index !== hometownCompleteCitiesQuery.length - 1) {
-                    additionalEncodedParameterizedQueries += `${encodeURIComponent(hometown)},`
-                } else {
-                    additionalEncodedParameterizedQueries += `${encodeURIComponent(hometown)}`
-                }
-            })
-            if (currentCityCompleteCitiesQuery?.length > 0) {
-                additionalEncodedParameterizedQueries += `&current_city_complete_city=`
+            if (currentCityCompleteCitiesQuery !== null) {
+                additionalEncodedParameterizedQueries += `&current_city_complete_city=${encodeURIComponent(currentCityCompleteCitiesQuery)}`
             }
-            currentCityCompleteCitiesQuery?.forEach((currentCity, index) => {
-                if (index !== currentCityCompleteCitiesQuery.length - 1) {
-                    additionalEncodedParameterizedQueries += `${encodeURIComponent(currentCity)},`
-                } else {
-                    additionalEncodedParameterizedQueries += `${encodeURIComponent(currentCity)}`
-                }
-            })
             // await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
             if (!ignore) {
                 setPage(1)
