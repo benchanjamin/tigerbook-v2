@@ -314,7 +314,7 @@ const List: React.FC<Props> = ({headerData}) => {
 
     useEffect(() => {
         onSearchFiltering()
-    }, [concentrationsQuery, tracksQuery]);
+    }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery]);
 
 
     async function onEnter() {
