@@ -155,6 +155,9 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [extracurricularPositionsQuery, setExtracurricularPositionsQuery] = useState(null);
     const [hometownCompleteCitiesQuery, setHometownCompleteCitiesQuery] = useState(null);
     const [currentCityCompleteCitiesQuery, setCurrentCityCompleteCitiesQuery] = useState(null);
+    const [housingLocationQuery, setHousingLocationQuery] = useState(null);
+    const [housingBuildingQuery, setHousingBuildingQuery] = useState(null);
+    const [researchTypeQuery, setResearchTypeQuery] = useState(null);
 
     // search list
     const [concentrationsList, setConcentrationsList] = useState([]);
@@ -168,7 +171,9 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [extracurricularPositionsList, setExtracurricularPositionsList] = useState([]);
     const [hometownCompleteCitiesList, setHometownCompleteCitiesList] = useState([]);
     const [currentCityCompleteCitiesList, setCurrentCityCompleteCitiesList] = useState([]);
-
+    const [housingLocationList, setHousingLocationList] = useState([]);
+    const [housingBuildingList, setHousingBuildingList] = useState([]);
+    const [researchTypeList, setResearchTypeList] = useState([]);
 
 
     async function fetch() {
@@ -186,6 +191,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             '/api-django/extracurriculars/',
             '/api-django/extracurricular-positions/',
             '/api-django/housing/',
+            '/api-django/housing/buildings/',
             '/api-django/research-types/',
             '/api-django/cities/',
         ]
@@ -241,7 +247,22 @@ const Search: React.FC<Props> = ({headerData}) => {
                         return
                     }
 
-                    if (index == 10) {
+                    if (index === 9) {
+                        setHousingLocationList(response.data)
+                        return
+                    }
+
+                    if (index === 10) {
+                        setHousingBuildingList(response.data)
+                        return
+                    }
+
+                    if (index === 11) {
+                        setResearchTypeList(response.data)
+                        return
+                    }
+
+                    if (index == 12) {
                         setHometownCompleteCitiesList(response.data)
                         setCurrentCityCompleteCitiesList(response.data.slice())
                         return
@@ -312,7 +333,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             let additionalEncodedParameterizedQueries = ''
             // if concentrationsQuery has at least one element, then we need to add it to the query
             if (concentrationsQuery?.length > 0) {
-                additionalEncodedParameterizedQueries += `&concentration=`
+                additionalEncodedParameterizedQueries += `&concentrations=`
             }
             concentrationsQuery?.forEach((concentration, index) => {
                 if (index !== concentrationsQuery.length - 1) {
@@ -323,7 +344,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             })
             // likewise for tracksQuery
             if (tracksQuery?.length > 0) {
-                additionalEncodedParameterizedQueries += `&track=`
+                additionalEncodedParameterizedQueries += `&tracks=`
             }
             tracksQuery?.forEach((track, index) => {
                 if (index !== tracksQuery.length - 1) {
@@ -334,7 +355,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             })
             // likewise for classYearsQuery
             if (classYearsQuery?.length > 0) {
-                additionalEncodedParameterizedQueries += `&class_year=`
+                additionalEncodedParameterizedQueries += `&class_years=`
             }
             classYearsQuery?.forEach((class_year, index) => {
                 if (index !== classYearsQuery.length - 1) {
@@ -345,7 +366,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             })
             // likewise for resCollegesQuery
             if (resCollegesQuery?.length > 0) {
-                additionalEncodedParameterizedQueries += `&residential_college=`
+                additionalEncodedParameterizedQueries += `&residential_colleges=`
             }
             resCollegesQuery?.forEach((residential_college, index) => {
                 if (index !== resCollegesQuery.length - 1) {
@@ -365,6 +386,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                     additionalEncodedParameterizedQueries += `${encodeURIComponent(certificates)}`
                 }
             })
+            // likewise for pronounsQuery
             if (pronounsQuery?.length > 0) {
                 additionalEncodedParameterizedQueries += `&pronouns=`
             }
@@ -375,6 +397,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                     additionalEncodedParameterizedQueries += `${encodeURIComponent(pronouns)}`
                 }
             })
+            // likewise for interestsQuery
             if (interestsQuery?.length > 0) {
                 additionalEncodedParameterizedQueries += `&interests=`
             }
@@ -385,16 +408,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                     additionalEncodedParameterizedQueries += `${encodeURIComponent(interest)}`
                 }
             })
-            if (interestsQuery?.length > 0) {
-                additionalEncodedParameterizedQueries += `&interests=`
-            }
-            interestsQuery?.forEach((interest, index) => {
-                if (index !== interestsQuery.length - 1) {
-                    additionalEncodedParameterizedQueries += `${encodeURIComponent(interest)},`
-                } else {
-                    additionalEncodedParameterizedQueries += `${encodeURIComponent(interest)}`
-                }
-            })
+            // likewise for extracurricularsQuery
             if (extracurricularsQuery?.length > 0) {
                 additionalEncodedParameterizedQueries += `&extracurriculars=`
             }
@@ -405,6 +419,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                     additionalEncodedParameterizedQueries += `${encodeURIComponent(extracurricular)}`
                 }
             })
+            // likewise for extracurricularPositionsQuery
             if (extracurricularPositionsQuery?.length > 0) {
                 additionalEncodedParameterizedQueries += `&extracurricular_positions=`
             }
@@ -415,12 +430,49 @@ const Search: React.FC<Props> = ({headerData}) => {
                     additionalEncodedParameterizedQueries += `${encodeURIComponent(extracurricularPosition)}`
                 }
             })
+            // likewise for hometownCompleteCitiesQuery
             if (hometownCompleteCitiesQuery !== null) {
                 additionalEncodedParameterizedQueries += `&hometown_complete_city=${encodeURIComponent(hometownCompleteCitiesQuery)}`
             }
+            // likewise for currentCityCompleteCitiesQuery
             if (currentCityCompleteCitiesQuery !== null) {
                 additionalEncodedParameterizedQueries += `&current_city_complete_city=${encodeURIComponent(currentCityCompleteCitiesQuery)}`
             }
+            // likewise for housingBuildingQuery
+            if (housingBuildingQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&housing_buildings=`
+            }
+            housingBuildingQuery?.forEach((housingBuilding, index) => {
+                if (index !== housingBuildingQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(housingBuilding)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(housingBuilding)}`
+                }
+            })
+            // likewise for housingLocationQuery
+            if (housingLocationQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&housing_locations=`
+            }
+            housingLocationQuery?.forEach((housingLocation, index) => {
+                if (index !== housingLocationQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(housingLocation)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(housingLocation)}`
+                }
+            })
+            // likewise for researchTypeQuery
+            if (researchTypeQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&research_types=`
+            }
+            researchTypeQuery?.forEach((researchType, index) => {
+                if (index !== researchTypeQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(researchType)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(researchType)}`
+                }
+            })
+
+
             // await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
             if (!ignore) {
                 setPage(1)
@@ -437,7 +489,7 @@ const Search: React.FC<Props> = ({headerData}) => {
         };
     }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery, certificatesQuery, pronounsQuery,
         interestsQuery, extracurricularsQuery, extracurricularPositionsQuery, hometownCompleteCitiesQuery,
-        currentCityCompleteCitiesQuery]);
+        currentCityCompleteCitiesQuery, housingBuildingQuery, housingLocationQuery]);
 
     useEffect(() => {
         let ignore = false;
@@ -802,35 +854,31 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                 />
                                             </li>
                                             <li>
-                                                <label htmlFor="current-city"
-                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
-                                                    Current City</label>
-                                                <TigerBookComboBoxSingleStrictSelect
-                                                    data={currentCityCompleteCitiesList}
-                                                    defaultText="Select current city"
-                                                    initialSelected={null}
-                                                    zIndex={23}
-                                                    setterFunction={setCurrentCityCompleteCitiesQuery}
+                                                <label htmlFor="housing-building"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Extracurriculars</label>
+                                                <TigerBookComboBoxMultipleStrictSelect
+                                                    data={extracurricularsList}
+                                                    defaultText="Select extracurriculars"
+                                                    initialSelected={[]}
+                                                    zIndex={22}
+                                                    setterFunction={setExtracurricularsQuery}
                                                     className="ml-1"
                                                     clearState={clearAll}
                                                     clearStateFunction={setClearAll}
-                                                    defaultOptionText="Select none"
                                                 />
                                             </li>
                                             <li>
-                                                <label htmlFor="current-city"
-                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
-                                                    Current City</label>
-                                                <TigerBookComboBoxSingleStrictSelect
-                                                    data={currentCityCompleteCitiesList}
-                                                    defaultText="Select current city"
-                                                    initialSelected={null}
-                                                    zIndex={23}
-                                                    setterFunction={setCurrentCityCompleteCitiesQuery}
+                                                <label htmlFor="housing-room"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Extracurriculars</label>
+                                                <TigerBookComboBoxMultipleStrictSelect
+                                                    data={extracurricularsList}
+                                                    defaultText="Select extracurriculars"
+                                                    initialSelected={[]}
+                                                    zIndex={21}
+                                                    setterFunction={setExtracurricularsQuery}
                                                     className="ml-1"
                                                     clearState={clearAll}
                                                     clearStateFunction={setClearAll}
-                                                    defaultOptionText="Select none"
                                                 />
                                             </li>
                                         </ul>
