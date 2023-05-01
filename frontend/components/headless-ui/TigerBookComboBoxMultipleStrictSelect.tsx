@@ -163,7 +163,7 @@ function VirtualizedList({
                             transform: `translateY(${virtualRow.start}px)`,
                         }}
                         className={({active}) =>
-                            `relative cursor-pointer select-none py-2 pl-1 pr-4 ${
+                            `relative cursor-pointer select-none py-2 pl-2 pr-4 ${
                                 active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
                             }`
                         }
