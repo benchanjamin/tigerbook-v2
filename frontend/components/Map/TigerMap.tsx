@@ -206,7 +206,7 @@ function TigerMap() {
         async function updateHometowns() {
             d3.select(svgRef.current).select("g").selectAll("g.city").remove();
 
-            let axios = await axiosLocalhost()
+            let axios = await axiosInstance()
             let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/map/hometown/`)
             const mapData: TigerBookMap[] = axiosResponse.data
             // d3.json('/static/cleaned-data-12-4.geojson').then(function (data) {
@@ -247,7 +247,7 @@ function TigerMap() {
         async function updateCurrentCities() {
             d3.select(svgRef.current).select("g").selectAll("g.city").remove();
 
-            let axios = await axiosLocalhost()
+            let axios = await axiosInstance()
             let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/map/current-city/`)
             const mapData: TigerBookMap[] = axiosResponse.data
             // d3.json('/static/cleaned-data-12-4.geojson').then(function (data) {
