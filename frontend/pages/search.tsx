@@ -166,7 +166,7 @@ const Search: React.FC<Props> = ({headerData}) => {
 
     async function fetch() {
 
-        const axios = await axiosLocalhost();
+        const axios = await axiosInstance();
 
         const apiListAPIRoutes = [
             '/api-django/concentrations/',
