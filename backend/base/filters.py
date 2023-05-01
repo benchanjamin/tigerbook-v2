@@ -42,7 +42,7 @@ class UndergraduateDirectoryListFilter(filters.FilterSet):
     extracurricular_positions = MultiValueCharFilter(field_name='extracurricular_position_objs__position',
                                                      lookup_expr='iexact')
     extracurricular_subgroup = MultiValueCharFilter(field_name='extracurricular_objs__subgroup', lookup_expr='iexact')
-    research_research_type = MultiValueCharFilter(field_name='research_objs__research_type', lookup_expr='iexact')
+    research_type = MultiValueCharFilter(field_name='research_objs__research_type', lookup_expr='iexact')
 
     class Meta:
         model = UndergraduateTigerBookDirectory
