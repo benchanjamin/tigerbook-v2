@@ -530,7 +530,7 @@ class UndergraduateTigerBookHousingSerializer(serializers.RelatedField):
     # TODO: referenced
     #  https://stackoverflow.com/questions/35257698/what-is-serializers-to-internal-value-method-used-for-in-django
     def to_internal_value(self, data):
-        # data is the room str, e.g. "FORBES, 307"
+        # data is the room str, e.g. "FORBES 307"
         # enforce that the data type is a string
         if not isinstance(data, str):
             raise serializers.ValidationError(
@@ -538,11 +538,7 @@ class UndergraduateTigerBookHousingSerializer(serializers.RelatedField):
             )
         data = data.split(", ")
         try:
-            if len(data) != 2:
-                raise serializers.ValidationError(
-                    'Entered # of commas is not 1 followed by a space for a housing location')
-            building, room_no = data
-            return UndergraduateTigerBookHousing.objects.get(building__iexact=building, room_no=room_no)
+            return UndergraduateTigerBookHousing.objects.get(entire_location_string=data)
         except TigerBookCities.DoesNotExist as exception:
             raise serializers.ValidationError(
                 'UndergraduateTigerBookHousing object does not exist.'
