@@ -95,12 +95,16 @@ export default function TigerBookComboBoxMultipleStrictSelect(
                             placeholder={defaultText}
                         />
                     </div>
+                    {data && data.length === 0 ?
+                        <Spinner color="warning"/>
+                    :
                     <Combobox.Button className="absolute bottom-[8px] right-0 flex items-center pr-2">
                         <ChevronUpDownIcon
                             className="h-5 w-5 text-gray-400"
                             aria-hidden="true"
                         />
                     </Combobox.Button>
+                    }
                 </div>
                 <Transition
                     as={Fragment}
@@ -138,7 +142,7 @@ function VirtualizedList({
 
     return (
         <div ref={parentRef}
-             className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white h-8 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+             className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
         >
             <div
                 style={{
@@ -146,11 +150,7 @@ function VirtualizedList({
                     width: '100%',
                     position: 'relative',
                 }}
-                className="text-center"
             >
-                {data && data.length === 0 &&
-                    <Spinner color="warning"/>
-                }
                 {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
                     <Combobox.Option
                         key={virtualRow.index}
