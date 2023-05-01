@@ -537,7 +537,6 @@ class UndergraduateTigerBookHousingSerializer(serializers.RelatedField):
             raise serializers.ValidationError(
                 'Housing must be a string.'
             )
-        data = data.split(", ")
         try:
             return UndergraduateTigerBookHousing.objects.get(entire_location_string=data)
         except TigerBookCities.DoesNotExist as exception:
