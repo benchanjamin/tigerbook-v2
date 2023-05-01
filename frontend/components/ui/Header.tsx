@@ -87,9 +87,9 @@ const Header: FC<Props> = function ({
                                 <NavbarLink href="/search">Search</NavbarLink>
                                 {/*<NavbarLink href="/list">List</NavbarLink>*/}
                                 {/*<NavbarLink href="/groups">Groups</NavbarLink>*/}
-                                <NavbarLink href="/notes">Notes</NavbarLink>
+                                {/*<NavbarLink href="/notes">Notes</NavbarLink>*/}
                                 <NavbarLink href="/visualize">Visualize</NavbarLink>
-                                <NavbarLink href="/suggest">Suggest</NavbarLink>
+                                {/*<NavbarLink href="/suggest">Suggest</NavbarLink>*/}
                             </Navbar.Collapse>
                         </>
                     }
