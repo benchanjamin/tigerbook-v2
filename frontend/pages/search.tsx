@@ -153,8 +153,8 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [interestsQuery, setInterestsQuery] = useState(null);
     const [extracurricularsQuery, setExtracurricularsQuery] = useState(null);
     const [extracurricularPositionsQuery, setExtracurricularPositionsQuery] = useState(null);
-    const [hometownCompleteCitiesQuery, setHometownCompleteCitiesQuery] = useState([]);
-    const [currentCityCompleteCitiesQuery, setCurrentCityCompleteCitiesQuery] = useState([]);
+    const [hometownCompleteCitiesQuery, setHometownCompleteCitiesQuery] = useState(null);
+    const [currentCityCompleteCitiesQuery, setCurrentCityCompleteCitiesQuery] = useState(null);
 
     // search list
     const [concentrationsList, setConcentrationsList] = useState([]);
@@ -242,8 +242,6 @@ const Search: React.FC<Props> = ({headerData}) => {
                     }
 
                     if (index == 10) {
-                        console.log('cities', response.data)
-                        // console.log('current cities', hometownCompleteCitiesList)
                         setHometownCompleteCitiesList(response.data)
                         setCurrentCityCompleteCitiesList(response.data.slice())
                         return
