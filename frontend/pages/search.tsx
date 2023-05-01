@@ -169,6 +169,9 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [hometownCompleteCitiesList, setHometownCompleteCitiesList] = useState([]);
     const [currentCityCompleteCitiesList, setCurrentCityCompleteCitiesList] = useState([]);
 
+    console.log('hometowns', currentCityCompleteCitiesList)
+    console.log('current cities', hometownCompleteCitiesList)
+
     async function fetch() {
 
         const axios = await axiosInstance();
