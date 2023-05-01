@@ -340,6 +340,67 @@ const Search: React.FC<Props> = ({headerData}) => {
                     additionalEncodedParameterizedQueries += `${encodeURIComponent(residential_college)}`
                 }
             })
+            // likewise for resCollegesQuery
+            if (certificatesQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&certificates=`
+            }
+            certificatesQuery?.forEach((certificates, index) => {
+                if (index !== certificatesQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(certificates)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(certificates)}`
+                }
+            })
+            if (pronounsQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&pronouns=`
+            }
+            pronounsQuery?.forEach((pronouns, index) => {
+                if (index !== pronounsQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(pronouns)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(pronouns)}`
+                }
+            })
+            if (interestsQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&interests=`
+            }
+            interestsQuery?.forEach((interest, index) => {
+                if (index !== interestsQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(interest)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(interest)}`
+                }
+            })
+            if (interestsQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&interests=`
+            }
+            interestsQuery?.forEach((interest, index) => {
+                if (index !== interestsQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(interest)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(interest)}`
+                }
+            })
+            if (extracurricularsQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&extracurriculars=`
+            }
+            extracurricularsQuery?.forEach((extracurricular, index) => {
+                if (index !== extracurricularsQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(extracurricular)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(extracurricular)}`
+                }
+            })
+            if (extracurricularPositionsQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&extracurricular_positions=`
+            }
+            extracurricularPositionsQuery?.forEach((extracurricularPosition, index) => {
+                if (index !== extracurricularPositionsQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(extracurricularPosition)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(extracurricularPosition)}`
+                }
+            })
             // await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
             setPage(1)
             setAdditionalQueries(additionalEncodedParameterizedQueries)
@@ -354,7 +415,7 @@ const Search: React.FC<Props> = ({headerData}) => {
         return () => {
             ignore = true;
         };
-    }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery]);
+    }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery, certificatesQuery, pronounsQuery, interestsQuery, extracurricularsQuery, extracurricularPositionsQuery]);
 
     useEffect(() => {
         let ignore = false;
