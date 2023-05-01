@@ -238,7 +238,8 @@ const Search: React.FC<Props> = ({headerData}) => {
                     }
 
                     if (index == 10) {
-
+                        setHometownCompleteCities(response.data)
+                        setCurrentCityCompleteCities(response.data.slice())
                     }
 
                     listData[keys[index]] = response.data.map((item) => item[indices[index]])
@@ -471,6 +472,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             const axios = await axiosInstance();
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
             console.log('SearchURL', listURL)
+            listURL += `${additionalQueries}`
             const axiosResponse = await axios.get(listURL)
             const listData: List = axiosResponse.data;
             setIsLoading(true)
