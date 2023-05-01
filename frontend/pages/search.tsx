@@ -571,6 +571,9 @@ const Search: React.FC<Props> = ({headerData}) => {
         setExtracurricularPositionsQuery([])
         setHometownCompleteCitiesQuery(null)
         setCurrentCityCompleteCitiesQuery(null)
+        setHousingBuildingsQuery([])
+        setHousingLocationsQuery([])
+        setResearchTypesQuery([])
         setClearAll(true)
     }
 
