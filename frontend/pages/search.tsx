@@ -169,8 +169,7 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [hometownCompleteCitiesList, setHometownCompleteCitiesList] = useState([]);
     const [currentCityCompleteCitiesList, setCurrentCityCompleteCitiesList] = useState([]);
 
-    console.log('hometowns', currentCityCompleteCitiesList)
-    console.log('current cities', hometownCompleteCitiesList)
+
 
     async function fetch() {
 
@@ -243,6 +242,8 @@ const Search: React.FC<Props> = ({headerData}) => {
                     }
 
                     if (index == 11) {
+                        console.log('cities', response.data)
+                        // console.log('current cities', hometownCompleteCitiesList)
                         setHometownCompleteCitiesList(response.data)
                         setCurrentCityCompleteCitiesList(response.data.slice())
                         return
