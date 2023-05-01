@@ -296,7 +296,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                     }
 
                     if (index === 9) {
-                        setHousingLocationsList(response.data)
+                        setHousingLocationsList(listData.completeHousing)
                     }
                 });
 
