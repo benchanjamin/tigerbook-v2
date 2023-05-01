@@ -4,11 +4,19 @@ import {CheckIcon, ChevronUpDownIcon, XMarkIcon} from '@heroicons/react/20/solid
 import {useVirtualizer} from '@tanstack/react-virtual'
 
 export default function TigerBookComboBoxMultipleStrictSelect(
-    {data, defaultText, zIndex, initialSelected, setterFunction, className}:
+    {data, defaultText, zIndex, initialSelected, setterFunction, className, clearState, clearStateFunction}:
         { data: string[], defaultText: string, zIndex: number, initialSelected: string[], setterFunction: (value: string) => void }) {
     // const input = useRef<HTMLInputElement>(null)
     const [selected, setSelected] = useState<string[]>(initialSelected)
     const [query, setQuery] = useState('')
+
+
+    useEffect(() => {
+        if (clearState) {
+            setSelected([])
+            clearStateFunction(false)
+        }
+    }, [clearState, clearStateFunction, setSelected])
 
     // useEffect(() => {
     //     // add default option to front of data array if it does exist

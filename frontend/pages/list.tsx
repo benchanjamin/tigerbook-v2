@@ -131,8 +131,9 @@ interface ListData {
 
 const List: React.FC<Props> = ({headerData}) => {
     const [firstQuery, setFirstQuery] = useState('');
-    const [additionalQueries, setAdditionalQueries] = useState('');
+    // const [additionalQueries, setAdditionalQueries] = useState('');
 
+    const [clearAll, setClearAll] = useState(false);
     const [page, setPage] = useState(1);
     const [listResults, setListResults] = useState<ListUser[]>([]);
     const [hasNextPage, setHasNextPage] = useState(false);
@@ -263,42 +264,6 @@ const List: React.FC<Props> = ({headerData}) => {
                 });
 
             });
-
-        // for (const [index, apiRoute] of apiListAPIRoutes.entries()) {
-        //     const axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiRoute}`)
-        //     console.log('incoming', axiosResponse.data)
-        //     if (axiosResponse.data.length === 0) {
-        //         continue
-        //     }
-        //     listData[keys[index]] = axiosResponse.data.map((item) => item[indices[index]])
-        //     if (index === 0) {
-        //         setConcentrationsList(listData.concentrations)
-        //     }
-        //     if (index === 1) {
-        //         setTracksList(listData.tracks)
-        //     }
-        //     if (index === 2) {
-        //         setClassYearsList(listData.classYears)
-        //     }
-        //     if (index === 3) {
-        //         setResCollegesList(listData.residentialColleges)
-        //     }
-        //     if (index === 4) {
-        //         setCertificatesList(listData.certificates)
-        //     }
-        //     if (index === 5) {
-        //         setPronounsList(listData.pronouns)
-        //     }
-        //     if (index === 6) {
-        //         setInterestsList(listData.interests)
-        //     }
-        //     if (index === 7) {
-        //         setExtracurricularsList(listData.extracurriculars)
-        //     }
-        //     if (index === 8) {
-        //         setExtracurricularPositionsList(listData.positions)
-        //     }
-        // }
     }
 
     useEffect(() => {
@@ -357,7 +322,7 @@ const List: React.FC<Props> = ({headerData}) => {
         })
         // await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
         setPage(1)
-        setAdditionalQueries(additionalEncodedParameterizedQueries)
+        // setAdditionalQueries(additionalEncodedParameterizedQueries)
         await fetchUserData(firstEncodedParameterizedQuery.concat(additionalEncodedParameterizedQueries))
         setIsExplicitSearching(false)
     }
@@ -365,7 +330,6 @@ const List: React.FC<Props> = ({headerData}) => {
     useEffect(() => {
         onSearchFiltering()
     }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery]);
-
 
     async function onEnter() {
         setIsExplicitSearching(true)
@@ -412,16 +376,7 @@ const List: React.FC<Props> = ({headerData}) => {
         setInterestsQuery([])
         setExtracurricularsQuery([])
         setExtracurricularPositionsQuery([])
-        //     set all lists to empty
-        setTracksList([])
-        setConcentrationsList([])
-        setClassYearsList([])
-        setResCollegesList([])
-        setCertificatesList([])
-        setPronounsList([])
-        setInterestsList([])
-        setExtracurricularsList([])
-        setExtracurricularPositionsList([])
+        setClearAll(true)
     }
 
     return (
@@ -532,6 +487,8 @@ const List: React.FC<Props> = ({headerData}) => {
                                                     zIndex={50}
                                                     setterFunction={setConcentrationsQuery}
                                                     className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
                                                 />
                                             </li>
                                             <li>
@@ -544,6 +501,8 @@ const List: React.FC<Props> = ({headerData}) => {
                                                     zIndex={40}
                                                     setterFunction={setTracksQuery}
                                                     className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
                                                 />
                                             </li>
                                             <li>
@@ -558,6 +517,8 @@ const List: React.FC<Props> = ({headerData}) => {
                                                     zIndex={31}
                                                     setterFunction={setClassYearsQuery}
                                                     className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
                                                 />
                                             </li>
                                             <li>
@@ -571,6 +532,8 @@ const List: React.FC<Props> = ({headerData}) => {
                                                     zIndex={30}
                                                     setterFunction={setResCollegesQuery}
                                                     className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
                                                 />
                                             </li>
                                         </ul>
