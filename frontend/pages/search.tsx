@@ -241,7 +241,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                         return
                     }
 
-                    if (index == 11) {
+                    if (index == 10) {
                         console.log('cities', response.data)
                         // console.log('current cities', hometownCompleteCitiesList)
                         setHometownCompleteCitiesList(response.data)
