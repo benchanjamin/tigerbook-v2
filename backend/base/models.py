@@ -497,6 +497,7 @@ class UndergraduateTigerBookHousing(models.Model):
     building = models.TextField(null=False, blank=False)
     room_no = models.TextField(null=False, blank=False)
     date_added = models.DateField(auto_now_add=True)
+    entire_location_string = models.TextField(null=False, blank=False)
 
     def __repr__(self):
         return f"{self.building} {self.room_no}"
