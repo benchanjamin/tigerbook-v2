@@ -242,6 +242,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                     if (index == 10) {
                         setHometownCompleteCitiesList(response.data)
                         setCurrentCityCompleteCitiesList(response.data.slice())
+                        return
                     }
 
                     listData[keys[index]] = response.data.map((item) => item[indices[index]])

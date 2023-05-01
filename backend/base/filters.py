@@ -31,7 +31,7 @@ class UndergraduateDirectoryListFilter(filters.FilterSet):
                                                lookup_expr='iexact')
     concentration = MultiValueCharFilter(field_name="concentration__concentration", lookup_expr='iexact')
     housing_building = MultiValueCharFilter(field_name='housing__building', lookup_expr='iexact')
-    # housing_room_no = filters.CharFilter(field_name='housing__room_no', lookup_expr='iexact')
+    housing_room_no = MultiValueCharFilter(field_name='housing__room_no', lookup_expr='iexact')
     pronouns = MultiValueCharFilter(field_name='pronouns__pronouns', lookup_expr='iexact')
     certificates = MultiValueCharFilter(field_name='certificates__certificate', lookup_expr='iexact')
     hometown_complete_city = filters.CharFilter(field_name='hometown__entire_location_string', lookup_expr='iexact')
@@ -41,8 +41,8 @@ class UndergraduateDirectoryListFilter(filters.FilterSet):
     extracurriculars = MultiValueCharFilter(field_name='extracurricular_objs__extracurricular', lookup_expr='iexact')
     extracurricular_positions = MultiValueCharFilter(field_name='extracurricular_position_objs__position',
                                                      lookup_expr='iexact')
-    extracurricular_subgroup = filters.CharFilter(field_name='extracurricular_objs__subgroup', lookup_expr='iexact')
-    research_research_type = filters.CharFilter(field_name='research_objs__research_type', lookup_expr='iexact')
+    extracurricular_subgroup = MultiValueCharFilter(field_name='extracurricular_objs__subgroup', lookup_expr='iexact')
+    research_research_type = MultiValueCharFilter(field_name='research_objs__research_type', lookup_expr='iexact')
 
     class Meta:
         model = UndergraduateTigerBookDirectory
