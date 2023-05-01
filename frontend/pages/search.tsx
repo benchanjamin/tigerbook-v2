@@ -239,7 +239,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                         return
                     }
 
-                    if (index == 9) {
+                    if (index == 11) {
                         setHometownCompleteCitiesList(response.data)
                         setCurrentCityCompleteCitiesList(response.data.slice())
                         return
