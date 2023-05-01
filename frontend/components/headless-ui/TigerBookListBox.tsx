@@ -13,7 +13,7 @@ const TigerBookListBox : FC = ({data, initialSelected, defaultText, zIndex, sett
             <div className="relative mt-1">
                 <Listbox.Button
                     className="relative w-full cursor-pointer rounded-lg
-                     bg-white py-2 pl-3 pr-10 text-left shadow-lg  border border-primary-200
+                     bg-white py-2 pl-3 text-left shadow-lg  border border-primary-200
                      focus:outline-none focus-visible:border-primary-500
                      focus-visible:ring-2 focus-visible:ring-white
                       focus-visible:ring-opacity-75 focus-visible:ring-offset-2

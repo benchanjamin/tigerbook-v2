@@ -113,7 +113,7 @@ function TigerBookComboBoxMultipleFFASelect({placeholder, dropdownDefaultDescrip
                             })}
                         </div>
                         <Combobox.Input
-                            className="py-2 pr-10 text-sm leading-5 text-gray-900 focus:ring-0
+                            className="py-2 text-sm leading-5 text-gray-900 focus:ring-0
                         focus:outline-none w-full
                         "
                             onChange={(event) => setQuery(event.target.value)}
