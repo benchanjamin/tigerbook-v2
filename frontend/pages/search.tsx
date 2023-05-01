@@ -541,7 +541,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                 }
                 <main className="flex h-full">
 
-                    <div className="order-2 mx-1 sm:mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
+                    <div className="order-2 sm:mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
                         <Container className="bg-gray-50 pt-4 rounded-2xl pb-10 dark:bg-gray-800">
                             <div className="flex flex-col md:flex-row items-center justify-center gap-x-4">
                                 <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
