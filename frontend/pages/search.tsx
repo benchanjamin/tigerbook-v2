@@ -141,6 +141,7 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [count, setCount] = useState(0);
     // const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [isEnter, setIsEnter] = useState(false);
 
     // search queries
     const [concentrationsQuery, setConcentrationsQuery] = useState(null);
@@ -277,20 +278,14 @@ const Search: React.FC<Props> = ({headerData}) => {
         async function fetchUserData(explicitQuery) {
             const axios = await axiosInstance();
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
-            // const {query} = router;
-            if (explicitQuery !== undefined) {
-                listURL += `?page=1&${explicitQuery}`;
-            } else {
-                listURL += `?page=${page}`;
-            }
+            listURL += `?page=1&${explicitQuery}`;
             console.log('listURL', listURL)
             const axiosResponse = await axios.get(listURL)
             const listData: List = axiosResponse.data;
             setIsLoading(false)
             if (!ignore) {
-                setListResults([])
+                setListResults((prev) => [...prev, ...listData.results]);
             }
-            setListResults((prev) => [...prev, ...listData.results]);
             setCount(listData.count)
             setHasNextPage(listData.next !== null);
         }
@@ -361,30 +356,45 @@ const Search: React.FC<Props> = ({headerData}) => {
         };
     }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery]);
 
-    async function onEnter() {
+    useEffect(() => {
+        let ignore = false;
+
         async function fetchUserData(explicitQuery) {
             const axios = await axiosInstance();
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
-            // const {query} = router;
             listURL += `?page=1&${explicitQuery}`;
             console.log('listURL', listURL)
             const axiosResponse = await axios.get(listURL)
             const listData: List = axiosResponse.data;
             setIsLoading(false)
-            setListResults((prev) => [...prev, ...listData.results]);
+            if (!ignore) {
+                setListResults((prev) => [...prev, ...listData.results]);
+            }
             setCount(listData.count)
             setHasNextPage(listData.next !== null);
         }
 
-        setIsExplicitSearching(true)
-        setIsLoading(true)
-        setListResults([])
-        let firstEncodedParameterizedQuery = `q=${encodeURIComponent(firstQuery)}`
-        // await router.push(`/list?${firstEncodedParameterizedQuery}`)
-        setPage(1)
-        await fetchUserData(firstEncodedParameterizedQuery.concat(additionalQueries))
-        setIsExplicitSearching(false)
-    }
+        async function onEnter() {
+            setIsExplicitSearching(true)
+            setIsLoading(true)
+            setListResults([])
+            let firstEncodedParameterizedQuery = `q=${encodeURIComponent(firstQuery)}`
+            setPage(1)
+            if (!ignore) {
+                await fetchUserData(firstEncodedParameterizedQuery.concat(additionalQueries))
+            }
+            setIsExplicitSearching(false)
+        }
+
+        onEnter()
+
+
+        return () => {
+            ignore = true;
+        };
+    }, [isEnter, firstQuery]);
+
+
 
     useEffect(() => {
         async function fetchSearchData() {
@@ -447,13 +457,9 @@ const Search: React.FC<Props> = ({headerData}) => {
                                     <TigerBookListBar defaultText="Search PUID, NetID, nickname, or full name"
                                                       zIndex={100} setterFunction={setFirstQuery}
                                                       autoComplete="off"
-                                                      onEnterFunction={async () => {
-                                                          await onEnter()
-                                                      }}/>
+                                                      onEnterFunction={() => setIsEnter(true)}/>
                                 </div>
-                                <button onClick={async () => {
-                                    await onEnter()
-                                }}
+                                <button onClick={() => setIsEnter(true)}
                                         className="bg-primary-600 hover:bg-primary-500 text-white px-4 py-2 rounded-md focus:outline-none active:bg-primary-700 focus:ring focus:ring-primary-300 mt-1.5">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                          strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 dark:text-white">
