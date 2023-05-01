@@ -632,6 +632,8 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
         # delete existing extracurriculars
         instance.extracurricular_objs.clear()
         instance.extracurricular_position_objs.clear()
+        # delete existing research
+        instance.research_objs.clear()
         # add extracurriculars
         if instance.extracurriculars is None:
             return super().update(instance, validated_data)
@@ -645,6 +647,11 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
                 # instance.extracurricular_position_objs.add(retrieved_position)
                 retrieved_positions_list.append(retrieved_position)
             instance.extracurricular_position_objs.add(*retrieved_positions_list)
+        # add research
+        for research in instance.research:
+            research_type = research['research_type']
+            retrieved_research_type = TigerBookResearchTypes.objects.get(research_type=retrieved_research_type)
+            instance.research_objs.add(retrieved_research_type)
         return super().update(instance, validated_data)
 
     # TODO: referenced https://stackoverflow.com/questions/56025763/serializer-for-jsonfield-nested-representation

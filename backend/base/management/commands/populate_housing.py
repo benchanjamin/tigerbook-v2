@@ -20,7 +20,7 @@ class Command(BaseCommand):
                 building = row['building']
                 room_no = row['room_no']
                 UndergraduateTigerBookHousing.objects.create(building=building, room_no=room_no,
-                                                             entire_location_string=f"{building}, {room_no}")
+                                                             entire_location_string=f"{building} {room_no}")
                 log.info(
                     f"Added room to UndergraduateTigerBookHousing: {building} {room_no}"
                 )
