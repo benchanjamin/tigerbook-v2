@@ -40,7 +40,7 @@ import React, {useEffect, useState} from "react";
 import Container from "@components/list/Container";
 import Card from "@components/list/Card";
 import TigerBookListBar from "@components/headless-ui/TigerBookListBar";
-import {useRouter} from "next/router";
+// import {useRouter} from "next/router";
 import {Spinner} from "flowbite-react";
 import TigerBookListBox from "@components/headless-ui/TigerBookListBox";
 import TigerBookComboBoxSingleStrictSelect from "@components/headless-ui/TigerBookComboBoxSingleStrictSelect";
@@ -138,7 +138,7 @@ const List: React.FC<Props> = ({headerData}) => {
     const [hasNextPage, setHasNextPage] = useState(false);
     const [isExplicitSearching, setIsExplicitSearching] = useState(false);
     const [count, setCount] = useState(0);
-    const router = useRouter();
+    // const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     // search queries
@@ -305,7 +305,7 @@ const List: React.FC<Props> = ({headerData}) => {
                 additionalEncodedParameterizedQueries += `${encodeURIComponent(residential_college)}`
             }
         })
-        await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
+        // await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
         setPage(1)
         setAdditionalQueries(additionalEncodedParameterizedQueries)
         await fetchUserData(firstEncodedParameterizedQuery.concat(additionalEncodedParameterizedQueries))
@@ -322,7 +322,7 @@ const List: React.FC<Props> = ({headerData}) => {
         setIsLoading(true)
         setListResults([])
         let firstEncodedParameterizedQuery = `q=${encodeURIComponent(firstQuery)}`
-        await router.push(`/list?${firstEncodedParameterizedQuery}`)
+        // await router.push(`/list?${firstEncodedParameterizedQuery}`)
         setPage(1)
         await fetchUserData(firstEncodedParameterizedQuery)
         setIsExplicitSearching(false)
@@ -331,17 +331,11 @@ const List: React.FC<Props> = ({headerData}) => {
     async function fetchUserData(explicitQuery) {
         const axios = await axiosInstance();
         let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
-        const {query} = router;
+        // const {query} = router;
         if (explicitQuery !== undefined) {
             listURL += `?page=1&${explicitQuery}`;
         } else {
             listURL += `?page=${page}`;
-            for (let [key, value] of Object.entries(query)) {
-                if (key === 'page') {
-                    continue;
-                }
-                listURL += `&${key}=${value}`;
-            }
         }
         console.log('listURL', listURL)
         const axiosResponse = await axios.get(listURL)
