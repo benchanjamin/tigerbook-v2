@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 #svg-main {
     /*border: solid 1px gray;*/
     background-color: #cdcccd;

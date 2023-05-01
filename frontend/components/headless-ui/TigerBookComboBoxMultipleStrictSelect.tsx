@@ -65,11 +65,11 @@ export default function TigerBookComboBoxMultipleStrictSelect(
                   onChange={onChange} className={`z-[${zIndex}] z-${zIndex} ${className}`} multiple>
             <div className="relative mt-1">
                 <div
-                    className="relative border border-primary-200 w-full cursor-default
+                    className={`relative border border-primary-200 w-full cursor-default
                     overflow-hidden rounded-lg bg-white text-left shadow-md
                      focus:outline-none focus-visible:ring-2 focus-visible:ring-white
                      focus-visible:ring-opacity-75 focus-visible:ring-offset-2
-                     sm:text-sm">
+                     sm:text-sm`}>
                     <div className="flex flex-wrap overflow-auto items-center pl-2 pr-2">
                         <div className="shrink-[10] overflow-x-auto w-[220px] sm:w-full">
                             {selected.map((item, index) => {
@@ -96,7 +96,7 @@ export default function TigerBookComboBoxMultipleStrictSelect(
                         />
                     </div>
                     {data && data.length === 0 ?
-                        <Spinner color="warning"/>
+                        <Spinner className="absolute right-1 top-[5px]" color="warning"/>
                     :
                     <Combobox.Button className="absolute bottom-[8px] right-0 flex items-center pr-2">
                         <ChevronUpDownIcon
