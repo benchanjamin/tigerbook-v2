@@ -64,7 +64,7 @@ export default function TigerBookComboBoxSingleStrictSelect(
                         spellCheck={false}
                         placeholder={defaultText}
                     />
-                    {data && data.length === 0 ?
+                    {data && data.length <= 1 ?
                         <Spinner className="absolute right-1 top-[5px]" color="warning"/>
                         :
                     <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
