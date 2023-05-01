@@ -122,6 +122,7 @@ class HousingBuildingListAPISerializer(serializers.ModelSerializer):
             'building'
         ]
 
+
 class HousingRoomListAPISerializer(serializers.ModelSerializer):
     class Meta:
         model = UndergraduateTigerBookHousing
@@ -847,6 +848,8 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
     miscellaneous = serializers.SerializerMethodField(read_only=True)
     research = serializers.SerializerMethodField(read_only=True)
     last_updated_current_city = serializers.SerializerMethodField(read_only=True)
+    interoffice_mailing_address = serializers.SerializerMethodField(read_only=True)
+    email_address = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -868,8 +871,16 @@ class UndergraduateTigerBookDirectoryRetrieveSerializer(serializers.ModelSeriali
             'extracurriculars',
             'miscellaneous',
             'research',
-            'last_updated_current_city'
+            'last_updated_current_city',
+            'interoffice_mailing_address',
+            'email_address'
         ]
+
+    def get_interoffice_mailing_address(self, obj: UndergraduateTigerBookDirectory):
+        return obj.active_directory_entry.interoffice_address
+
+    def get_email_address(self, obj: UndergraduateTigerBookDirectory):
+        return obj.active_directory_entry.email
 
     def get_username(self, obj):
         request = self.context.get('request')
