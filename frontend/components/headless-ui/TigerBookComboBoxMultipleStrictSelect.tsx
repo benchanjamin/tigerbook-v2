@@ -33,8 +33,10 @@ export default function TigerBookComboBoxMultipleStrictSelect(
 
         // @ts-ignore
         const associatedText = event.target.parentNode.innerText
+        console.log('associatedText', associatedText)
         setSelected(prevArray => {
             let result = prevArray.filter(item => item !== associatedText)
+            console.log('result: ', result)
             setterFunction(result)
             return result
         })
