@@ -472,7 +472,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             const axios = await axiosInstance();
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
             console.log('SearchURL', listURL)
-            listURL += `${additionalQueries}`
+            listURL += `${firstQuery}${additionalQueries}`
             const axiosResponse = await axios.get(listURL)
             const listData: List = axiosResponse.data;
             setIsLoading(true)
