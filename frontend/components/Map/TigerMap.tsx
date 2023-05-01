@@ -265,7 +265,7 @@ function TigerMap() {
 
     return (
         <>
-            <div id="chart">
+            <div id="chart" className="relative">
                 <CityOptionListBox onChange={setType}/>
                 <svg className="w-full h-full rounded-2xl" ref={svgRef} id="svg-main" xmlns="http://www.w3.org/1999/xhtml"/>
             </div>
