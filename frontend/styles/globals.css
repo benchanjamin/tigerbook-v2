@@ -8,10 +8,6 @@
     /*background-color: #c4c2c2;*/
 }
 
-.font-change {
-    font-family: Lato, serif;
-}
-
 .country {
     fill: #e8e8e8;
     /*stroke: white;*/
@@ -45,7 +41,6 @@
 #tooltip text {
     font-size: 12px;
     text-anchor: middle;
-    font-family: Lato, sans-serif;
     font-weight: lighter;
 }
 

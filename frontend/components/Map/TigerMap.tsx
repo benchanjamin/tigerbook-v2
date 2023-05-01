@@ -26,15 +26,12 @@ function TigerMap() {
 
         const svg = d3.select(svgRef.current).attr("viewBox", `0 0 ${width} ${height}`)
 
-// add objects to globe, so they can be zoomed
         const globe = svg.append("g");
 
-// choose a projection
         const projection = d3.geoMercator().scale(width / 3 / Math.PI)
             .center([20, 30])
             .translate([width / 2, height / 2]);
 
-// create a path generator function for the projection
         const geoPath = d3.geoPath()
             .projection(projection);
 
@@ -46,8 +43,6 @@ function TigerMap() {
         d3.json(FILE)
             .then(function (shapes) {
                 map.features = shapes.features;
-
-                // drawGraticules();
                 draw();
                 drawTooltips();
                 drawButtons();
@@ -86,16 +81,15 @@ function TigerMap() {
             .scaleExtent([1, 600])
             .translateExtent([[0, 0], [width, height]])
             .on('zoom', () => {
-                // @ts-ignore
                 const currentTransform = d3.event.transform;
                 globe.attr("transform", currentTransform);
-                console.log(currentTransform.k)
+                // console.log(currentTransform.k)
                 d3.select("g").selectAll("circle").attr("transform", function (d, i, n) {
                     return `scale(${(1 / currentTransform.k)})`
                 })
             });
 
-        svg.call(zoom).on("dblclick.zoom", null)
+        svg.call(zoom).on("dblclick.zoom", null).on("wheel.zoom", null);
 
         function drawButtons() {
             const buttonDiv = svg.append("foreignObject")
@@ -200,63 +194,102 @@ function TigerMap() {
                 .attr("transform", `translate(${[coords[0], coords[1] + 40]})`)
                 .style("opacity", 1);
             tooltip.select("text:first-of-type")
-                .text(`Location: \"${d.properties.original_text}\"`)
+                .text(`Location: ${d.complete_city}`)
             tooltip.select("text:nth-of-type(2)")
-                .text(`Text: \"${titleMapper[d.properties.original_book_title]}\"`)
-            tooltip.select("text:nth-of-type(3)")
-                .text(`Author: ${authorMapper[titleMapper[d.properties.original_book_title]]}`)
-            tooltip.select("text:nth-of-type(4)")
-                .text(`Count in Text: ${d.properties.original_count}`)
-            tooltip.select("text:last-child")
-                .text(`Total Count Across All Texts: ${d.properties.original_total_count}`)
+                .text(`# of Hometown Affiliations: ${d.count}`)
         }
 
         function hideTooltip() {
             d3.select("#tooltip").style("opacity", 0)
         }
 
-        function updateTitles(filter) {
-            d3.json('/static/cleaned-data-12-4.geojson').then(function (data) {
-                // TODO: delete existing points
-                d3.select(svgRef.current).select("g").selectAll("g.city").remove();
-                let pointsOfInterest = data.features.filter(d => d.geometry.type === 'Point');
-                if (filter.name !== "All Texts") {
-                    pointsOfInterest = pointsOfInterest.filter(d => d.properties.original_book_title === filter.alt)
-                }
-                pointsOfInterest.sort((a, b) => d3.descending(a.properties.original_total_count, b.properties.original_total_count));
+        async function updateHometowns() {
+            d3.select(svgRef.current).select("g").selectAll("g.city").remove();
 
-                d3.select(svgRef.current).select("g").selectAll("g.city").data(pointsOfInterest).enter()
-                    .append("g").attr("class", "city")
-                    .attr("transform", d => {
-                        return `translate(${[projection(d.geometry.coordinates)]})`
-                    })
-                    .each(function (d1) {
-                        const globe = d3.select(svgRef.current).select("g");
-                        let currentScaleValue = globe.attr("transform")
-                        if (currentScaleValue === null) {
-                            currentScaleValue = 1;
-                        } else {
-                            let regex = /[+-]?\d+(\.\d+)?/g;
-                            let floats = currentScaleValue.match(regex).map(function (v) {
-                                return parseFloat(v);
-                            });
-                            currentScaleValue = floats[2]
-                        }
-                        currentScaleValue = 1 / currentScaleValue
-                        d3.select(this).append("circle").raise()
-                            .attr('r', Math.sqrt(d1.properties.original_total_count) + 2)
-                            .attr('transform', `scale(${currentScaleValue})`)
-                            .on("mouseenter", (d2) => {
-                                // showTooltip(d2);
-                                d3.select(this).select("circle").style("fill", highlightColor);
-                            })
-                            .on("mouseleave", () => {
-                                hideTooltip();
-                                // Add +1 to i1 index because 0th index is path.country while rest are g.city
-                                d3.select(this).select("circle").style("fill", defaultColor)
-                            })
-                    });
-            })
+            let axios = await axiosLocalhost()
+            let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/map/hometown/`)
+            const mapData: TigerBookMap[] = axiosResponse.data
+            // d3.json('/static/cleaned-data-12-4.geojson').then(function (data) {
+            // let pointsOfInterest = mapData.filter(d => d.geometry.type === 'Point');
+            mapData.sort((a, b) => d3.descending(a.count, b.count));
+
+            d3.select(svgRef.current).select("g").selectAll("g.city").data(mapData).enter()
+                .append("g").attr("class", "city")
+                .attr("transform", d => `translate(${[projection([d.longitude, d.latitude])]})`)
+                .each(function (d1) {
+                    const globe = d3.select(svgRef.current).select("g");
+                    let currentScaleValue = globe.attr("transform")
+                    if (currentScaleValue === null) {
+                        currentScaleValue = 1;
+                    } else {
+                        let regex = /[+-]?\d+(\.\d+)?/g;
+                        let floats = currentScaleValue.match(regex).map(function (v) {
+                            return parseFloat(v);
+                        });
+                        currentScaleValue = floats[2]
+                    }
+                    currentScaleValue = 1 / currentScaleValue
+                    d3.select(this).append("circle").raise()
+                        .attr('r', Math.sqrt(d1.count) + 2)
+                        .attr('transform', `scale(${currentScaleValue})`)
+                        .on("mouseenter", (d2) => {
+                            showTooltip(d2);
+                            d3.select(this).select("circle").style("fill", highlightColor);
+                        })
+                        .on("mouseleave", () => {
+                            hideTooltip();
+                            // Add +1 to i1 index because 0th index is path.country while rest are g.city
+                            d3.select(this).select("circle").style("fill", defaultColor)
+                        })
+                });
+        }
+
+        async function updateCurrentCities() {
+            d3.select(svgRef.current).select("g").selectAll("g.city").remove();
+
+            let axios = await axiosLocalhost()
+            let axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/map/current-city/`)
+            const mapData: TigerBookMap[] = axiosResponse.data
+            // d3.json('/static/cleaned-data-12-4.geojson').then(function (data) {
+            // let pointsOfInterest = mapData.filter(d => d.geometry.type === 'Point');
+            mapData.sort((a, b) => d3.descending(a.count, b.count));
+
+            d3.select(svgRef.current).select("g").selectAll("g.city").data(mapData).enter()
+                .append("g").attr("class", "city")
+                .attr("transform", d => `translate(${[projection([d.longitude, d.latitude])]})`)
+                .each(function (d1) {
+                    const globe = d3.select(svgRef.current).select("g");
+                    let currentScaleValue = globe.attr("transform")
+                    if (currentScaleValue === null) {
+                        currentScaleValue = 1;
+                    } else {
+                        let regex = /[+-]?\d+(\.\d+)?/g;
+                        let floats = currentScaleValue.match(regex).map(function (v) {
+                            return parseFloat(v);
+                        });
+                        currentScaleValue = floats[2]
+                    }
+                    currentScaleValue = 1 / currentScaleValue
+                    d3.select(this).append("circle").raise()
+                        .attr('r', Math.sqrt(d1.count) + 2)
+                        .attr('transform', `scale(${currentScaleValue})`)
+                        .on("mouseenter", (d2) => {
+                            showTooltip(d2);
+                            d3.select(this).select("circle").style("fill", highlightColor);
+                        })
+                        .on("mouseleave", () => {
+                            hideTooltip();
+                            // Add +1 to i1 index because 0th index is path.country while rest are g.city
+                            d3.select(this).select("circle").style("fill", defaultColor)
+                        })
+                });
+        }
+
+        // @ts-ignore
+        if (type.name === 'By Hometown') {
+            updateHometowns()
+        } else {
+            updateCurrentCities()
         }
 
 

@@ -10,8 +10,10 @@ const type = [
 export default function CityOptionListBox({onChange}) {
     const [selected, setSelected] = useState(type[0])
 
+    console.log('selected: ', selected)
+
     return (
-        <div className="absolute -top-[5.75rem] left-1/2 -translate-x-1/2 sm:w-[10rem] w-[10rem] md:left-2 md:top-1 md:translate-x-0 font-change z-10">
+        <div className="absolute -top-[5.75rem] left-1/2 -translate-x-1/2 w-[22rem] md:left-2 md:top-1 md:translate-x-0 font-change z-10">
                 <Listbox value={selected} onChange={e => {
                     setSelected(e);
                     onChange(e);
@@ -52,7 +54,7 @@ export default function CityOptionListBox({onChange}) {
                               selected ? 'font-medium' : 'font-normal'
                           }`}
                       >
-                        {option.desc}
+                        {option.name}
                       </span>
                                                 {selected ? (
                                                     <span

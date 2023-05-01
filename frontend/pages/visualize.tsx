@@ -125,7 +125,7 @@ const Visualize : React.FC<Props> = ({headerData}) => {
                     {/*<div className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">*/}
                         <div className="bg-white pt-4 pb-10 dark:bg-gray-800 w-full max-w-[2520px] mx-auto">
                             <h1 className="text-center text-dark dark:text-white py-6 text-2xl font-bold tracking-wide">
-                                View Hometowns or Current Cities Map
+                                Visualize Hometowns or Current Cities on Map
                             </h1>
                             <TigerMap />
                         </div>
