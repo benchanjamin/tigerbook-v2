@@ -214,41 +214,91 @@ const List: React.FC<Props> = ({headerData}) => {
 
         const listData: ListData = {}
 
-        for (const [index, apiRoute] of apiListAPIRoutes.entries()) {
-            const axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiRoute}`)
-            console.log('incoming', axiosResponse.data)
-            if (axiosResponse.data.length === 0) {
-                continue
-            }
-            listData[keys[index]] = axiosResponse.data.map((item) => item[indices[index]])
-            if (index === 0) {
-                setConcentrationsList(listData.concentrations)
-            }
-            if (index === 1) {
-                setTracksList(listData.tracks)
-            }
-            if (index === 2) {
-                setClassYearsList(listData.classYears)
-            }
-            if (index === 3) {
-                setResCollegesList(listData.residentialColleges)
-            }
-            if (index === 4) {
-                setCertificatesList(listData.certificates)
-            }
-            if (index === 5) {
-                setPronounsList(listData.pronouns)
-            }
-            if (index === 6) {
-                setInterestsList(listData.interests)
-            }
-            if (index === 7) {
-                setExtracurricularsList(listData.extracurriculars)
-            }
-            if (index === 8) {
-                setExtracurricularPositionsList(listData.positions)
-            }
-        }
+        Promise.all([
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[0]}`),
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[1]}`),
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[2]}`),
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[3]}`),
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[4]}`),
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[5]}`),
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[6]}`),
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[7]}`),
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[8]}`),
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[9]}`),
+            ])
+            .then((responses) => {
+                responses.forEach((response, index) => {
+                    if (response.data.length === 0) {
+                        return
+                    }
+                    listData[keys[index]] = response.data.map((item) => item[indices[index]])
+
+                    if (index === 0) {
+                        setConcentrationsList(listData.concentrations)
+                    }
+                    if (index === 1) {
+                        setTracksList(listData.tracks)
+                    }
+                    if (index === 2) {
+                        setClassYearsList(listData.classYears)
+                    }
+                    if (index === 3) {
+                        setResCollegesList(listData.residentialColleges)
+                    }
+                    if (index === 4) {
+                        setCertificatesList(listData.certificates)
+                    }
+                    if (index === 5) {
+                        setPronounsList(listData.pronouns)
+                    }
+                    if (index === 6) {
+                        setInterestsList(listData.interests)
+                    }
+                    if (index === 7) {
+                        setExtracurricularsList(listData.extracurriculars)
+                    }
+                    if (index === 8) {
+                        setExtracurricularPositionsList(listData.positions)
+                    }
+                });
+
+            });
+
+        // for (const [index, apiRoute] of apiListAPIRoutes.entries()) {
+        //     const axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiRoute}`)
+        //     console.log('incoming', axiosResponse.data)
+        //     if (axiosResponse.data.length === 0) {
+        //         continue
+        //     }
+        //     listData[keys[index]] = axiosResponse.data.map((item) => item[indices[index]])
+        //     if (index === 0) {
+        //         setConcentrationsList(listData.concentrations)
+        //     }
+        //     if (index === 1) {
+        //         setTracksList(listData.tracks)
+        //     }
+        //     if (index === 2) {
+        //         setClassYearsList(listData.classYears)
+        //     }
+        //     if (index === 3) {
+        //         setResCollegesList(listData.residentialColleges)
+        //     }
+        //     if (index === 4) {
+        //         setCertificatesList(listData.certificates)
+        //     }
+        //     if (index === 5) {
+        //         setPronounsList(listData.pronouns)
+        //     }
+        //     if (index === 6) {
+        //         setInterestsList(listData.interests)
+        //     }
+        //     if (index === 7) {
+        //         setExtracurricularsList(listData.extracurriculars)
+        //     }
+        //     if (index === 8) {
+        //         setExtracurricularPositionsList(listData.positions)
+        //     }
+        // }
     }
 
     useEffect(() => {
