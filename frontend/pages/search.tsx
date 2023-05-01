@@ -249,11 +249,6 @@ const Search: React.FC<Props> = ({headerData}) => {
                         return
                     }
 
-                    if (index === 9) {
-                        setHousingLocationsList(response.data)
-                        return
-                    }
-
                     if (index === 10) {
                         setHousingBuildingsList(response.data)
                         return
