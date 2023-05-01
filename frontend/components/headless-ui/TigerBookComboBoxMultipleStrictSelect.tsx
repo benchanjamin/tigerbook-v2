@@ -37,8 +37,6 @@ export default function TigerBookComboBoxMultipleStrictSelect(
     async function onClick(event)
     {
         event.stopPropagation()
-        event.preventDefault()
-
         // @ts-ignore
         const associatedText = event.target.parentNode.innerText ??
             event.target.parentNode.parentNode.innerText
