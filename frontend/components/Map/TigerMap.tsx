@@ -4,15 +4,17 @@ import classes from "./Map.module.css"
 import {axiosInstance} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
 import {TigerBookMap} from "@types/types";
+import CityOptionListBox from "@components/CityOptionListBox/CityOptionListBox";
 // import TitleListBox from "@components/TitleListBox/TitleListBox";
 // import AuthorListBox from "@components/AuthorListBox/AuthorListBox";
 // import AuthorAndTitleRadioGroup from "@components/AuthorAndTitleRadioGroup/AuthorAndTitleRadioGroup";
-// import AuthorAndTitleListBox from "@components/AuthorAndTitleListBox/AuthorAndTitleListBox";
+// import CityOptionListBox from "@components/CityOptionListBox/CityOptionListBox";
 
 function TigerMap() {
     let defaultColor = '#FF8911';
     let highlightColor = '#FF9E3A';
 
+    const [type, setType] = useState({name: 'By Hometown', desc: 'Explore hometown frequency on map'});
 
     const svgRef = React.useRef(null);
 
@@ -258,12 +260,13 @@ function TigerMap() {
         }
 
 
-    }, []);
+    }, [type]);
 
 
     return (
         <>
             <div id="chart">
+                <CityOptionListBox onChange={setType}/>
                 <svg className="w-full h-full rounded-2xl" ref={svgRef} id="svg-main" xmlns="http://www.w3.org/1999/xhtml"/>
             </div>
         </>
