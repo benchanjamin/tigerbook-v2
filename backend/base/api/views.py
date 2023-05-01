@@ -29,6 +29,7 @@ from base.serializers import (
     PronounsListAPISerializer, TigerBookHeaderSerializer, TigerBookHometownMapSerializer, InterestsListAPISerializer,
     ExtracurricularsListAPISerializer, HousingListAPISerializer, ExtracurricularsPositionsListAPISerializer,
     UndergraduateTigerBookDirectoryPreviewSerializer, TigerBookCurrentCityMapSerializer, ResearchTypesAPISerializer,
+    HousingBuildingListAPISerializer, HousingRoomListAPISerializer,
 )
 
 from django.conf import settings
@@ -105,6 +106,30 @@ class ExtracurricularPositionsListAPIView(ListAPIView):
 class HousingListAPIView(ListAPIView):
     serializer_class = HousingListAPISerializer
     queryset = UndergraduateTigerBookHousing.objects.all().order_by('building', 'room_no')
+
+
+class HousingBuildingListAPIView(ListAPIView):
+    serializer_class = HousingBuildingListAPISerializer
+    queryset = UndergraduateTigerBookHousing.objects.all().order_by('building')
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        data = [obj['building'] for obj in serializer.data]
+        data = list(dict.fromkeys(data))
+        return Response(data)
+
+
+class HousingRoomListAPIView(ListAPIView):
+    serializer_class = HousingRoomListAPISerializer
+    queryset = UndergraduateTigerBookHousing.objects.all().order_by('room_no')
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        data = [obj['room_no'] for obj in serializer.data]
+        data = list(dict.fromkeys(data))
+        return Response(data)
 
 
 class ResearchTypesListAPIView(ListAPIView):

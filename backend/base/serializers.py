@@ -115,6 +115,21 @@ class HousingListAPISerializer(serializers.ModelSerializer):
         ]
 
 
+class HousingBuildingListAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UndergraduateTigerBookHousing
+        fields = [
+            'building'
+        ]
+
+class HousingRoomListAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UndergraduateTigerBookHousing
+        fields = [
+            'room_no'
+        ]
+
+
 class ResearchTypesAPISerializer(serializers.ModelSerializer):
     class Meta:
         model = TigerBookResearchTypes
@@ -489,7 +504,7 @@ class UndergraduateTigerBookDirectorySetupSecondPageSerializer(serializers.Model
             'profile_pic'
         ]
 
-    def get_username(self, obj:UndergraduateTigerBookDirectory):
+    def get_username(self, obj: UndergraduateTigerBookDirectory):
         return get_display_username(obj.active_directory_entry.net_id)
 
     # TODO: https://stackoverflow.com/questions/29373983/remove-a-file-in-amazon-s3-using-django-storages
