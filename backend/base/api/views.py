@@ -137,6 +137,13 @@ class ResearchTypesListAPIView(ListAPIView):
     queryset = TigerBookResearchTypes.objects.all().order_by('research_type')
 
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        data = [obj['research_type'] for obj in serializer.data]
+        return Response(data)
+
+
 class TigerBookRedirectURLView(GenericAPIView):
     queryset = UndergraduateTigerBookDirectory.objects.all().select_related("user")
 

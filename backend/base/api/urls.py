@@ -70,6 +70,6 @@ urlpatterns = [
     path('extracurricular-positions/', ExtracurricularPositionsListAPIView.as_view()),
     path('housing/', HousingListAPIView.as_view()),
     path('housing/buildings/', HousingBuildingListAPIView.as_view()),
-    path('housing/rooms/', HousingRoomListAPIView.as_view()),
+    # path('housing/rooms/', HousingRoomListAPIView.as_view()),
     path('research-types/', ResearchTypesListAPIView.as_view()),
 ]
