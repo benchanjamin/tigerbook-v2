@@ -277,7 +277,7 @@ const List: React.FC<Props> = ({headerData}) => {
             additionalEncodedParameterizedQueries += `&track=`
         }
         tracksQuery?.forEach((track, index) => {
-            if (index !== concentrationsQuery.length - 1) {
+            if (index !== tracksQuery.length - 1) {
                 additionalEncodedParameterizedQueries += `${encodeURIComponent(track)},`
             } else {
                 additionalEncodedParameterizedQueries += `${encodeURIComponent(track)}`
