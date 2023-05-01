@@ -650,7 +650,7 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
         # add research
         for research in instance.research:
             research_type = research['research_type']
-            retrieved_research_type = TigerBookResearchTypes.objects.get(research_type=retrieved_research_type)
+            retrieved_research_type = TigerBookResearchTypes.objects.get(research_type=research_type)
             instance.research_objs.add(retrieved_research_type)
         return super().update(instance, validated_data)
 
