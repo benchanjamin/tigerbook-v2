@@ -32,7 +32,7 @@ export const flowbiteTheme: CustomFlowbiteTheme = {
       list: "space-y-2 py-2 list-none",
     },
     inner:
-      "h-1/2 overflow-y-auto overflow-x-hidden bg-white py-4 px-3 dark:bg-gray-800",
+      "h-1/2 lg:h-full overflow-y-auto overflow-x-hidden bg-white py-4 px-3 dark:bg-gray-800",
     item: {
       base: "no-underline flex items-center rounded-lg p-2 text-lg font-normal text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700",
     },
