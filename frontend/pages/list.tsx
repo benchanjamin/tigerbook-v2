@@ -330,6 +330,7 @@ const List: React.FC<Props> = ({headerData}) => {
     useEffect(() => {
         onSearchFiltering()
         return () => {
+            setIsLoading(true)
             setListResults([])
         };
     }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery]);
