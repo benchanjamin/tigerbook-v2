@@ -504,7 +504,7 @@ class UndergraduateTigerBookHousing(models.Model):
 
     @property
     def complete_housing(self):
-        return self.building + ", " + self.room_no
+        return self.building + " " + self.room_no
 
 
 class TigerBookCities(models.Model):
