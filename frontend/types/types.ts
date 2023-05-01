@@ -77,6 +77,8 @@ export interface User {
     research: null | Research[];
     miscellaneous: null | Miscellaneous[];
     last_updated_current_city: null | string;
+    interoffice_mailing_address: null | string;
+    email_address: null | string;
 }
 
 export interface HeaderType {
