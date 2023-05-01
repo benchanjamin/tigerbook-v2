@@ -18,7 +18,7 @@ const Sidebar: FC<PropsWithChildren<Record<string, unknown>>> = function ({
                 }
             )}
         >
-            <FlowbiteSidebar className="w-24">{children}</FlowbiteSidebar>
+            <FlowbiteSidebar className="w-80">{children}</FlowbiteSidebar>
         </div>
         // <aside id="sidebar-multi-level-sidebar"
         //        className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"

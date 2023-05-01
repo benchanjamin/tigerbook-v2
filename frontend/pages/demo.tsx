@@ -79,7 +79,7 @@ export default function Index(): JSX.Element {
 
 function ActualSidebar(): JSX.Element {
     return (
-        <Sidebar className="w-24">
+        <Sidebar>
             <Sidebar.Items>
                 <Sidebar.ItemGroup>
                     <Sidebar.Item href="#" icon={HiChartPie}>
