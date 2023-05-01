@@ -283,6 +283,28 @@ const List: React.FC<Props> = ({headerData}) => {
                 additionalEncodedParameterizedQueries += `${encodeURIComponent(track)}`
             }
         })
+        // likewise for classYearsQuery
+        if (classYearsQuery?.length > 0) {
+            additionalEncodedParameterizedQueries += `&class_year=`
+        }
+        classYearsQuery?.forEach((class_year, index) => {
+            if (index !== classYearsQuery.length - 1) {
+                additionalEncodedParameterizedQueries += `${encodeURIComponent(class_year)},`
+            } else {
+                additionalEncodedParameterizedQueries += `${encodeURIComponent(class_year)}`
+            }
+        })
+        // likewise for resCollegesQuery
+        if (resCollegesQuery?.length > 0) {
+            additionalEncodedParameterizedQueries += `&residential_college=`
+        }
+        resCollegesQuery?.forEach((residential_college, index) => {
+            if (index !== resCollegesQuery.length - 1) {
+                additionalEncodedParameterizedQueries += `${encodeURIComponent(residential_college)},`
+            } else {
+                additionalEncodedParameterizedQueries += `${encodeURIComponent(residential_college)}`
+            }
+        })
         await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
         setPage(1)
         setAdditionalQueries(additionalEncodedParameterizedQueries)
