@@ -207,7 +207,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             'extracurriculars',
             'positions',
             'completeHousing',
-            'researchTypes',
+            // 'researchTypes',
             // 'cities',
         ]
 
@@ -222,7 +222,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             'extracurricular',
             'position',
             'complete_housing',
-            'research_type',
+            // 'research_type',
             // 'complete_city',
         ]
 
