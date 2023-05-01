@@ -149,7 +149,7 @@ function TigerMap() {
             tooltip.select("text:first-of-type")
                 .text(`Location: ${d.complete_city}`)
             tooltip.select("text:nth-of-type(2)")
-                .text(`# of Hometown Affiliations: ${d.count}`)
+                .text(`# of Affiliations: ${d.count}`)
             // tooltip.select("text:nth-of-type(3)")
             //     .text(`Author: ${authorMapper[titleMapper[d.properties.original_book_title]]}`)
             // tooltip.select("text:nth-of-type(4)")
@@ -196,7 +196,7 @@ function TigerMap() {
             tooltip.select("text:first-of-type")
                 .text(`Location: ${d.complete_city}`)
             tooltip.select("text:nth-of-type(2)")
-                .text(`# of Hometown Affiliations: ${d.count}`)
+                .text(`# of Affiliations: ${d.count}`)
         }
 
         function hideTooltip() {
