@@ -294,6 +294,10 @@ const Search: React.FC<Props> = ({headerData}) => {
                     if (index === 8) {
                         setExtracurricularPositionsList(listData.positions)
                     }
+
+                    if (index === 9) {
+                        setHousingLocationsList(response.data)
+                    }
                 });
 
             });
