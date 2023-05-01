@@ -282,12 +282,12 @@ const Search: React.FC<Props> = ({headerData}) => {
             console.log('listURL', listURL)
             const axiosResponse = await axios.get(listURL)
             const listData: List = axiosResponse.data;
-            setIsLoading(false)
             if (!ignore) {
+                setIsLoading(false)
                 setListResults((prev) => [...prev, ...listData.results]);
+                setCount(listData.count)
+                setHasNextPage(listData.next !== null);
             }
-            setCount(listData.count)
-            setHasNextPage(listData.next !== null);
         }
 
         async function onSearchFiltering() {
@@ -345,8 +345,8 @@ const Search: React.FC<Props> = ({headerData}) => {
             setAdditionalQueries(additionalEncodedParameterizedQueries)
             if (!ignore) {
                 await fetchUserData(firstEncodedParameterizedQuery.concat(additionalEncodedParameterizedQueries))
+                setIsExplicitSearching(false)
             }
-            setIsExplicitSearching(false)
         }
 
         onSearchFiltering()
@@ -366,12 +366,12 @@ const Search: React.FC<Props> = ({headerData}) => {
             console.log('listURL', listURL)
             const axiosResponse = await axios.get(listURL)
             const listData: List = axiosResponse.data;
-            setIsLoading(false)
             if (!ignore) {
                 setListResults((prev) => [...prev, ...listData.results]);
+                setCount(listData.count)
+                setHasNextPage(listData.next !== null)
+                setIsLoading(false)
             }
-            setCount(listData.count)
-            setHasNextPage(listData.next !== null);
         }
 
         async function onEnter() {
@@ -382,8 +382,8 @@ const Search: React.FC<Props> = ({headerData}) => {
             setPage(1)
             if (!ignore) {
                 await fetchUserData(firstEncodedParameterizedQuery.concat(additionalQueries))
+                setIsExplicitSearching(false)
             }
-            setIsExplicitSearching(false)
         }
 
         onEnter()
@@ -404,11 +404,12 @@ const Search: React.FC<Props> = ({headerData}) => {
             console.log('SearchURL', listURL)
             const axiosResponse = await axios.get(listURL)
             const listData: List = axiosResponse.data;
-            setIsLoading(false)
+            setIsLoading(true)
             if (!ignore) {
                 setListResults((prev) => [...prev, ...listData.results]);
                 setCount(listData.count)
                 setHasNextPage(listData.next !== null);
+                setIsLoading(false)
             }
         }
 
@@ -472,14 +473,6 @@ const Search: React.FC<Props> = ({headerData}) => {
                                     </svg>
                                 </button>
                             </div>
-                            {isLoading &&
-                                <div className="flex justify-center mt-10">
-                                    <Spinner
-                                        id="spinner"
-                                        color="warning"
-                                        className="h-[200px] w-[200px]"/>
-                                </div>
-                            }
                             <div className="flex justify-end items-center dark:text-white text-sm w-full mt-1">
                                 {!isLoading && !isExplicitSearching && `Showing ${count} results`}
                             </div>
@@ -494,6 +487,14 @@ const Search: React.FC<Props> = ({headerData}) => {
                                     />
                                 ))}
                             </div>
+                            {isLoading &&
+                                <div className="flex justify-center mt-10">
+                                    <Spinner
+                                        id="spinner"
+                                        color="warning"
+                                        className="h-[200px] w-[200px]"/>
+                                </div>
+                            }
                         </Container>
                     </div>
 
