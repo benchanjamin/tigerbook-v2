@@ -516,6 +516,8 @@ const Search: React.FC<Props> = ({headerData}) => {
         setInterestsQuery([])
         setExtracurricularsQuery([])
         setExtracurricularPositionsQuery([])
+        setHometownCompleteCitiesQuery(null)
+        setCurrentCityCompleteCitiesQuery(null)
         setClearAll(true)
     }
 
@@ -775,12 +777,12 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                     data={hometownCompleteCitiesList}
                                                     defaultText="Select hometown"
                                                     initialSelected={null}
-                                                    zIndex={25}
+                                                    zIndex={24}
                                                     setterFunction={setHometownCompleteCitiesQuery}
                                                     className="ml-1"
                                                     clearState={clearAll}
                                                     clearStateFunction={setClearAll}
-                                                    defaultOptionText={undefined}
+                                                    defaultOptionText="Select none"
                                                 />
                                             </li>
                                             <li>
@@ -791,12 +793,12 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                     data={currentCityCompleteCitiesList}
                                                     defaultText="Select current city"
                                                     initialSelected={null}
-                                                    zIndex={25}
+                                                    zIndex={23}
                                                     setterFunction={setCurrentCityCompleteCitiesQuery}
                                                     className="ml-1"
                                                     clearState={clearAll}
                                                     clearStateFunction={setClearAll}
-                                                    defaultOptionText={undefined}
+                                                    defaultOptionText="Select none"
                                                 />
                                             </li>
                                         </ul>
