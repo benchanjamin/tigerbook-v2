@@ -395,8 +395,9 @@ const Search: React.FC<Props> = ({headerData}) => {
     }, [isEnter, firstQuery]);
 
 
-
     useEffect(() => {
+        let ignore = false;
+
         async function fetchSearchData() {
             const axios = await axiosInstance();
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
@@ -404,15 +405,18 @@ const Search: React.FC<Props> = ({headerData}) => {
             const axiosResponse = await axios.get(listURL)
             const listData: List = axiosResponse.data;
             setIsLoading(false)
-            setListResults((prev) => [...prev, ...listData.results]);
-            setCount(listData.count)
-            setHasNextPage(listData.next !== null);
+            if (!ignore) {
+                setListResults((prev) => [...prev, ...listData.results]);
+                setCount(listData.count)
+                setHasNextPage(listData.next !== null);
+            }
         }
 
         if (isExplicitSearching) return;
         fetchSearchData();
+
         return () => {
-            setListResults([])
+            ignore = true;
         };
     }, [page]);
 
