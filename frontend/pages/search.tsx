@@ -191,8 +191,8 @@ const Search: React.FC<Props> = ({headerData}) => {
             '/api-django/extracurriculars/',
             '/api-django/extracurricular-positions/',
             '/api-django/housing/',
-            '/api-django/housing/buildings/',
             '/api-django/research-types/',
+            '/api-django/housing/buildings/',
             '/api-django/cities/',
         ]
 
@@ -250,12 +250,12 @@ const Search: React.FC<Props> = ({headerData}) => {
                     }
 
                     if (index === 10) {
-                        setHousingBuildingsList(response.data)
+                        setResearchTypesList(response.data)
                         return
                     }
 
                     if (index === 11) {
-                        setResearchTypesList(response.data)
+                        setHousingBuildingsList(response.data)
                         return
                     }
 
