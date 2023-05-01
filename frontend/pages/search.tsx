@@ -487,7 +487,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                                     />
                                 ))}
                             </div>
-                            {isLoading &&
+                            {hasNextPage &&
                                 <div className="flex justify-center mt-10">
                                     <Spinner
                                         id="spinner"
