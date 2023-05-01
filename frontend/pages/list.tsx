@@ -270,72 +270,114 @@ const List: React.FC<Props> = ({headerData}) => {
         fetch()
     }, []);
 
-    async function onSearchFiltering() {
-        setIsExplicitSearching(true)
-        setIsLoading(true)
-        setListResults([])
-        let firstEncodedParameterizedQuery = `q=${encodeURIComponent(firstQuery)}`
-        let additionalEncodedParameterizedQueries = ''
-        // if concentrationsQuery has at least one element, then we need to add it to the query
-        if (concentrationsQuery?.length > 0) {
-            additionalEncodedParameterizedQueries += `&concentration=`
-        }
-        concentrationsQuery?.forEach((concentration, index) => {
-            if (index !== concentrationsQuery.length - 1) {
-                additionalEncodedParameterizedQueries += `${encodeURIComponent(concentration)},`
-            } else {
-                additionalEncodedParameterizedQueries += `${encodeURIComponent(concentration)}`
-            }
-        })
-        // likewise for tracksQuery
-        if (tracksQuery?.length > 0) {
-            additionalEncodedParameterizedQueries += `&track=`
-        }
-        tracksQuery?.forEach((track, index) => {
-            if (index !== tracksQuery.length - 1) {
-                additionalEncodedParameterizedQueries += `${encodeURIComponent(track)},`
-            } else {
-                additionalEncodedParameterizedQueries += `${encodeURIComponent(track)}`
-            }
-        })
-        // likewise for classYearsQuery
-        if (classYearsQuery?.length > 0) {
-            additionalEncodedParameterizedQueries += `&class_year=`
-        }
-        classYearsQuery?.forEach((class_year, index) => {
-            if (index !== classYearsQuery.length - 1) {
-                additionalEncodedParameterizedQueries += `${encodeURIComponent(class_year)},`
-            } else {
-                additionalEncodedParameterizedQueries += `${encodeURIComponent(class_year)}`
-            }
-        })
-        // likewise for resCollegesQuery
-        if (resCollegesQuery?.length > 0) {
-            additionalEncodedParameterizedQueries += `&residential_college=`
-        }
-        resCollegesQuery?.forEach((residential_college, index) => {
-            if (index !== resCollegesQuery.length - 1) {
-                additionalEncodedParameterizedQueries += `${encodeURIComponent(residential_college)},`
-            } else {
-                additionalEncodedParameterizedQueries += `${encodeURIComponent(residential_college)}`
-            }
-        })
-        // await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
-        setPage(1)
-        // setAdditionalQueries(additionalEncodedParameterizedQueries)
-        await fetchUserData(firstEncodedParameterizedQuery.concat(additionalEncodedParameterizedQueries))
-        setIsExplicitSearching(false)
-    }
 
     useEffect(() => {
-        onSearchFiltering()
-        return () => {
+        let ignore = false;
+        async function fetchUserData(explicitQuery) {
+            const axios = await axiosInstance();
+            let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
+            // const {query} = router;
+            if (explicitQuery !== undefined) {
+                listURL += `?page=1&${explicitQuery}`;
+            } else {
+                listURL += `?page=${page}`;
+            }
+            console.log('listURL', listURL)
+            const axiosResponse = await axios.get(listURL)
+            const listData: List = axiosResponse.data;
+            setIsLoading(false)
+            if (!ignore) {
+                setListResults([])
+            }
+            setListResults((prev) => [...prev, ...listData.results]);
+            setCount(listData.count)
+            setHasNextPage(listData.next !== null);
+        }
+        async function onSearchFiltering() {
+            setIsExplicitSearching(true)
             setIsLoading(true)
             setListResults([])
+            let firstEncodedParameterizedQuery = `q=${encodeURIComponent(firstQuery)}`
+            let additionalEncodedParameterizedQueries = ''
+            // if concentrationsQuery has at least one element, then we need to add it to the query
+            if (concentrationsQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&concentration=`
+            }
+            concentrationsQuery?.forEach((concentration, index) => {
+                if (index !== concentrationsQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(concentration)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(concentration)}`
+                }
+            })
+            // likewise for tracksQuery
+            if (tracksQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&track=`
+            }
+            tracksQuery?.forEach((track, index) => {
+                if (index !== tracksQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(track)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(track)}`
+                }
+            })
+            // likewise for classYearsQuery
+            if (classYearsQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&class_year=`
+            }
+            classYearsQuery?.forEach((class_year, index) => {
+                if (index !== classYearsQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(class_year)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(class_year)}`
+                }
+            })
+            // likewise for resCollegesQuery
+            if (resCollegesQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&residential_college=`
+            }
+            resCollegesQuery?.forEach((residential_college, index) => {
+                if (index !== resCollegesQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(residential_college)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(residential_college)}`
+                }
+            })
+            // await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
+            setPage(1)
+            // setAdditionalQueries(additionalEncodedParameterizedQueries)
+            if (!ignore) {
+                await fetchUserData(firstEncodedParameterizedQuery.concat(additionalEncodedParameterizedQueries))
+            }
+            setIsExplicitSearching(false)
+        }
+
+        onSearchFiltering()
+
+        return () => {
+            ignore = true;
         };
     }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery]);
 
     async function onEnter() {
+        async function fetchUserData(explicitQuery) {
+            const axios = await axiosInstance();
+            let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
+            // const {query} = router;
+            if (explicitQuery !== undefined) {
+                listURL += `?page=1&${explicitQuery}`;
+            } else {
+                listURL += `?page=${page}`;
+            }
+            console.log('listURL', listURL)
+            const axiosResponse = await axios.get(listURL)
+            const listData: List = axiosResponse.data;
+            setIsLoading(false)
+            setListResults((prev) => [...prev, ...listData.results]);
+            setCount(listData.count)
+            setHasNextPage(listData.next !== null);
+        }
+
         setIsExplicitSearching(true)
         setIsLoading(true)
         setListResults([])
@@ -346,27 +388,26 @@ const List: React.FC<Props> = ({headerData}) => {
         setIsExplicitSearching(false)
     }
 
-    async function fetchUserData(explicitQuery) {
-        const axios = await axiosInstance();
-        let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
-        // const {query} = router;
-        if (explicitQuery !== undefined) {
-            listURL += `?page=1&${explicitQuery}`;
-        } else {
-            listURL += `?page=${page}`;
-        }
-        console.log('listURL', listURL)
-        const axiosResponse = await axios.get(listURL)
-        const listData: List = axiosResponse.data;
-        setIsLoading(false)
-        setListResults((prev) => [...prev, ...listData.results]);
-        setCount(listData.count)
-        setHasNextPage(listData.next !== null);
-    }
+
+
+
 
     useEffect(() => {
+        async function fetchSearchData() {
+            const axios = await axiosInstance();
+            let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
+            // const {query} = router;
+            console.log('SearchURL', listURL)
+            const axiosResponse = await axios.get(listURL)
+            const listData: List = axiosResponse.data;
+            setIsLoading(false)
+            setListResults((prev) => [...prev, ...listData.results]);
+            setCount(listData.count)
+            setHasNextPage(listData.next !== null);
+        }
+
         if (isExplicitSearching) return;
-        fetchUserData();
+        fetchSearchData();
         return () => {
             setListResults([])
         };
