@@ -1,7 +1,8 @@
-import {Fragment, useEffect, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {Combobox, Transition} from '@headlessui/react'
 import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid'
 import {useVirtualizer} from '@tanstack/react-virtual'
+import {Spinner} from "flowbite-react";
 
 export default function TigerBookComboBoxSingleStrictSelect(
     {data, defaultText, zIndex, initialSelected, defaultOptionText, setterFunction, clearState, clearStateFunction}:
@@ -63,12 +64,15 @@ export default function TigerBookComboBoxSingleStrictSelect(
                         spellCheck={false}
                         placeholder={defaultText}
                     />
+                    {data && data.length === 0 ?
+                        <Spinner className="absolute right-1 top-[5px]" color="warning"/>
+                        :
                     <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
                         <ChevronUpDownIcon
                             className="h-5 w-5 text-gray-400"
                             aria-hidden="true"
                         />
-                    </Combobox.Button>
+                    </Combobox.Button>}
                 </div>
                 <Transition
                     as={Fragment}

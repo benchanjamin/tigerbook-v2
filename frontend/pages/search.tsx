@@ -782,7 +782,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                                             <li>
                                                 <label htmlFor="hometown"
                                                        className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
-                                                    Hometowns</label>
+                                                    Hometown</label>
                                                 <TigerBookComboBoxSingleStrictSelect
                                                     data={hometownCompleteCitiesList}
                                                     defaultText="Select hometown"
@@ -798,7 +798,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                                             <li>
                                                 <label htmlFor="current-city"
                                                        className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
-                                                    Current Cities</label>
+                                                    Current City</label>
                                                 <TigerBookComboBoxSingleStrictSelect
                                                     data={currentCityCompleteCitiesList}
                                                     defaultText="Select current city"
