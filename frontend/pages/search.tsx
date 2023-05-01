@@ -411,9 +411,9 @@ const Search: React.FC<Props> = ({headerData}) => {
                 }
             })
             // await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
-            setPage(1)
-            setAdditionalQueries(additionalEncodedParameterizedQueries)
             if (!ignore) {
+                setPage(1)
+                setAdditionalQueries(additionalEncodedParameterizedQueries)
                 await fetchUserData(firstEncodedParameterizedQuery.concat(additionalEncodedParameterizedQueries))
                 setIsExplicitSearching(false)
             }
@@ -449,8 +449,8 @@ const Search: React.FC<Props> = ({headerData}) => {
             setIsLoading(true)
             setListResults([])
             let firstEncodedParameterizedQuery = `q=${encodeURIComponent(firstQuery)}`
-            setPage(1)
             if (!ignore) {
+                setPage(1)
                 await fetchUserData(firstEncodedParameterizedQuery.concat(additionalQueries))
                 setIsExplicitSearching(false)
             }
