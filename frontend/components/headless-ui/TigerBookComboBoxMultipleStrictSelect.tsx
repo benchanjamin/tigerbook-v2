@@ -1,7 +1,8 @@
-import {Fragment, useEffect, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {Combobox, Transition} from '@headlessui/react'
 import {CheckIcon, ChevronUpDownIcon, XMarkIcon} from '@heroicons/react/20/solid'
 import {useVirtualizer} from '@tanstack/react-virtual'
+import {Spinner} from "flowbite-react";
 
 export default function TigerBookComboBoxMultipleStrictSelect(
     {data, defaultText, zIndex, initialSelected, setterFunction, className, clearState, clearStateFunction}:
@@ -34,14 +35,13 @@ export default function TigerBookComboBoxMultipleStrictSelect(
         })
     }
 
-    async function onClick(event)
-    {
+    async function onClick(event) {
         event.stopPropagation()
         // @ts-ignore
         const associatedText = event.target.parentNode.innerText ??
             event.target.parentNode.parentNode.innerText
-        console.log("actual target" , event.target)
-        console.log("associated text" , associatedText)
+        console.log("actual target", event.target)
+        console.log("associated text", associatedText)
         setSelected(prevArray => {
             let result = prevArray.filter(item => String(item) !== String(associatedText))
             console.log('result: ', result)
@@ -109,12 +109,13 @@ export default function TigerBookComboBoxMultipleStrictSelect(
                     leaveTo="opacity-0"
                     afterLeave={() => setQuery('')}
                 >
-                    <Combobox.Options
-                    >
-                        {(
-                            <VirtualizedList items={filteredStrings ?? []}
-                            />
-                        )}
+                    <Combobox.Options>
+                        {data && data.length === 0 ?
+                            <Spinner color="info"/>
+                            : (
+                                <VirtualizedList items={filteredStrings ?? []}
+                                />
+                            )}
                     </Combobox.Options>
                 </Transition>
             </div>

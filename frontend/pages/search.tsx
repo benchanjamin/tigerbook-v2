@@ -279,7 +279,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             const axios = await axiosInstance();
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
             listURL += `?page=1&${explicitQuery}`;
-            console.log('listURL', listURL)
+            console.log('listURL1', listURL)
             const axiosResponse = await axios.get(listURL)
             const listData: List = axiosResponse.data;
             if (!ignore) {
@@ -363,7 +363,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             const axios = await axiosInstance();
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
             listURL += `?page=1&${explicitQuery}`;
-            console.log('listURL', listURL)
+            console.log('listURL2', listURL)
             const axiosResponse = await axios.get(listURL)
             const listData: List = axiosResponse.data;
             if (!ignore) {
