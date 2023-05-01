@@ -611,6 +611,9 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
             #  if user is not including profile pic in post request, then don't delete the old one)
             if instance.profile_pic.url and 'profile_pic' in validated_data:
                 instance.profile_pic.delete(save=False)
+        # update current city last updated date
+        if instance.current_city is not None:
+            instance.last_updated_current_city = datetime.date.today()
         # delete existing extracurriculars
         instance.extracurricular_objs.clear()
         instance.extracurricular_position_objs.clear()
@@ -627,9 +630,6 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
                 # instance.extracurricular_position_objs.add(retrieved_position)
                 retrieved_positions_list.append(retrieved_position)
             instance.extracurricular_position_objs.add(*retrieved_positions_list)
-        # update current city last updated date
-        if instance.current_city is not None:
-            instance.last_updated_current_city = datetime.date.today()
         return super().update(instance, validated_data)
 
     # TODO: referenced https://stackoverflow.com/questions/56025763/serializer-for-jsonfield-nested-representation
