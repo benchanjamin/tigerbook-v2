@@ -1,5 +1,3 @@
-from itertools import chain
-
 from django.db.models import QuerySet
 from django_filters import rest_framework as filters
 
@@ -38,14 +36,9 @@ class UndergraduateDirectoryListFilter(filters.FilterSet):
     aliases = filters.CharFilter(field_name='aliases', lookup_expr='icontains')
     pronouns = MultiValueCharFilter(field_name='pronouns__pronouns', lookup_expr='iexact')
     certificates = MultiValueCharFilter(field_name='certificates__certificate', lookup_expr='iexact')
-    # hometown_city = filters.CharFilter(field_name='hometown__city', lookup_expr='iexact')
-    # hometown_admin_name = filters.CharFilter(field_name='hometown__admin_name', lookup_expr='iexact')
-    hometown_country = MultiValueCharFilter(field_name='hometown__country', lookup_expr='iexact')
-    # current_city_city = filters.CharFilter(field_name='current_city__city', lookup_expr='iexact')
-    # current_city_admin_name = filters.CharFilter(field_name='current_city__admin_name', lookup_expr='iexact')
-    current_city_country = MultiValueCharFilter(field_name='current_city__entire_location_string', lookup_expr='iexact')
-    hometown_complete_city = MultiValueCharFilter(field_name='hometown__entire_location_string', lookup_expr='iexact')
-    current_city_complete_city = MultiValueCharFilter(field_name='current_city__country', lookup_expr='iexact')
+    hometown_complete_city = filters.CharFilter(field_name='hometown__entire_location_string', lookup_expr='iexact')
+    current_city_complete_city = filters.CharFilter(field_name='current_city__entire_location_string',
+                                                    lookup_expr='iexact')
     interests = MultiValueCharFilter(field_name='interests__interest', lookup_expr='iexact')
     extracurriculars = MultiValueCharFilter(field_name='extracurricular_objs__extracurricular', lookup_expr='iexact')
     extracurricular_positions = MultiValueCharFilter(field_name='extracurricular_position_objs__position',

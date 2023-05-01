@@ -30,7 +30,6 @@ export default function TigerBookComboBoxMultipleStrictSelect(
         setSelected(() => {
             let result = dataArray
             result = [...new Set(result)]
-            console.log('extraAPICall?', result)
             setterFunction(result)
             return result
         })
