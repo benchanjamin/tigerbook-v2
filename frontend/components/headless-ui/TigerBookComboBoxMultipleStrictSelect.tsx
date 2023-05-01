@@ -163,7 +163,7 @@ function VirtualizedList({
                             transform: `translateY(${virtualRow.start}px)`,
                         }}
                         className={({active}) =>
-                            `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
+                            `relative cursor-pointer select-none py-2 pl-1 pr-4 ${
                                 active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
                             }`
                         }
@@ -174,11 +174,11 @@ function VirtualizedList({
                                     <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
                                              {items?.[virtualRow.index]}
                                     </span>
-                                {selected ? (
-                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                                                      <CheckIcon className="h-5 w-5" aria-hidden="true"/>
-                                    </span>
-                                ) : null}
+                                {/*{selected ? (*/}
+                                {/*    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">*/}
+                                {/*                      /!*<CheckIcon className="h-5 w-5" aria-hidden="true"/>*!/*/}
+                                {/*    </span>*/}
+                                {/*) : null}*/}
                             </>
                         )}
                     </Combobox.Option>
