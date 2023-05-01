@@ -272,9 +272,17 @@ const List: React.FC<Props> = ({headerData}) => {
                 additionalEncodedParameterizedQueries += `${encodeURIComponent(concentration)}`
             }
         })
-        // tracksQuery?.forEach((track) => {
-        //     additionalEncodedParameterizedQueries += `&track=${encodeURIComponent(track)}`
-        // })
+        // likewise for tracksQuery
+        if (tracksQuery?.length > 0) {
+            additionalEncodedParameterizedQueries += `&track=`
+        }
+        tracksQuery?.forEach((track, index) => {
+            if (index !== concentrationsQuery.length - 1) {
+                additionalEncodedParameterizedQueries += `${encodeURIComponent(track)},`
+            } else {
+                additionalEncodedParameterizedQueries += `${encodeURIComponent(track)}`
+            }
+        })
         await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
         setPage(1)
         setAdditionalQueries(additionalEncodedParameterizedQueries)
