@@ -155,9 +155,9 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [extracurricularPositionsQuery, setExtracurricularPositionsQuery] = useState(null);
     const [hometownCompleteCitiesQuery, setHometownCompleteCitiesQuery] = useState(null);
     const [currentCityCompleteCitiesQuery, setCurrentCityCompleteCitiesQuery] = useState(null);
-    const [housingLocationQuery, setHousingLocationQuery] = useState(null);
-    const [housingBuildingQuery, setHousingBuildingQuery] = useState(null);
-    const [researchTypeQuery, setResearchTypeQuery] = useState(null);
+    const [housingLocationsQuery, setHousingLocationsQuery] = useState(null);
+    const [housingBuildingsQuery, setHousingBuildingsQuery] = useState(null);
+    const [researchTypeQuery, setResearchTypesQuery] = useState(null);
 
     // search list
     const [concentrationsList, setConcentrationsList] = useState([]);
@@ -171,9 +171,9 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [extracurricularPositionsList, setExtracurricularPositionsList] = useState([]);
     const [hometownCompleteCitiesList, setHometownCompleteCitiesList] = useState([]);
     const [currentCityCompleteCitiesList, setCurrentCityCompleteCitiesList] = useState([]);
-    const [housingLocationList, setHousingLocationList] = useState([]);
-    const [housingBuildingList, setHousingBuildingList] = useState([]);
-    const [researchTypeList, setResearchTypeList] = useState([]);
+    const [housingLocationsList, setHousingLocationsList] = useState([]);
+    const [housingBuildingsList, setHousingBuildingsList] = useState([]);
+    const [researchTypesList, setResearchTypesList] = useState([]);
 
 
     async function fetch() {
@@ -248,17 +248,17 @@ const Search: React.FC<Props> = ({headerData}) => {
                     }
 
                     if (index === 9) {
-                        setHousingLocationList(response.data)
+                        setHousingLocationsList(response.data)
                         return
                     }
 
                     if (index === 10) {
-                        setHousingBuildingList(response.data)
+                        setHousingBuildingsList(response.data)
                         return
                     }
 
                     if (index === 11) {
-                        setResearchTypeList(response.data)
+                        setResearchTypesList(response.data)
                         return
                     }
 
@@ -438,23 +438,23 @@ const Search: React.FC<Props> = ({headerData}) => {
             if (currentCityCompleteCitiesQuery !== null) {
                 additionalEncodedParameterizedQueries += `&current_city_complete_city=${encodeURIComponent(currentCityCompleteCitiesQuery)}`
             }
-            // likewise for housingBuildingQuery
-            if (housingBuildingQuery?.length > 0) {
+            // likewise for housingBuildingsQuery
+            if (housingBuildingsQuery?.length > 0) {
                 additionalEncodedParameterizedQueries += `&housing_buildings=`
             }
-            housingBuildingQuery?.forEach((housingBuilding, index) => {
-                if (index !== housingBuildingQuery.length - 1) {
+            housingBuildingsQuery?.forEach((housingBuilding, index) => {
+                if (index !== housingBuildingsQuery.length - 1) {
                     additionalEncodedParameterizedQueries += `${encodeURIComponent(housingBuilding)},`
                 } else {
                     additionalEncodedParameterizedQueries += `${encodeURIComponent(housingBuilding)}`
                 }
             })
-            // likewise for housingLocationQuery
-            if (housingLocationQuery?.length > 0) {
+            // likewise for housingLocationsQuery
+            if (housingLocationsQuery?.length > 0) {
                 additionalEncodedParameterizedQueries += `&housing_locations=`
             }
-            housingLocationQuery?.forEach((housingLocation, index) => {
-                if (index !== housingLocationQuery.length - 1) {
+            housingLocationsQuery?.forEach((housingLocation, index) => {
+                if (index !== housingLocationsQuery.length - 1) {
                     additionalEncodedParameterizedQueries += `${encodeURIComponent(housingLocation)},`
                 } else {
                     additionalEncodedParameterizedQueries += `${encodeURIComponent(housingLocation)}`
@@ -489,7 +489,7 @@ const Search: React.FC<Props> = ({headerData}) => {
         };
     }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery, certificatesQuery, pronounsQuery,
         interestsQuery, extracurricularsQuery, extracurricularPositionsQuery, hometownCompleteCitiesQuery,
-        currentCityCompleteCitiesQuery, housingBuildingQuery, housingLocationQuery]);
+        currentCityCompleteCitiesQuery, housingBuildingsQuery, housingLocationsQuery, researchTypeQuery]);
 
     useEffect(() => {
         let ignore = false;
@@ -854,28 +854,48 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                 />
                                             </li>
                                             <li>
-                                                <label htmlFor="housing-building"
-                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Extracurriculars</label>
+                                                <label htmlFor="housing-buildings"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
+                                                    Housing Buildings
+                                                </label>
                                                 <TigerBookComboBoxMultipleStrictSelect
-                                                    data={extracurricularsList}
-                                                    defaultText="Select extracurriculars"
+                                                    data={housingBuildingsList}
+                                                    defaultText="Select housing buildings"
                                                     initialSelected={[]}
                                                     zIndex={22}
-                                                    setterFunction={setExtracurricularsQuery}
+                                                    setterFunction={setHousingBuildingsQuery}
                                                     className="ml-1"
                                                     clearState={clearAll}
                                                     clearStateFunction={setClearAll}
                                                 />
                                             </li>
                                             <li>
-                                                <label htmlFor="housing-room"
-                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Extracurriculars</label>
+                                                <label htmlFor="housing-locations"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
+                                                    Housing Locations
+                                                </label>
                                                 <TigerBookComboBoxMultipleStrictSelect
-                                                    data={extracurricularsList}
-                                                    defaultText="Select extracurriculars"
+                                                    data={housingLocationsList}
+                                                    defaultText="Select housing locations"
                                                     initialSelected={[]}
                                                     zIndex={21}
-                                                    setterFunction={setExtracurricularsQuery}
+                                                    setterFunction={setHousingLocationsQuery}
+                                                    className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
+                                                />
+                                            </li>
+                                            <li>
+                                                <label htmlFor="research-types"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
+                                                    Research Types
+                                                </label>
+                                                <TigerBookComboBoxMultipleStrictSelect
+                                                    data={researchTypesList}
+                                                    defaultText="Select research types"
+                                                    initialSelected={[]}
+                                                    zIndex={20}
+                                                    setterFunction={setResearchTypesQuery}
                                                     className="ml-1"
                                                     clearState={clearAll}
                                                     clearStateFunction={setClearAll}
