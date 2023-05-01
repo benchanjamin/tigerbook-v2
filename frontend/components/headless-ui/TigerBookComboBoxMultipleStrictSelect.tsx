@@ -86,7 +86,7 @@ export default function TigerBookComboBoxMultipleStrictSelect(
                             })}
                         </div>
                         <Combobox.Input
-                            className="w-full py-2 pl-1 pr-10 text-sm leading-5 text-gray-900 focus:ring-0
+                            className="w-full py-2 pl-1 text-sm leading-5 text-gray-900 focus:ring-0
                         focus:outline-none
                         focus-visible:border-primary-500"
                             // displayValue={(dataString) => dataString === null || dataString.length === 0 ? '' : dataString.join(', ')}
