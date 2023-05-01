@@ -334,10 +334,14 @@ const List: React.FC<Props> = ({headerData}) => {
         const {query} = router;
         if (explicitQuery !== undefined) {
             listURL += `?page=1&${explicitQuery}`;
-        } else if ('q' in query) {
-            listURL += `?page=${page}&q=${query.q}${additionalQueries}`;
         } else {
             listURL += `?page=${page}`;
+            for (let [key, value] of Object.entries(query)) {
+                if (key === 'page') {
+                    continue;
+                }
+                listURL += `&${key}=${value}`;
+            }
         }
         console.log('listURL', listURL)
         const axiosResponse = await axios.get(listURL)
