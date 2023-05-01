@@ -30,10 +30,8 @@ class UndergraduateDirectoryListFilter(filters.FilterSet):
     residential_college = MultiValueCharFilter(field_name="residential_college__residential_college",
                                                lookup_expr='iexact')
     concentration = MultiValueCharFilter(field_name="concentration__concentration", lookup_expr='iexact')
-    housing_building = filters.CharFilter(field_name='housing__building', lookup_expr='iexact')
-    housing_room_no = filters.CharFilter(field_name='housing__room_no', lookup_expr='iexact')
-    # TODO: strip out all non-alphanumeric characters for aliases
-    aliases = filters.CharFilter(field_name='aliases', lookup_expr='icontains')
+    housing_building = MultiValueCharFilter(field_name='housing__building', lookup_expr='iexact')
+    # housing_room_no = filters.CharFilter(field_name='housing__room_no', lookup_expr='iexact')
     pronouns = MultiValueCharFilter(field_name='pronouns__pronouns', lookup_expr='iexact')
     certificates = MultiValueCharFilter(field_name='certificates__certificate', lookup_expr='iexact')
     hometown_complete_city = filters.CharFilter(field_name='hometown__entire_location_string', lookup_expr='iexact')

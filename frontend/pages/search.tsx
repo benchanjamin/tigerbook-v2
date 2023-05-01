@@ -153,6 +153,8 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [interestsQuery, setInterestsQuery] = useState(null);
     const [extracurricularsQuery, setExtracurricularsQuery] = useState(null);
     const [extracurricularPositionsQuery, setExtracurricularPositionsQuery] = useState(null);
+    const [hometownCompleteCitiesQuery, setHometownCompleteCitiesQuery] = useState([]);
+    const [currentCityCompleteCitiesQuery, setCurrentCityCompleteCitiesQuery] = useState([]);
 
     // search list
     const [concentrationsList, setConcentrationsList] = useState([]);
@@ -164,8 +166,8 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [interestsList, setInterestsList] = useState([]);
     const [extracurricularsList, setExtracurricularsList] = useState([]);
     const [extracurricularPositionsList, setExtracurricularPositionsList] = useState([]);
-    const [hometownCompleteCities, setHometownCompleteCities] = useState([]);
-    const [currentCityCompleteCities, setCurrentCityCompleteCities] = useState([]);
+    const [hometownCompleteCitiesList, setHometownCompleteCitiesList] = useState([]);
+    const [currentCityCompleteCitiesList, setCurrentCityCompleteCitiesList] = useState([]);
 
     async function fetch() {
 
@@ -238,8 +240,8 @@ const Search: React.FC<Props> = ({headerData}) => {
                     }
 
                     if (index == 10) {
-                        setHometownCompleteCities(response.data)
-                        setCurrentCityCompleteCities(response.data.slice())
+                        setHometownCompleteCitiesList(response.data)
+                        setCurrentCityCompleteCitiesList(response.data.slice())
                     }
 
                     listData[keys[index]] = response.data.map((item) => item[indices[index]])
@@ -410,6 +412,26 @@ const Search: React.FC<Props> = ({headerData}) => {
                     additionalEncodedParameterizedQueries += `${encodeURIComponent(extracurricularPosition)}`
                 }
             })
+            if (hometownCompleteCitiesQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&hometown_complete_city=`
+            }
+            hometownCompleteCitiesQuery?.forEach((hometown, index) => {
+                if (index !== hometownCompleteCitiesQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(hometown)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(hometown)}`
+                }
+            })
+            if (currentCityCompleteCitiesQuery?.length > 0) {
+                additionalEncodedParameterizedQueries += `&current_city_complete_city=`
+            }
+            currentCityCompleteCitiesQuery?.forEach((currentCity, index) => {
+                if (index !== currentCityCompleteCitiesQuery.length - 1) {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(currentCity)},`
+                } else {
+                    additionalEncodedParameterizedQueries += `${encodeURIComponent(currentCity)}`
+                }
+            })
             // await router.push(`/list?${firstEncodedParameterizedQuery}${additionalEncodedParameterizedQueries}`)
             if (!ignore) {
                 setPage(1)
@@ -424,7 +446,9 @@ const Search: React.FC<Props> = ({headerData}) => {
         return () => {
             ignore = true;
         };
-    }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery, certificatesQuery, pronounsQuery, interestsQuery, extracurricularsQuery, extracurricularPositionsQuery]);
+    }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery, certificatesQuery, pronounsQuery,
+        interestsQuery, extracurricularsQuery, extracurricularPositionsQuery, hometownCompleteCitiesQuery,
+        currentCityCompleteCitiesQuery]);
 
     useEffect(() => {
         let ignore = false;
@@ -693,6 +717,8 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                     zIndex={29}
                                                     setterFunction={setCertificatesQuery}
                                                     className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
                                                 />
                                             </li>
                                             <li>
@@ -705,6 +731,8 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                     zIndex={28}
                                                     setterFunction={setPronounsQuery}
                                                     className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
                                                 />
                                             </li>
                                             <li>
@@ -717,6 +745,8 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                     zIndex={27}
                                                     setterFunction={setInterestsQuery}
                                                     className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
                                                 />
                                             </li>
                                             <li>
@@ -729,6 +759,8 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                     zIndex={26}
                                                     setterFunction={setExtracurricularsQuery}
                                                     className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
                                                 />
                                             </li>
                                             <li>
@@ -742,6 +774,40 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                     zIndex={25}
                                                     setterFunction={setExtracurricularPositionsQuery}
                                                     className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
+                                                />
+                                            </li>
+                                            <li>
+                                                <label htmlFor="hometown"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
+                                                    Hometowns</label>
+                                                <TigerBookComboBoxSingleStrictSelect
+                                                    data={hometownCompleteCitiesList}
+                                                    defaultText="Select hometown"
+                                                    initialSelected={null}
+                                                    zIndex={25}
+                                                    setterFunction={setHometownCompleteCitiesQuery}
+                                                    className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
+                                                    defaultOptionText={undefined}
+                                                />
+                                            </li>
+                                            <li>
+                                                <label htmlFor="current-city"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
+                                                    Current Cities</label>
+                                                <TigerBookComboBoxSingleStrictSelect
+                                                    data={currentCityCompleteCitiesList}
+                                                    defaultText="Select current city"
+                                                    initialSelected={null}
+                                                    zIndex={25}
+                                                    setterFunction={setCurrentCityCompleteCitiesQuery}
+                                                    className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
+                                                    defaultOptionText={undefined}
                                                 />
                                             </li>
                                         </ul>

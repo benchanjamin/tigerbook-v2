@@ -4,7 +4,7 @@ import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid'
 import {useVirtualizer} from '@tanstack/react-virtual'
 
 export default function TigerBookComboBoxSingleStrictSelect(
-    {data, defaultText, zIndex, initialSelected, defaultOptionText, setterFunction}:
+    {data, defaultText, zIndex, initialSelected, defaultOptionText, setterFunction, clearState, clearStateFunction}:
         { data: string[], defaultText: string, zIndex: number, initialSelected: string, defaultOptionText: string | undefined, setterFunction: (value: string) => void }) {
     const [selected, setSelected] = useState<string | null>(initialSelected)
     const [query, setQuery] = useState('')
@@ -16,6 +16,12 @@ export default function TigerBookComboBoxSingleStrictSelect(
         }
     }, [data, defaultOptionText]);
 
+    useEffect(() => {
+        if (clearState) {
+            setSelected([])
+            clearStateFunction(false)
+        }
+    }, [clearState, clearStateFunction, setSelected])
 
     const filteredStrings =
         query === ''
