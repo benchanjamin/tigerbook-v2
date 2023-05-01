@@ -143,6 +143,10 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         if (axiosResponse.data.length === 0) {
             continue
         }
+        if (index === 10) {
+            listData['researchTypes'] = axiosResponse.data
+            continue
+        }
         listData[keys[index]] = axiosResponse.data.map((item) => item[indices[index]])
     }
 
