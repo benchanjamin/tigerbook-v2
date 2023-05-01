@@ -85,7 +85,7 @@ const Header: FC<Props> = function ({
                         <>
                             <Navbar.Collapse>
                                 <NavbarLink href="/search">Search</NavbarLink>
-                                <NavbarLink href="/list">List</NavbarLink>
+                                {/*<NavbarLink href="/list">List</NavbarLink>*/}
                                 {/*<NavbarLink href="/groups">Groups</NavbarLink>*/}
                                 <NavbarLink href="/notes">Notes</NavbarLink>
                                 <NavbarLink href="/map">Map</NavbarLink>
