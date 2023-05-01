@@ -575,15 +575,16 @@ const Search: React.FC<Props> = ({headerData}) => {
                                             </li>
                                             <li>
                                                 <label htmlFor="residential-colleges"
-                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Residential
-                                                    Colleges</label>
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
+                                                    Residential Colleges
+                                                </label>
                                                 <TigerBookComboBoxMultipleStrictSelect
                                                     data={resCollegesList}
                                                     defaultText="Select residential colleges"
                                                     initialSelected={[]}
                                                     zIndex={30}
                                                     setterFunction={setResCollegesQuery}
-                                                    className="ml-1"
+                                                    className="ml-1 mb-2"
                                                     clearState={clearAll}
                                                     clearStateFunction={setClearAll}
                                                 />
