@@ -801,6 +801,38 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                     defaultOptionText="Select none"
                                                 />
                                             </li>
+                                            <li>
+                                                <label htmlFor="current-city"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
+                                                    Current City</label>
+                                                <TigerBookComboBoxSingleStrictSelect
+                                                    data={currentCityCompleteCitiesList}
+                                                    defaultText="Select current city"
+                                                    initialSelected={null}
+                                                    zIndex={23}
+                                                    setterFunction={setCurrentCityCompleteCitiesQuery}
+                                                    className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
+                                                    defaultOptionText="Select none"
+                                                />
+                                            </li>
+                                            <li>
+                                                <label htmlFor="current-city"
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
+                                                    Current City</label>
+                                                <TigerBookComboBoxSingleStrictSelect
+                                                    data={currentCityCompleteCitiesList}
+                                                    defaultText="Select current city"
+                                                    initialSelected={null}
+                                                    zIndex={23}
+                                                    setterFunction={setCurrentCityCompleteCitiesQuery}
+                                                    className="ml-1"
+                                                    clearState={clearAll}
+                                                    clearStateFunction={setClearAll}
+                                                    defaultOptionText="Select none"
+                                                />
+                                            </li>
                                         </ul>
                                     </li>
                                 </Sidebar.ItemGroup>
