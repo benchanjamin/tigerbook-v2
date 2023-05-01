@@ -85,6 +85,9 @@ export default function TigerBookComboBoxMultipleStrictSelect(
                                 )
                             })}
                         </div>
+                        {data && data.length === 0 &&
+                            <Spinner color="warning"/>
+                        }
                         <Combobox.Input
                             className="w-full py-2 pl-1 pr-10 text-sm leading-5 text-gray-900 focus:ring-0
                         focus:outline-none
@@ -110,12 +113,10 @@ export default function TigerBookComboBoxMultipleStrictSelect(
                     afterLeave={() => setQuery('')}
                 >
                     <Combobox.Options>
-                        {data && data.length === 0 ?
-                            <Spinner color="info"/>
-                            : (
-                                <VirtualizedList items={filteredStrings ?? []}
-                                />
-                            )}
+                        {(
+                            <VirtualizedList items={filteredStrings ?? []}
+                            />
+                        )}
                     </Combobox.Options>
                 </Transition>
             </div>
