@@ -5,7 +5,7 @@ import {useVirtualizer} from '@tanstack/react-virtual'
 import {Spinner} from "flowbite-react";
 
 export default function TigerBookComboBoxSingleStrictSelect(
-    {data, defaultText, zIndex, initialSelected, defaultOptionText, setterFunction, clearState, clearStateFunction}:
+    {data, defaultText, zIndex, initialSelected, defaultOptionText, setterFunction, clearState, clearStateFunction, className}:
         { data: string[], defaultText: string, zIndex: number, initialSelected: string, defaultOptionText: string | undefined, setterFunction: (value: string) => void }) {
     const [selected, setSelected] = useState<string | null>(initialSelected)
     const [query, setQuery] = useState('')
@@ -46,7 +46,7 @@ export default function TigerBookComboBoxSingleStrictSelect(
                       }
                       setSelected(defaultOptionText)
                       setterFunction(null)
-                  }} className={`z-[${zIndex}] z-${zIndex}`}>
+                  }} className={`z-[${zIndex}] z-${zIndex} ${className}`}>
             <div className="relative mt-1">
                 <div
                     className="relative border border-primary-200 w-full cursor-pointer
