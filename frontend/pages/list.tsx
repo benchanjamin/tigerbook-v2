@@ -226,7 +226,7 @@ const List: React.FC<Props> = ({headerData}) => {
             axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[7]}`),
             axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[8]}`),
             axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[9]}`),
-            ])
+        ])
             .then((responses) => {
                 responses.forEach((response, index) => {
                     if (response.data.length === 0) {
@@ -329,6 +329,9 @@ const List: React.FC<Props> = ({headerData}) => {
 
     useEffect(() => {
         onSearchFiltering()
+        return () => {
+            setListResults([])
+        };
     }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery]);
 
     async function onEnter() {
@@ -363,6 +366,9 @@ const List: React.FC<Props> = ({headerData}) => {
     useEffect(() => {
         if (isExplicitSearching) return;
         fetchUserData();
+        return () => {
+            setListResults([])
+        };
     }, [page]);
 
     function clearAllFilters() {
