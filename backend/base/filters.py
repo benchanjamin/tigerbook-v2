@@ -1,3 +1,5 @@
+from itertools import chain
+
 from django.db.models import QuerySet
 from django_filters import rest_framework as filters
 
@@ -17,14 +19,9 @@ class MultiValueCharFilter(filters.BaseCSVFilter, filters.CharFilter):
 
         if not query_sets:
             return qs
-
-        results = query_sets[0]
-
-        for queryset in query_sets:
-            results.union(queryset)
-
-        return results
-
+        elif isinstance(query_sets[0], QuerySet):
+            return query_sets[0].union(*query_sets[1:])
+        return qs
 
 class UndergraduateDirectoryListFilter(filters.FilterSet):
     class_year = filters.NumberFilter(field_name="class_year__class_year", lookup_expr='iexact')
