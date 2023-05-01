@@ -10,6 +10,8 @@ export default function TigerBookComboBoxSingleStrictSelect(
     const [selected, setSelected] = useState<string | null>(initialSelected)
     const [query, setQuery] = useState('')
 
+    const requiredLength = defaultOptionText === undefined ? 0 : 1
+
     useEffect(() => {
         // add default option to front of data array if it does exist
         if (defaultOptionText !== undefined && data[0] !== defaultOptionText) {
@@ -64,7 +66,7 @@ export default function TigerBookComboBoxSingleStrictSelect(
                         spellCheck={false}
                         placeholder={defaultText}
                     />
-                    {data && data.length <= 1 ?
+                    {data && data.length <= requiredLength ?
                         <Spinner className="absolute right-1 top-[5px]" color="warning"/>
                         :
                     <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
