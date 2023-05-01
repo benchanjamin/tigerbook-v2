@@ -548,7 +548,8 @@ const List: React.FC<Props> = ({headerData}) => {
                                             </li>
                                             <li>
                                                 <label htmlFor="class-years"
-                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Class
+                                                       className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">
+                                                    Class
                                                     Years</label>
                                                 <TigerBookComboBoxMultipleStrictSelect
                                                     data={classYearsList}
