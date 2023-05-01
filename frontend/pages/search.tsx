@@ -164,6 +164,8 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [interestsList, setInterestsList] = useState([]);
     const [extracurricularsList, setExtracurricularsList] = useState([]);
     const [extracurricularPositionsList, setExtracurricularPositionsList] = useState([]);
+    const [hometownCompleteCities, setHometownCompleteCities] = useState([]);
+    const [currentCityCompleteCities, setCurrentCityCompleteCities] = useState([]);
 
     async function fetch() {
 
@@ -180,8 +182,8 @@ const Search: React.FC<Props> = ({headerData}) => {
             '/api-django/extracurriculars/',
             '/api-django/extracurricular-positions/',
             '/api-django/housing/',
-            '/api-django/research-types/'
-            // '/api-django/cities/',
+            '/api-django/research-types/',
+            '/api-django/cities/',
         ]
 
         const keys = [
@@ -227,12 +229,18 @@ const Search: React.FC<Props> = ({headerData}) => {
             axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[7]}`),
             axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[8]}`),
             axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[9]}`),
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}${apiListAPIRoutes[10]}`),
         ])
             .then((responses) => {
                 responses.forEach((response, index) => {
                     if (response.data.length === 0) {
                         return
                     }
+
+                    if (index == 10) {
+
+                    }
+
                     listData[keys[index]] = response.data.map((item) => item[indices[index]])
 
                     if (index === 0) {
@@ -736,35 +744,6 @@ const Search: React.FC<Props> = ({headerData}) => {
                                             </li>
                                         </ul>
                                     </li>
-                                    {/*    <Sidebar.Item href="#" icon={HiViewBoards}>*/}
-                                    {/*        Kanban*/}
-                                    {/*    </Sidebar.Item>*/}
-                                    {/*    <Sidebar.Item href="#" icon={HiInbox}>*/}
-                                    {/*        Inbox*/}
-                                    {/*    </Sidebar.Item>*/}
-                                    {/*    <Sidebar.Item href="#" icon={HiUser}>*/}
-                                    {/*        Users*/}
-                                    {/*    </Sidebar.Item>*/}
-                                    {/*    <Sidebar.Item href="#" icon={HiShoppingBag}>*/}
-                                    {/*        Products*/}
-                                    {/*    </Sidebar.Item>*/}
-                                    {/*    <Sidebar.Item href="#" icon={HiArrowSmRight}>*/}
-                                    {/*        Sign In*/}
-                                    {/*    </Sidebar.Item>*/}
-                                    {/*    <Sidebar.Item href="#" icon={HiTable}>*/}
-                                    {/*        Sign Up*/}
-                                    {/*    </Sidebar.Item>*/}
-                                    {/*</Sidebar.ItemGroup>*/}
-                                    {/*<Sidebar.ItemGroup>*/}
-                                    {/*    <Sidebar.Item href="#" icon={HiChartPie}>*/}
-                                    {/*        Upgrade to Pro*/}
-                                    {/*    </Sidebar.Item>*/}
-                                    {/*    <Sidebar.Item href="#" icon={HiViewBoards}>*/}
-                                    {/*        Documentation*/}
-                                    {/*    </Sidebar.Item>*/}
-                                    {/*    <Sidebar.Item href="#" icon={BiBuoy}>*/}
-                                    {/*        Help*/}
-                                    {/*    </Sidebar.Item>*/}
                                 </Sidebar.ItemGroup>
                             </Sidebar.Items>
                         </Sidebar>
