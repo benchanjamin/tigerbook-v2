@@ -20,13 +20,15 @@ class MultiValueCharFilter(filters.BaseCSVFilter, filters.CharFilter):
         if not query_sets:
             return qs
         elif isinstance(query_sets[0], QuerySet):
-            return query_sets[0].union(*query_sets[1:])
+            for query_set in query_sets[1:]:
+                query_sets[0] = query_sets[0] | query_set
+            return query_sets[0]
         return qs
 
 class UndergraduateDirectoryListFilter(filters.FilterSet):
-    class_year = filters.NumberFilter(field_name="class_year__class_year", lookup_expr='iexact')
+    class_year = MultiValueCharFilter(field_name="class_year__class_year", lookup_expr='iexact')
     track = MultiValueCharFilter(field_name="track__track", lookup_expr='iexact')
-    residential_college = filters.CharFilter(field_name="residential_college__residential_college",
+    residential_college = MultiValueCharFilter(field_name="residential_college__residential_college",
                                              lookup_expr='iexact')
     concentration = MultiValueCharFilter(field_name="concentration__concentration", lookup_expr='iexact')
     housing_building = filters.CharFilter(field_name='housing__building', lookup_expr='iexact')
