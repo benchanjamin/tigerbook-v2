@@ -659,6 +659,18 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
             serializer.is_valid(raise_exception=True)
         return extracurriculars
 
+    def validate_aliases(self, aliases):
+        if type(aliases) is not list:
+            raise serializers.ValidationError("Research field is not an array.")
+        for alias in aliases:
+            hyperlink_regex = re.compile(
+                r'\b(?:https?|telnet|gopher|file|wais|ftp):[\w/#~:.?+=&%@!\-.:?\\-]+?(?=[.:?\-]*(?:['
+                r'^\w/#~:.?+=&%@!\-.:?\-]|$))')
+            html_tags_regex = re.compile(r'<.*?>')
+            if hyperlink_regex.match(alias) or html_tags_regex.match(alias):
+                raise serializers.ValidationError(f"Alias {alias} contains a hyperlink or html tags.")
+        return aliases
+
     def validate_research(self, research):
         if type(research) is not list:
             raise serializers.ValidationError("Research field is not an array.")
