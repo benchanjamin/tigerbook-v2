@@ -52,7 +52,7 @@ interface ServerSideProps {
 
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({query, req}) => {
     let REDIRECT_ERROR = 0
-    const axios = await axiosLocalhost();
+    const axios = await axiosInstance();
     const axiosRedirect: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/redirect/`,
         {
             headers: {

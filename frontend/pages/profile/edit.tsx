@@ -40,7 +40,7 @@ interface ServerSideProps {
 
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({req}) => {
     let REDIRECT_ERROR = 0
-    const axios = await axiosLocalhost();
+    const axios = await axiosInstance();
     const axiosRedirect: AxiosResponse = await axios.get(`${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/redirect/`,
         {
             headers: {
@@ -221,7 +221,7 @@ const ProfileEdit: React.FC<Props> = ({
     const [isImageReady, setIsImageReady] = useState(false);
 
     async function fetch() {
-        const axios = await axiosLocalhost()
+        const axios = await axiosInstance()
         const axiosResponse: AxiosResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/cities/`)
         console.log('completed fetch')
         setHometowns(axiosResponse.data)
@@ -268,7 +268,7 @@ const ProfileEdit: React.FC<Props> = ({
         console.log(postData)
 
         let RESPONSE_ERROR = 0
-        const axios = await axiosLocalhost();
+        const axios = await axiosInstance();
 
         if (files.length == 0 && changePhoto) {
             context.showNotification({
