@@ -130,6 +130,7 @@ interface ListData {
 }
 
 const Search: React.FC<Props> = ({headerData}) => {
+    const onLoadController = new AbortController()
     const [firstQuery, setFirstQuery] = useState('');
     const [additionalQueries, setAdditionalQueries] = useState('');
 
@@ -494,6 +495,7 @@ const Search: React.FC<Props> = ({headerData}) => {
         // if there isn't an empty string in the dependencies, then we know that the user has selected something
         // and we can search
         if (dependencies.some((dependency) => dependency !== '' && dependency !== null)) {
+            onLoadController.abort()
             onSearchFiltering()
         }
 
@@ -541,6 +543,7 @@ const Search: React.FC<Props> = ({headerData}) => {
         }
 
         if (firstQuery !== '') {
+            onLoadController.abort()
             onEnter()
         }
 
@@ -560,7 +563,9 @@ const Search: React.FC<Props> = ({headerData}) => {
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
             listURL += `${firstQuery}${additionalQueries}`
             console.log('SearchURL', listURL)
-            const axiosResponse = await axios.get(listURL)
+            const axiosResponse = await axios.get(listURL, {
+                signal: onLoadController.signal
+            })
             const listData: List = axiosResponse.data;
             if (!ignore) {
                 setListResults((prev) => [...prev, ...listData.results]);
