@@ -136,7 +136,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                 {userData.aliases.map((alias, index) => {
                                     return (
                                         <span key={index} className="text-gray-300">
-                                            {alias}
+                                            {alias} <br/>
                                         </span>
                                     )
                                 })}
