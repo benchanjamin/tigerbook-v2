@@ -270,13 +270,6 @@ const ProfileEdit: React.FC<Props> = ({
         let RESPONSE_ERROR = 0
         const axios = await axiosInstance();
 
-        if (files.length == 0 && changePhoto) {
-            context.showNotification({
-                description: String("No file selected to save"),
-            })
-            return;
-        }
-
         let formData: SetupTwoPost = new FormData()
         if (changePhoto && files.length > 0) {
             formData.append('profile_pic', files[0], 'profile_pic')
