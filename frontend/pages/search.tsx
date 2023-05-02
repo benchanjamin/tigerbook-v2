@@ -544,6 +544,7 @@ const Search: React.FC<Props> = ({headerData}) => {
 
         if (firstQuery !== '') {
             onLoadController.abort()
+            console.log('signaled', onLoadController.abort('aborted the onload controller'))
             onEnter()
         }
 
