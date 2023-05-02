@@ -493,6 +493,7 @@ const Search: React.FC<Props> = ({headerData}) => {
         currentCityCompleteCitiesQuery, housingBuildingsQuery, housingLocationsQuery, researchTypeQuery]);
 
     useEffect(() => {
+        const controller = new AbortController();
         let ignore = false;
 
         async function fetchUserData(explicitQuery) {
@@ -500,7 +501,6 @@ const Search: React.FC<Props> = ({headerData}) => {
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
             listURL += `?page=1&${explicitQuery}`;
             console.log('listURL2', listURL)
-            const controller = new AbortController();
             const axiosResponse = await axios.get(listURL,
                 {
                     signal: controller.signal
@@ -511,8 +511,6 @@ const Search: React.FC<Props> = ({headerData}) => {
                 setCount(listData.count)
                 setHasNextPage(listData.next !== null)
                 setIsLoading(false)
-            } else {
-                controller.abort()
             }
         }
 
@@ -532,6 +530,7 @@ const Search: React.FC<Props> = ({headerData}) => {
 
 
         return () => {
+            controller.abort()
             ignore = true;
         };
     }, [isEnter, firstQuery]);
