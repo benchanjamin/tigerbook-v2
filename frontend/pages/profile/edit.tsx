@@ -273,31 +273,6 @@ const ProfileEdit: React.FC<Props> = ({
         let formData: SetupTwoPost = new FormData()
         if (changePhoto && files.length > 0) {
             formData.append('profile_pic', files[0], 'profile_pic')
-        } else if (changePhoto && files.length == 0) {
-            formData.append('profile_pic', null, 'profile_pic')
-        }
-
-        // // TODO: Change this to the actual endpoint
-        let axiosResponse: AxiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/edit/`,
-            postData
-        ).then((response) => {
-            if (response.ok) {
-                return response
-            }
-        })
-            .catch((error) => {
-                RESPONSE_ERROR = 1
-                const errorObject = error.response.data
-                let errorString = errorObject == undefined ? error.message : ''
-                for (const property in errorObject) {
-                    errorString = errorString + `${property}: ${errorObject[property]}\n`;
-                }
-                context.showNotification({
-                    description: String(errorString),
-                })
-            })
-
-        if (changePhoto) {
             axiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/setup/two/`,
                 formData,
                 {
@@ -321,10 +296,48 @@ const ProfileEdit: React.FC<Props> = ({
                         description: String(errorString),
                     })
                 })
-
-
+        } else if (changePhoto && files.length == 0) {
+            axiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/setup/two/`,
+                {
+                    profile_pic: null
+                },
+            ).then((response) => {
+                if (response.ok) {
+                    return response
+                }
+            })
+                .catch((error) => {
+                    RESPONSE_ERROR = 1
+                    const errorObject = error.response.data
+                    let errorString = errorObject == undefined ? error.message : ''
+                    for (const property in errorObject) {
+                        errorString = errorString + `${property}: ${errorObject[property]}\n`;
+                    }
+                    context.showNotification({
+                        description: String(errorString),
+                    })
+                })
         }
-        console.log(axiosResponse)
+
+        let axiosResponse: AxiosResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/undergraduate/profile/edit/`,
+            postData
+        ).then((response) => {
+            if (response.ok) {
+                return response
+            }
+        })
+            .catch((error) => {
+                RESPONSE_ERROR = 1
+                const errorObject = error.response.data
+                let errorString = errorObject == undefined ? error.message : ''
+                for (const property in errorObject) {
+                    errorString = errorString + `${property}: ${errorObject[property]}\n`;
+                }
+                context.showNotification({
+                    description: String(errorString),
+                })
+            })
+
         if (RESPONSE_ERROR === 0) {
             await router.push('/profile/preview')
         }
