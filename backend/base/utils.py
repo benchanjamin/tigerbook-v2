@@ -44,21 +44,32 @@ def add_to_undergraduate_tigerbook_directory(user):
         class_year=active_directory_entry.department.split(" ")[-1])
     permissions = UndergraduateTigerBookDirectoryPermissions.objects.create()
     has_setup_profile = SetupTigerBookDirectoryStages.objects.create()
-    undergraduate_tigerbook_entry = UndergraduateTigerBookDirectory.objects.create(user=user,
-                                                                                   has_setup_profile=has_setup_profile,
-                                                                                   active_directory_entry=
-                                                                                   active_directory_entry,
-                                                                                   residential_college_facebook_entry=
-                                                                                   residential_college_facebook_entry,
-                                                                                   permissions=permissions,
-                                                                                   concentration=concentration,
-                                                                                   track=track,
-                                                                                   class_year=
-                                                                                   class_year,
-                                                                                   residential_college=
-                                                                                   residential_college)
-    GenericTigerBookDirectory.objects.create(tigerbook_directory_username=user.username,
-                                             tigerbook_entry=undergraduate_tigerbook_entry)
+    undergrad_directory_object = UndergraduateTigerBookDirectory.objects.filter(active_directory_entry__net_id__exact
+                                                                                =net_id).first()
+    if undergrad_directory_object is None:
+        undergraduate_tigerbook_entry = UndergraduateTigerBookDirectory.objects.create(user=
+                                                                                       user,
+                                                                                       has_setup_profile=
+                                                                                       has_setup_profile,
+                                                                                       active_directory_entry=
+                                                                                       active_directory_entry,
+                                                                                       residential_college_facebook_entry=
+                                                                                       residential_college_facebook_entry,
+                                                                                       permissions=
+                                                                                       permissions,
+                                                                                       concentration=
+                                                                                       concentration,
+                                                                                       track=track,
+                                                                                       class_year=
+                                                                                       class_year,
+                                                                                       residential_college=
+                                                                                       residential_college)
+        GenericTigerBookDirectory.objects.create(tigerbook_directory_username=user.username,
+                                                 tigerbook_entry=undergraduate_tigerbook_entry)
+    else:
+        # attached user to undergrad_directory_object
+        undergrad_directory_object.user = user
+        undergrad_directory_object.save()
 
 
 def update_undergraduate_tigerbook_directory(user):
