@@ -320,7 +320,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             const listData: List = axiosResponse.data;
             if (!ignore) {
                 setIsLoading(false)
-                setListResults((prev) => [...prev, ...listData.results]);
+                setListResults(listData.results);
                 setCount(listData.count)
                 setHasNextPage(listData.next !== null);
             }
@@ -503,7 +503,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             const axiosResponse = await axios.get(listURL)
             const listData: List = axiosResponse.data;
             if (!ignore) {
-                setListResults([...listData.results]);
+                setListResults(listData.results);
                 setCount(listData.count)
                 setHasNextPage(listData.next !== null)
                 setIsLoading(false)
