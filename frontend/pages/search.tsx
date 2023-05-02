@@ -556,7 +556,7 @@ const Search: React.FC<Props> = ({headerData}) => {
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        let onLoadController = new AbortController()
+        // let onLoadController = new AbortController()
         let ignore = false;
 
         async function fetchSearchData() {
@@ -565,9 +565,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
             listURL += `q=${firstQuery}${additionalQueries}`
             console.log('SearchURL', listURL)
-            const axiosResponse = await axios.get(listURL, {
-                signal: onLoadController.signal
-            })
+            const axiosResponse = await axios.get(listURL)
             const listData: List = axiosResponse.data;
             if (!ignore) {
                 setListResults((prev) => [...prev, ...listData.results]);
