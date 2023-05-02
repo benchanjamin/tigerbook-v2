@@ -484,6 +484,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             if (!ignore) {
                 setPage(1)
                 setAdditionalQueries(additionalEncodedParameterizedQueries)
+                setAdditionalQueriesIsSet(true)
                 await fetchUserData(firstEncodedParameterizedQuery.concat(additionalEncodedParameterizedQueries))
                 setIsExplicitSearching(false)
             }
@@ -495,7 +496,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             housingLocationsQuery, researchTypeQuery]
         // if there isn't an empty string in the dependencies, then we know that the user has selected something
         // and we can search
-        if (dependencies.some((dependency) => dependency !== '' && dependency !== null)) {
+        if (dependencies.some((dependency) => dependency !== '' && dependency !== null) || additionalQueriesIsSet) {
             onSearchFiltering()
         }
 
@@ -582,7 +583,7 @@ const Search: React.FC<Props> = ({headerData}) => {
         return () => {
             ignore = true;
         };
-    }, [page, firstQueryIsSet]);
+    }, [page]);
 
     function clearAllFilters() {
         // set all queries to empty
