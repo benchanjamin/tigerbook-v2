@@ -27,7 +27,7 @@ export const flowbiteTheme: CustomFlowbiteTheme = {
     },
   },
   sidebar: {
-    base: "h-full bg-gray-50",
+    base: "h-[200vh] bg-gray-50",
     collapse: {
       list: "space-y-2 py-2 list-none",
     },
