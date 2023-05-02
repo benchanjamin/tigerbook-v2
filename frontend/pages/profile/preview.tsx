@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {GetServerSideProps} from "next";
 import {axiosInstance, axiosLocalhost} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
@@ -232,7 +232,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                     })}
                                 </>)
                             }
-                            {userData.extracurriculars !== null &&
+                            {userData.extracurriculars && userData.extracurriculars.length > 0 &&
                                 (<>
                                     <h4 className="text-primary-500 text-left mt-3 font-bold tracking-wide">
                                         EXTRACURRICULARS
