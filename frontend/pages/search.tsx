@@ -130,9 +130,10 @@ interface ListData {
 }
 
 const Search: React.FC<Props> = ({headerData}) => {
-    let onLoadController = new AbortController()
     const [firstQuery, setFirstQuery] = useState('');
+    const [firstQueryIsSet, setFirstQueryIsSet] = useState(false);
     const [additionalQueries, setAdditionalQueries] = useState('');
+    const [additionalQueriesIsSet, setAdditionalQueriesIsSet] = useState(false);
 
     const [clearAll, setClearAll] = useState(false);
     const [page, setPage] = useState(1);
@@ -495,7 +496,6 @@ const Search: React.FC<Props> = ({headerData}) => {
         // if there isn't an empty string in the dependencies, then we know that the user has selected something
         // and we can search
         if (dependencies.some((dependency) => dependency !== '' && dependency !== null)) {
-            onLoadController.abort()
             onSearchFiltering()
         }
 
@@ -542,9 +542,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             }
         }
 
-        if (firstQuery !== '') {
-            onLoadController.abort()
-            console.log('signaled', onLoadController.abort('aborted the onload controller'))
+        if (firstQuery !== '' && firstQueryIsSet) {
             onEnter()
         }
 
@@ -557,7 +555,7 @@ const Search: React.FC<Props> = ({headerData}) => {
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        onLoadController = new AbortController()
+        let onLoadController = new AbortController()
         let ignore = false;
 
         async function fetchSearchData() {
@@ -584,7 +582,10 @@ const Search: React.FC<Props> = ({headerData}) => {
         return () => {
             ignore = true;
         };
-    }, [page]);
+    }, [page, firstQuery, concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery, certificatesQuery,
+        pronounsQuery, interestsQuery, extracurricularsQuery, extracurricularPositionsQuery,
+        hometownCompleteCitiesQuery, currentCityCompleteCitiesQuery, housingBuildingsQuery,
+        housingLocationsQuery, researchTypeQuery]);
 
     function clearAllFilters() {
         // set all queries to empty
@@ -630,9 +631,13 @@ const Search: React.FC<Props> = ({headerData}) => {
                             <div className="flex flex-col md:flex-row items-center justify-center gap-x-4">
                                 <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
                                     <TigerBookListBar defaultText="Search PUID, NetID, nickname, or full name"
-                                                      zIndex={100} setterFunction={setFirstQuery}
+                                                      zIndex={100} setterFunction={(e) => {
+                                        setFirstQuery(e)
+                                        setFirstQueryIsSet(true)
+                                    }}
                                                       autoComplete="off"
-                                                      onEnterFunction={() => {}}/>
+                                                      onEnterFunction={() => {
+                                                      }}/>
                                 </div>
                                 {/*<button onClick={() => {}}*/}
                                 {/*        className="bg-primary-500 hover:bg-primary-400 text-white px-4 py-2 rounded-md focus:outline-none active:bg-primary-600 focus:ring focus:ring-primary-200 mt-1.5">*/}
