@@ -206,7 +206,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                         <div
                             className="flex flex-col items-center sm:items-start order-last mb-4 sm:order-4 sm:mb-0">
 
-                            {userData.interests?.length !== 0 &&
+                            {userData.interests && userData.interests.length > 0 &&
                                 (<>
                                     <h4 className="text-primary-500 text-left mt-4 sm:mt-0 sm:mt-3 font-bold tracking-wide">
                                         INTERESTS
@@ -317,7 +317,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
 
                         <div
                             className="flex flex-col items-center sm:items-start order-4 sm:order-3 sm:mb-0">
-                            {userData.certificates?.length !== 0 &&
+                            {userData.certificates && userData.certificates?.length > 0 &&
                                 (<>
                                     <h4 className="text-primary-500 text-left mt-4 font-bold tracking-wide">
                                         CERTIFICATES
