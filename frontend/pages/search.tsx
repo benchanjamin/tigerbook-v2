@@ -134,6 +134,7 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [firstQueryIsSet, setFirstQueryIsSet] = useState(false);
     const [additionalQueries, setAdditionalQueries] = useState('');
     const [additionalQueriesIsSet, setAdditionalQueriesIsSet] = useState(false);
+    const [firstLoadIsSet, setFirstLoadIsSet] = useState(false);
 
     const [clearAll, setClearAll] = useState(false);
     const [page, setPage] = useState(1);
@@ -556,7 +557,7 @@ const Search: React.FC<Props> = ({headerData}) => {
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        // let onLoadController = new AbortController()
+        let onLoadController = new AbortController()
         let ignore = false;
 
         async function fetchSearchData() {
@@ -565,7 +566,9 @@ const Search: React.FC<Props> = ({headerData}) => {
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/?page=${page}`;
             listURL += `&q=${firstQuery}${additionalQueries}`
             console.log('SearchURL', listURL)
-            const axiosResponse = await axios.get(listURL)
+            const axiosResponse = await axios.get(listURL, {
+                signal: onLoadController.signal
+            })
             const listData: List = axiosResponse.data;
             if (!ignore) {
                 setListResults((prev) => [...prev, ...listData.results]);
@@ -576,12 +579,15 @@ const Search: React.FC<Props> = ({headerData}) => {
         }
 
         if (isExplicitSearching) return;
+        if ( (firstQueryIsSet || additionalQueriesIsSet) && !firstLoadIsSet) return
         fetchSearchData();
 
+
         return () => {
+            onLoadController.abort()
             ignore = true;
         };
-    }, [page]);
+    }, [page, firstQueryIsSet, additionalQueriesIsSet, firstLoadIsSet]);
 
     function clearAllFilters() {
         // set all queries to empty
