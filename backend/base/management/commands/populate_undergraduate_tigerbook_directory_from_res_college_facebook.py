@@ -26,8 +26,8 @@ class Command(BaseCommand):
             req = req_lib.get_info_for_tigerbook(net_id)
             if not type(req) is dict:
                 continue
-            if OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(**req).exists():
-                active_directory_entry = OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(**req).first()
+            if OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(net_id=req['net_id']).exists():
+                active_directory_entry = OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(net_id=req['net_id']).first()
             else:
                 active_directory_entry = OITActiveDirectoryUndergraduateGraduateInfo.objects.create(**req)
             # if not active_directory_entry:

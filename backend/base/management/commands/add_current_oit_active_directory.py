@@ -6,6 +6,7 @@ from base.models import (OITActiveDirectoryUndergraduateGraduateInfo,
                          )
 from utils.color_logging import log
 from datetime import datetime
+import re
 
 
 class Command(BaseCommand):
@@ -30,7 +31,7 @@ class Command(BaseCommand):
             )
             for class_year_student in class_year_students:
                 net_id = class_year_student.get('netid', None)
-                full_name = class_year_student.get('full_name', None)
+                full_name = re.sub(r' [A-Z]*\. ', ' ', class_year_student.get('full_name', None))
                 puid = class_year_student.get('emplid', None)
                 email = class_year_student.get('email', None)
                 if email:

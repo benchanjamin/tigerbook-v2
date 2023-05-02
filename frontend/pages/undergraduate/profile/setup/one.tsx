@@ -55,9 +55,9 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         '/api-django/tracks/',
         '/api-django/residential-colleges/',
         '/api-django/class-years/',
-        '/api-django/cities/',
         '/api-django/certificates/',
         '/api-django/pronouns/',
+        '/api-django/cities/',
     ]
 
     const keys = [
@@ -65,9 +65,9 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         'tracks',
         'residentialColleges',
         'classYears',
-        'cities',
         'certificates',
         'pronouns',
+        // 'cities',
     ]
 
     const indices = [
@@ -75,9 +75,9 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
         'track',
         'residential_college',
         'class_year',
-        'complete_city',
         'certificate',
         'pronouns',
+        // 'complete_city',
     ]
 
     const listData = {}
@@ -88,6 +88,10 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({r
                 Cookie: req.headers.cookie
             }
         })
+        if (index === 6) {
+            listData['cities'] = axiosResponse.data
+            continue
+        }
         listData[keys[index]] = axiosResponse.data.map((item) => item[indices[index]])
     }
 
