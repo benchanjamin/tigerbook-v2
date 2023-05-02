@@ -1051,6 +1051,8 @@ class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializ
     permissions = PermissionsSerializer(read_only=True)
     last_updated_current_city = serializers.SerializerMethodField(read_only=True)
     residential_college_facebook_entry = ResidentialCollegeSetupSerializer(read_only=True)
+    interoffice_mailing_address = serializers.SerializerMethodField(read_only=True)
+    email_address = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = UndergraduateTigerBookDirectory
@@ -1074,8 +1076,16 @@ class UndergraduateTigerBookDirectoryPreviewSerializer(serializers.ModelSerializ
             'research',
             'permissions',
             'last_updated_current_city',
-            'residential_college_facebook_entry'
+            'residential_college_facebook_entry',
+            'interoffice_mailing_address',
+            'email_address',
         ]
+
+    def get_interoffice_mailing_address(self, obj: UndergraduateTigerBookDirectory):
+        return obj.active_directory_entry.interoffice_address
+
+    def get_email_address(self, obj: UndergraduateTigerBookDirectory):
+        return obj.active_directory_entry.email
 
     def get_username(self, obj):
         return get_display_username(obj.active_directory_entry.net_id)
