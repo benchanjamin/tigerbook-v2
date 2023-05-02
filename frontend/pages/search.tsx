@@ -582,10 +582,7 @@ const Search: React.FC<Props> = ({headerData}) => {
         return () => {
             ignore = true;
         };
-    }, [page, firstQuery, concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery, certificatesQuery,
-        pronounsQuery, interestsQuery, extracurricularsQuery, extracurricularPositionsQuery,
-        hometownCompleteCitiesQuery, currentCityCompleteCitiesQuery, housingBuildingsQuery,
-        housingLocationsQuery, researchTypeQuery]);
+    }, [page]);
 
     function clearAllFilters() {
         // set all queries to empty
