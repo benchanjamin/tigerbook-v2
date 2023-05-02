@@ -282,7 +282,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                 </>
                             )
                             }
-                            {userData.research !== null &&
+                            {userData.research && userData.research.length > 0 &&
                                 (<>
                                     <h4 className="text-primary-500 text-left mt-3 font-bold tracking-wide">
                                         RESEARCH
@@ -391,7 +391,7 @@ const ProfilePreview: React.FC<Props> = ({userData, headerData}) => {
                                 </>
                             )
                             }
-                            {userData.miscellaneous !== null &&
+                            {userData.miscellaneous && userData.miscellaneous.length > 0 &&
                                 (<>
                                     <h4 className="text-primary-500 text-left mt-3 font-bold tracking-wide">
                                         MISCELLANEOUS
