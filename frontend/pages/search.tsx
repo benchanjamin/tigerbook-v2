@@ -542,7 +542,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             }
         }
 
-        if (firstQuery !== '' && firstQueryIsSet) {
+        if (firstQuery !== '' || firstQueryIsSet) {
             onEnter()
         }
 
@@ -582,7 +582,7 @@ const Search: React.FC<Props> = ({headerData}) => {
         return () => {
             ignore = true;
         };
-    }, [page]);
+    }, [page, firstQueryIsSet]);
 
     function clearAllFilters() {
         // set all queries to empty
