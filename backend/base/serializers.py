@@ -661,7 +661,7 @@ class UndergraduateTigerBookDirectoryProfileFullSerializer(WritableNestedModelSe
 
     def validate_aliases(self, aliases):
         if type(aliases) is not list:
-            raise serializers.ValidationError("Research field is not an array.")
+            raise serializers.ValidationError("Aliases is not an array.")
         for alias in aliases:
             hyperlink_regex = re.compile(
                 r'\b(?:https?|telnet|gopher|file|wais|ftp):[\w/#~:.?+=&%@!\-.:?\\-]+?(?=[.:?\-]*(?:['
