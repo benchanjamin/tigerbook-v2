@@ -579,6 +579,7 @@ const Search: React.FC<Props> = ({headerData}) => {
         }
 
         if (isExplicitSearching) return;
+        console.log("SearchURL", firstQueryIsSet, additionalQueriesIsSet, firstLoadIsSet)
         if ( (firstQueryIsSet || additionalQueriesIsSet) && !firstLoadIsSet) return
         fetchSearchData();
         setFirstLoadIsSet(true)
