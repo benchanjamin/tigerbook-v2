@@ -130,7 +130,7 @@ interface ListData {
 }
 
 const Search: React.FC<Props> = ({headerData}) => {
-    const onLoadController = new AbortController()
+    let onLoadController = new AbortController()
     const [firstQuery, setFirstQuery] = useState('');
     const [additionalQueries, setAdditionalQueries] = useState('');
 
@@ -556,6 +556,8 @@ const Search: React.FC<Props> = ({headerData}) => {
 
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        onLoadController = new AbortController()
         let ignore = false;
 
         async function fetchSearchData() {
