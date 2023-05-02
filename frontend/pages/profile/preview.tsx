@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({req}) => {
 }
 
 function format(inputDate) {
-    let date = new Date(inputDate);
+    let date = new Date(inputDate+ 'T00:00:00');
     if (!isNaN(date.getTime())) {
         return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
     }
