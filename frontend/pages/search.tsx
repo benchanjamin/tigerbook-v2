@@ -309,6 +309,7 @@ const Search: React.FC<Props> = ({headerData}) => {
 
 
     useEffect(() => {
+        const controller = new AbortController();
         let ignore = false;
 
         async function fetchUserData(explicitQuery) {
@@ -316,7 +317,10 @@ const Search: React.FC<Props> = ({headerData}) => {
             let listURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api-django/list/`;
             listURL += `?page=1&${explicitQuery}`;
             console.log('listURL1', listURL)
-            const axiosResponse = await axios.get(listURL)
+            const axiosResponse = await axios.get(listURL,
+                {
+                    signal: controller.signal,
+                })
             const listData: List = axiosResponse.data;
             if (!ignore) {
                 setIsLoading(false)
@@ -483,14 +487,24 @@ const Search: React.FC<Props> = ({headerData}) => {
             }
         }
 
-        onSearchFiltering()
+        const dependencies = [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery, certificatesQuery,
+            pronounsQuery, interestsQuery, extracurricularsQuery, extracurricularPositionsQuery,
+            hometownCompleteCitiesQuery, currentCityCompleteCitiesQuery, housingBuildingsQuery,
+            housingLocationsQuery, researchTypeQuery]
+        // if there isn't an empty string in the dependencies, then we know that the user has selected something
+        // and we can search
+        if (dependencies.some((dependency) => dependency !== '' && dependency !== null)) {
+            onSearchFiltering()
+        }
 
         return () => {
+            controller.abort()
             ignore = true;
         };
-    }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery, certificatesQuery, pronounsQuery,
-        interestsQuery, extracurricularsQuery, extracurricularPositionsQuery, hometownCompleteCitiesQuery,
-        currentCityCompleteCitiesQuery, housingBuildingsQuery, housingLocationsQuery, researchTypeQuery]);
+    }, [concentrationsQuery, tracksQuery, classYearsQuery, resCollegesQuery, certificatesQuery,
+        pronounsQuery, interestsQuery, extracurricularsQuery, extracurricularPositionsQuery,
+        hometownCompleteCitiesQuery, currentCityCompleteCitiesQuery, housingBuildingsQuery,
+        housingLocationsQuery, researchTypeQuery]);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -526,14 +540,15 @@ const Search: React.FC<Props> = ({headerData}) => {
             }
         }
 
-        onEnter()
-
+        if (firstQuery !== '') {
+            onEnter()
+        }
 
         return () => {
             controller.abort()
             ignore = true;
         };
-    }, [isEnter, firstQuery]);
+    }, [firstQuery]);
 
 
     useEffect(() => {
@@ -609,16 +624,16 @@ const Search: React.FC<Props> = ({headerData}) => {
                                     <TigerBookListBar defaultText="Search PUID, NetID, nickname, or full name"
                                                       zIndex={100} setterFunction={setFirstQuery}
                                                       autoComplete="off"
-                                                      onEnterFunction={() => setIsEnter(true)}/>
+                                                      onEnterFunction={() => {}}/>
                                 </div>
-                                <button onClick={() => setIsEnter(true)}
-                                        className="bg-primary-500 hover:bg-primary-400 text-white px-4 py-2 rounded-md focus:outline-none active:bg-primary-600 focus:ring focus:ring-primary-200 mt-1.5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                         strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 dark:text-white">
-                                        <path strokeLinecap="round" strokeLinejoin="round"
-                                              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
-                                    </svg>
-                                </button>
+                                {/*<button onClick={() => {}}*/}
+                                {/*        className="bg-primary-500 hover:bg-primary-400 text-white px-4 py-2 rounded-md focus:outline-none active:bg-primary-600 focus:ring focus:ring-primary-200 mt-1.5">*/}
+                                {/*    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"*/}
+                                {/*         strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 dark:text-white">*/}
+                                {/*        <path strokeLinecap="round" strokeLinejoin="round"*/}
+                                {/*              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>*/}
+                                {/*    </svg>*/}
+                                {/*</button>*/}
                             </div>
                             <div className="flex justify-end items-center dark:text-white text-sm w-full mt-2">
                                 {!isLoading && !isExplicitSearching && `Showing ${count} results`}
