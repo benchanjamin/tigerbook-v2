@@ -578,18 +578,20 @@ const Search: React.FC<Props> = ({headerData}) => {
             }
         }
 
-        if (isExplicitSearching) return;
-        console.log("SearchURL", firstQueryIsSet, additionalQueriesIsSet, firstLoadIsSet)
-        if ( (firstQueryIsSet || additionalQueriesIsSet) && !firstLoadIsSet) return
-        fetchSearchData();
-        setFirstLoadIsSet(true)
+        if (isExplicitSearching) {
+           // if the user is explicitly searching with other search functions, then we don't want to load more results
+        } else if (firstQueryIsSet || additionalQueriesIsSet) {
+            // if the user has entered a query, then we don't want to load the first page of results
+        } else {
+            fetchSearchData();
+        }
 
 
         return () => {
             onLoadController.abort()
             ignore = true;
         };
-    }, [page, firstQueryIsSet, additionalQueriesIsSet, firstLoadIsSet]);
+    }, [page, firstQueryIsSet, additionalQueriesIsSet]);
 
     function clearAllFilters() {
         // set all queries to empty
