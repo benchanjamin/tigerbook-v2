@@ -580,10 +580,11 @@ const Search: React.FC<Props> = ({headerData}) => {
 
         if (isExplicitSearching) {
            // if the user is explicitly searching with other search functions, then we don't want to load more results
-        } else if (firstQueryIsSet || additionalQueriesIsSet) {
+        // } else if (firstQueryIsSet || additionalQueriesIsSet) {
             // if the user has entered a query, then we don't want to load the first page of results
         } else {
             fetchSearchData();
+            setFirstLoadIsSet(true)
         }
 
 
@@ -591,7 +592,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             onLoadController.abort()
             ignore = true;
         };
-    }, [page, firstQueryIsSet, additionalQueriesIsSet]);
+    }, [page]);
 
     function clearAllFilters() {
         // set all queries to empty
@@ -635,7 +636,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                     <div className="order-2 sm:mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
                         <Container className="bg-gray-50 pt-4 rounded-2xl pb-10 dark:bg-gray-800">
                             <div className="flex flex-col md:flex-row items-center justify-center gap-x-4">
-                                <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
+                                {firstLoadIsSet && <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
                                     <TigerBookListBar defaultText="Search PUID, NetID, nickname, or full name"
                                                       zIndex={100} setterFunction={(e) => {
                                         setFirstQuery(e)
@@ -644,7 +645,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                       autoComplete="off"
                                                       onEnterFunction={() => {
                                                       }}/>
-                                </div>
+                                </div>}
                                 {/*<button onClick={() => {}}*/}
                                 {/*        className="bg-primary-500 hover:bg-primary-400 text-white px-4 py-2 rounded-md focus:outline-none active:bg-primary-600 focus:ring focus:ring-primary-200 mt-1.5">*/}
                                 {/*    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"*/}
