@@ -78,7 +78,7 @@ def update_undergraduate_tigerbook_directory(user):
     req = req_lib.get_info_for_tigerbook(net_id)
     if not req:
         PermissionDenied("OIT Active Directory does not contain your Princeton netID")
-    active_directory_entry = OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(**req).first()
+    active_directory_entry = OITActiveDirectoryUndergraduateGraduateInfo.objects.filter(net_id__iexact=net_id).first()
     if not active_directory_entry:
         active_directory_entry = OITActiveDirectoryUndergraduateGraduateInfo.objects.create(**req)
         user.undergraduate_tigerbook_directory_entry.active_directory_entry.delete()
