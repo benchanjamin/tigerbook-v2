@@ -583,8 +583,9 @@ const Search: React.FC<Props> = ({headerData}) => {
         // } else if (firstQueryIsSet || additionalQueriesIsSet) {
             // if the user has entered a query, then we don't want to load the first page of results
         } else {
-            fetchSearchData();
-            setFirstLoadIsSet(true)
+            fetchSearchData().then(() => {
+                setFirstLoadIsSet(true)
+            })
         }
 
 
