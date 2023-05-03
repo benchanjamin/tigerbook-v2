@@ -178,6 +178,7 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [housingBuildingsList, setHousingBuildingsList] = useState([]);
     const [researchTypesList, setResearchTypesList] = useState([]);
 
+    console.log("isExplicitSearching", isExplicitSearching)
 
     async function fetch() {
 
