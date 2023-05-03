@@ -594,7 +594,7 @@ const Search: React.FC<Props> = ({headerData}) => {
             onLoadController.abort()
             ignore = true;
         };
-    }, [page, isExplicitSearching]);
+    }, [page]);
 
     function clearAllFilters() {
         // set all queries to empty
