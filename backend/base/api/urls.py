@@ -16,7 +16,6 @@ from .views import (UndergraduateProfileSetupFirstPageView, get_routes, Undergra
 from uniauth.views import get_jwt_tokens_from_session
 
 urlpatterns = [
-    path('', get_routes),
     path('redirect/', TigerBookRedirectURLView.as_view()),
     path('header/', TigerBookHeaderView.as_view(),
          name="header"),
