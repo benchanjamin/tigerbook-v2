@@ -13,7 +13,7 @@ export default function CityOptionListBox({onChange}) {
     console.log('selected: ', selected)
 
     return (
-        <div className="absolute -top-[5.75rem] left-1/2 -translate-x-1/2 w-[22rem] md:left-2 md:top-1 md:translate-x-0 font-change z-10">
+        <div className="absolute -top-[2.75rem] left-1/2 -translate-x-1/2 w-[22rem] md:left-2 md:top-1 md:translate-x-0 font-change z-10">
                 <Listbox value={selected} onChange={e => {
                     setSelected(e);
                     onChange(e);
