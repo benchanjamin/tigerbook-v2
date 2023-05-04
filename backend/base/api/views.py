@@ -310,12 +310,14 @@ class UndergraduateTigerBookDirectorySearchView(ListModelMixin,
             return None
         lookup = Q(active_directory_entry__puid__icontains=query) | Q(
             active_directory_entry__net_id__icontains=query) | Q(
-            aliases__icontains=query) | Q(
-            active_directory_entry__full_name__icontains=query)
+            aliases__icontains=query)
+        lookup_name = Q()
+        for name in query.split(' '):
+            lookup_name &= Q(active_directory_entry__full_name__icontains=name)
         # if query contains @ symbol, assume it's an email address
         if '@' in query:
             lookup = Q(active_directory_entry__email__icontains=query)
-        return qs.filter(lookup).order_by('active_directory_entry__full_name')
+        return qs.filter(lookup | lookup_name).order_by('active_directory_entry__full_name')
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
