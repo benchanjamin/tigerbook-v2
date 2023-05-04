@@ -1,42 +1,13 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import {SidebarProvider} from "@context/SidebarContext";
-import {BiBuoy} from "react-icons/bi";
-import {
-    BsDribbble,
-    BsFacebook,
-    BsGithub,
-    BsInstagram,
-    BsTwitter,
-} from "react-icons/bs";
-import {
-    HiAdjustments,
-    HiArrowNarrowRight,
-    HiArrowSmRight,
-    HiChartPie,
-    HiCheck,
-    HiClipboardList,
-    HiCloudDownload,
-    HiDatabase,
-    HiExclamation,
-    HiEye,
-    HiHome,
-    HiInbox,
-    HiOutlineAdjustments,
-    HiShoppingBag,
-    HiTable,
-    HiUser,
-    HiUserCircle,
-    HiViewBoards,
-    HiX,
-} from "react-icons/hi";
 import Sidebar from "@components/ui/Sidebar";
 import Header from "@components/ui/Header";
 import {HeaderType, List, ListUser, SetupOneGet} from "@types/types";
 import {GetServerSideProps} from "next";
 import {axiosInstance, axiosLocalhost} from "@utils/axiosInstance";
 import {AxiosResponse} from "axios";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Container from "@components/list/Container";
 import Card from "@components/list/Card";
 import TigerBookListBar from "@components/headless-ui/TigerBookListBar";
@@ -90,29 +61,15 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({q
         })
     const headerData: HeaderType = axiosResponse.data;
 
-    // let listURL = `${process.env.NEXT_PRIVATE_API_BASE_URL}/api-django/list/`;
-    // if ('q' in query) {
-    //     listURL += `?q=${query.q}`;
-    // }
-    // axiosResponse = await axios.get(listURL,
-    //     {
-    //         headers: {
-    //             Cookie: req.headers.cookie
-    //         }
-    //     })
-    // const listData: Search = axiosResponse.data;
-
     return {
         props: {
             headerData,
-            // listData
         },
     }
 };
 
 interface Props {
     headerData: HeaderType
-    // listData: Search
 }
 
 interface ListData {
@@ -130,11 +87,13 @@ interface ListData {
 }
 
 const Search: React.FC<Props> = ({headerData}) => {
+    const firstDropdownRef = useRef(null);
+    const secondDropdownRef = useRef(null);
+
     const [firstQuery, setFirstQuery] = useState('');
     const [firstQueryIsSet, setFirstQueryIsSet] = useState(false);
     const [additionalQueries, setAdditionalQueries] = useState('');
     const [additionalQueriesIsSet, setAdditionalQueriesIsSet] = useState(false);
-    const [firstLoadIsSet, setFirstLoadIsSet] = useState(false);
 
     const [clearAll, setClearAll] = useState(false);
     const [page, setPage] = useState(1);
@@ -144,7 +103,6 @@ const Search: React.FC<Props> = ({headerData}) => {
     const [count, setCount] = useState(0);
     // const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
-    const [isEnter, setIsEnter] = useState(false);
 
     // search queries
     const [concentrationsQuery, setConcentrationsQuery] = useState(null);
@@ -580,13 +538,11 @@ const Search: React.FC<Props> = ({headerData}) => {
         }
 
         if (isExplicitSearching) {
-           // if the user is explicitly searching with other search functions, then we don't want to load more results
-        // } else if (firstQueryIsSet || additionalQueriesIsSet) {
+            // if the user is explicitly searching with other search functions, then we don't want to load more results
+            // } else if (firstQueryIsSet || additionalQueriesIsSet) {
             // if the user has entered a query, then we don't want to load the first page of results
         } else {
-            fetchSearchData().then(() => {
-                setFirstLoadIsSet(true)
-            })
+            fetchSearchData()
         }
 
 
@@ -638,7 +594,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                     <div className="order-2 sm:mx-4 mt-4 mb-24 flex-[1_0_16rem] flex-col z-10">
                         <Container className="bg-gray-50 pt-4 rounded-2xl pb-10 dark:bg-gray-800">
                             <div className="flex flex-col md:flex-row items-center justify-center gap-x-4">
-                               <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
+                                <div className="w-full md:w-1/2 mb-4 md:mb-0 align-middle">
                                     <TigerBookListBar defaultText="Search PUID, NetID, nickname, or full name"
                                                       zIndex={100} setterFunction={(e) => {
                                         setFirstQuery(e)
@@ -695,7 +651,10 @@ const Search: React.FC<Props> = ({headerData}) => {
                                         <button type="button"
                                                 className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                                 aria-controls="dropdown-1"
-                                                data-collapse-toggle="dropdown-1">
+                                                onClick={() => {
+                                                    firstDropdownRef.current.classList.toggle('hidden')
+                                                }}
+                                        >
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                  strokeWidth={1.5} stroke="currentColor"
                                                  className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -712,7 +671,9 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                       clipRule="evenodd"></path>
                                             </svg>
                                         </button>
-                                        <ul id="dropdown-1" className="hidden">
+                                        <ul id="dropdown-1"
+                                            ref={firstDropdownRef}
+                                            className="hidden">
                                             <li>
                                                 <label htmlFor="concentrations"
                                                        className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Concentrations</label>
@@ -779,7 +740,10 @@ const Search: React.FC<Props> = ({headerData}) => {
                                         <button type="button"
                                                 className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                                                 aria-controls="dropdown-2"
-                                                data-collapse-toggle="dropdown-2">
+                                                onClick={() => {
+                                                    secondDropdownRef.current.classList.toggle('hidden')
+                                                }}
+                                                >
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                  strokeWidth={1.5} stroke="currentColor"
                                                  className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -795,7 +759,7 @@ const Search: React.FC<Props> = ({headerData}) => {
                                                       clipRule="evenodd"></path>
                                             </svg>
                                         </button>
-                                        <ul id="dropdown-2" className="hidden">
+                                        <ul id="dropdown-2" ref={secondDropdownRef} className="hidden">
                                             <li>
                                                 <label htmlFor="certificates"
                                                        className="block my-1 ml-1 text-sm font-medium text-gray-900 dark:text-white pl-1">Certificates</label>
