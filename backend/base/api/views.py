@@ -358,10 +358,13 @@ class UndergraduateTigerBookDirectoryListView(ListModelMixin,
             active_directory_entry__net_id__icontains=query) | Q(
             aliases__icontains=query) | Q(
             active_directory_entry__full_name__icontains=query)
+        lookup_name = Q()
+        for name in query.split(' '):
+            lookup_name &= Q(active_directory_entry__full_name__icontains=name)
         # if query contains @ symbol, assume it's an email address
         if '@' in query:
             second_lookup = Q(active_directory_entry__email__icontains=query)
-        return qs.exclude(first_lookup).filter(second_lookup).order_by('active_directory_entry__full_name')
+        return qs.exclude(first_lookup).filter(second_lookup | lookup_name).order_by('active_directory_entry__full_name')
 
     def get_object(self):
         queryset = self.get_queryset()
