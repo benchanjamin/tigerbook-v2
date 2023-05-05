@@ -1,3 +1,5 @@
+import re
+
 import requests
 import json
 from .configs import Configs
@@ -81,7 +83,7 @@ class ReqLib:
             return []
 
         result['net_id'] = req.get('uid', None)
-        result['full_name'] = req.get('displayname', None)
+        result['full_name'] = re.sub(r' [A-Z]*\. ', ' ', req.get('displayname', None))
         result['puid'] = req.get('universityid', None)
         email = req.get('mail', None)
         if email:
