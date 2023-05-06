@@ -539,7 +539,7 @@ const Search: React.FC<Props> = ({headerData}) => {
 
         if (isExplicitSearching) {
             // if the user is explicitly searching with other search functions, then we don't want to load more results
-        } else if (firstQueryIsSet || additionalQueriesIsSet) {
+        } else if ((firstQueryIsSet || additionalQueriesIsSet) && page == 1) {
             // if the user has entered a query, then we don't want to load the first page of results
         } else {
             fetchSearchData()
