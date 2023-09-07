@@ -60,14 +60,14 @@ export default function Home() {
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path
-                                          d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                          clipRule="evenodd"></path>
+                                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                        clipRule="evenodd"></path>
                                 </svg>
                                 <svg className="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path
-                                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                          clipRule="evenodd"></path>
+                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                        clipRule="evenodd"></path>
                                 </svg>
                             </button>
                         </div>
@@ -115,8 +115,8 @@ export default function Home() {
                             <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path
-                                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                      clipRule="evenodd"></path>
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clipRule="evenodd"></path>
                             </svg>
                         </Link>
                     </div>
@@ -181,14 +181,6 @@ export default function Home() {
                                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                 </svg>
-                                {/*<svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"*/}
-                                {/*     fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">*/}
-                                {/*    <path*/}
-                                {/*        d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>*/}
-                                {/*    <path fill-rule="evenodd"*/}
-                                {/*          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"*/}
-                                {/*          clip-rule="evenodd"></path>*/}
-                                {/*</svg>*/}
                             </div>
                             <h3 className="mb-2 text-xl font-bold dark:text-white">Privacy</h3>
                             <p className="text-gray-500 dark:text-gray-400">Control access to your information, whether
@@ -207,11 +199,6 @@ export default function Home() {
                                     <path
                                         d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
                                 </svg>
-                                {/*<svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"*/}
-                                {/*     fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">*/}
-                                {/*    <path*/}
-                                {/*        d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>*/}
-                                {/*</svg>*/}
                             </div>
                             <h3 className="mb-2 text-xl font-bold dark:text-white">Smart Search Bar</h3>
                             <p className="text-gray-500 dark:text-gray-400">Search by PUID, email, full name, and
@@ -271,27 +258,22 @@ export default function Home() {
             <section className="bg-white dark:bg-gray-900" id="team">
                 <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
                     <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
-                        <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Our
-                            Team</h2>
-                        {/*<p className="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Explore the whole*/}
-                        {/*    collection of open-source web components and elements built with the utility classes from*/}
-                        {/*    Tailwind</p>*/}
+                        <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+                            Our Team
+                        </h2>
                     </div>
-                    {/*<div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">*/}
                     <div
                         className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
-                        <a href="pages#">
-                            <Image className="rounded-lg sm:rounded-none sm:rounded-l-lg"
-                                   src="/static/ben.jpg"
-                                   alt="Bonnie Avatar" width={200} height={200}/>
-                        </a>
+                        <Image className="w-full sm:w-[200px] rounded-lg sm:rounded-none sm:rounded-l-lg"
+                               src="/static/ben.jpg"
+                               alt="Ben Chan at Forbes Backyard" width={200} height={200}/>
                         <div className="p-5">
                             <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                <a href="pages#">Ben Chan &apos;23</a>
+                                Ben Chan &apos;23
                             </h3>
-                            <span className="text-gray-500 dark:text-gray-400">Full-Stack Developer</span>
+                            <span className="text-gray-500 dark:text-gray-400">Lead Developer</span>
                             <p className="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">Reimagining the flow of
-                                connectivity within the Princeton University community.</p>
+                                connectivity within the Princeton University community</p>
                             <ul className="flex space-x-4 sm:mt-0">
                                 <li>
                                     <a href="https://github.com/benchanjamin" target="_blank" rel="noopener noreferrer"
@@ -307,8 +289,21 @@ export default function Home() {
                             </ul>
                         </div>
                     </div>
+                    <br/>
+                    <div
+                        className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
+                        <Image className="w-full sm:w-[200px] rounded-lg sm:rounded-none sm:rounded-l-lg"
+                               src="/static/lumbroso.jpg"
+                               alt="Portrait Photo of Dr. Jérémie Lumbroso" width={200} height={200}/>
+                        <div className="p-5">
+                            <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                Dr. Jérémie Lumbroso
+                            </h3>
+                            <span className="text-gray-500 dark:text-gray-400">Faculty Advisor</span>
+
+                        </div>
+                    </div>
                 </div>
-                {/*</div>*/}
             </section>
         </>
     );
